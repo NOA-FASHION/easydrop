@@ -32,6 +32,7 @@ dependencies:
   provider: ^5.0.0
   fancy_drawer: ^1.0.0
   forme: ^2.5.2
+  shared_preferences: ^2.0.6
 
 dev_dependencies:
   flutter_test:
