@@ -19,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen>
   late FancyDrawerController _controller;
   void initState() {
     super.initState();
+    
     _controller =
         FancyDrawerController(vsync: this, duration: Duration(milliseconds: 50))
           ..addListener(() {

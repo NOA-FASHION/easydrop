@@ -1,185 +1,86 @@
 import 'dart:ffi';
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
-
-enum unity_challenge {
-  haute,
-  normal,
-  quotidien,
-  hebdomadaire,
-  mensuel,
-  notification
-}
-enum unity_challenge1 {
-  evenement,
-  achat,
-  tache,
-  mission,
-  youtube,
-  video,
-  commentaire,
-  image,
-  url,
-  paiement,
-  formation,
-  projet,
-  adresse,
-  echeancier,
-  information
-}
-choixDesciptionEnum(dynamic json) {
-  unity_challenge1 unity = unity_challenge1.evenement;
-  if (json['description'] == "unity_challenge1.evenement") {
-    unity = unity_challenge1.evenement;
-  } else if (json['description'] == "unity_challenge1.achat") {
-    unity = unity_challenge1.achat;
-  } else if (json['description'] == "unity_challenge1.tache") {
-    unity = unity_challenge1.tache;
-  } else if (json['description'] == "unity_challenge1.mission") {
-    unity = unity_challenge1.mission;
-  } else if (json['description'] == "unity_challenge1.youtube") {
-    unity = unity_challenge1.youtube;
-  } else if (json['description'] == "unity_challenge1.video") {
-    unity = unity_challenge1.video;
-  } else if (json['description'] == "unity_challenge1.commentaire") {
-    unity = unity_challenge1.commentaire;
-  } else if (json['description'] == "unity_challenge1.image") {
-    unity = unity_challenge1.image;
-  } else if (json['description'] == "unity_challenge1.url") {
-    unity = unity_challenge1.url;
-  } else if (json['description'] == "unity_challenge1.paiement") {
-    unity = unity_challenge1.paiement;
-  } else if (json['description'] == "unity_challenge1.echeancier") {
-    unity = unity_challenge1.echeancier;
-  } else if (json['description'] == "unity_challenge1.projet") {
-    unity = unity_challenge1.projet;
-  } else if (json['description'] == "unity_challenge1.adresse") {
-    unity = unity_challenge1.adresse;
-  } else if (json['description'] == "unity_challenge1.formation") {
-    unity = unity_challenge1.formation;
-  } else if (json['description'] == "unity_challenge1.information") {
-    unity = unity_challenge1.information;
-  }
-  return unity;
-}
-
-choixDesciptionEnum1(dynamic json) {
-  unity_challenge unity = unity_challenge.haute;
-  if (json['unity'] == "unity_challenge.haute") {
-    unity = unity_challenge.haute;
-  } else if (json['unity'] == "unity_challenge.normal") {
-    unity = unity_challenge.normal;
-  } else if (json['unity'] == "unity_challenge.quotidien") {
-    unity = unity_challenge.quotidien;
-  } else if (json['unity'] == "unity_challenge.hebdomadaire") {
-    unity = unity_challenge.hebdomadaire;
-  } else if (json['unity'] == "unity_challenge.mensuel") {
-    unity = unity_challenge.mensuel;
-  } else if (json['unity'] == "unity_challenge.notification") {
-    unity = unity_challenge.notification;
-  }
-  return unity;
-}
-
-// class Formation {
-//   String chapitre;
-//   String duree;
-//   String theoriePratique;
-//   Formation({
-//     required this.chapitre,
-//     required this.duree,
-//     required this.theoriePratique,
-//   });
-
-//   Formation.fromJSON(Map<String, dynamic> json)
-//       : chapitre = json['chapitre'],
-//         duree = json['duree'],
-//         theoriePratique = json['theoriePratique'];
-
-//   Map<String, dynamic> toJson() {
-//     return {
-//       "chapitre": chapitre,
-//       "duree": duree,
-//       "theoriePratique": theoriePratique
-//     };
-//   }
-// }
-
 class ResultJournee {
-  double prix;
-  double cout;
-  String id;
-  String index;
-  String name;
-  final String tache;
-  final unity_challenge1 description;
+  Double chiffreAffaireDays;
+  Double prixShippingDays;
+  Double facebookDepenseDays;
+  Double coutDaysProduit;
+  Double margeDays;
+  Double venteDays;
+  Double roaDays;
+  int panierDays;
+  int vueDays;
+  List<String> nombreVenteOffreDays;
   ResultJournee(
-      {required this.prix,
-      required this.cout,
-      required this.id,
-      required this.name,
-      required this.tache,
-      required this.description,
-      required this.index});
+      {required this.chiffreAffaireDays,
+      required this.prixShippingDays,
+      required this.facebookDepenseDays,
+      required this.coutDaysProduit,
+      required this.margeDays,
+      required this.venteDays,
+      required this.roaDays,
+      required this.panierDays,
+      required this.vueDays,
+      required this.nombreVenteOffreDays});
 
-  ResultJournee.fromJSON(Map<String, dynamic> json)
-      : prix = json['prix'],
-        cout = json['cout'],
-        name = json['name'],
-        id = json['id'],
-        tache = json['tache'],
-        index = json['index'],
-        description = choixDesciptionEnum(json);
+  factory ResultJournee.fromJSON(Map<String, dynamic> json) => ResultJournee(
+      chiffreAffaireDays: json['chiffreAffaireDays'],
+      prixShippingDays: json['prixShippingDays'],
+      facebookDepenseDays: json['facebookDepenseDays'],
+      coutDaysProduit: json['coutDaysProduit'],
+      margeDays: json['margeDays'],
+      venteDays: json['venteDays'],
+      roaDays: json['roaDays'],
+      panierDays: json['panierDays'],
+      vueDays: json['vueDays'],
+      nombreVenteOffreDays:
+          List<String>.from(json["nombreVenteOffreDays"].map((x) => x)));
 
   Map<String, dynamic> toJson() {
     return {
-      "prix": prix,
-      "cout": cout,
-      "name": name,
-      "id": id,
-      "tache": tache,
-      "index": index,
-      "description": description.toString()
+      "chiffreAffaireDays": chiffreAffaireDays,
+      "prixShippingDays": prixShippingDays,
+      "facebookDepenseDays": facebookDepenseDays,
+      "coutDaysProduit": coutDaysProduit,
+      "margeDays": margeDays,
+      "venteDays": venteDays,
+      "roaDays": roaDays,
+      "panierDays": panierDays,
+      "vueDays": vueDays,
+      "nombreVenteOffreDays":
+          List<dynamic>.from(nombreVenteOffreDays.map((x) => x)),
     };
   }
 }
 
 class Offre {
-  double prix;
-  double cout;
-  String id;
-  String index;
-  String name;
-  final String tache;
-  final unity_challenge1 description;
-  Offre(
-      {required this.prix,
-      required this.cout,
-      required this.id,
-      required this.name,
-      required this.tache,
-      required this.description,
-      required this.index});
+  double prixAchat;
+  double prixVente;
+  double prixBarre;
+  double margeOffre;
+  double roas;
+  Offre({
+    required this.prixAchat,
+    required this.prixVente,
+    required this.prixBarre,
+    required this.margeOffre,
+    required this.roas,
+  });
 
   Offre.fromJSON(Map<String, dynamic> json)
-      : prix = json['prix'],
-        cout = json['cout'],
-        name = json['name'],
-        id = json['id'],
-        tache = json['tache'],
-        index = json['index'],
-        description = choixDesciptionEnum(json);
+      : prixAchat = json['prixAchat'],
+        prixVente = json['prixVente'],
+        prixBarre = json['prixBarre'],
+        margeOffre = json['margeOffre'],
+        roas = json['roas'];
 
   Map<String, dynamic> toJson() {
     return {
-      "prix": prix,
-      "cout": cout,
-      "name": name,
-      "id": id,
-      "tache": tache,
-      "index": index,
-      "description": description.toString()
+      "prixAchat": prixAchat,
+      "prixVente": prixVente,
+      "prixBarre": prixBarre,
+      "margeOffre": margeOffre,
+      "roas": roas
     };
   }
 }
@@ -189,7 +90,7 @@ class ProduitGagnant {
   Double prixAchat;
   Double prixVente;
   Double chiffreAffaireTotal;
-  Double prixShipping;
+  Double prixShippingTotal;
   Double facebookDepenseTotal;
   Double coutTotalProduit;
   Double margeTotal;
@@ -209,7 +110,7 @@ class ProduitGagnant {
     required this.prixAchat,
     required this.prixVente,
     required this.chiffreAffaireTotal,
-    required this.prixShipping,
+    required this.prixShippingTotal,
     required this.facebookDepenseTotal,
     required this.coutTotalProduit,
     required this.adresseSite,
@@ -230,7 +131,7 @@ class ProduitGagnant {
         prixVente: json['prixVente'],
         prixAchat: json['prixAchat'],
         chiffreAffaireTotal: json['chiffreAffaireTotal'],
-        prixShipping: json['prixShipping'],
+        prixShippingTotal: json['prixShippingTotal'],
         facebookDepenseTotal: json['facebookDepenseTotal'],
         coutTotalProduit: json['coutTotalProduit'],
         adresseSite: json['adresseSite'],
@@ -257,7 +158,7 @@ class ProduitGagnant {
       "prixVente": prixVente,
       "prixAchat": prixAchat,
       "chiffreAffaireTotal": chiffreAffaireTotal,
-      "prixShipping": prixShipping,
+      "prixShippingTotal": prixShippingTotal,
       "facebookDepenseTotal": facebookDepenseTotal,
       "coutTotalProduit": coutTotalProduit,
       "adresseSite": adresseSite,
@@ -313,39 +214,3 @@ class UserDrop {
     };
   }
 }
-
-// class Challengeyesterday {
-//   String date;
-//   String nbChallengeEnCours;
-//   String nbTacheEnCours;
-//   String commentaire;
-//   String nbchallengeVallide;
-//   String nbtacheVallide;
-
-//   Challengeyesterday(
-//       {this.date,
-//       this.nbChallengeEnCours,
-//       this.commentaire,
-//       this.nbchallengeVallide,
-//       this.nbTacheEnCours,
-//       this.nbtacheVallide});
-
-//   Challengeyesterday.fromJSON(Map<String, dynamic> json)
-//       : date = json['date'],
-//         nbChallengeEnCours = json['nbChallengeEnCours'],
-//         nbTacheEnCours = json['nbTacheEnCours'],
-//         nbchallengeVallide = json['nbchallengeVallide'],
-//         nbtacheVallide = json['nbtacheVallide'],
-//         commentaire = json['commentaire'];
-
-//   Map<String, dynamic> toJson() {
-//     return {
-//       "date": date,
-//       "nbchallengeVallide": nbchallengeVallide,
-//       "nbTacheEnCours": nbTacheEnCours,
-//       "nbtacheVallide": nbtacheVallide,
-//       "nbChallengeEnCours": nbChallengeEnCours,
-//       "commentaire": commentaire
-//     };
-//   }
-// }
