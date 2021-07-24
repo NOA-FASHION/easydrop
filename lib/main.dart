@@ -1,3 +1,4 @@
+import 'package:easydrop/screens/guest_screen.dart';
 import 'package:easydrop/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +27,7 @@ class _EasydropState extends State<Easydrop> {
       ),
       title: 'ICanDoIt',
       home: ChangeNotifierProvider<Challengecontroller>(
-          create: (context) => Challengecontroller(), child: HomeScreen()),
+          create: (context) => Challengecontroller(), child: GuestScreen()),
     );
   }
 }

@@ -9,8 +9,13 @@ const String keyAccesUserDrop = "UserDrop";
 
 class Challengecontroller extends ChangeNotifier {
   late SharedPreferences _localData;
-  UserDrop _userDrop =
-      UserDrop(email: '', nom: '', photo: '', prenom: '', telephone: '');
+  UserDrop _userDrop = UserDrop(
+      email: '',
+      nom: '',
+      photo: '',
+      prenom: '',
+      telephone: '',
+      infoRecupere: false);
   late SharedPreferences _localDataUserDrop;
   Challengecontroller() {
     _initProduitGagnantList();
@@ -44,5 +49,9 @@ class Challengecontroller extends ChangeNotifier {
       _jsonDecodeUserDrop = jsonDecode(_tempListChallenge);
       _userDrop = UserDrop.fromJSON(_jsonDecodeUserDrop);
     }
+  }
+
+  bool getInfoRecupere() {
+    return _userDrop.infoRecupere;
   }
 }

@@ -179,14 +179,14 @@ class ProduitGagnant {
 }
 
 class UserDrop {
-  // bool notifcationResultBool;
+  bool infoRecupere;
   String nom;
   String prenom;
   String email;
   String telephone;
   String photo;
   UserDrop({
-    // required this.notifcationResultBool,
+    required this.infoRecupere,
     required this.nom,
     required this.prenom,
     required this.email,
@@ -195,8 +195,7 @@ class UserDrop {
   });
 
   UserDrop.fromJSON(Map<String, dynamic> json)
-      :
-        // notifcationResultBool = json['notifcationResultBool'],
+      : infoRecupere = json['infoRecupere'],
         nom = json['nom'],
         prenom = json['prenom'],
         email = json['email'],
@@ -205,7 +204,7 @@ class UserDrop {
 
   Map<String, dynamic> toJson() {
     return {
-      // "notifcationResultBool": notifcationResultBool,
+      "infoRecupere": infoRecupere,
       "nom": nom,
       "prenom": prenom,
       "email": email,
