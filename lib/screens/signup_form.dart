@@ -14,7 +14,11 @@ class _SignUpScreenState extends State<SignupFormPage> {
   late double _pixelRatio;
   late bool _large;
   late bool _medium;
-
+  late String nom;
+  late String prenom;
+  late String telephone;
+  late String email = '';
+  final GlobalKey<FormState> formKeyTache = GlobalKey<FormState>();
   final FormeKey formeKey = FormeKey();
 
   @override
@@ -121,86 +125,236 @@ class _SignUpScreenState extends State<SignupFormPage> {
   }
 
   Widget form() {
-    return Container(
-      margin: EdgeInsets.only(
-          left: _width / 12.0, right: _width / 12.0, top: _height / 20.0),
-      child: Column(
-        children: <Widget>[
-          firstNameTextFormField(),
-          SizedBox(height: _height / 60.0),
-          lastNameTextFormField(),
-          SizedBox(height: _height / 60.0),
-          emailTextFormField(),
-          SizedBox(height: _height / 60.0),
-          phoneTextFormField(),
-          SizedBox(height: _height / 60.0),
-          passwordTextFormField(),
-        ],
+    return Form(
+      key: formKeyTache,
+      child: Container(
+        margin: EdgeInsets.only(
+            left: _width / 12.0, right: _width / 12.0, top: _height / 20.0),
+        child: Column(
+          children: <Widget>[
+            firstNameTextFormField(),
+            SizedBox(height: _height / 60.0),
+            lastNameTextFormField(),
+            SizedBox(height: _height / 60.0),
+            emailTextFormField(),
+            SizedBox(height: _height / 60.0),
+            phoneTextFormField(),
+            SizedBox(height: _height / 60.0),
+            // passwordTextFormField(),
+          ],
+        ),
       ),
     );
   }
 
   Widget firstNameTextFormField() {
-    return CustomTextField(
-      keyboardType: TextInputType.text,
-      icon: Icons.person,
-      hint: "First Name",
-      name: 'firstName',
-      formeKey: formeKey,
-      listener: FormeValueFieldListener(
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        onValidate: FormeValidates.size(min: 5, errorText: 'at least 5 length'),
-        onAsyncValidate: (f, v) => Future.delayed(Duration(seconds: 2),
-            () => v == 'admin' ? null : 'username exists'),
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      elevation: 12,
+      child: TextFormField(
+        textCapitalization: TextCapitalization.sentences,
+        onSaved: (value) {
+          nom = value!;
+        },
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "Merci votre nom";
+          }
+          return null;
+        },
+        decoration: InputDecoration(
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 2.0, color: Colors.transparent),
+                borderRadius: BorderRadius.circular(15.0)),
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 1.0, color: Colors.transparent),
+                borderRadius: BorderRadius.circular(15.0)),
+            contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            labelText: "Nom",
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(15.0))),
       ),
     );
   }
+  // Widget firstNameTextFormField() {
+  //   return CustomTextField(
+  //     keyboardType: TextInputType.text,
+  //     icon: Icons.person,
+  //     hint: "Nom",
+  //     name: 'Nom',
+  //     formeKey: formeKey,
+  //     listener: FormeValueFieldListener(
+  //       onSaved: (controler, value) {
+  //         nom = value;
+  //       },
+  //       autovalidateMode: AutovalidateMode.onUserInteraction,
+  //       onValidate: FormeValidates.size(min: 5, errorText: 'Minimum 5 lettres'),
+  //       // onAsyncValidate: (f, v) => Future.delayed(Duration(seconds: 2),
+  //       //     () => v == 'admin' ? null : 'username exists'),
+  //     ),
+  //   );
+  // }
 
   Widget lastNameTextFormField() {
-    return CustomTextField(
-      keyboardType: TextInputType.text,
-      icon: Icons.person,
-      hint: "Last Name",
-      name: 'lastName',
-      formeKey: formeKey,
-      listener: FormeValueFieldListener(
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        onValidate: FormeValidates.size(
-            min: 6, errorText: 'Last Name\'s must bigger than 6'),
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      elevation: 12,
+      child: TextFormField(
+        textCapitalization: TextCapitalization.sentences,
+        onSaved: (value) {
+          prenom = value!;
+        },
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "Merci d'entrer votre prénom";
+          }
+          return null;
+        },
+        decoration: InputDecoration(
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 2.0, color: Colors.transparent),
+                borderRadius: BorderRadius.circular(15.0)),
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 1.0, color: Colors.transparent),
+                borderRadius: BorderRadius.circular(15.0)),
+            contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            labelText: "Prénom",
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(15.0))),
+      ),
+    );
+  }
+  // Widget lastNameTextFormField() {
+  //   return CustomTextField(
+  //     keyboardType: TextInputType.text,
+  //     icon: Icons.person,
+  //     hint: "Prénom",
+  //     name: 'Prénom',
+  //     formeKey: formeKey,
+  //     listener: FormeValueFieldListener(
+  //       onSaved: (controler, value) {
+  //         prenom = value;
+  //       },
+  //       autovalidateMode: AutovalidateMode.onUserInteraction,
+  //       onValidate: FormeValidates.size(min: 3, errorText: 'Minimum 3 lettres'),
+  //     ),
+  //   );
+  // }
+
+  Widget emailTextFormField() {
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      elevation: 12,
+      child: TextFormField(
+        // textCapitalization: TextCapitalization.sentences,
+        onSaved: (value) {
+          email = value!;
+        },
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "Merci d'entrer une votre email";
+          }
+          return null;
+        },
+        decoration: InputDecoration(
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 2.0, color: Colors.transparent),
+                borderRadius: BorderRadius.circular(15.0)),
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 1.0, color: Colors.transparent),
+                borderRadius: BorderRadius.circular(15.0)),
+            contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            labelText: "Email",
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(15.0))),
       ),
     );
   }
 
-  Widget emailTextFormField() {
-    return CustomTextField(
-      keyboardType: TextInputType.emailAddress,
-      icon: Icons.email,
-      hint: "Email ID",
-      name: 'email',
-      formeKey: formeKey,
-    );
-  }
-
+  // Widget emailTextFormField() {
+  //   return CustomTextField(
+  //     listener: FormeValueFieldListener(
+  //       onSaved: (controler, value) {
+  //         nom = value;
+  //       },
+  //       autovalidateMode: AutovalidateMode.onUserInteraction,
+  //       onValidate:
+  //           FormeValidates.size(min: 3, errorText: 'Saisir un email valide'),
+  //     ),
+  //     keyboardType: TextInputType.emailAddress,
+  //     icon: Icons.email,
+  //     hint: "Email ID",
+  //     name: 'email',
+  //     formeKey: formeKey,
+  //   );
+  // }
   Widget phoneTextFormField() {
-    return CustomTextField(
-      keyboardType: TextInputType.number,
-      icon: Icons.phone,
-      hint: "Mobile Number",
-      name: 'mobile',
-      formeKey: formeKey,
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      elevation: 12,
+      child: TextFormField(
+        // textCapitalization: TextCapitalization.sentences,
+        onSaved: (value) {
+          telephone = value!;
+        },
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "Merci d'entrer votre numéro de téléphone";
+          }
+          return null;
+        },
+        decoration: InputDecoration(
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 2.0, color: Colors.transparent),
+                borderRadius: BorderRadius.circular(15.0)),
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 1.0, color: Colors.transparent),
+                borderRadius: BorderRadius.circular(15.0)),
+            contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            labelText: "Téléphone",
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15.0),
+                borderSide: BorderSide(width: 1.0, color: Colors.transparent))),
+      ),
     );
   }
+  // Widget phoneTextFormField() {
+  //   return CustomTextField(
+  //     listener: FormeValueFieldListener(
+  //       onSaved: (controler, value) {
+  //         controler.textEditingController.dispose();
+  //         telephone = value;
+  //       },
+  //       autovalidateMode: AutovalidateMode.onUserInteraction,
+  //       onValidate: FormeValidates.size(
+  //           min: 3, errorText: 'Saisir un numéro de téléphone valide'),
+  //     ),
+  //     keyboardType: TextInputType.number,
+  //     icon: Icons.phone,
+  //     hint: "Mobile Number",
+  //     name: 'mobile',
+  //     formeKey: formeKey,
+  //   );
+  // }
 
-  Widget passwordTextFormField() {
-    return CustomTextField(
-      keyboardType: TextInputType.text,
-      obscureText: true,
-      icon: Icons.lock,
-      hint: "Password",
-      name: 'password',
-      formeKey: formeKey,
-    );
-  }
+  // Widget passwordTextFormField() {
+  //   return CustomTextField(
+  //     keyboardType: TextInputType.text,
+  //     obscureText: true,
+  //     icon: Icons.lock,
+  //     hint: "Password",
+  //     name: 'password',
+  //     formeKey: formeKey,
+  //   );
+  // }
 
   Widget acceptTermsTextRow() {
     return Container(
@@ -214,11 +368,11 @@ class _SignUpScreenState extends State<SignupFormPage> {
                   name: 'accept',
                   listener: FormeValueFieldListener(
                     onValidate: FormeValidates.equals(true,
-                        errorText: 'you must accept all terms and conditions'),
+                        errorText: 'accepter tous les thermes et conditions'),
                   ),
                 ),
                 Text(
-                  "I accept all terms and conditions",
+                  "J'accepte tous les thermes et conditions",
                   style: TextStyle(
                       fontWeight: FontWeight.w400,
                       fontSize: _large ? 12 : (_medium ? 11 : 10)),
@@ -302,6 +456,10 @@ class _SignUpScreenState extends State<SignupFormPage> {
                     '${element.controller.name} ${element.isValueChangedDuringValidation}');
               });
               value.firstInvalidField?.controller.focusNode?.requestFocus();
+              if (formKeyTache.currentState!.validate()) {
+                formKeyTache.currentState!.save();
+                print(email);
+              }
             });
           },
           child: Container(
@@ -316,7 +474,7 @@ class _SignUpScreenState extends State<SignupFormPage> {
             ),
             padding: const EdgeInsets.all(12.0),
             child: Text(
-              'SIGN UP',
+              'Enregistrer',
               style: TextStyle(fontSize: _large ? 14 : (_medium ? 12 : 10)),
             ),
           ),
@@ -427,23 +585,37 @@ class CustomAppBar extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     return Material(
       child: Container(
-        height: height / 10,
+        height: height / 6,
         width: width,
         padding: EdgeInsets.only(left: 15, top: 25),
         decoration: BoxDecoration(
           gradient: LinearGradient(colors: [Colors.orange, Colors.pinkAccent]),
         ),
-        child: Row(
-          children: <Widget>[
-            IconButton(
-                icon: Icon(
-                  Icons.arrow_back,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                })
-          ],
+        child: Container(
+          padding: EdgeInsets.only(top: 40.0),
+          alignment: Alignment.center,
+          child: Image.asset(
+            'assets/logo.png',
+            width: 55,
+            height: 130,
+          ),
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: <Color>[Colors.orange, Colors.pink])),
         ),
+        // child: Row(
+        //   children: <Widget>[
+        //     IconButton(
+        //         icon: Icon(
+        //           Icons.arrow_back,
+        //         ),
+        //         onPressed: () {
+        //           Navigator.of(context).pop();
+        //         })
+        //   ],
+        // ),
       ),
     );
   }
