@@ -1,5 +1,8 @@
+import 'package:easydrop/controllers/challenge_controller.dart';
+import 'package:easydrop/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:forme/forme.dart';
+import 'package:provider/provider.dart';
 
 /// from https://github.com/sherazmahar/Flutter-Login-Signup-UI
 class SignupFormPage extends StatefulWidget {
@@ -228,22 +231,6 @@ class _SignUpScreenState extends State<SignupFormPage> {
       ),
     );
   }
-  // Widget lastNameTextFormField() {
-  //   return CustomTextField(
-  //     keyboardType: TextInputType.text,
-  //     icon: Icons.person,
-  //     hint: "Prénom",
-  //     name: 'Prénom',
-  //     formeKey: formeKey,
-  //     listener: FormeValueFieldListener(
-  //       onSaved: (controler, value) {
-  //         prenom = value;
-  //       },
-  //       autovalidateMode: AutovalidateMode.onUserInteraction,
-  //       onValidate: FormeValidates.size(min: 3, errorText: 'Minimum 3 lettres'),
-  //     ),
-  //   );
-  // }
 
   Widget emailTextFormField() {
     return Card(
@@ -277,23 +264,6 @@ class _SignUpScreenState extends State<SignupFormPage> {
     );
   }
 
-  // Widget emailTextFormField() {
-  //   return CustomTextField(
-  //     listener: FormeValueFieldListener(
-  //       onSaved: (controler, value) {
-  //         nom = value;
-  //       },
-  //       autovalidateMode: AutovalidateMode.onUserInteraction,
-  //       onValidate:
-  //           FormeValidates.size(min: 3, errorText: 'Saisir un email valide'),
-  //     ),
-  //     keyboardType: TextInputType.emailAddress,
-  //     icon: Icons.email,
-  //     hint: "Email ID",
-  //     name: 'email',
-  //     formeKey: formeKey,
-  //   );
-  // }
   Widget phoneTextFormField() {
     return Card(
       shape: RoundedRectangleBorder(
@@ -326,35 +296,6 @@ class _SignUpScreenState extends State<SignupFormPage> {
       ),
     );
   }
-  // Widget phoneTextFormField() {
-  //   return CustomTextField(
-  //     listener: FormeValueFieldListener(
-  //       onSaved: (controler, value) {
-  //         controler.textEditingController.dispose();
-  //         telephone = value;
-  //       },
-  //       autovalidateMode: AutovalidateMode.onUserInteraction,
-  //       onValidate: FormeValidates.size(
-  //           min: 3, errorText: 'Saisir un numéro de téléphone valide'),
-  //     ),
-  //     keyboardType: TextInputType.number,
-  //     icon: Icons.phone,
-  //     hint: "Mobile Number",
-  //     name: 'mobile',
-  //     formeKey: formeKey,
-  //   );
-  // }
-
-  // Widget passwordTextFormField() {
-  //   return CustomTextField(
-  //     keyboardType: TextInputType.text,
-  //     obscureText: true,
-  //     icon: Icons.lock,
-  //     hint: "Password",
-  //     name: 'password',
-  //     formeKey: formeKey,
-  //   );
-  // }
 
   Widget acceptTermsTextRow() {
     return Container(
@@ -405,38 +346,39 @@ class _SignUpScreenState extends State<SignupFormPage> {
   }
 
   Widget button() {
+    Challengecontroller variable = Provider.of<Challengecontroller>(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        ElevatedButton(
-          style: ButtonStyle(
-            elevation: MaterialStateProperty.all(0),
-            shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0))),
-            textStyle:
-                MaterialStateProperty.all(TextStyle(color: Colors.white)),
-            padding: MaterialStateProperty.all(EdgeInsets.all(0.0)),
-          ),
-          onPressed: () {
-            formeKey.reset();
-          },
-          child: Container(
-            alignment: Alignment.center,
-            width:
-                _large ? _width / 4 : (_medium ? _width / 3.75 : _width / 3.5),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20.0)),
-              gradient: LinearGradient(
-                colors: <Color>[Colors.pinkAccent[200]!, Colors.redAccent],
-              ),
-            ),
-            padding: const EdgeInsets.all(12.0),
-            child: Text(
-              'CLEAR',
-              style: TextStyle(fontSize: _large ? 14 : (_medium ? 12 : 10)),
-            ),
-          ),
-        ),
+        // ElevatedButton(
+        //   style: ButtonStyle(
+        //     elevation: MaterialStateProperty.all(0),
+        //     shape: MaterialStateProperty.all(RoundedRectangleBorder(
+        //         borderRadius: BorderRadius.circular(30.0))),
+        //     textStyle:
+        //         MaterialStateProperty.all(TextStyle(color: Colors.white)),
+        //     padding: MaterialStateProperty.all(EdgeInsets.all(0.0)),
+        //   ),
+        //   onPressed: () {
+        //     formeKey.reset();
+        //   },
+        //   child: Container(
+        //     alignment: Alignment.center,
+        //     width:
+        //         _large ? _width / 4 : (_medium ? _width / 3.75 : _width / 3.5),
+        //     decoration: BoxDecoration(
+        //       borderRadius: BorderRadius.all(Radius.circular(20.0)),
+        //       gradient: LinearGradient(
+        //         colors: <Color>[Colors.pinkAccent[200]!, Colors.redAccent],
+        //       ),
+        //     ),
+        //     padding: const EdgeInsets.all(12.0),
+        //     child: Text(
+        //       'CLEAR',
+        //       style: TextStyle(fontSize: _large ? 14 : (_medium ? 12 : 10)),
+        //     ),
+        //   ),
+        // ),
         SizedBox(
           width: 20,
         ),
@@ -458,7 +400,17 @@ class _SignUpScreenState extends State<SignupFormPage> {
               value.firstInvalidField?.controller.focusNode?.requestFocus();
               if (formKeyTache.currentState!.validate()) {
                 formKeyTache.currentState!.save();
-                print(email);
+                Provider.of<Challengecontroller>(context, listen: false)
+                    .addUserDropp(
+                        infoRecupere: true,
+                        nom: nom,
+                        prenom: prenom,
+                        email: email,
+                        telephone: telephone,
+                        photo: "");
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ChangeNotifierProvider.value(
+                        value: variable, child: HomeScreen())));
               }
             });
           },
@@ -483,35 +435,35 @@ class _SignUpScreenState extends State<SignupFormPage> {
     );
   }
 
-  Widget signInTextRow() {
-    return Container(
-      margin: EdgeInsets.only(top: _height / 20.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            "Already have an account?",
-            style: TextStyle(fontWeight: FontWeight.w400),
-          ),
-          SizedBox(
-            width: 5,
-          ),
-          GestureDetector(
-            onTap: () {
-              print("Routing to Sign up screen");
-            },
-            child: Text(
-              "Sign in",
-              style: TextStyle(
-                  fontWeight: FontWeight.w800,
-                  color: Colors.orange[200],
-                  fontSize: 19),
-            ),
-          )
-        ],
-      ),
-    );
-  }
+  // Widget signInTextRow() {
+  //   return Container(
+  //     margin: EdgeInsets.only(top: _height / 20.0),
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.center,
+  //       children: <Widget>[
+  //         Text(
+  //           "Already have an account?",
+  //           style: TextStyle(fontWeight: FontWeight.w400),
+  //         ),
+  //         SizedBox(
+  //           width: 5,
+  //         ),
+  //         GestureDetector(
+  //           onTap: () {
+  //             print("Routing to Sign up screen");
+  //           },
+  //           child: Text(
+  //             "Sign in",
+  //             style: TextStyle(
+  //                 fontWeight: FontWeight.w800,
+  //                 color: Colors.orange[200],
+  //                 fontSize: 19),
+  //           ),
+  //         )
+  //       ],
+  //     ),
+  //   );
+  // }
 }
 
 class ResponsiveWidget {
@@ -605,195 +557,184 @@ class CustomAppBar extends StatelessWidget {
                   end: Alignment.centerRight,
                   colors: <Color>[Colors.orange, Colors.pink])),
         ),
-        // child: Row(
-        //   children: <Widget>[
-        //     IconButton(
-        //         icon: Icon(
-        //           Icons.arrow_back,
-        //         ),
-        //         onPressed: () {
-        //           Navigator.of(context).pop();
-        //         })
-        //   ],
-        // ),
       ),
     );
   }
 }
 
-class CustomTextField extends StatelessWidget {
-  final String? hint;
-  final TextInputType? keyboardType;
-  final bool obscureText;
-  final IconData? icon;
-  late final double _width;
-  late final double _pixelRatio;
-  late final bool large;
-  late final bool medium;
-  final String name;
-  final FormeKey formeKey;
-  final FormeValueFieldListener<String, FormeTextFieldController>? listener;
+// class CustomTextField extends StatelessWidget {
+//   final String? hint;
+//   final TextInputType? keyboardType;
+//   final bool obscureText;
+//   final IconData? icon;
+//   late final double _width;
+//   late final double _pixelRatio;
+//   late final bool large;
+//   late final bool medium;
+//   final String name;
+//   final FormeKey formeKey;
+//   final FormeValueFieldListener<String, FormeTextFieldController>? listener;
 
-  CustomTextField({
-    this.hint,
-    this.keyboardType,
-    this.icon,
-    this.obscureText = false,
-    this.listener,
-    required this.name,
-    required this.formeKey,
-  });
+//   CustomTextField({
+//     this.hint,
+//     this.keyboardType,
+//     this.icon,
+//     this.obscureText = false,
+//     this.listener,
+//     required this.name,
+//     required this.formeKey,
+//   });
 
-  @override
-  Widget build(BuildContext context) {
-    print(name);
-    _width = MediaQuery.of(context).size.width;
-    _pixelRatio = MediaQuery.of(context).devicePixelRatio;
-    large = ResponsiveWidget.isScreenLarge(_width, _pixelRatio);
-    medium = ResponsiveWidget.isScreenMedium(_width, _pixelRatio);
-    return Material(
-        borderRadius: BorderRadius.circular(30.0),
-        elevation: large ? 12 : (medium ? 10 : 8),
-        child: Stack(
-          children: [
-            FormeTextField(
-              name: name,
-              listener: FormeValueFieldListener(
-                autovalidateMode: listener?.autovalidateMode,
-                onValidate: listener?.onValidate,
-                onAsyncValidate: listener?.onAsyncValidate,
-                onErrorChanged: (m, a) {
-                  InputBorder border;
-                  if (a == null || !a.invalid) {
-                    border = OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                        borderSide: BorderSide.none);
-                  } else {
-                    border = OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30.0),
-                        borderSide:
-                            BorderSide(color: Colors.orange[200]!, width: 2));
-                  }
-                  m.updateModel(FormeTextFieldModel(
-                      decoration: InputDecoration(
-                          focusedBorder: border, enabledBorder: border)));
-                },
-              ),
-              model: FormeTextFieldModel(
-                keyboardType: keyboardType,
-                maxLines: 1,
-                obscureText: obscureText,
-                cursorColor: Colors.orange[200],
-                decoration: InputDecoration(
-                  prefixIcon: Icon(icon, color: Colors.orange[200], size: 20),
-                  hintText: hint,
-                  suffixIconConstraints: BoxConstraints.tightFor(),
-                  suffixIcon: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      if (obscureText)
-                        Builder(builder: (context) {
-                          FormeValueFieldController<String, FormeTextFieldModel>
-                              controller = FormeFieldController.of(context);
-                          return IconButton(
-                              onPressed: () {
-                                controller.updateModel(FormeTextFieldModel(
-                                  obscureText:
-                                      !(controller.model.obscureText ?? false),
-                                ));
-                                (context as Element).markNeedsBuild();
-                              },
-                              icon: Icon(
-                                  (controller.model.obscureText ?? false)
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                  color: Colors.orange[200],
-                                  size: 24));
-                        }),
-                      Builder(
-                        builder: (context) {
-                          FormeValueFieldController<String, FormeModel>
-                              controller = FormeFieldController.of(context);
-                          return ValueListenableBuilder2<bool, String?>(
-                              controller.focusListenable,
-                              controller.valueListenable,
-                              builder: (context, a, b, c) {
-                            if (a && b != null && b.length > 0) {
-                              return IconButton(
-                                  icon: Icon(Icons.clear,
-                                      color: Colors.orange[200], size: 24),
-                                  onPressed: () {
-                                    controller.value = '';
-                                  });
-                            }
-                            return SizedBox();
-                          });
-                        },
-                      ),
-                      Builder(
-                        builder: (context) {
-                          FormeValueFieldController<String, FormeModel>
-                              controller = FormeFieldController.of(context);
-                          return ValueListenableBuilder<FormeValidateError?>(
-                              valueListenable: controller.errorTextListenable,
-                              builder: (context, errorText, child) {
-                                if (errorText == null) return SizedBox();
-                                if (errorText.validating) {
-                                  return Padding(
-                                    padding: EdgeInsets.all(16),
-                                    child: SizedBox(
-                                      width: 16,
-                                      height: 16,
-                                      child: CircularProgressIndicator(
-                                        valueColor:
-                                            new AlwaysStoppedAnimation<Color>(
-                                                Colors.orange[200]!),
-                                      ),
-                                    ),
-                                  );
-                                } else
-                                  return errorText.invalid
-                                      ? const IconButton(
-                                          onPressed: null,
-                                          icon: const Icon(
-                                            Icons.error,
-                                            color: Colors.red,
-                                          ))
-                                      : IconButton(
-                                          onPressed: null,
-                                          icon: const Icon(
-                                            Icons.check,
-                                            color: Colors.green,
-                                          ));
-                              });
-                        },
-                      ),
-                    ],
-                  ),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                      borderSide: BorderSide.none),
-                ),
-              ),
-            ),
-            Positioned(
-                bottom: 5,
-                left: 48,
-                child: Builder(builder: (context) {
-                  return ValueListenableBuilder<FormeValidateError?>(
-                      valueListenable:
-                          formeKey.valueField(name).errorTextListenable,
-                      builder: (context, a, b) {
-                        return a == null || !a.invalid
-                            ? SizedBox()
-                            : Text(a.text!,
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: large ? 12 : 10,
-                                ));
-                      });
-                })),
-          ],
-        ));
-  }
-}
+// @override
+// Widget build(BuildContext context) {
+//   print(name);
+//   _width = MediaQuery.of(context).size.width;
+//   _pixelRatio = MediaQuery.of(context).devicePixelRatio;
+//   large = ResponsiveWidget.isScreenLarge(_width, _pixelRatio);
+//   medium = ResponsiveWidget.isScreenMedium(_width, _pixelRatio);
+//   return Material(
+//       borderRadius: BorderRadius.circular(30.0),
+//       elevation: large ? 12 : (medium ? 10 : 8),
+//       child: Stack(
+//         children: [
+//           FormeTextField(
+//             name: name,
+//             listener: FormeValueFieldListener(
+//               autovalidateMode: listener?.autovalidateMode,
+//               onValidate: listener?.onValidate,
+//               onAsyncValidate: listener?.onAsyncValidate,
+//               onErrorChanged: (m, a) {
+//                 InputBorder border;
+//                 if (a == null || !a.invalid) {
+//                   border = OutlineInputBorder(
+//                       borderRadius: BorderRadius.circular(30.0),
+//                       borderSide: BorderSide.none);
+//                 } else {
+//                   border = OutlineInputBorder(
+//                       borderRadius: BorderRadius.circular(30.0),
+//                       borderSide:
+//                           BorderSide(color: Colors.orange[200]!, width: 2));
+//                 }
+//                 m.updateModel(FormeTextFieldModel(
+//                     decoration: InputDecoration(
+//                         focusedBorder: border, enabledBorder: border)));
+//               },
+//             ),
+//             model: FormeTextFieldModel(
+//               keyboardType: keyboardType,
+//               maxLines: 1,
+//               obscureText: obscureText,
+//               cursorColor: Colors.orange[200],
+//               decoration: InputDecoration(
+//                 prefixIcon: Icon(icon, color: Colors.orange[200], size: 20),
+//                 hintText: hint,
+//                 suffixIconConstraints: BoxConstraints.tightFor(),
+//                 suffixIcon: Row(
+//                   mainAxisSize: MainAxisSize.min,
+//                   children: [
+//                     if (obscureText)
+//                       Builder(builder: (context) {
+//                         FormeValueFieldController<String, FormeTextFieldModel>
+//                             controller = FormeFieldController.of(context);
+//                         return IconButton(
+//                             onPressed: () {
+//                               controller.updateModel(FormeTextFieldModel(
+//                                 obscureText:
+//                                     !(controller.model.obscureText ?? false),
+//                               ));
+//                               (context as Element).markNeedsBuild();
+//                             },
+//                             icon: Icon(
+//                                 (controller.model.obscureText ?? false)
+//                                     ? Icons.visibility
+//                                     : Icons.visibility_off,
+//                                 color: Colors.orange[200],
+//                                 size: 24));
+//                       }),
+//                     Builder(
+//                       builder: (context) {
+//                         FormeValueFieldController<String, FormeModel>
+//                             controller = FormeFieldController.of(context);
+//                         return ValueListenableBuilder2<bool, String?>(
+//                             controller.focusListenable,
+//                             controller.valueListenable,
+//                             builder: (context, a, b, c) {
+//                           if (a && b != null && b.length > 0) {
+//                             return IconButton(
+//                                 icon: Icon(Icons.clear,
+//                                     color: Colors.orange[200], size: 24),
+//                                 onPressed: () {
+//                                   controller.value = '';
+//                                 });
+//                           }
+//                           return SizedBox();
+//                         });
+//                       },
+//                     ),
+//                     Builder(
+//                       builder: (context) {
+//                         FormeValueFieldController<String, FormeModel>
+//                             controller = FormeFieldController.of(context);
+//                         return ValueListenableBuilder<FormeValidateError?>(
+//                             valueListenable: controller.errorTextListenable,
+//                             builder: (context, errorText, child) {
+//                               if (errorText == null) return SizedBox();
+//                               if (errorText.validating) {
+//                                 return Padding(
+//                                   padding: EdgeInsets.all(16),
+//                                   child: SizedBox(
+//                                     width: 16,
+//                                     height: 16,
+//                                     child: CircularProgressIndicator(
+//                                       valueColor:
+//                                           new AlwaysStoppedAnimation<Color>(
+//                                               Colors.orange[200]!),
+//                                     ),
+//                                   ),
+//                                 );
+//                               } else
+//                                 return errorText.invalid
+//                                     ? const IconButton(
+//                                         onPressed: null,
+//                                         icon: const Icon(
+//                                           Icons.error,
+//                                           color: Colors.red,
+//                                         ))
+//                                     : IconButton(
+//                                         onPressed: null,
+//                                         icon: const Icon(
+//                                           Icons.check,
+//                                           color: Colors.green,
+//                                         ));
+//                             });
+//                       },
+//                     ),
+//                   ],
+//                 ),
+//                 border: OutlineInputBorder(
+//                     borderRadius: BorderRadius.circular(30.0),
+//                     borderSide: BorderSide.none),
+//               ),
+//             ),
+//           ),
+//           Positioned(
+//               bottom: 5,
+//               left: 48,
+//               child: Builder(builder: (context) {
+//                 return ValueListenableBuilder<FormeValidateError?>(
+//                     valueListenable:
+//                         formeKey.valueField(name).errorTextListenable,
+//                     builder: (context, a, b) {
+//                       return a == null || !a.invalid
+//                           ? SizedBox()
+//                           : Text(a.text!,
+//                               style: TextStyle(
+//                                 color: Colors.red,
+//                                 fontSize: large ? 12 : 10,
+//                               ));
+//                     });
+//               })),
+//         ],
+//       ));
+// }
+// }

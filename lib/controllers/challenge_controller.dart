@@ -36,11 +36,11 @@ class Challengecontroller extends ChangeNotifier {
           .map((challenge) => ProduitGagnant.fromJSON(challenge))
           .toList();
     }
-    _initChallengeListStartChallenge();
+    _initUserDrop();
     notifyListeners();
   }
 
-  void _initChallengeListStartChallenge() async {
+  void _initUserDrop() async {
     _localDataUserDrop = await SharedPreferences.getInstance();
     Map<String, dynamic> _jsonDecodeUserDrop;
     final String? _tempListChallenge =
@@ -53,5 +53,28 @@ class Challengecontroller extends ChangeNotifier {
 
   bool getInfoRecupere() {
     return _userDrop.infoRecupere;
+  }
+
+  addUserDropp(
+      {required bool infoRecupere,
+      required String nom,
+      required String prenom,
+      required String email,
+      required String telephone,
+      required String photo}) async {
+    _userDrop.infoRecupere = infoRecupere;
+    _userDrop.nom = nom;
+    _userDrop.prenom = prenom;
+    _userDrop.email = email;
+    _userDrop.telephone = telephone;
+    _userDrop.photo = photo;
+    await _saveUserDropp();
+    _initUserDrop();
+  }
+
+  Future<bool> _saveUserDropp() async {
+    Map mapday = _userDrop.toJson();
+    String _jsonDay = jsonEncode(mapday);
+    return _localData.setString(keyAccesUserDrop, _jsonDay);
   }
 }
