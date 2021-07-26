@@ -16,6 +16,7 @@ class _HomeScreenState extends State<HomeScreen>
   late PersistentBottomSheetController _bottomSheetController;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
+
   // late FancyDrawerController _controller;
   void initState() {
     super.initState();
@@ -31,129 +32,6 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     // Challengecontroller variable = Provider.of<Challengecontroller>(context);
     return Material(
-      // child: FancyDrawerWrapper(
-      //   hideOnContentTap: true,
-      //   backgroundColor: Colors.white,
-      //   controller: _controller,
-      //   drawerItems: <Widget>[
-      //     InkWell(
-      //       onTap: () {
-      //         // Navigator.of(context).push(MaterialPageRoute(
-      //         //     builder: (context) => ChangeNotifierProvider.value(
-      //         //         value: variable,
-      //         //         child: Home(
-      //         //           id: "",
-      //         //           idChallenge1: '',
-      //         //           namechallenge: '',
-      //         //           returnRaccourci: false,
-      //         //         ))));
-      //       },
-      //       child: Row(
-      //         children: [
-      //           Icon(Icons.home),
-      //           SizedBox(
-      //             width: 5.0,
-      //           ),
-      //           Text(
-      //             "Menu",
-      //             style: TextStyle(
-      //               fontSize: 18,
-      //               color: Colors.purple,
-      //               fontWeight: FontWeight.bold,
-      //             ),
-      //           ),
-      //         ],
-      //       ),
-      //     ),
-      //     SizedBox(height: 5.0),
-      //     InkWell(
-      //       onTap: () {
-      //         // Navigator.of(context).push(MaterialPageRoute(
-      //         //     builder: (context) => ChangeNotifierProvider.value(
-      //         //         value: variable, child: ExampleApp())));
-      //       },
-      //       child: Row(
-      //         children: [
-      //           Icon(Icons.save_rounded),
-      //           SizedBox(
-      //             width: 5.0,
-      //           ),
-      //           Text(
-      //             "Sauvegarde challenge",
-      //             style: TextStyle(
-      //               fontSize: 18,
-      //               color: Colors.purple,
-      //               fontWeight: FontWeight.bold,
-      //             ),
-      //           ),
-      //         ],
-      //       ),
-      //     ),
-      //     SizedBox(height: 5.0),
-      //     // InkWell(
-      //     //   onTap: () {
-      //     //     // Navigator.of(context).push(MaterialPageRoute(
-      //     //     //     builder: (context) => ChangeNotifierProvider.value(
-      //     //     //         value: variable, child: ResultaChallenge())));
-      //     //   },
-      //     //   child: Row(
-      //     //     children: [
-      //     //       Icon(FontAwesomeIcons.play),
-      //     //       SizedBox(
-      //     //         width: 5.0,
-      //     //       ),
-      //     //       Text(
-      //     //         "Score des challenges",
-      //     //         style: TextStyle(
-      //     //           fontSize: 18,
-      //     //           color: Colors.purple,
-      //     //           fontWeight: FontWeight.bold,
-      //     //         ),
-      //     //       ),
-      //     //     ],
-      //     //   ),
-      //     // ),
-      //     // SizedBox(height: 5.0),
-      //     InkWell(
-      //       onTap: () {},
-      //       child: Row(
-      //         children: [
-      //           Icon(Icons.support),
-      //           SizedBox(
-      //             width: 5.0,
-      //           ),
-      //           Text(
-      //             "Support",
-      //             style: TextStyle(
-      //               fontSize: 18,
-      //               color: Colors.purple,
-      //               fontWeight: FontWeight.bold,
-      //             ),
-      //           ),
-      //         ],
-      //       ),
-      //     ),
-      //     SizedBox(height: 5.0),
-      //     InkWell(
-      //       onTap: () {},
-      //       child: Row(
-      //         children: [
-      //           Icon(Icons.policy),
-      //           SizedBox(
-      //             width: 5.0,
-      //           ),
-      //           Text(
-      //             "À propos",
-      //             style: TextStyle(
-      //               fontSize: 18,
-      //               color: Colors.purple,
-      //               fontWeight: FontWeight.bold,
-      //             ),
-      //           ),
-      //         ],
-      //       ),
-      //     ),
-      //   ],
       child: Scaffold(
         key: scaffoldkey,
         appBar: PreferredSize(
@@ -174,16 +52,16 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
                 ),
               ],
-              leading: IconButton(
-                alignment: Alignment.topRight,
-                icon: Icon(
-                  Icons.menu,
-                  color: Colors.black,
-                ),
-                onPressed: () {
-                  // _controller.toggle();
-                },
-              ),
+              // leading: IconButton(
+              //   alignment: Alignment.topRight,
+              //   icon: Icon(
+              //     Icons.menu,
+              //     color: Colors.black,
+              //   ),
+              //   onPressed: () {
+              //     // _controller.toggle();
+              //   },
+              // ),
               centerTitle: true,
               flexibleSpace: Container(
                 padding: EdgeInsets.only(top: 40.0),
@@ -244,209 +122,572 @@ class _HomeScreenState extends State<HomeScreen>
                     key: formKey,
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: ListView(
-                        padding: EdgeInsets.all(10.0),
-                        children: [
-                          IconButton(
-                            alignment: Alignment.topRight,
-                            icon: Icon(
-                              Icons.cancel,
-                              color: Colors.black,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            // IconButton(
+                            //   alignment: Alignment.topRight,
+                            //   icon: Icon(
+                            //     Icons.cancel,
+                            //     color: Colors.black,
+                            //   ),
+                            //   onPressed: () {
+                            //     Navigator.pop(context);
+                            //   },
+                            // ),
+                            SizedBox(
+                              height: 5.0,
                             ),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                          SizedBox(
-                            height: 15.0,
-                          ),
-                          TextFormField(
-                            textCapitalization: TextCapitalization.sentences,
-                            onSaved: (value) {
-                              var nameChallenge = value;
-                            },
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Merci d'entrer un nom pour le challenge";
-                              }
-                              return null;
-                            },
-                            decoration: InputDecoration(
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 2.0, color: Colors.blueAccent),
-                                    borderRadius: BorderRadius.circular(15.0)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 1.0, color: Colors.blueAccent),
-                                    borderRadius: BorderRadius.circular(15.0)),
-                                contentPadding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 10),
-                                labelText: "Nom de la mission",
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15.0))),
-                          ),
-                          SizedBox(
-                            height: 15.0,
-                          ),
-                          TextFormField(
-                            textCapitalization: TextCapitalization.sentences,
-                            onSaved: (value) {
-                              var targetChallenge = value;
-                            },
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Merci d'entrer une description pour la mission";
-                              } else if (value.length > 35) {
-                                return "Pas plus de 50 caractères";
-                              }
-                              return null;
-                            },
-                            decoration: InputDecoration(
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 2.0, color: Colors.blueAccent),
-                                    borderRadius: BorderRadius.circular(15.0)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 1.0, color: Colors.blueAccent),
-                                    borderRadius: BorderRadius.circular(15.0)),
-                                labelText: "Description",
-                                contentPadding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 10),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15.0))),
-                          ),
-                          SizedBox(
-                            height: 15.0,
-                          ),
-                          DropdownButtonFormField<String>(
-                            decoration: InputDecoration(
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 2.0, color: Colors.blueAccent),
-                                    borderRadius: BorderRadius.circular(15.0)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 1.0, color: Colors.blueAccent),
-                                    borderRadius: BorderRadius.circular(15.0)),
-                                contentPadding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 10),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15.0))),
-                            value: "",
-                            onChanged: (value) {
-                              updateController(value);
-                            },
-                            onSaved: (value) {
-                              updateController(value);
-                            },
-                            items: <DropdownMenuItem<String>>[
-                              DropdownMenuItem(
-                                value: "haute",
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.update,
-                                      size: 30.0,
+                            ///////////////////////////////////
+                            Row(
+                              children: [
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width / 2.2,
+                                  height: 500,
+                                  child: Card(
+                                    color: Colors.white,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30.0),
                                     ),
-                                    SizedBox(width: 10),
-                                    Text("Haute"),
+                                    elevation: 15.0,
+                                    child: Column(
+                                      children: [
+                                        SizedBox(
+                                          height: 30.0,
+                                        ),
+                                        Card(
+                                          elevation: 15.0,
+                                          color: Colors.white,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: Center(
+                                              child: Text(
+                                                  "CARACTERISTIQUE DU PRODUIT"),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: TextFormField(
+                                            style: TextStyle(fontSize: 10),
+                                            textCapitalization:
+                                                TextCapitalization.sentences,
+                                            onSaved: (value) {
+                                              var targetChallenge = value;
+                                            },
+                                            validator: (value) {
+                                              if (value!.isEmpty) {
+                                                return "Merci d'entrer une description pour la mission";
+                                              } else if (value.length > 35) {
+                                                return "Pas plus de 50 caractères";
+                                              }
+                                              return null;
+                                            },
+                                            decoration: InputDecoration(
+                                              focusedBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      width: 2.0,
+                                                      color: Colors.blueAccent),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15.0)),
+                                              enabledBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      width: 1.0,
+                                                      color: Colors.blueAccent),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15.0)),
+                                              contentPadding:
+                                                  EdgeInsets.symmetric(
+                                                      horizontal: 20,
+                                                      vertical: 10),
+                                              labelText: "Nom du produit",
+                                              border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15.0)),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 5.0,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: TextFormField(
+                                            style: TextStyle(fontSize: 10),
+                                            textCapitalization:
+                                                TextCapitalization.sentences,
+                                            onSaved: (value) {
+                                              var targetChallenge = value;
+                                            },
+                                            validator: (value) {
+                                              if (value!.isEmpty) {
+                                                return "Merci d'entrer une description pour la mission";
+                                              } else if (value.length > 35) {
+                                                return "Pas plus de 50 caractères";
+                                              }
+                                              return null;
+                                            },
+                                            decoration: InputDecoration(
+                                              focusedBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      width: 2.0,
+                                                      color: Colors.blueAccent),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15.0)),
+                                              enabledBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      width: 1.0,
+                                                      color: Colors.blueAccent),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15.0)),
+                                              contentPadding:
+                                                  EdgeInsets.symmetric(
+                                                      horizontal: 20,
+                                                      vertical: 10),
+                                              labelText: "Type de produit",
+                                              border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15.0)),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 5.0,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: TextFormField(
+                                            style: TextStyle(fontSize: 10),
+                                            textCapitalization:
+                                                TextCapitalization.sentences,
+                                            onSaved: (value) {
+                                              var targetChallenge = value;
+                                            },
+                                            validator: (value) {
+                                              if (value!.isEmpty) {
+                                                return "Merci d'entrer une description pour la mission";
+                                              } else if (value.length > 35) {
+                                                return "Pas plus de 50 caractères";
+                                              }
+                                              return null;
+                                            },
+                                            decoration: InputDecoration(
+                                              focusedBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      width: 2.0,
+                                                      color: Colors.blueAccent),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15.0)),
+                                              enabledBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      width: 1.0,
+                                                      color: Colors.blueAccent),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15.0)),
+                                              contentPadding:
+                                                  EdgeInsets.symmetric(
+                                                      horizontal: 20,
+                                                      vertical: 10),
+                                              labelText: "Prix d'achat",
+                                              border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15.0)),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 5.0,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: TextFormField(
+                                            style: TextStyle(fontSize: 10),
+                                            textCapitalization:
+                                                TextCapitalization.sentences,
+                                            onSaved: (value) {
+                                              var targetChallenge = value;
+                                            },
+                                            validator: (value) {
+                                              if (value!.isEmpty) {
+                                                return "Merci d'entrer une description pour la mission";
+                                              } else if (value.length > 35) {
+                                                return "Pas plus de 50 caractères";
+                                              }
+                                              return null;
+                                            },
+                                            decoration: InputDecoration(
+                                              focusedBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      width: 2.0,
+                                                      color: Colors.blueAccent),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15.0)),
+                                              enabledBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      width: 1.0,
+                                                      color: Colors.blueAccent),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15.0)),
+                                              contentPadding:
+                                                  EdgeInsets.symmetric(
+                                                      horizontal: 20,
+                                                      vertical: 10),
+                                              labelText: "Prix de vente",
+                                              border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15.0)),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 5.0,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: TextFormField(
+                                            style: TextStyle(fontSize: 10),
+                                            textCapitalization:
+                                                TextCapitalization.sentences,
+                                            onSaved: (value) {
+                                              var targetChallenge = value;
+                                            },
+                                            validator: (value) {
+                                              if (value!.isEmpty) {
+                                                return "Merci d'entrer une description pour la mission";
+                                              } else if (value.length > 35) {
+                                                return "Pas plus de 50 caractères";
+                                              }
+                                              return null;
+                                            },
+                                            decoration: InputDecoration(
+                                              focusedBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      width: 2.0,
+                                                      color: Colors.blueAccent),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15.0)),
+                                              enabledBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      width: 1.0,
+                                                      color: Colors.blueAccent),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15.0)),
+                                              contentPadding:
+                                                  EdgeInsets.symmetric(
+                                                      horizontal: 20,
+                                                      vertical: 10),
+                                              labelText: "Prix shipping",
+                                              border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15.0)),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Column(
+                                  children: [
+                                    Container(
+                                      width: MediaQuery.of(context).size.width /
+                                          2.2,
+                                      height: 210,
+                                      child: Card(
+                                          color: Colors.white,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(30.0),
+                                          ),
+                                          elevation: 15.0,
+                                          child: Column(
+                                            children: [
+                                              SizedBox(
+                                                height: 15.0,
+                                              ),
+                                              Card(
+                                                elevation: 15.0,
+                                                color: Colors.white,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.0),
+                                                ),
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(
+                                                      10.0),
+                                                  child: Center(
+                                                    child: Text(
+                                                        "PHOTO DU PRODUIT"),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 15.0,
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.0),
+                                                  child: Image(
+                                                    image: NetworkImage(
+                                                        "https://cdn.pixabay.com/photo/2017/10/12/20/15/photoshop-2845779_960_720.jpg"),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          )),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width /
+                                          2.2,
+                                      height: 290,
+                                      child: Card(
+                                        color: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(30.0),
+                                        ),
+                                        elevation: 15.0,
+                                        child: Column(
+                                          children: [
+                                            SizedBox(
+                                              height: 15.0,
+                                            ),
+                                            Card(
+                                              elevation: 15.0,
+                                              color: Colors.white,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(20.0),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: Center(
+                                                  child:
+                                                      Text("ADRESSE INTERNET"),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 5.0,
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: TextFormField(
+                                                style: TextStyle(fontSize: 10),
+                                                textCapitalization:
+                                                    TextCapitalization
+                                                        .sentences,
+                                                onSaved: (value) {
+                                                  var targetChallenge = value;
+                                                },
+                                                validator: (value) {
+                                                  if (value!.isEmpty) {
+                                                    return "Merci d'entrer une description pour la mission";
+                                                  } else if (value.length >
+                                                      35) {
+                                                    return "Pas plus de 50 caractères";
+                                                  }
+                                                  return null;
+                                                },
+                                                decoration: InputDecoration(
+                                                  focusedBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          width: 2.0,
+                                                          color: Colors
+                                                              .blueAccent),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15.0)),
+                                                  enabledBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          width: 1.0,
+                                                          color: Colors
+                                                              .blueAccent),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15.0)),
+                                                  contentPadding:
+                                                      EdgeInsets.symmetric(
+                                                          horizontal: 20,
+                                                          vertical: 10),
+                                                  labelText: "Site de vente",
+                                                  border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15.0)),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 5.0,
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: TextFormField(
+                                                style: TextStyle(fontSize: 10),
+                                                textCapitalization:
+                                                    TextCapitalization
+                                                        .sentences,
+                                                onSaved: (value) {
+                                                  var targetChallenge = value;
+                                                },
+                                                validator: (value) {
+                                                  if (value!.isEmpty) {
+                                                    return "Merci d'entrer une description pour la mission";
+                                                  } else if (value.length >
+                                                      35) {
+                                                    return "Pas plus de 50 caractères";
+                                                  }
+                                                  return null;
+                                                },
+                                                decoration: InputDecoration(
+                                                  focusedBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          width: 2.0,
+                                                          color: Colors
+                                                              .blueAccent),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15.0)),
+                                                  enabledBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          width: 1.0,
+                                                          color: Colors
+                                                              .blueAccent),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15.0)),
+                                                  contentPadding:
+                                                      EdgeInsets.symmetric(
+                                                          horizontal: 20,
+                                                          vertical: 10),
+                                                  labelText: "Site AliExpress",
+                                                  border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15.0)),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 5.0,
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: TextFormField(
+                                                style: TextStyle(fontSize: 10),
+                                                textCapitalization:
+                                                    TextCapitalization
+                                                        .sentences,
+                                                onSaved: (value) {
+                                                  var targetChallenge = value;
+                                                },
+                                                validator: (value) {
+                                                  if (value!.isEmpty) {
+                                                    return "Merci d'entrer une description pour la mission";
+                                                  } else if (value.length >
+                                                      35) {
+                                                    return "Pas plus de 50 caractères";
+                                                  }
+                                                  return null;
+                                                },
+                                                decoration: InputDecoration(
+                                                  focusedBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          width: 2.0,
+                                                          color: Colors
+                                                              .blueAccent),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15.0)),
+                                                  enabledBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          width: 1.0,
+                                                          color: Colors
+                                                              .blueAccent),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15.0)),
+                                                  contentPadding:
+                                                      EdgeInsets.symmetric(
+                                                          horizontal: 20,
+                                                          vertical: 10),
+                                                  labelText: "facebook",
+                                                  border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15.0)),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
-                              ),
-                              DropdownMenuItem(
-                                value: "normal",
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.auto_fix_normal,
-                                      size: 30.0,
-                                    ),
-                                    SizedBox(width: 10),
-                                    Text("Normal"),
-                                  ],
-                                ),
-                              ),
-                              DropdownMenuItem(
-                                value: "quotidien",
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.view_day,
-                                      size: 30.0,
-                                    ),
-                                    SizedBox(width: 10),
-                                    Text("Quotidien"),
-                                  ],
-                                ),
-                              ),
-                              DropdownMenuItem(
-                                value: "hebdomadaire",
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.view_week,
-                                      size: 30.0,
-                                    ),
-                                    SizedBox(width: 10),
-                                    Text("Hebdomadaire"),
-                                  ],
-                                ),
-                              ),
-                              DropdownMenuItem(
-                                value: "mensuel",
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.date_range,
-                                      size: 30.0,
-                                    ),
-                                    SizedBox(width: 10),
-                                    Text("Mensuel"),
-                                  ],
-                                ),
-                              ),
-                              DropdownMenuItem(
-                                value: "notification",
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.schedule,
-                                      size: 30.0,
-                                    ),
-                                    SizedBox(width: 10),
-                                    Text("Notification"),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 15.0,
-                          ),
-                          Center(
-                            child: IconButton(
-                              iconSize: 60,
-                              alignment: Alignment.topRight,
-                              icon: Icon(
-                                Icons.check_circle,
-                                color: Colors.orange[900],
-                              ),
-                              onPressed: () {
-                                if (formKey.currentState!.validate()) {
-                                  formKey.currentState!.save();
-                                  {
-                                    // Provider.of<Challengecontroller>(context,
-                                    //         listen: false).
+                              ],
+                            ),
 
-                                    Navigator.pop(context);
-                                  }
-                                }
-                              },
+                            SizedBox(
+                              height: 15.0,
                             ),
-                          ),
-                        ],
+                            SizedBox(
+                              height: 15.0,
+                            ),
+                            Center(
+                              child: IconButton(
+                                iconSize: 60,
+                                alignment: Alignment.topRight,
+                                icon: Icon(
+                                  Icons.check_circle,
+                                  color: Colors.orange[900],
+                                ),
+                                onPressed: () {
+                                  if (formKey.currentState!.validate()) {
+                                    formKey.currentState!.save();
+                                    {
+                                      // Provider.of<Challengecontroller>(context,
+                                      //         listen: false).
+
+                                      Navigator.pop(context);
+                                    }
+                                  }
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ));
