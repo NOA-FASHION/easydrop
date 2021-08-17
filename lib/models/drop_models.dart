@@ -86,19 +86,22 @@ class Offre {
 }
 
 class ProduitGagnant {
+  String nomProduit;
+  double prixShipping;
   String typeDuProduit;
-  Double prixAchat;
-  Double prixVente;
-  Double chiffreAffaireTotal;
-  Double prixShippingTotal;
-  Double facebookDepenseTotal;
-  Double coutTotalProduit;
-  Double margeTotal;
-  Double venteTotal;
-  Double roaTotal;
+  double prixAchat;
+  double prixVente;
+  double chiffreAffaireTotal;
+  double prixShippingTotal;
+  double facebookDepenseTotal;
+  double coutTotalProduit;
+  double margeTotal;
+  double venteTotal;
+  double roaTotal;
   int panierTotal;
   int vueTotal;
-  String adresseSite;
+  String siteVente;
+  String siteAliexpress;
   String facebookAdress;
   String photoProduit;
   List<String> nombreVenteOffreTotal;
@@ -106,6 +109,8 @@ class ProduitGagnant {
   List<Offre> listeOffre;
 
   ProduitGagnant({
+    required this.nomProduit,
+    required this.prixShipping,
     required this.typeDuProduit,
     required this.prixAchat,
     required this.prixVente,
@@ -113,7 +118,8 @@ class ProduitGagnant {
     required this.prixShippingTotal,
     required this.facebookDepenseTotal,
     required this.coutTotalProduit,
-    required this.adresseSite,
+    required this.siteVente,
+    required this.siteAliexpress,
     required this.margeTotal,
     required this.venteTotal,
     required this.roaTotal,
@@ -128,13 +134,16 @@ class ProduitGagnant {
 
   factory ProduitGagnant.fromJSON(Map<String, dynamic> json) => ProduitGagnant(
         typeDuProduit: json['typeDuProduit'],
+        prixShipping: json['prixShipping'],
+        siteAliexpress: json['siteAliexpress'],
+        nomProduit: json['nomProduit'],
         prixVente: json['prixVente'],
         prixAchat: json['prixAchat'],
         chiffreAffaireTotal: json['chiffreAffaireTotal'],
         prixShippingTotal: json['prixShippingTotal'],
         facebookDepenseTotal: json['facebookDepenseTotal'],
         coutTotalProduit: json['coutTotalProduit'],
-        adresseSite: json['adresseSite'],
+        siteVente: json['siteVente'],
         margeTotal: json['margeTotal'],
         venteTotal: json['venteTotal'],
         nombreVenteOffreTotal:
@@ -154,6 +163,8 @@ class ProduitGagnant {
 
   Map<String, dynamic> toJson() {
     return {
+      "nomProduit": nomProduit,
+      "prixShipping": prixShipping,
       "typeDuProduit": typeDuProduit,
       "prixVente": prixVente,
       "prixAchat": prixAchat,
@@ -161,7 +172,8 @@ class ProduitGagnant {
       "prixShippingTotal": prixShippingTotal,
       "facebookDepenseTotal": facebookDepenseTotal,
       "coutTotalProduit": coutTotalProduit,
-      "adresseSite": adresseSite,
+      "siteVente": siteVente,
+      "siteAliexpress": siteAliexpress,
       "margeTotal": margeTotal,
       "venteTotal": venteTotal,
       "nombreVenteOffreTotal":

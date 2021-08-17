@@ -1,5 +1,9 @@
 // import 'package:fancy_drawer/fancy_drawer.dart';
+
+import 'package:easydrop/controllers/challenge_controller.dart';
+import 'package:easydrop/models/drop_models.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
 import 'creatProduct.dart';
@@ -28,6 +32,27 @@ class _HomeScreenState extends State<HomeScreen>
     //       }); // This chunk of code is important
   }
 
+  double chiffreAffaireTotal = 0;
+  double coutTotalProduit = 0;
+  double facebookDepenseTotal = 0;
+  double margeTotal = 0;
+  double prixShippingTotal = 0;
+  double venteTotal = 0.0;
+  int vueTotal = 0;
+  double roaTotal = 0;
+  late String nomProduit;
+  late String typeDuProduit;
+  late double prixAchat;
+  late double prixVente;
+  late double prixShipping;
+  late String siteVente;
+  late String siteAliexpress;
+  late String facebookAdress;
+  List<String> nombreVenteOffreTotal = [];
+  List<ResultJournee> listeResultatJournee = [];
+  List<Offre> listeOffre = [];
+  late String photoProduit;
+  int panierTotal = 0;
   @override
   Widget build(BuildContext context) {
     // Challengecontroller variable = Provider.of<Challengecontroller>(context);
@@ -179,7 +204,7 @@ class _HomeScreenState extends State<HomeScreen>
                                             textCapitalization:
                                                 TextCapitalization.sentences,
                                             onSaved: (value) {
-                                              var targetChallenge = value;
+                                              nomProduit = value!;
                                             },
                                             validator: (value) {
                                               if (value!.isEmpty) {
@@ -226,7 +251,7 @@ class _HomeScreenState extends State<HomeScreen>
                                             textCapitalization:
                                                 TextCapitalization.sentences,
                                             onSaved: (value) {
-                                              var targetChallenge = value;
+                                              typeDuProduit = value!;
                                             },
                                             validator: (value) {
                                               if (value!.isEmpty) {
@@ -273,7 +298,7 @@ class _HomeScreenState extends State<HomeScreen>
                                             textCapitalization:
                                                 TextCapitalization.sentences,
                                             onSaved: (value) {
-                                              var targetChallenge = value;
+                                              prixAchat = double.parse(value!);
                                             },
                                             validator: (value) {
                                               if (value!.isEmpty) {
@@ -320,7 +345,7 @@ class _HomeScreenState extends State<HomeScreen>
                                             textCapitalization:
                                                 TextCapitalization.sentences,
                                             onSaved: (value) {
-                                              var targetChallenge = value;
+                                              prixVente = double.parse(value!);
                                             },
                                             validator: (value) {
                                               if (value!.isEmpty) {
@@ -367,7 +392,8 @@ class _HomeScreenState extends State<HomeScreen>
                                             textCapitalization:
                                                 TextCapitalization.sentences,
                                             onSaved: (value) {
-                                              var targetChallenge = value;
+                                              prixShipping =
+                                                  double.parse(value!);
                                             },
                                             validator: (value) {
                                               if (value!.isEmpty) {
@@ -506,7 +532,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                     TextCapitalization
                                                         .sentences,
                                                 onSaved: (value) {
-                                                  var targetChallenge = value;
+                                                  siteVente = value!;
                                                 },
                                                 validator: (value) {
                                                   if (value!.isEmpty) {
@@ -558,7 +584,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                     TextCapitalization
                                                         .sentences,
                                                 onSaved: (value) {
-                                                  var targetChallenge = value;
+                                                  siteAliexpress = value!;
                                                 },
                                                 validator: (value) {
                                                   if (value!.isEmpty) {
@@ -610,7 +636,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                     TextCapitalization
                                                         .sentences,
                                                 onSaved: (value) {
-                                                  var targetChallenge = value;
+                                                  facebookAdress = value!;
                                                 },
                                                 validator: (value) {
                                                   if (value!.isEmpty) {
@@ -677,8 +703,37 @@ class _HomeScreenState extends State<HomeScreen>
                                   if (formKey.currentState!.validate()) {
                                     formKey.currentState!.save();
                                     {
-                                      // Provider.of<Challengecontroller>(context,
-                                      //         listen: false).
+                                      Provider.of<Challengecontroller>(
+                                              context,
+                                              listen: false)
+                                          .addProductGagant(
+                                              chiffreAffaireTotal:
+                                                  chiffreAffaireTotal,
+                                              coutTotalProduit:
+                                                  coutTotalProduit,
+                                              facebookAdress: facebookAdress,
+                                              facebookDepenseTotal:
+                                                  facebookDepenseTotal,
+                                              margeTotal: margeTotal,
+                                              prixAchat: prixAchat,
+                                              prixShippingTotal:
+                                                  prixShippingTotal,
+                                              prixVente: prixVente,
+                                              roaTotal: roaTotal,
+                                              venteTotal: venteTotal,
+                                              vueTotal: vueTotal,
+                                              listeOffre: listeOffre,
+                                              listeResultatJournee:
+                                                  listeResultatJournee,
+                                              photoProduit: photoProduit,
+                                              typeDuProduit: typeDuProduit,
+                                              panierTotal: panierTotal,
+                                              nombreVenteOffreTotal:
+                                                  nombreVenteOffreTotal,
+                                              nomProduit: '',
+                                              siteAliexpress: siteAliexpress,
+                                              siteVente: siteVente,
+                                              prixShipping: prixShipping);
 
                                       Navigator.pop(context);
                                     }

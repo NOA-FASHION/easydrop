@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:easydrop/models/drop_models.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 const String keyAcces = "listProduitGagnant";
 const String keyAccesUserDrop = "UserDrop";
+List<ProduitGagnant> _listProduitGagnant = [];
 
 class Challengecontroller extends ChangeNotifier {
   late SharedPreferences _localData;
@@ -23,7 +25,7 @@ class Challengecontroller extends ChangeNotifier {
 
   void _initProduitGagnantList() async {
     _localData = await SharedPreferences.getInstance();
-    List<ProduitGagnant> _listProduitGagnant = [];
+
     List<Map<String, dynamic>> _jsonDecodeList;
     final List<String>? _tempList = _localData.getStringList(keyAcces);
     if (_tempList != null) {
@@ -76,5 +78,71 @@ class Challengecontroller extends ChangeNotifier {
     Map mapday = _userDrop.toJson();
     String _jsonDay = jsonEncode(mapday);
     return _localData.setString(keyAccesUserDrop, _jsonDay);
+  }
+
+  void addProductGagant(
+      {required String siteVente,
+      required double prixShipping,
+      required String siteAliexpress,
+      required String nomProduit,
+      required double chiffreAffaireTotal,
+      required double coutTotalProduit,
+      required String facebookAdress,
+      required double facebookDepenseTotal,
+      required double margeTotal,
+      required double prixAchat,
+      required double prixShippingTotal,
+      required double prixVente,
+      required double roaTotal,
+      required double venteTotal,
+      required int vueTotal,
+      required List<Offre> listeOffre,
+      required List<ResultJournee> listeResultatJournee,
+      required String photoProduit,
+      required String typeDuProduit,
+      required int panierTotal,
+      required List<String> nombreVenteOffreTotal}) async {
+    _listProduitGagnant.add(
+      ProduitGagnant(
+          chiffreAffaireTotal: chiffreAffaireTotal,
+          coutTotalProduit: coutTotalProduit,
+          facebookAdress: facebookAdress,
+          facebookDepenseTotal: facebookDepenseTotal,
+          listeOffre: listeOffre,
+          listeResultatJournee: listeResultatJournee,
+          margeTotal: margeTotal,
+          panierTotal: panierTotal,
+          nombreVenteOffreTotal: nombreVenteOffreTotal,
+          photoProduit: photoProduit,
+          prixAchat: prixAchat,
+          prixShippingTotal: prixShippingTotal,
+          prixVente: prixVente,
+          roaTotal: roaTotal,
+          typeDuProduit: typeDuProduit,
+          venteTotal: venteTotal,
+          vueTotal: vueTotal,
+          nomProduit: nomProduit,
+          siteAliexpress: siteAliexpress,
+          siteVente: siteVente,
+          prixShipping: prixShipping),
+    );
+
+    await _save(remove: false);
+    _initProduitGagnantList();
+    notifyListeners();
+  }
+
+  Future<bool> _save({required bool remove}) async {
+    if (_listProduitGagnant.length < 1 && remove) {
+      return _localData.setStringList(keyAcces, []);
+    }
+    if (_listProduitGagnant.isNotEmpty) {
+      List<String> _jsonList = _listProduitGagnant.map((challenge) {
+        return jsonEncode(challenge.toJson());
+      }).toList();
+      return _localData.setStringList(keyAcces, _jsonList);
+    }
+
+    return false;
   }
 }
