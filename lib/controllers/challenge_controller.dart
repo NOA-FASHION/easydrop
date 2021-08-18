@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:ffi';
+// import 'dart:ffi';
 
 import 'package:easydrop/models/drop_models.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +40,10 @@ class Challengecontroller extends ChangeNotifier {
     }
     _initUserDrop();
     notifyListeners();
+  }
+
+  List<ProduitGagnant> getChallenges() {
+    return _listProduitGagnant;
   }
 
   void _initUserDrop() async {
@@ -144,5 +148,15 @@ class Challengecontroller extends ChangeNotifier {
     }
 
     return false;
+  }
+
+  void remove({
+    required int index,
+  }) async {
+    // await removeChallengelistId(index);
+    _listProduitGagnant.removeAt(index);
+    await _save(remove: true);
+    _initProduitGagnantList();
+    notifyListeners();
   }
 }

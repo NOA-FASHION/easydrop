@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
-import 'creatProduct.dart';
+import 'buildProduct.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -117,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen>
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                     colors: [Colors.orange, Colors.pink])),
-            child: CreateProduct(),
+            child: BuildProduct(),
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
