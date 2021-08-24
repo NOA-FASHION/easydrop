@@ -76,7 +76,10 @@ class _BuildProductState extends State<BuildProduct> {
       word2 = word;
       longLetter = Text(
         word2,
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
+        ),
       );
     }
     return longLetter;
@@ -109,7 +112,7 @@ class _BuildProductState extends State<BuildProduct> {
                       child: Row(
                         children: [
                           Text(
-                            "Nom du produit",
+                            "Type de produit",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.blue),
@@ -117,7 +120,7 @@ class _BuildProductState extends State<BuildProduct> {
                           SizedBox(
                             width: 5.0,
                           ),
-                          maxLetter(product.nomProduit),
+                          maxLetter(product.typeDuProduit),
                         ],
                       ),
                     ),
@@ -127,7 +130,7 @@ class _BuildProductState extends State<BuildProduct> {
                       child: Row(
                         children: [
                           Text(
-                            "Type de produit",
+                            "prix produit",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.blue),
@@ -136,7 +139,7 @@ class _BuildProductState extends State<BuildProduct> {
                             width: 5.0,
                           ),
                           Text(
-                            product.typeDuProduit,
+                            product.prixAchat.toString(),
                           ),
                         ],
                       ),
@@ -150,8 +153,10 @@ class _BuildProductState extends State<BuildProduct> {
                   elevation: 15.0,
                   child: Container(
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(60.0),
+                      borderRadius: BorderRadius.circular(40.0),
                       child: Image(
+                        width: MediaQuery.of(context).size.width / 6,
+                        height: MediaQuery.of(context).size.height / 16,
                         image: NetworkImage(
                             "https://cdn.pixabay.com/photo/2017/10/12/20/15/photoshop-2845779_960_720.jpg"),
                       ),
@@ -178,7 +183,7 @@ class _BuildProductState extends State<BuildProduct> {
       return Container(
         alignment: Alignment.center,
         child: Text(
-          "Pas de mission en cours.",
+          "Pas de produits.",
           style: TextStyle(color: Colors.orange[600], fontSize: 18.0),
           textAlign: TextAlign.center,
         ),
@@ -197,8 +202,8 @@ class _BuildProductState extends State<BuildProduct> {
                   index: index,
                 );
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
-                    content: "Le challenge a bien été validé",
-                    lotties: 'assets/challenge.json'));
+                    content: "Le produit a bien été supprimée",
+                    lotties: 'assets/trash.json'));
               }
 
               if (direction == DismissDirection.startToEnd) {
@@ -206,7 +211,7 @@ class _BuildProductState extends State<BuildProduct> {
                   index: index,
                 );
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
-                    content: "La mission a bien été supprimée",
+                    content: "Le produit a bien été supprimée",
                     lotties: 'assets/trash.json'));
               }
             },
@@ -220,7 +225,35 @@ class _BuildProductState extends State<BuildProduct> {
                           "Confirmation",
                           style: TextStyle(color: Colors.blue),
                         ),
-                        content: Text("Voulez vous supprimer la mission"),
+                        content: Text("Voulez vous supprimer le produit"),
+                        actions: [
+                          RaisedButton(
+                            onPressed: () {
+                              Navigator.pop(context, true);
+                            },
+                            child: Text("Oui"),
+                          ),
+                          RaisedButton(
+                            onPressed: () {
+                              Navigator.pop(context, false);
+                            },
+                            child: Text("Non"),
+                          )
+                        ],
+                      );
+                    });
+                return resultat;
+              }
+              if (direction == DismissDirection.endToStart) {
+                final bool? resultat = await showDialog<bool>(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text(
+                          "Confirmation",
+                          style: TextStyle(color: Colors.blue),
+                        ),
+                        content: Text("Voulez vous supprimer le produit"),
                         actions: [
                           RaisedButton(
                             onPressed: () {
@@ -254,10 +287,10 @@ class _BuildProductState extends State<BuildProduct> {
             secondaryBackground: Container(
               padding: EdgeInsets.only(right: 10.0),
               alignment: Alignment.centerRight,
-              color: Colors.green,
+              color: Colors.red,
               child: Icon(
-                Icons.check,
-                size: 30.0,
+                Icons.delete,
+                size: 55.0,
                 color: Colors.white,
               ),
             ),
@@ -331,11 +364,9 @@ class _BuildProductState extends State<BuildProduct> {
                                 SizedBox(
                                   width: 5.0,
                                 ),
-                                maxLetterTitre(
-                                  _productGagnantList[index]
-                                      .nomProduit
-                                      .toUpperCase(),
-                                ),
+                                maxLetterTitre(_productGagnantList[index]
+                                    .nomProduit
+                                    .toUpperCase()),
                               ],
                             ),
                           ),

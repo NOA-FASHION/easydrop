@@ -51,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen>
   List<String> nombreVenteOffreTotal = [];
   List<ResultJournee> listeResultatJournee = [];
   List<Offre> listeOffre = [];
-  late String photoProduit;
+  String photoProduit = "";
   int panierTotal = 0;
   @override
   Widget build(BuildContext context) {
@@ -730,7 +730,7 @@ class _HomeScreenState extends State<HomeScreen>
                                               panierTotal: panierTotal,
                                               nombreVenteOffreTotal:
                                                   nombreVenteOffreTotal,
-                                              nomProduit: '',
+                                              nomProduit: nomProduit,
                                               siteAliexpress: siteAliexpress,
                                               siteVente: siteVente,
                                               prixShipping: prixShipping);
