@@ -3,6 +3,7 @@
 import 'package:easydrop/controllers/challenge_controller.dart';
 import 'package:easydrop/models/drop_models.dart';
 import 'package:flutter/material.dart';
+import 'package:nanoid/nanoid.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
@@ -703,12 +704,9 @@ class _HomeScreenState extends State<HomeScreen>
                                   if (formKey.currentState!.validate()) {
                                     formKey.currentState!.save();
                                     {
-                                      Provider.of<Challengecontroller>(
-                                              context,
+                                      Provider.of<Challengecontroller>(context,
                                               listen: false)
                                           .addProductGagant(
-                                              chiffreAffaireTotal:
-                                                  chiffreAffaireTotal,
                                               coutTotalProduit:
                                                   coutTotalProduit,
                                               facebookAdress: facebookAdress,
@@ -733,7 +731,10 @@ class _HomeScreenState extends State<HomeScreen>
                                               nomProduit: nomProduit,
                                               siteAliexpress: siteAliexpress,
                                               siteVente: siteVente,
-                                              prixShipping: prixShipping);
+                                              prixShipping: prixShipping,
+                                              idProduct: int.parse(nanoid(9)),
+                                              chiffreAffaireTotal:
+                                                  chiffreAffaireTotal);
 
                                       Navigator.pop(context);
                                     }

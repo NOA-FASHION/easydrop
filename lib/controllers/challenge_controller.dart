@@ -85,7 +85,8 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void addProductGagant(
-      {required String siteVente,
+      {required int idProduct,
+      required String siteVente,
       required double prixShipping,
       required String siteAliexpress,
       required String nomProduit,
@@ -108,6 +109,7 @@ class Challengecontroller extends ChangeNotifier {
       required List<String> nombreVenteOffreTotal}) async {
     _listProduitGagnant.add(
       ProduitGagnant(
+          id: idProduct,
           chiffreAffaireTotal: chiffreAffaireTotal,
           coutTotalProduit: coutTotalProduit,
           facebookAdress: facebookAdress,
@@ -158,5 +160,63 @@ class Challengecontroller extends ChangeNotifier {
     await _save(remove: true);
     _initProduitGagnantList();
     notifyListeners();
+  }
+
+  void addResultatDays({
+    required int index,
+    required double chiffreAffaireDays,
+    required double prixShippingDays,
+    required double facebookDepenseDays,
+    required double coutDaysProduit,
+    required double margeDays,
+    required double venteDays,
+    required double roaDays,
+    required int panierDays,
+    required int vueDays,
+    required List<String> nombreVenteOffreDays,
+  }) async {
+    List<ResultJournee> _resultatDays = [];
+    _resultatDays.add(ResultJournee(
+        chiffreAffaireDays: chiffreAffaireDays,
+        prixShippingDays: prixShippingDays,
+        facebookDepenseDays: facebookDepenseDays,
+        coutDaysProduit: coutDaysProduit,
+        margeDays: margeDays,
+        roaDays: roaDays,
+        panierDays: panierDays,
+        vueDays: vueDays,
+        nombreVenteOffreDays: nombreVenteOffreDays,
+        venteDays: venteDays));
+
+    addresultDays(index: index, resultday: _resultatDays);
+
+    await _save(remove: false);
+    _initProduitGagnantList();
+    notifyListeners();
+  }
+
+  void addresultDays(
+      {required List<ResultJournee> resultday, required int index}) async {
+    _listProduitGagnant[index].listeResultatJournee.add(ResultJournee(
+        chiffreAffaireDays: resultday[0].chiffreAffaireDays,
+        prixShippingDays: resultday[0].prixShippingDays,
+        facebookDepenseDays: resultday[0].facebookDepenseDays,
+        coutDaysProduit: resultday[0].coutDaysProduit,
+        margeDays: resultday[0].margeDays,
+        venteDays: resultday[0].venteDays,
+        roaDays: resultday[0].roaDays,
+        panierDays: resultday[0].panierDays,
+        vueDays: resultday[0].vueDays,
+        nombreVenteOffreDays: resultday[0].nombreVenteOffreDays));
+  }
+
+  List<ResultJournee> getResulDays(int id) {
+    List<ResultJournee> resulDays = [];
+    for (var i = _listProduitGagnant.length - 1; i >= 0; i--) {
+      if (_listProduitGagnant[i].id == id) {
+        resulDays = _listProduitGagnant[i].listeResultatJournee;
+      }
+    }
+    return resulDays;
   }
 }

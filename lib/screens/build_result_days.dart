@@ -1,20 +1,21 @@
 import 'package:easydrop/controllers/challenge_controller.dart';
 import 'package:easydrop/models/drop_models.dart';
-import 'package:easydrop/screens/resultat_Days.dart';
+import 'package:easydrop/screens/stat_days.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:marquee_text/marquee_text.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
-class BuildProduct extends StatefulWidget {
-  BuildProduct({Key? key}) : super(key: key);
+class BuildResultDays extends StatefulWidget {
+  final int idProduct;
+  BuildResultDays(this.idProduct);
 
   @override
-  _BuildProductState createState() => _BuildProductState();
+  _BuildResultDaysState createState() => _BuildResultDaysState();
 }
 
-class _BuildProductState extends State<BuildProduct> {
+class _BuildResultDaysState extends State<BuildResultDays> {
   Widget maxLetter(String word) {
     Widget longLetter;
 
@@ -85,7 +86,7 @@ class _BuildProductState extends State<BuildProduct> {
     return longLetter;
   }
 
-  Widget activeGlow(ProduitGagnant product) {
+  Widget activeGlow(ResultJournee product) {
     Widget glow = Padding(
       padding: const EdgeInsets.all(1.0),
       child: Container(
@@ -112,7 +113,7 @@ class _BuildProductState extends State<BuildProduct> {
                       child: Row(
                         children: [
                           Text(
-                            "Type de produit",
+                            "Chiffre d'affaire",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.blue),
@@ -120,7 +121,7 @@ class _BuildProductState extends State<BuildProduct> {
                           SizedBox(
                             width: 5.0,
                           ),
-                          maxLetter(product.typeDuProduit),
+                          maxLetter(product.chiffreAffaireDays.toString()),
                         ],
                       ),
                     ),
@@ -130,7 +131,7 @@ class _BuildProductState extends State<BuildProduct> {
                       child: Row(
                         children: [
                           Text(
-                            "prix produit",
+                            "Marge",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.blue),
@@ -139,7 +140,7 @@ class _BuildProductState extends State<BuildProduct> {
                             width: 5.0,
                           ),
                           Text(
-                            product.prixAchat.toString(),
+                            product.margeDays.toString(),
                           ),
                         ],
                       ),
@@ -177,9 +178,10 @@ class _BuildProductState extends State<BuildProduct> {
   @override
   Widget build(BuildContext context) {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
-    List<ProduitGagnant> _productGagnantList = variable.getChallenges();
+    List<ResultJournee> _resultatDaysList =
+        variable.getResulDays(widget.idProduct);
 
-    if (_productGagnantList.isEmpty) {
+    if (_resultatDaysList.isEmpty) {
       return Container(
         alignment: Alignment.center,
         child: Text(
@@ -191,7 +193,7 @@ class _BuildProductState extends State<BuildProduct> {
     }
 
     return ListView.builder(
-      itemCount: _productGagnantList.length,
+      itemCount: _resultatDaysList.length,
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.only(bottom: 3.0, left: 8.0, right: 8.0),
@@ -333,9 +335,7 @@ class _BuildProductState extends State<BuildProduct> {
                         PageTransition(
                             type: PageTransitionType.bottomToTop,
                             child: ChangeNotifierProvider.value(
-                                value: variable,
-                                child: ResultDays(
-                                    index, _productGagnantList[index].id))));
+                                value: variable, child: StatDays())));
 
                     // var HomeTaches1 =
                     //     await buildPageAsync(_challengesList, variable, index);
@@ -366,8 +366,9 @@ class _BuildProductState extends State<BuildProduct> {
                                 SizedBox(
                                   width: 5.0,
                                 ),
-                                maxLetterTitre(_productGagnantList[index]
-                                    .nomProduit
+                                maxLetterTitre(_resultatDaysList[index]
+                                    .chiffreAffaireDays
+                                    .toString()
                                     .toUpperCase()),
                               ],
                             ),
@@ -379,7 +380,7 @@ class _BuildProductState extends State<BuildProduct> {
                       ],
                     ),
                   ),
-                  subtitle: activeGlow(_productGagnantList[index]),
+                  subtitle: activeGlow(_resultatDaysList[index]),
                   isThreeLine: true,
                 ),
               ),

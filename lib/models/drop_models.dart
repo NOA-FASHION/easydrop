@@ -1,13 +1,11 @@
-import 'dart:ffi';
-
 class ResultJournee {
-  Double chiffreAffaireDays;
-  Double prixShippingDays;
-  Double facebookDepenseDays;
-  Double coutDaysProduit;
-  Double margeDays;
-  Double venteDays;
-  Double roaDays;
+  double chiffreAffaireDays;
+  double prixShippingDays;
+  double facebookDepenseDays;
+  double coutDaysProduit;
+  double margeDays;
+  double venteDays;
+  double roaDays;
   int panierDays;
   int vueDays;
   List<String> nombreVenteOffreDays;
@@ -86,6 +84,7 @@ class Offre {
 }
 
 class ProduitGagnant {
+  int id;
   String nomProduit;
   double prixShipping;
   String typeDuProduit;
@@ -109,6 +108,7 @@ class ProduitGagnant {
   List<Offre> listeOffre;
 
   ProduitGagnant({
+    required this.id,
     required this.nomProduit,
     required this.prixShipping,
     required this.typeDuProduit,
@@ -134,6 +134,7 @@ class ProduitGagnant {
 
   factory ProduitGagnant.fromJSON(Map<String, dynamic> json) => ProduitGagnant(
         typeDuProduit: json['typeDuProduit'],
+        id: json['id'],
         prixShipping: json['prixShipping'],
         siteAliexpress: json['siteAliexpress'],
         nomProduit: json['nomProduit'],
@@ -163,6 +164,7 @@ class ProduitGagnant {
 
   Map<String, dynamic> toJson() {
     return {
+      "id": id,
       "nomProduit": nomProduit,
       "prixShipping": prixShipping,
       "typeDuProduit": typeDuProduit,
