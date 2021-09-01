@@ -57,20 +57,23 @@ class Offre {
   double prixBarre;
   double margeOffre;
   double roas;
+  List<String> offres;
   Offre({
     required this.prixAchat,
     required this.prixVente,
     required this.prixBarre,
     required this.margeOffre,
     required this.roas,
+    required this.offres,
   });
 
-  Offre.fromJSON(Map<String, dynamic> json)
-      : prixAchat = json['prixAchat'],
-        prixVente = json['prixVente'],
-        prixBarre = json['prixBarre'],
-        margeOffre = json['margeOffre'],
-        roas = json['roas'];
+  factory Offre.fromJSON(Map<String, dynamic> json) => Offre(
+      prixAchat: json['prixAchat'],
+      prixVente: json['prixVente'],
+      prixBarre: json['prixBarre'],
+      margeOffre: json['margeOffre'],
+      roas: json['roas'],
+      offres: List<String>.from(json["offres"].map((x) => x)));
 
   Map<String, dynamic> toJson() {
     return {
@@ -78,13 +81,14 @@ class Offre {
       "prixVente": prixVente,
       "prixBarre": prixBarre,
       "margeOffre": margeOffre,
-      "roas": roas
+      "roas": roas,
+      "offres": List<dynamic>.from(offres.map((x) => x)),
     };
   }
 }
 
 class ProduitGagnant {
-  int id;
+  String id;
   String nomProduit;
   double prixShipping;
   String typeDuProduit;

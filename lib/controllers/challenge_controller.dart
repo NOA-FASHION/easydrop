@@ -85,7 +85,7 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void addProductGagant(
-      {required int idProduct,
+      {required String idProduct,
       required String siteVente,
       required double prixShipping,
       required String siteAliexpress,
@@ -162,6 +162,39 @@ class Challengecontroller extends ChangeNotifier {
     notifyListeners();
   }
 
+  void addOffreDays(
+      {required int index,
+      required double prixAchat,
+      required double prixVente,
+      required double prixBarre,
+      required double margeOffre,
+      required double roas,
+      required List<String> offres}) async {
+    List<Offre> offreday = [];
+    offreday.add(Offre(
+        margeOffre: margeOffre,
+        prixAchat: prixAchat,
+        prixBarre: prixBarre,
+        prixVente: prixVente,
+        roas: roas,
+        offres: offres));
+    addOffreDays1(index: index, offreday: offreday);
+    await _save(remove: false);
+    _initProduitGagnantList();
+    notifyListeners();
+  }
+
+  void addOffreDays1(
+      {required List<Offre> offreday, required int index}) async {
+    _listProduitGagnant[index].listeOffre.add(Offre(
+        prixAchat: offreday[0].prixAchat,
+        prixVente: offreday[0].prixVente,
+        prixBarre: offreday[0].prixBarre,
+        margeOffre: offreday[0].margeOffre,
+        roas: offreday[0].roas,
+        offres: offreday[0].offres));
+  }
+
   void addResultatDays({
     required int index,
     required double chiffreAffaireDays,
@@ -210,7 +243,7 @@ class Challengecontroller extends ChangeNotifier {
         nombreVenteOffreDays: resultday[0].nombreVenteOffreDays));
   }
 
-  List<ResultJournee> getResulDays(int id) {
+  List<ResultJournee> getResulDays(String id) {
     List<ResultJournee> resulDays = [];
     for (var i = _listProduitGagnant.length - 1; i >= 0; i--) {
       if (_listProduitGagnant[i].id == id) {
@@ -218,5 +251,15 @@ class Challengecontroller extends ChangeNotifier {
       }
     }
     return resulDays;
+  }
+
+  List<Offre> getOffresProduct(String id) {
+    List<Offre> offreProduct = [];
+    for (var i = _listProduitGagnant.length - 1; i >= 0; i--) {
+      if (_listProduitGagnant[i].id == id) {
+        offreProduct = _listProduitGagnant[i].listeOffre;
+      }
+    }
+    return offreProduct;
   }
 }

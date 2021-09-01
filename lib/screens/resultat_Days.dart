@@ -1,13 +1,15 @@
 import 'package:easydrop/controllers/challenge_controller.dart';
 import 'package:easydrop/models/drop_models.dart';
 import 'package:easydrop/screens/build_result_days.dart';
+import 'package:easydrop/screens/offre.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
 class ResultDays extends StatefulWidget {
   final int indexProduct;
-  final int idProduct;
+  final String idProduct;
   ResultDays(this.indexProduct, this.idProduct);
 
   @override
@@ -57,38 +59,58 @@ class _ResultDaysState extends State<ResultDays> {
           preferredSize: Size.fromHeight(100.0),
           child: SafeArea(
             child: AppBar(
-              title: Text(""),
-              actions: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 15, top: 10),
-                  child: SizedBox.fromSize(
-                    size: Size(50, 50), // button width and height
-                    child: ClipOval(
-                      child: Material(
-                        color: Colors.purple, // button color
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-              // leading: IconButton(
-              //   alignment: Alignment.topRight,
-              //   icon: Icon(
-              //     Icons.menu,
-              //     color: Colors.black,
-              //   ),
-              //   onPressed: () {
-              //     // _controller.toggle();
-              //   },
-              // ),
+              title: Text("Résultat de la journée"),
               centerTitle: true,
               flexibleSpace: Container(
                 padding: EdgeInsets.only(top: 40.0),
                 alignment: Alignment.center,
-                child: Image.asset(
-                  'assets/logo.png',
-                  width: 55,
-                  height: 130,
+                height: 130,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        InkWell(
+                          splashColor: Colors.white,
+                          onTap: () {
+                            Navigator.of(context).push(PageTransition(
+                                type: PageTransitionType.bottomToTop,
+                                child: OffreProduct(
+                                    widget.indexProduct, widget.idProduct)));
+                          }, // butt
+                          child: Icon(
+                            Icons.money,
+                            size: 20,
+                            color: Colors.blue,
+                          ),
+                        ), // icon
+                        Text(
+                          "Offre",
+                          style: TextStyle(fontSize: 10, color: Colors.blue),
+                        ), // text
+                      ],
+                    ),
+                    Image.asset(
+                      'assets/logo.png',
+                      width: 55,
+                      height: 130,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          Icons.query_stats,
+                          size: 20,
+                          color: Colors.blue,
+                        ), // icon
+                        Text(
+                          "Stat globale",
+                          style: TextStyle(fontSize: 10, color: Colors.blue),
+                        ), // text
+                      ],
+                    ),
+                  ],
                 ),
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -149,6 +171,16 @@ class _ResultDaysState extends State<ResultDays> {
                               height: 5.0,
                             ),
                             ///////////////////////////////////
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20.0),
+                                child: Image(
+                                  image: NetworkImage(
+                                      "https://cdn.pixabay.com/photo/2017/10/12/20/15/photoshop-2845779_960_720.jpg"),
+                                ),
+                              ),
+                            ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: TextFormField(

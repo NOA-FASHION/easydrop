@@ -1,21 +1,21 @@
 import 'package:easydrop/controllers/challenge_controller.dart';
 import 'package:easydrop/models/drop_models.dart';
-import 'package:easydrop/screens/stat_days.dart';
+import 'package:easydrop/screens/presentation_offre.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:marquee_text/marquee_text.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
-class BuildResultDays extends StatefulWidget {
+class BuildOffre extends StatefulWidget {
   final String idProduct;
-  BuildResultDays(this.idProduct);
+  BuildOffre(this.idProduct);
 
   @override
-  _BuildResultDaysState createState() => _BuildResultDaysState();
+  _BuildOffreState createState() => _BuildOffreState();
 }
 
-class _BuildResultDaysState extends State<BuildResultDays> {
+class _BuildOffreState extends State<BuildOffre> {
   Widget maxLetter(String word) {
     Widget longLetter;
 
@@ -86,7 +86,7 @@ class _BuildResultDaysState extends State<BuildResultDays> {
     return longLetter;
   }
 
-  Widget activeGlow(ResultJournee product) {
+  Widget activeGlow(Offre offres) {
     Widget glow = Padding(
       padding: const EdgeInsets.all(1.0),
       child: Container(
@@ -113,7 +113,7 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                       child: Row(
                         children: [
                           Text(
-                            "Chiffre d'affaire",
+                            "prix d'achat",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.blue),
@@ -121,7 +121,7 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                           SizedBox(
                             width: 5.0,
                           ),
-                          maxLetter(product.chiffreAffaireDays.toString()),
+                          maxLetter(offres.prixAchat.toString()),
                         ],
                       ),
                     ),
@@ -131,7 +131,7 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                       child: Row(
                         children: [
                           Text(
-                            "Marge",
+                            "Pris de vente",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.blue),
@@ -140,7 +140,7 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                             width: 5.0,
                           ),
                           Text(
-                            product.margeDays.toString(),
+                            offres.prixVente.toString(),
                           ),
                         ],
                       ),
@@ -178,10 +178,9 @@ class _BuildResultDaysState extends State<BuildResultDays> {
   @override
   Widget build(BuildContext context) {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
-    List<ResultJournee> _resultatDaysList =
-        variable.getResulDays(widget.idProduct);
+    List<Offre> _offresProduct = variable.getOffresProduct(widget.idProduct);
 
-    if (_resultatDaysList.isEmpty) {
+    if (_offresProduct.isEmpty) {
       return Container(
         alignment: Alignment.center,
         child: Text(
@@ -193,7 +192,7 @@ class _BuildResultDaysState extends State<BuildResultDays> {
     }
 
     return ListView.builder(
-      itemCount: _resultatDaysList.length,
+      itemCount: _offresProduct.length,
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.only(bottom: 3.0, left: 8.0, right: 8.0),
@@ -320,30 +319,12 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                 elevation: 20.0,
                 child: ListTile(
                   onTap: () async {
-                    // Navigator.of(context).push(MaterialPageRoute(
-                    //     builder: (context) => ChangeNotifierProvider.value(
-                    //         value: variable,
-                    //         child: HomeTaches(
-                    //             _challengesList[index].id,
-                    //             variable.returnIndexForName(
-                    //                 _challengesList[index].id),
-                    //             _challengesList[index].name,
-                    //             _challengesList[index].animatedpadding))));
-
                     Navigator.push(
                         context,
                         PageTransition(
                             type: PageTransitionType.bottomToTop,
                             child: ChangeNotifierProvider.value(
-                                value: variable, child: StatDays())));
-
-                    // var HomeTaches1 =
-                    //     await buildPageAsync(_challengesList, variable, index);
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => ChangeNotifierProvider.value(
-                    //             value: variable, child: HomeTaches1)));
+                                value: variable, child: PresentationOffre())));
                   },
                   title: Container(
                     child: Row(
@@ -366,8 +347,8 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                                 SizedBox(
                                   width: 5.0,
                                 ),
-                                maxLetterTitre(_resultatDaysList[index]
-                                    .chiffreAffaireDays
+                                maxLetterTitre(_offresProduct[index]
+                                    .offres
                                     .toString()
                                     .toUpperCase()),
                               ],
@@ -380,7 +361,7 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                       ],
                     ),
                   ),
-                  subtitle: activeGlow(_resultatDaysList[index]),
+                  subtitle: activeGlow(_offresProduct[index]),
                   isThreeLine: true,
                 ),
               ),

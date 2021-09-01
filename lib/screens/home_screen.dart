@@ -64,20 +64,8 @@ class _HomeScreenState extends State<HomeScreen>
           preferredSize: Size.fromHeight(100.0),
           child: SafeArea(
             child: AppBar(
-              title: Text(""),
-              actions: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 15, top: 10),
-                  child: SizedBox.fromSize(
-                    size: Size(50, 50), // button width and height
-                    child: ClipOval(
-                      child: Material(
-                        color: Colors.purple, // button color
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+              title: Text("Produit"),
+
               // leading: IconButton(
               //   alignment: Alignment.topRight,
               //   icon: Icon(
@@ -732,7 +720,7 @@ class _HomeScreenState extends State<HomeScreen>
                                               siteAliexpress: siteAliexpress,
                                               siteVente: siteVente,
                                               prixShipping: prixShipping,
-                                              idProduct: int.parse(nanoid(9)),
+                                              idProduct: (nanoid(9)),
                                               chiffreAffaireTotal:
                                                   chiffreAffaireTotal);
 
