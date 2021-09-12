@@ -184,7 +184,7 @@ class _BuildOffreState extends State<BuildOffre> {
       return Container(
         alignment: Alignment.center,
         child: Text(
-          "Pas de produits.",
+          "Pas d'offre.",
           style: TextStyle(color: Colors.orange[600], fontSize: 18.0),
           textAlign: TextAlign.center,
         ),

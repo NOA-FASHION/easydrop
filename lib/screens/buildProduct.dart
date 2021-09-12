@@ -139,7 +139,7 @@ class _BuildProductState extends State<BuildProduct> {
                             width: 5.0,
                           ),
                           Text(
-                            product.prixAchat.toString(),
+                            product.prixVente.toString(),
                           ),
                         ],
                       ),

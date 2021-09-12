@@ -51,7 +51,7 @@ class _ResultDaysState extends State<ResultDays> {
 
   @override
   Widget build(BuildContext context) {
-    // Challengecontroller variable = Provider.of<Challengecontroller>(context);
+    Challengecontroller variable = Provider.of<Challengecontroller>(context);
     return Material(
       child: Scaffold(
         key: scaffoldkey,
@@ -74,10 +74,19 @@ class _ResultDaysState extends State<ResultDays> {
                         InkWell(
                           splashColor: Colors.white,
                           onTap: () {
-                            Navigator.of(context).push(PageTransition(
-                                type: PageTransitionType.bottomToTop,
-                                child: OffreProduct(
-                                    widget.indexProduct, widget.idProduct)));
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    type: PageTransitionType.bottomToTop,
+                                    child: ChangeNotifierProvider.value(
+                                        value: variable,
+                                        child: OffreProduct(widget.indexProduct,
+                                            widget.idProduct))));
+
+                            // Navigator.of(context).push(PageTransition(
+                            //     type: PageTransitionType.bottomToTop,
+                            //     child: OffreProduct(
+                            //         widget.indexProduct, widget.idProduct)));
                           }, // butt
                           child: Icon(
                             Icons.money,
