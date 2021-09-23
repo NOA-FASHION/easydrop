@@ -32,6 +32,51 @@ class _ResultDaysState extends State<ResultDays> {
     //       }); // This chunk of code is important
   }
 
+  Widget offreVente(
+      List<ProduitGagnant> _listProduitGagnant, int indexProduitGagnant) {
+    Widget offreVentes = SizedBox(
+      height: .0,
+    );
+
+    for (var i = _listProduitGagnant[indexProduitGagnant].listeOffre.length - 1;
+        i >= 0;
+        i--) {
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: TextFormField(
+          style: TextStyle(fontSize: 10),
+          textCapitalization: TextCapitalization.sentences,
+          onSaved: (value) {
+            nombreVenteOffreDays.add(value!);
+          },
+          validator: (value) {
+            if (value!.isEmpty) {
+              return "Merci d'entrer le nombre de vente concernant l'offre " +
+                  (i + 1).toString();
+            } else if (value.length > 35) {
+              return "Pas plus de 50 caractères";
+            }
+            return null;
+          },
+          decoration: InputDecoration(
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 2.0, color: Colors.blueAccent),
+                borderRadius: BorderRadius.circular(15.0)),
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 1.0, color: Colors.blueAccent),
+                borderRadius: BorderRadius.circular(15.0)),
+            contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            labelText: "Offre " + (i + 1).toString(),
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(15.0)),
+          ),
+        ),
+      );
+    }
+
+    return offreVentes;
+  }
+
   double chiffreAffaireDays = 0;
   double facebookDepenseDays = 0;
   double facebookDepenseTotal = 0;
@@ -158,6 +203,7 @@ class _ResultDaysState extends State<ResultDays> {
   }
 
   FloatingActionButton buildBottomSheet() {
+    Challengecontroller variable = Provider.of<Challengecontroller>(context);
     return FloatingActionButton(
         // child: Lottie.asset('assets/float.json'),
         child: Icon(Icons.add),
@@ -391,6 +437,8 @@ class _ResultDaysState extends State<ResultDays> {
                                 ),
                               ),
                             ),
+                            offreVente(variable.getProduitGagnant(),
+                                widget.indexProduct),
                             Center(
                               child: IconButton(
                                 iconSize: 60,

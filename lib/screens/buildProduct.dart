@@ -177,7 +177,7 @@ class _BuildProductState extends State<BuildProduct> {
   @override
   Widget build(BuildContext context) {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
-    List<ProduitGagnant> _productGagnantList = variable.getChallenges();
+    List<ProduitGagnant> _productGagnantList = variable.getProduitGagnant();
 
     if (_productGagnantList.isEmpty) {
       return Container(
@@ -318,16 +318,6 @@ class _BuildProductState extends State<BuildProduct> {
                 elevation: 20.0,
                 child: ListTile(
                   onTap: () async {
-                    // Navigator.of(context).push(MaterialPageRoute(
-                    //     builder: (context) => ChangeNotifierProvider.value(
-                    //         value: variable,
-                    //         child: HomeTaches(
-                    //             _challengesList[index].id,
-                    //             variable.returnIndexForName(
-                    //                 _challengesList[index].id),
-                    //             _challengesList[index].name,
-                    //             _challengesList[index].animatedpadding))));
-
                     Navigator.push(
                         context,
                         PageTransition(
@@ -337,13 +327,7 @@ class _BuildProductState extends State<BuildProduct> {
                                 child: ResultDays(
                                     index, _productGagnantList[index].id))));
 
-                    // var HomeTaches1 =
-                    //     await buildPageAsync(_challengesList, variable, index);
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => ChangeNotifierProvider.value(
-                    //             value: variable, child: HomeTaches1)));
+               
                   },
                   title: Container(
                     child: Row(

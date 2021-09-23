@@ -8,6 +8,7 @@ import 'package:shimmer_animation/shimmer_animation.dart';
 
 class OffreProduct extends StatefulWidget {
   final int indexProduct;
+
   final String idProduct;
   OffreProduct(this.indexProduct, this.idProduct);
 
@@ -32,6 +33,7 @@ class _OffreProductState extends State<OffreProduct> {
   }
 
   Color margeColors = Colors.green;
+  Color roaColors = Colors.green;
   String margeText = '';
   double roas1 = 0;
   double marge1 = 0;
@@ -351,20 +353,16 @@ class _OffreProductState extends State<OffreProduct> {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  validateRoas(formKey);
+                                  validateMarge(formKey);
                                   _bottomSheetController.setState!(() {
                                     margeText =
-                                        validateRoas(formKey).toString();
-                                    if (validateRoas(formKey) > 12) {
+                                        validateMarge(formKey).toString();
+                                    if (validateMarge(formKey) > 12) {
                                       margeColors = Colors.green;
                                     } else {
                                       margeColors = Colors.red;
                                     }
                                   });
-                                  // setState(() {
-                                  //   margeText =
-                                  //       validateRoas(formKey).toString();
-                                  // });
                                 },
                                 child: Container(
                                   width:
@@ -393,28 +391,43 @@ class _OffreProductState extends State<OffreProduct> {
                                   ),
                                 ),
                               ),
-                              Container(
-                                width: MediaQuery.of(context).size.width / 3.2,
-                                child: Card(
-                                  color: Colors.green,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                  ),
-                                  elevation: 15.0,
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        child: Card(
-                                            color: Colors.green,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(15.0),
-                                            ),
-                                            elevation: 15.0,
-                                            child: Text("Roas")),
-                                      ),
-                                      Text("200")
-                                    ],
+                              InkWell(
+                                onTap: () {
+                                  validateRoas(formKey);
+                                  _bottomSheetController.setState!(() {
+                                    margeText =
+                                        validateRoas(formKey).toString();
+                                    if (validateRoas(formKey) > 12) {
+                                      roaColors = Colors.green;
+                                    } else {
+                                      roaColors = Colors.red;
+                                    }
+                                  });
+                                },
+                                child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width / 3.2,
+                                  child: Card(
+                                    color: roaColors,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                    ),
+                                    elevation: 15.0,
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          child: Card(
+                                              color: roaColors,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(15.0),
+                                              ),
+                                              elevation: 15.0,
+                                              child: Text("Roas")),
+                                        ),
+                                        Text("200")
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -437,12 +450,12 @@ class _OffreProductState extends State<OffreProduct> {
                                             listen: false)
                                         .addOffreDays(
                                             index: widget.indexProduct,
-                                            margeOffre: margeOffre,
+                                            margeOffre: validateMarge(formKey),
                                             prixAchat: prixAchat,
                                             prixBarre: prixBarre,
                                             prixVente: prixVente,
-                                            roas: roas,
-                                            offres: []);
+                                            roas: validateRoas(formKey),
+                                            offres: offres);
 
                                     Navigator.pop(context);
                                   }

@@ -42,7 +42,7 @@ class Challengecontroller extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<ProduitGagnant> getChallenges() {
+  List<ProduitGagnant> getProduitGagnant() {
     return _listProduitGagnant;
   }
 
@@ -152,12 +152,39 @@ class Challengecontroller extends ChangeNotifier {
     return false;
   }
 
+  Future<bool> _saveOffre(
+      {required bool remove, required String idProduct}) async {
+    for (var i = _listProduitGagnant.length - 1; i >= 0; i--) {
+      if (_listProduitGagnant[i].id == idProduct) {
+        if (_listProduitGagnant[i].listeOffre.length < 1 && remove) {
+          _listProduitGagnant[i].listeOffre = [];
+          List<String> _jsonList = _listProduitGagnant.map((produit) {
+            return jsonEncode(produit.toJson());
+          }).toList();
+          return _localData.setStringList(keyAcces, _jsonList);
+        }
+      }
+    }
+    return false;
+  }
+
   void remove({
     required int index,
   }) async {
     // await removeChallengelistId(index);
     _listProduitGagnant.removeAt(index);
     await _save(remove: true);
+    _initProduitGagnantList();
+    notifyListeners();
+  }
+
+  void removeOffre({
+    required int index,
+    required int indexProduct,
+    required String idProduct,
+  }) async {
+    _listProduitGagnant[indexProduct].listeOffre.removeAt(index);
+    await _saveOffre(remove: true, idProduct: idProduct);
     _initProduitGagnantList();
     notifyListeners();
   }

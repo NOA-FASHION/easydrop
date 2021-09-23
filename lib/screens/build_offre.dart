@@ -108,7 +108,7 @@ class _BuildOffreState extends State<BuildOffre> {
                 Column(
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width / 1.8,
+                      width: MediaQuery.of(context).size.width / 2.6,
                       height: 25.0,
                       child: Row(
                         children: [
@@ -126,7 +126,7 @@ class _BuildOffreState extends State<BuildOffre> {
                       ),
                     ),
                     Container(
-                      width: MediaQuery.of(context).size.width / 1.8,
+                      width: MediaQuery.of(context).size.width / 2.6,
                       height: 30.0,
                       child: Row(
                         children: [
@@ -147,22 +147,47 @@ class _BuildOffreState extends State<BuildOffre> {
                     ),
                   ],
                 ),
-                Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(60.0),
-                  ),
-                  elevation: 15.0,
-                  child: Container(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(40.0),
-                      child: Image(
-                        width: MediaQuery.of(context).size.width / 6,
-                        height: MediaQuery.of(context).size.height / 16,
-                        image: NetworkImage(
-                            "https://cdn.pixabay.com/photo/2017/10/12/20/15/photoshop-2845779_960_720.jpg"),
+                Column(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width / 2.6,
+                      height: 25.0,
+                      child: Row(
+                        children: [
+                          Text(
+                            "Roas",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue),
+                          ),
+                          SizedBox(
+                            width: 5.0,
+                          ),
+                          maxLetter(offres.roas.toString()),
+                        ],
                       ),
                     ),
-                  ),
+                    Container(
+                      width: MediaQuery.of(context).size.width / 2.6,
+                      height: 30.0,
+                      child: Row(
+                        children: [
+                          Text(
+                            "Marge",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue),
+                          ),
+                          SizedBox(
+                            width: 5.0,
+                          ),
+                          Text(
+                            offres.margeOffre.toString(),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
