@@ -274,15 +274,15 @@ class _ResultDaysState extends State<ResultDays> {
                                 ),
                               ),
                             ),
-                            ListView.builder(
-                                padding: const EdgeInsets.all(8),
-                                itemCount: offreDays.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return Container(
-                                    child: Text(
-                                        "offre" + offreDays.length.toString()),
-                                  );
-                                }),
+                            // ListView.builder(
+                            //     padding: const EdgeInsets.all(8),
+                            //     itemCount: offreDays.length,
+                            //     itemBuilder: (BuildContext context, int index) {
+                            //       return Container(
+                            //         child: Text(
+                            //             "offre" + offreDays.length.toString()),
+                            //       );
+                            //     }),
 
                             SizedBox(
                               height: 15.0,
