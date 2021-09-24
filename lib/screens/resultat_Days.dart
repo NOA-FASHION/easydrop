@@ -204,6 +204,7 @@ class _ResultDaysState extends State<ResultDays> {
 
   FloatingActionButton buildBottomSheet() {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
+    List<Offre> offreDays = variable.getOffresProduct(widget.idProduct);
     return FloatingActionButton(
         // child: Lottie.asset('assets/float.json'),
         child: Icon(Icons.add),
@@ -273,6 +274,15 @@ class _ResultDaysState extends State<ResultDays> {
                                 ),
                               ),
                             ),
+                            ListView.builder(
+                                padding: const EdgeInsets.all(8),
+                                itemCount: offreDays.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Container(
+                                    child: Text(
+                                        "offre" + offreDays.length.toString()),
+                                  );
+                                }),
 
                             SizedBox(
                               height: 15.0,
