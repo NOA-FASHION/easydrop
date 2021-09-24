@@ -9,7 +9,8 @@ import 'package:provider/provider.dart';
 
 class BuildOffre extends StatefulWidget {
   final String idProduct;
-  BuildOffre(this.idProduct);
+  final int indexProduct;
+  BuildOffre(this.idProduct, this.indexProduct);
 
   @override
   _BuildOffreState createState() => _BuildOffreState();
@@ -224,8 +225,10 @@ class _BuildOffreState extends State<BuildOffre> {
           child: Dismissible(
             onDismissed: (direction) {
               if (direction == DismissDirection.endToStart) {
-                variable.remove(
+                variable.removeOffre(
                   index: index,
+                  idProduct: widget.idProduct,
+                  indexProduct: widget.indexProduct,
                 );
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
                     content: "Le produit a bien été supprimée",
@@ -233,8 +236,10 @@ class _BuildOffreState extends State<BuildOffre> {
               }
 
               if (direction == DismissDirection.startToEnd) {
-                variable.remove(
+                variable.removeOffre(
                   index: index,
+                  idProduct: widget.idProduct,
+                  indexProduct: widget.indexProduct,
                 );
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
                     content: "Le produit a bien été supprimée",

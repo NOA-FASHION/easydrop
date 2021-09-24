@@ -115,7 +115,7 @@ class _OffreProductState extends State<OffreProduct> {
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                     colors: [Colors.orange, Colors.pink])),
-            child: BuildOffre(widget.idProduct),
+            child: BuildOffre(widget.idProduct, widget.indexProduct),
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
