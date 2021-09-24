@@ -227,8 +227,8 @@ class _BuildOffreState extends State<BuildOffre> {
               if (direction == DismissDirection.endToStart) {
                 variable.removeOffre(
                   index: index,
-                  idProduct: widget.idProduct,
                   indexProduct: widget.indexProduct,
+                  idProduct: widget.idProduct,
                 );
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
                     content: "Le produit a bien été supprimée",
@@ -238,8 +238,8 @@ class _BuildOffreState extends State<BuildOffre> {
               if (direction == DismissDirection.startToEnd) {
                 variable.removeOffre(
                   index: index,
-                  idProduct: widget.idProduct,
                   indexProduct: widget.indexProduct,
+                  idProduct: widget.idProduct,
                 );
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
                     content: "Le produit a bien été supprimée",
@@ -369,7 +369,8 @@ class _BuildOffreState extends State<BuildOffre> {
                             child: Row(
                               children: [
                                 Text(
-                                  "Titre".toUpperCase(),
+                                  "Offre" +
+                                      (index + 1).toString().toUpperCase(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.purple),

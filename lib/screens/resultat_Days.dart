@@ -187,7 +187,7 @@ class _ResultDaysState extends State<ResultDays> {
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                     colors: [Colors.orange, Colors.pink])),
-            child: BuildResultDays(widget.idProduct),
+            child: BuildResultDays(widget.idProduct, widget.indexProduct),
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -237,53 +237,105 @@ class _ResultDaysState extends State<ResultDays> {
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                style: TextStyle(fontSize: 10),
-                                textCapitalization:
-                                    TextCapitalization.sentences,
-                                onSaved: (value) {
-                                  chiffreAffaireDays = double.parse(value!);
-                                },
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "Merci d'entrer le chiffe d'affaire de la journée";
-                                  } else if (value.length > 35) {
-                                    return "Pas plus de 50 caractères";
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          width: 2.0, color: Colors.blueAccent),
-                                      borderRadius:
-                                          BorderRadius.circular(15.0)),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          width: 1.0, color: Colors.blueAccent),
-                                      borderRadius:
-                                          BorderRadius.circular(15.0)),
-                                  contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
-                                  labelText: "Chiffre d'affaire de la journée",
-                                  border: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(15.0)),
+                            Container(
+                              width: MediaQuery.of(context).size.width / 1.2,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  style: TextStyle(fontSize: 10),
+                                  textCapitalization:
+                                      TextCapitalization.sentences,
+                                  onSaved: (value) {
+                                    chiffreAffaireDays = double.parse(value!);
+                                  },
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return "Merci d'entrer le chiffe d'affaire de la journée";
+                                    } else if (value.length > 35) {
+                                      return "Pas plus de 50 caractères";
+                                    }
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                    focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            width: 2.0,
+                                            color: Colors.blueAccent),
+                                        borderRadius:
+                                            BorderRadius.circular(15.0)),
+                                    enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            width: 1.0,
+                                            color: Colors.blueAccent),
+                                        borderRadius:
+                                            BorderRadius.circular(15.0)),
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 10),
+                                    labelText:
+                                        "Chiffre d'affaire de la journée",
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(15.0)),
+                                  ),
                                 ),
                               ),
                             ),
                             Container(
-                              height: 250,
+                              height: 150,
                               child: ListView.builder(
                                   padding: const EdgeInsets.all(8),
                                   itemCount: offreDays.length,
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     return Container(
-                                      child: Text("offre" +
-                                          offreDays.length.toString()),
+                                      width: MediaQuery.of(context).size.width /
+                                          3.2,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TextFormField(
+                                          style: TextStyle(fontSize: 10),
+                                          textCapitalization:
+                                              TextCapitalization.sentences,
+                                          onSaved: (value) {
+                                            nombreVenteOffreDays.add(value!);
+                                          },
+                                          validator: (value) {
+                                            if (value!.isEmpty) {
+                                              return "Merci d'entrer le nombre de vente concernant l'offre " +
+                                                  offreDays.length.toString();
+                                            } else if (value.length > 35) {
+                                              return "Pas plus de 50 caractères";
+                                            }
+                                            return null;
+                                          },
+                                          decoration: InputDecoration(
+                                            focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    width: 2.0,
+                                                    color: Colors.blueAccent),
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        15.0)),
+                                            enabledBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    width: 1.0,
+                                                    color: Colors.blueAccent),
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        15.0)),
+                                            contentPadding:
+                                                EdgeInsets.symmetric(
+                                                    horizontal: 20,
+                                                    vertical: 10),
+                                            labelText: "offre" +
+                                                (index + 1).toString(),
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        15.0)),
+                                          ),
+                                        ),
+                                      ),
                                     );
                                   }),
                             ),

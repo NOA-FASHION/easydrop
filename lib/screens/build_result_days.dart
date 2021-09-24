@@ -9,7 +9,8 @@ import 'package:provider/provider.dart';
 
 class BuildResultDays extends StatefulWidget {
   final String idProduct;
-  BuildResultDays(this.idProduct);
+  final int indexProduct;
+  BuildResultDays(this.idProduct, this.indexProduct);
 
   @override
   _BuildResultDaysState createState() => _BuildResultDaysState();
@@ -200,8 +201,10 @@ class _BuildResultDaysState extends State<BuildResultDays> {
           child: Dismissible(
             onDismissed: (direction) {
               if (direction == DismissDirection.endToStart) {
-                variable.remove(
+                variable.removeResultatDays(
                   index: index,
+                  indexProduct: widget.indexProduct,
+                  idProduct: widget.idProduct,
                 );
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
                     content: "Le produit a bien été supprimée",
@@ -209,8 +212,10 @@ class _BuildResultDaysState extends State<BuildResultDays> {
               }
 
               if (direction == DismissDirection.startToEnd) {
-                variable.remove(
+                variable.removeResultatDays(
                   index: index,
+                  indexProduct: widget.indexProduct,
+                  idProduct: widget.idProduct,
                 );
                 Scaffold.of(context).showSnackBar(_buildSnackBar(
                     content: "Le produit a bien été supprimée",
