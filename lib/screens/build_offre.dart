@@ -48,7 +48,7 @@ class _BuildOffreState extends State<BuildOffre> {
     String word2;
     if (word.length > 20) {
       longLetter = Container(
-        width: MediaQuery.of(context).size.width / 2.4,
+        width: MediaQuery.of(context).size.width / 1.5,
         color: Colors.transparent,
         child: MarqueeText(
           text: word,
@@ -106,89 +106,107 @@ class _BuildOffreState extends State<BuildOffre> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width / 2.6,
-                      height: 25.0,
-                      child: Row(
-                        children: [
-                          Text(
-                            "prix d'achat",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.blue),
+                Card(
+                  elevation: 20,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(7.0),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Column(
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width / 2.5,
+                          height: 25.0,
+                          child: Row(
+                            children: [
+                              Text(
+                                "prix d'achat",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.blue),
+                              ),
+                              SizedBox(
+                                width: 18.0,
+                              ),
+                              maxLetter(offres.prixAchat.toString()),
+                            ],
                           ),
-                          SizedBox(
-                            width: 5.0,
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width / 2.5,
+                          height: 30.0,
+                          child: Row(
+                            children: [
+                              Text(
+                                "Pris de vente",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.blue),
+                              ),
+                              SizedBox(
+                                width: 5.0,
+                              ),
+                              Text(
+                                offres.prixVente.toString(),
+                              ),
+                            ],
                           ),
-                          maxLetter(offres.prixAchat.toString()),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width / 2.6,
-                      height: 30.0,
-                      child: Row(
-                        children: [
-                          Text(
-                            "Pris de vente",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.blue),
-                          ),
-                          SizedBox(
-                            width: 5.0,
-                          ),
-                          Text(
-                            offres.prixVente.toString(),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-                Column(
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width / 2.6,
-                      height: 25.0,
-                      child: Row(
-                        children: [
-                          Text(
-                            "Roas",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.blue),
+                Card(
+                  elevation: 20,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(7.0),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Column(
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width / 3.4,
+                          height: 25.0,
+                          child: Row(
+                            children: [
+                              Text(
+                                "Roas",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.blue),
+                              ),
+                              SizedBox(
+                                width: 12.0,
+                              ),
+                              maxLetter(offres.roas.toString()),
+                            ],
                           ),
-                          SizedBox(
-                            width: 5.0,
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width / 3.4,
+                          height: 30.0,
+                          child: Row(
+                            children: [
+                              Text(
+                                "Marge",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.blue),
+                              ),
+                              SizedBox(
+                                width: 5.0,
+                              ),
+                              Text(
+                                offres.margeOffre.toString(),
+                              ),
+                            ],
                           ),
-                          maxLetter(offres.roas.toString()),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width / 2.6,
-                      height: 30.0,
-                      child: Row(
-                        children: [
-                          Text(
-                            "Marge",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.blue),
-                          ),
-                          SizedBox(
-                            width: 5.0,
-                          ),
-                          Text(
-                            offres.margeOffre.toString(),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ],
             ),

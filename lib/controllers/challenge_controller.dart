@@ -158,11 +158,11 @@ class Challengecontroller extends ChangeNotifier {
       if (_listProduitGagnant[i].id == idProduct) {
         if (_listProduitGagnant[i].listeOffre.length < 1 && remove) {
           _listProduitGagnant[i].listeOffre = [];
-          List<String> _jsonList = _listProduitGagnant.map((produit) {
-            return jsonEncode(produit.toJson());
-          }).toList();
-          return _localData.setStringList(keyAcces, _jsonList);
         }
+        List<String> _jsonList = _listProduitGagnant.map((produit) {
+          return jsonEncode(produit.toJson());
+        }).toList();
+        return _localData.setStringList(keyAcces, _jsonList);
       }
     }
     return false;
@@ -174,11 +174,11 @@ class Challengecontroller extends ChangeNotifier {
       if (_listProduitGagnant[i].id == idProduct) {
         if (_listProduitGagnant[i].listeResultatJournee.length < 1 && remove) {
           _listProduitGagnant[i].listeResultatJournee = [];
-          List<String> _jsonList = _listProduitGagnant.map((produit) {
-            return jsonEncode(produit.toJson());
-          }).toList();
-          return _localData.setStringList(keyAcces, _jsonList);
         }
+        List<String> _jsonList = _listProduitGagnant.map((produit) {
+          return jsonEncode(produit.toJson());
+        }).toList();
+        return _localData.setStringList(keyAcces, _jsonList);
       }
     }
     return false;
@@ -223,7 +223,8 @@ class Challengecontroller extends ChangeNotifier {
       required double prixBarre,
       required double margeOffre,
       required double roas,
-      required List<String> offres}) async {
+      required double prixShipping,
+      required String offres}) async {
     List<Offre> offreday = [];
     offreday.add(Offre(
         margeOffre: margeOffre,
@@ -231,6 +232,7 @@ class Challengecontroller extends ChangeNotifier {
         prixBarre: prixBarre,
         prixVente: prixVente,
         roas: roas,
+        prixShipping: prixShipping,
         offres: offres));
     addOffreDays1(index: index, offreday: offreday);
     await _save(remove: false);
@@ -246,6 +248,7 @@ class Challengecontroller extends ChangeNotifier {
         prixBarre: offreday[0].prixBarre,
         margeOffre: offreday[0].margeOffre,
         roas: offreday[0].roas,
+        prixShipping: offreday[0].prixShipping,
         offres: offreday[0].offres));
   }
 

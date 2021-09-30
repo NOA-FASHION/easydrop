@@ -77,6 +77,66 @@ class _ResultDaysState extends State<ResultDays> {
     return offreVentes;
   }
 
+  double chiffreAffaire(
+      {required List<String> venteOffre, required List<Offre> offreEnCours}) {
+    double chiffreAffaires = 0;
+    for (var i = offreEnCours.length - 1; i >= 0; i--) {
+      chiffreAffaires = chiffreAffaires +
+          (offreEnCours[i].prixVente * double.parse(venteOffre[i]));
+    }
+
+    return chiffreAffaires;
+  }
+
+  double totalNombreVante(
+      {required List<String> venteOffre, required List<Offre> offreEnCours}) {
+    double nombreVante = 0;
+    for (var i = venteOffre.length - 1; i >= 0; i--) {
+      nombreVante = nombreVante + int.parse(venteOffre[i]);
+    }
+
+    return nombreVante;
+  }
+
+  double shippingDaysCalcul(
+      {required List<String> venteOffre, required List<Offre> offreEnCours}) {
+    double shipping = 0;
+    for (var i = offreEnCours.length - 1; i >= 0; i--) {
+      shipping = shipping +
+          (offreEnCours[i].prixShipping * double.parse(venteOffre[i]));
+    }
+    return shipping;
+  }
+
+  double coutProductDaysCalcul(
+      {required List<String> venteOffre, required List<Offre> offreEnCours}) {
+    double prixProduit = 0;
+    for (var i = offreEnCours.length - 1; i >= 0; i--) {
+      prixProduit = prixProduit +
+          (offreEnCours[i].prixAchat * double.parse(venteOffre[i]));
+    }
+    return prixProduit;
+  }
+
+  double margeDaysCalcul(
+      {required List<String> venteOffre, required List<Offre> offreEnCours}) {
+    double margeDays = 0;
+    for (var i = offreEnCours.length - 1; i >= 0; i--) {
+      margeDays = margeDays +
+          (offreEnCours[i].margeOffre * double.parse(venteOffre[i]));
+    }
+    return margeDays;
+  }
+
+  double roaDaysCalcul(
+      {required List<String> venteOffre, required List<Offre> offreEnCours}) {
+    double roaDays = 0;
+    for (var i = offreEnCours.length - 1; i >= 0; i--) {
+      roaDays = roaDays + (offreEnCours[i].roas * double.parse(venteOffre[i]));
+    }
+    return roaDays;
+  }
+
   double chiffreAffaireDays = 0;
   double facebookDepenseDays = 0;
   double facebookDepenseTotal = 0;
@@ -237,50 +297,9 @@ class _ResultDaysState extends State<ResultDays> {
                                 ),
                               ),
                             ),
+
                             Container(
-                              width: MediaQuery.of(context).size.width / 1.2,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: TextFormField(
-                                  style: TextStyle(fontSize: 10),
-                                  textCapitalization:
-                                      TextCapitalization.sentences,
-                                  onSaved: (value) {
-                                    chiffreAffaireDays = double.parse(value!);
-                                  },
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return "Merci d'entrer le chiffe d'affaire de la journée";
-                                    } else if (value.length > 35) {
-                                      return "Pas plus de 50 caractères";
-                                    }
-                                    return null;
-                                  },
-                                  decoration: InputDecoration(
-                                    focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            width: 2.0,
-                                            color: Colors.blueAccent),
-                                        borderRadius:
-                                            BorderRadius.circular(15.0)),
-                                    enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            width: 1.0,
-                                            color: Colors.blueAccent),
-                                        borderRadius:
-                                            BorderRadius.circular(15.0)),
-                                    contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 20, vertical: 10),
-                                    labelText:
-                                        "Chiffre d'affaire de la journée",
-                                    border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(15.0)),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Container(
+                              width: 250,
                               height: 150,
                               child: ListView.builder(
                                   padding: const EdgeInsets.all(8),
@@ -290,6 +309,7 @@ class _ResultDaysState extends State<ResultDays> {
                                     return Container(
                                       width: MediaQuery.of(context).size.width /
                                           3.2,
+                                      margin: EdgeInsets.only(top: 10),
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: TextFormField(
@@ -327,8 +347,9 @@ class _ResultDaysState extends State<ResultDays> {
                                                 EdgeInsets.symmetric(
                                                     horizontal: 20,
                                                     vertical: 10),
-                                            labelText: "offre" +
-                                                (index + 1).toString(),
+                                            labelText:
+                                                "Nombre de vente concernant l'offre" +
+                                                    (index + 1).toString(),
                                             border: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(
@@ -343,40 +364,45 @@ class _ResultDaysState extends State<ResultDays> {
                             SizedBox(
                               height: 15.0,
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                style: TextStyle(fontSize: 10),
-                                textCapitalization:
-                                    TextCapitalization.sentences,
-                                onSaved: (value) {
-                                  facebookDepenseDays = double.parse(value!);
-                                },
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "Merci d'entrer les dépense facebook";
-                                  } else if (value.length > 35) {
-                                    return "Pas plus de 50 caractères";
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          width: 2.0, color: Colors.blueAccent),
-                                      borderRadius:
-                                          BorderRadius.circular(15.0)),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          width: 1.0, color: Colors.blueAccent),
-                                      borderRadius:
-                                          BorderRadius.circular(15.0)),
-                                  contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
-                                  labelText: "Dépense Facebook",
-                                  border: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(15.0)),
+                            Container(
+                              width: 235,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  style: TextStyle(fontSize: 10),
+                                  textCapitalization:
+                                      TextCapitalization.sentences,
+                                  onSaved: (value) {
+                                    facebookDepenseDays = double.parse(value!);
+                                  },
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return "Merci d'entrer les dépense facebook";
+                                    } else if (value.length > 35) {
+                                      return "Pas plus de 50 caractères";
+                                    }
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                    focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            width: 2.0,
+                                            color: Colors.blueAccent),
+                                        borderRadius:
+                                            BorderRadius.circular(15.0)),
+                                    enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            width: 1.0,
+                                            color: Colors.blueAccent),
+                                        borderRadius:
+                                            BorderRadius.circular(15.0)),
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 10),
+                                    labelText: "Dépense Facebook",
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(15.0)),
+                                  ),
                                 ),
                               ),
                             ),
@@ -384,40 +410,45 @@ class _ResultDaysState extends State<ResultDays> {
                             SizedBox(
                               height: 15.0,
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                style: TextStyle(fontSize: 10),
-                                textCapitalization:
-                                    TextCapitalization.sentences,
-                                onSaved: (value) {
-                                  panierDays = int.parse(value!);
-                                },
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "Merci d'entrer le nombre de panier de la journée";
-                                  } else if (value.length > 35) {
-                                    return "Pas plus de 50 caractères";
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          width: 2.0, color: Colors.blueAccent),
-                                      borderRadius:
-                                          BorderRadius.circular(15.0)),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          width: 1.0, color: Colors.blueAccent),
-                                      borderRadius:
-                                          BorderRadius.circular(15.0)),
-                                  contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
-                                  labelText: "Nombre de panier de la journée",
-                                  border: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(15.0)),
+                            Container(
+                              width: 235,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  style: TextStyle(fontSize: 10),
+                                  textCapitalization:
+                                      TextCapitalization.sentences,
+                                  onSaved: (value) {
+                                    panierDays = int.parse(value!);
+                                  },
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return "Merci d'entrer le nombre de panier de la journée";
+                                    } else if (value.length > 35) {
+                                      return "Pas plus de 50 caractères";
+                                    }
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                    focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            width: 2.0,
+                                            color: Colors.blueAccent),
+                                        borderRadius:
+                                            BorderRadius.circular(15.0)),
+                                    enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            width: 1.0,
+                                            color: Colors.blueAccent),
+                                        borderRadius:
+                                            BorderRadius.circular(15.0)),
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 10),
+                                    labelText: "Nombre de panier de la journée",
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(15.0)),
+                                  ),
                                 ),
                               ),
                             ),
@@ -425,40 +456,45 @@ class _ResultDaysState extends State<ResultDays> {
                             SizedBox(
                               height: 15.0,
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                style: TextStyle(fontSize: 10),
-                                textCapitalization:
-                                    TextCapitalization.sentences,
-                                onSaved: (value) {
-                                  vueDays = int.parse(value!);
-                                },
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "Merci d'entrer le nombre de vue de la journée";
-                                  } else if (value.length > 35) {
-                                    return "Pas plus de 50 caractères";
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          width: 2.0, color: Colors.blueAccent),
-                                      borderRadius:
-                                          BorderRadius.circular(15.0)),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          width: 1.0, color: Colors.blueAccent),
-                                      borderRadius:
-                                          BorderRadius.circular(15.0)),
-                                  contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
-                                  labelText: "le nombre de vuede la journée",
-                                  border: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(15.0)),
+                            Container(
+                              width: 235,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  style: TextStyle(fontSize: 10),
+                                  textCapitalization:
+                                      TextCapitalization.sentences,
+                                  onSaved: (value) {
+                                    vueDays = int.parse(value!);
+                                  },
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return "Merci d'entrer le nombre de vue de la journée";
+                                    } else if (value.length > 35) {
+                                      return "Pas plus de 50 caractères";
+                                    }
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                    focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            width: 2.0,
+                                            color: Colors.blueAccent),
+                                        borderRadius:
+                                            BorderRadius.circular(15.0)),
+                                    enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            width: 1.0,
+                                            color: Colors.blueAccent),
+                                        borderRadius:
+                                            BorderRadius.circular(15.0)),
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 10),
+                                    labelText: "le nombre de vue de la journée",
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(15.0)),
+                                  ),
                                 ),
                               ),
                             ),
@@ -466,43 +502,7 @@ class _ResultDaysState extends State<ResultDays> {
                             SizedBox(
                               height: 15.0,
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                style: TextStyle(fontSize: 10),
-                                textCapitalization:
-                                    TextCapitalization.sentences,
-                                onSaved: (value) {
-                                  venteDays = double.parse(value!);
-                                },
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "Merci d'entrer le nombre de vente de la journée";
-                                  } else if (value.length > 35) {
-                                    return "Pas plus de 50 caractères";
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          width: 2.0, color: Colors.blueAccent),
-                                      borderRadius:
-                                          BorderRadius.circular(15.0)),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          width: 1.0, color: Colors.blueAccent),
-                                      borderRadius:
-                                          BorderRadius.circular(15.0)),
-                                  contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 10),
-                                  labelText: "Nombre de vente de la journée",
-                                  border: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(15.0)),
-                                ),
-                              ),
-                            ),
+
                             offreVente(variable.getProduitGagnant(),
                                 widget.indexProduct),
                             Center(
@@ -521,18 +521,30 @@ class _ResultDaysState extends State<ResultDays> {
                                               listen: false)
                                           .addResultatDays(
                                         index: widget.indexProduct,
-                                        chiffreAffaireDays: chiffreAffaireDays,
+                                        chiffreAffaireDays: chiffreAffaire(
+                                            offreEnCours: offreDays,
+                                            venteOffre: nombreVenteOffreDays),
                                         facebookDepenseDays:
                                             facebookDepenseDays,
                                         panierDays: panierDays,
                                         vueDays: vueDays,
-                                        venteDays: venteDays,
-                                        margeDays: margeDays,
+                                        venteDays: totalNombreVante(
+                                            offreEnCours: offreDays,
+                                            venteOffre: nombreVenteOffreDays),
+                                        margeDays: margeDaysCalcul(
+                                            offreEnCours: offreDays,
+                                            venteOffre: nombreVenteOffreDays),
                                         nombreVenteOffreDays:
                                             nombreVenteOffreDays,
-                                        coutDaysProduit: coutDaysProduit,
-                                        prixShippingDays: prixShippingDays,
-                                        roaDays: roaDays,
+                                        coutDaysProduit: coutProductDaysCalcul(
+                                            offreEnCours: offreDays,
+                                            venteOffre: nombreVenteOffreDays),
+                                        prixShippingDays: shippingDaysCalcul(
+                                            offreEnCours: offreDays,
+                                            venteOffre: nombreVenteOffreDays),
+                                        roaDays: roaDaysCalcul(
+                                            offreEnCours: offreDays,
+                                            venteOffre: nombreVenteOffreDays),
                                       );
 
                                       Navigator.pop(context);

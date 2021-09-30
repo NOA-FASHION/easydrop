@@ -34,8 +34,10 @@ class _OffreProductState extends State<OffreProduct> {
 
   Color margeColors = Colors.green;
   Color roaColors = Colors.green;
-  String margeText = '';
+  String margeText = '0';
+  String roaText = '0';
   double roas1 = 0;
+  double prixShipping = 0;
   double marge1 = 0;
   double margeOffre = 0;
   double prixAchat = 0;
@@ -43,7 +45,7 @@ class _OffreProductState extends State<OffreProduct> {
   int index = 0;
   double prixVente = 0;
   double roas = 0;
-  List<String> offres = [];
+  late String offres;
 
   double validateMarge(GlobalKey<FormState> formKey1) {
     double marge = 0;
@@ -51,7 +53,7 @@ class _OffreProductState extends State<OffreProduct> {
       formKey1.currentState!.save();
       {
         setState(() {
-          marge = prixVente - prixAchat;
+          marge = prixVente - (prixAchat + prixShipping);
           marge1 = marge;
         });
       }
@@ -136,6 +138,8 @@ class _OffreProductState extends State<OffreProduct> {
         child: Icon(Icons.add),
         backgroundColor: Colors.orange[900],
         onPressed: () {
+          roaText = '0';
+          margeText = '0';
           _bottomSheetController = scaffoldkey.currentState!.showBottomSheet(
             (context) {
               return Container(
@@ -167,13 +171,11 @@ class _OffreProductState extends State<OffreProduct> {
                                   textCapitalization:
                                       TextCapitalization.sentences,
                                   onSaved: (value) {
-                                    offres.add(value!);
+                                    offres = value!;
                                   },
                                   validator: (value) {
                                     if (value!.isEmpty) {
                                       return "Merci d'entrer une offre'";
-                                    } else if (value.length > 35) {
-                                      return "Pas plus de 50 caractères";
                                     }
                                     return null;
                                   },
@@ -209,7 +211,7 @@ class _OffreProductState extends State<OffreProduct> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                width: MediaQuery.of(context).size.width / 3.2,
+                                width: MediaQuery.of(context).size.width / 2.9,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: TextFormField(
@@ -254,7 +256,7 @@ class _OffreProductState extends State<OffreProduct> {
                                 width: 2.0,
                               ),
                               Container(
-                                width: MediaQuery.of(context).size.width / 3.2,
+                                width: MediaQuery.of(context).size.width / 2.9,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: TextFormField(
@@ -298,8 +300,61 @@ class _OffreProductState extends State<OffreProduct> {
                               SizedBox(
                                 width: 2.0,
                               ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 15.0,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
                               Container(
-                                width: MediaQuery.of(context).size.width / 3.2,
+                                width: MediaQuery.of(context).size.width / 2.9,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: TextFormField(
+                                    style: TextStyle(fontSize: 10),
+                                    textCapitalization:
+                                        TextCapitalization.sentences,
+                                    onSaved: (value) {
+                                      prixShipping = double.parse(value!);
+                                    },
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return "Merci d'entrer le prix du shipping";
+                                      } else if (value.length > 35) {
+                                        return "Pas plus de 50 caractères";
+                                      }
+                                      return null;
+                                    },
+                                    decoration: InputDecoration(
+                                      focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              width: 2.0,
+                                              color: Colors.blueAccent),
+                                          borderRadius:
+                                              BorderRadius.circular(15.0)),
+                                      enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              width: 1.0,
+                                              color: Colors.blueAccent),
+                                          borderRadius:
+                                              BorderRadius.circular(15.0)),
+                                      contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 20, vertical: 10),
+                                      labelText: "Prix du shipping",
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15.0)),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 2.0,
+                              ),
+                              Container(
+                                width: MediaQuery.of(context).size.width / 2.9,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: TextFormField(
@@ -340,9 +395,6 @@ class _OffreProductState extends State<OffreProduct> {
                                   ),
                                 ),
                               ),
-                              SizedBox(
-                                width: 10.0,
-                              ),
                             ],
                           ),
                           SizedBox(
@@ -375,6 +427,11 @@ class _OffreProductState extends State<OffreProduct> {
                                     elevation: 15.0,
                                     child: Column(
                                       children: [
+                                        Icon(
+                                          Icons.calculate,
+                                          size: 40,
+                                          color: Colors.orange[900],
+                                        ),
                                         Container(
                                           child: Card(
                                               color: margeColors,
@@ -385,7 +442,17 @@ class _OffreProductState extends State<OffreProduct> {
                                               elevation: 15.0,
                                               child: Text("Marge")),
                                         ),
-                                        Text(margeText)
+                                        Card(
+                                            color: Colors.orange,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(7.0),
+                                            ),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Text(margeText),
+                                            ))
                                       ],
                                     ),
                                   ),
@@ -395,8 +462,7 @@ class _OffreProductState extends State<OffreProduct> {
                                 onTap: () {
                                   validateRoas(formKey);
                                   _bottomSheetController.setState!(() {
-                                    margeText =
-                                        validateRoas(formKey).toString();
+                                    roaText = validateRoas(formKey).toString();
                                     if (validateRoas(formKey) > 12) {
                                       roaColors = Colors.green;
                                     } else {
@@ -415,9 +481,14 @@ class _OffreProductState extends State<OffreProduct> {
                                     elevation: 15.0,
                                     child: Column(
                                       children: [
+                                        Icon(
+                                          Icons.calculate,
+                                          size: 40,
+                                          color: Colors.orange[900],
+                                        ),
                                         Container(
                                           child: Card(
-                                              color: roaColors,
+                                              color: margeColors,
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(15.0),
@@ -425,7 +496,17 @@ class _OffreProductState extends State<OffreProduct> {
                                               elevation: 15.0,
                                               child: Text("Roas")),
                                         ),
-                                        Text("200")
+                                        Card(
+                                            color: Colors.orange,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(7.0),
+                                            ),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Text(roaText),
+                                            ))
                                       ],
                                     ),
                                   ),
@@ -452,6 +533,7 @@ class _OffreProductState extends State<OffreProduct> {
                                             index: widget.indexProduct,
                                             margeOffre: validateMarge(formKey),
                                             prixAchat: prixAchat,
+                                            prixShipping: prixShipping,
                                             prixBarre: prixBarre,
                                             prixVente: prixVente,
                                             roas: validateRoas(formKey),

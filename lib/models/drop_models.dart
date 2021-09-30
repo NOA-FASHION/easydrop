@@ -53,11 +53,12 @@ class ResultJournee {
 
 class Offre {
   double prixAchat;
+  double prixShipping;
   double prixVente;
   double prixBarre;
   double margeOffre;
   double roas;
-  List<String> offres;
+  String offres;
   Offre({
     required this.prixAchat,
     required this.prixVente,
@@ -65,6 +66,7 @@ class Offre {
     required this.margeOffre,
     required this.roas,
     required this.offres,
+    required this.prixShipping,
   });
 
   factory Offre.fromJSON(Map<String, dynamic> json) => Offre(
@@ -73,7 +75,8 @@ class Offre {
       prixBarre: json['prixBarre'],
       margeOffre: json['margeOffre'],
       roas: json['roas'],
-      offres: List<String>.from(json["offres"].map((x) => x)));
+      prixShipping: json['prixShipping'],
+      offres: json['offres']);
 
   Map<String, dynamic> toJson() {
     return {
@@ -82,7 +85,8 @@ class Offre {
       "prixBarre": prixBarre,
       "margeOffre": margeOffre,
       "roas": roas,
-      "offres": List<dynamic>.from(offres.map((x) => x)),
+      "prixShipping": prixShipping,
+      "offres": offres,
     };
   }
 }

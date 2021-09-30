@@ -65,17 +65,6 @@ class _HomeScreenState extends State<HomeScreen>
           child: SafeArea(
             child: AppBar(
               title: Text("Produit"),
-
-              // leading: IconButton(
-              //   alignment: Alignment.topRight,
-              //   icon: Icon(
-              //     Icons.menu,
-              //     color: Colors.black,
-              //   ),
-              //   onPressed: () {
-              //     // _controller.toggle();
-              //   },
-              // ),
               centerTitle: true,
               flexibleSpace: Container(
                 padding: EdgeInsets.only(top: 40.0),

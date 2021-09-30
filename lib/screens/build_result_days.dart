@@ -6,6 +6,7 @@ import 'package:lottie/lottie.dart';
 import 'package:marquee_text/marquee_text.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 class BuildResultDays extends StatefulWidget {
   final String idProduct;
@@ -87,7 +88,7 @@ class _BuildResultDaysState extends State<BuildResultDays> {
     return longLetter;
   }
 
-  Widget activeGlow(ResultJournee product) {
+  Widget activeGlow(ResultJournee resultDays) {
     Widget glow = Padding(
       padding: const EdgeInsets.all(1.0),
       child: Container(
@@ -122,7 +123,7 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                           SizedBox(
                             width: 5.0,
                           ),
-                          maxLetter(product.chiffreAffaireDays.toString()),
+                          maxLetter(resultDays.chiffreAffaireDays.toString()),
                         ],
                       ),
                     ),
@@ -141,7 +142,7 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                             width: 5.0,
                           ),
                           Text(
-                            product.margeDays.toString(),
+                            resultDays.margeDays.toString(),
                           ),
                         ],
                       ),
@@ -178,6 +179,8 @@ class _BuildResultDaysState extends State<BuildResultDays> {
   String unityPattern = "unity_challenge.";
   @override
   Widget build(BuildContext context) {
+    DateTime today = new DateTime.now();
+    String todays = DateFormat('EEEE, d MMM, yyyy').format(today);
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
     List<ResultJournee> _resultatDaysList =
         variable.getResulDays(widget.idProduct);
@@ -186,7 +189,7 @@ class _BuildResultDaysState extends State<BuildResultDays> {
       return Container(
         alignment: Alignment.center,
         child: Text(
-          "Pas de produits.",
+          "Pas de résultats.",
           style: TextStyle(color: Colors.orange[600], fontSize: 18.0),
           textAlign: TextAlign.center,
         ),
@@ -371,10 +374,7 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                                 SizedBox(
                                   width: 5.0,
                                 ),
-                                maxLetterTitre(_resultatDaysList[index]
-                                    .chiffreAffaireDays
-                                    .toString()
-                                    .toUpperCase()),
+                                maxLetterTitre("Résultat du " + todays)
                               ],
                             ),
                           ),
