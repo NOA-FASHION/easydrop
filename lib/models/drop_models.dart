@@ -1,4 +1,5 @@
 class ResultJournee {
+  String date;
   double chiffreAffaireDays;
   double prixShippingDays;
   double facebookDepenseDays;
@@ -11,6 +12,7 @@ class ResultJournee {
   List<String> nombreVenteOffreDays;
   ResultJournee(
       {required this.chiffreAffaireDays,
+      required this.date,
       required this.prixShippingDays,
       required this.facebookDepenseDays,
       required this.coutDaysProduit,
@@ -23,6 +25,7 @@ class ResultJournee {
 
   factory ResultJournee.fromJSON(Map<String, dynamic> json) => ResultJournee(
       chiffreAffaireDays: json['chiffreAffaireDays'],
+      date: json['date'],
       prixShippingDays: json['prixShippingDays'],
       facebookDepenseDays: json['facebookDepenseDays'],
       coutDaysProduit: json['coutDaysProduit'],
@@ -37,6 +40,7 @@ class ResultJournee {
   Map<String, dynamic> toJson() {
     return {
       "chiffreAffaireDays": chiffreAffaireDays,
+      "date": date,
       "prixShippingDays": prixShippingDays,
       "facebookDepenseDays": facebookDepenseDays,
       "coutDaysProduit": coutDaysProduit,

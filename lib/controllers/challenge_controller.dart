@@ -199,7 +199,7 @@ class Challengecontroller extends ChangeNotifier {
     required int indexProduct,
     required String idProduct,
   }) async {
-    _listProduitGagnant[indexProduct].listeOffre.removeAt(index);
+    _listProduitGagnant[indexProduct].listeResultatJournee.removeAt(index);
     await _saveResultatDays(remove: true, idProduct: idProduct);
     _initProduitGagnantList();
     notifyListeners();
@@ -253,6 +253,7 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   void addResultatDays({
+    required String date,
     required int index,
     required double chiffreAffaireDays,
     required double prixShippingDays,
@@ -267,6 +268,7 @@ class Challengecontroller extends ChangeNotifier {
   }) async {
     List<ResultJournee> _resultatDays = [];
     _resultatDays.add(ResultJournee(
+        date: date,
         chiffreAffaireDays: chiffreAffaireDays,
         prixShippingDays: prixShippingDays,
         facebookDepenseDays: facebookDepenseDays,
@@ -288,6 +290,7 @@ class Challengecontroller extends ChangeNotifier {
   void addresultDays(
       {required List<ResultJournee> resultday, required int index}) async {
     _listProduitGagnant[index].listeResultatJournee.add(ResultJournee(
+        date: resultday[0].date,
         chiffreAffaireDays: resultday[0].chiffreAffaireDays,
         prixShippingDays: resultday[0].prixShippingDays,
         facebookDepenseDays: resultday[0].facebookDepenseDays,

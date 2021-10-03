@@ -3,6 +3,7 @@ import 'package:easydrop/models/drop_models.dart';
 import 'package:easydrop/screens/build_result_days.dart';
 import 'package:easydrop/screens/offre.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
@@ -263,6 +264,8 @@ class _ResultDaysState extends State<ResultDays> {
   }
 
   FloatingActionButton buildBottomSheet() {
+    DateTime today = new DateTime.now();
+    String todays = DateFormat('EEEE, d MMM, yyyy').format(today);
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
     List<Offre> offreDays = variable.getOffresProduct(widget.idProduct);
     return FloatingActionButton(
@@ -520,6 +523,7 @@ class _ResultDaysState extends State<ResultDays> {
                                       Provider.of<Challengecontroller>(context,
                                               listen: false)
                                           .addResultatDays(
+                                        date: todays,
                                         index: widget.indexProduct,
                                         chiffreAffaireDays: chiffreAffaire(
                                             offreEnCours: offreDays,
