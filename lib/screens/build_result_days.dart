@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:easydrop/controllers/challenge_controller.dart';
 import 'package:easydrop/models/drop_models.dart';
 import 'package:easydrop/screens/stat_days.dart';
@@ -47,9 +49,9 @@ class _BuildResultDaysState extends State<BuildResultDays> {
     Widget longLetter;
 
     String word2;
-    if (word.length > 20) {
+    if (word.length > 40) {
       longLetter = Container(
-        width: MediaQuery.of(context).size.width / 2.4,
+        width: MediaQuery.of(context).size.width / 1.45,
         color: Colors.transparent,
         child: MarqueeText(
           text: word,
@@ -61,9 +63,9 @@ class _BuildResultDaysState extends State<BuildResultDays> {
         ),
       );
       return longLetter;
-    } else if (word.length > 25) {
+    } else if (word.length > 35) {
       longLetter = Container(
-        width: MediaQuery.of(context).size.width / 2,
+        width: MediaQuery.of(context).size.width / 1.45,
         color: Colors.transparent,
         child: MarqueeText(
           text: word,
@@ -88,15 +90,19 @@ class _BuildResultDaysState extends State<BuildResultDays> {
     return longLetter;
   }
 
-  Widget activeGlow(ResultJournee resultDays) {
+  Widget activeGlow(
+      ResultJournee resultDays, List<ProduitGagnant> _listProduitGagnant) {
     Widget glow = Padding(
       padding: const EdgeInsets.all(1.0),
       child: Container(
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Colors.white,
-        ),
+            border: Border.all(color: Colors.white70),
+            borderRadius: BorderRadius.circular(15),
+            gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [Colors.pink, Colors.orange])),
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
@@ -121,7 +127,7 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                                 color: Colors.blue),
                           ),
                           SizedBox(
-                            width: 5.0,
+                            width: 32.0,
                           ),
                           maxLetter(resultDays.chiffreAffaireDays.toString()),
                         ],
@@ -133,7 +139,7 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                       child: Row(
                         children: [
                           Text(
-                            "Marge",
+                            "Marge de la journée",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.blue),
@@ -155,15 +161,9 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                   ),
                   elevation: 15.0,
                   child: Container(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(40.0),
-                      child: Image(
-                        width: MediaQuery.of(context).size.width / 6,
-                        height: MediaQuery.of(context).size.height / 16,
-                        image: NetworkImage(
-                            "https://cdn.pixabay.com/photo/2017/10/12/20/15/photoshop-2845779_960_720.jpg"),
-                      ),
-                    ),
+                   child:Image.file(File(imageproductGagnant(_listProduitGagnant)), width: MediaQuery.of(context).size.width / 6,
+                        height: MediaQuery.of(context).size.height / 14,),
+                    
                   ),
                 ),
               ],
@@ -176,6 +176,16 @@ class _BuildResultDaysState extends State<BuildResultDays> {
     return glow;
   }
 
+  String imageproductGagnant(List<ProduitGagnant> _listProduitGagnant) {
+    String imageProduct = "";
+    for (var i = _listProduitGagnant.length - 1; i >= 0; i--) {
+      if (_listProduitGagnant[i].id == widget.idProduct) {
+        imageProduct = _listProduitGagnant[i].photoProduit;
+      }
+    }
+    return imageProduct;
+  }
+
   String unityPattern = "unity_challenge.";
   @override
   Widget build(BuildContext context) {
@@ -184,6 +194,7 @@ class _BuildResultDaysState extends State<BuildResultDays> {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
     List<ResultJournee> _resultatDaysList =
         variable.getResulDays(widget.idProduct);
+    List<ProduitGagnant> ListProduitGagnant = variable.getProduitGagnant();
 
     if (_resultatDaysList.isEmpty) {
       return Container(
@@ -366,7 +377,7 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                             child: Row(
                               children: [
                                 Text(
-                                  "Titre".toUpperCase(),
+                                  "Date".toUpperCase(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.purple),
@@ -374,7 +385,10 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                                 SizedBox(
                                   width: 5.0,
                                 ),
-                                maxLetterTitre("Résultat du " + todays)
+                                maxLetterTitre(
+                                  "Résultat du ".toUpperCase() +
+                                      todays.toUpperCase(),
+                                )
                               ],
                             ),
                           ),
@@ -385,7 +399,8 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                       ],
                     ),
                   ),
-                  subtitle: activeGlow(_resultatDaysList[index]),
+                  subtitle:
+                      activeGlow(_resultatDaysList[index], ListProduitGagnant),
                   isThreeLine: true,
                 ),
               ),

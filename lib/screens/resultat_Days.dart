@@ -120,11 +120,13 @@ class _ResultDaysState extends State<ResultDays> {
   }
 
   double margeDaysCalcul(
-      {required List<String> venteOffre, required List<Offre> offreEnCours}) {
+      {required List<String> venteOffre,
+      required List<Offre> offreEnCours,
+      required double coutPub}) {
     double margeDays = 0;
     for (var i = offreEnCours.length - 1; i >= 0; i--) {
       margeDays = margeDays +
-          (offreEnCours[i].margeOffre * double.parse(venteOffre[i]));
+          (offreEnCours[i].margeOffre * double.parse(venteOffre[i]) - coutPub);
     }
     return margeDays;
   }
@@ -536,6 +538,7 @@ class _ResultDaysState extends State<ResultDays> {
                                             offreEnCours: offreDays,
                                             venteOffre: nombreVenteOffreDays),
                                         margeDays: margeDaysCalcul(
+                                            coutPub: facebookDepenseDays,
                                             offreEnCours: offreDays,
                                             venteOffre: nombreVenteOffreDays),
                                         nombreVenteOffreDays:

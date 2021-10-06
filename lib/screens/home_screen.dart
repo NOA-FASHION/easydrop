@@ -3,6 +3,8 @@
 import 'package:easydrop/controllers/challenge_controller.dart';
 import 'package:easydrop/models/drop_models.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:lottie/lottie.dart';
 import 'package:nanoid/nanoid.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
@@ -33,6 +35,12 @@ class _HomeScreenState extends State<HomeScreen>
     //       }); // This chunk of code is important
   }
 
+  bool _visibility1 = true;
+
+  String wait = "assets/wait.json";
+  late String dataJoin;
+  late String _image;
+  final picker = ImagePicker();
   double chiffreAffaireTotal = 0;
   double coutTotalProduit = 0;
   double facebookDepenseTotal = 0;
@@ -104,6 +112,94 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
+  Future getImageCamera() async {
+    _bottomSheetController.setState!(() {
+      _changeVisibility(false);
+    });
+    final pickedFile = await picker.getImage(source: ImageSource.camera);
+
+    setState(() {
+      if (pickedFile != null) {
+        dataJoin = pickedFile.path;
+        _image = pickedFile.path;
+        _bottomSheetController.setState!(() {
+          wait = "assets/picture.json";
+        });
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+  Future getImageGallery() async {
+    _bottomSheetController.setState!(() {
+      _changeVisibility(false);
+    });
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        dataJoin = pickedFile.path;
+        _image = pickedFile.path;
+        _bottomSheetController.setState!(() {
+          wait = "assets/picture.json";
+        });
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+  void _changeVisibility(bool visibility) {
+    setState(() {
+      _visibility1 = visibility;
+    });
+  }
+
+  Widget selectdropdown() {
+    Widget documentJoint = SizedBox(
+      width: 1.0,
+    );
+
+    documentJoint = Column(
+      children: [
+        Offstage(
+          offstage: _visibility1,
+          child: Container(
+            width: MediaQuery.of(context).size.width / 2.2,
+            height: 70,
+            child: Center(child: Lottie.asset(wait)),
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            InkWell(
+                onTap: () async {
+                  getImageGallery();
+                },
+                child: Container(
+                    width: 70.0,
+                    height: 80.0,
+                    child: Lottie.asset('assets/upload.json'))),
+            SizedBox(
+              width: 15.0,
+            ),
+            InkWell(
+                onTap: () async {
+                  getImageCamera();
+                },
+                child: Container(
+                    width: 70.0,
+                    height: 120.0,
+                    child: Lottie.asset('assets/photo.json'))),
+          ],
+        ),
+      ],
+    );
+    return documentJoint;
+  }
+
   updateController(dynamic value) {
     _bottomSheetController.setState!(() {
       var unityChallenge = value;
@@ -116,6 +212,8 @@ class _HomeScreenState extends State<HomeScreen>
         child: Icon(Icons.add),
         backgroundColor: Colors.orange[900],
         onPressed: () {
+          _visibility1 = true;
+          wait = "assets/wait.json";
           _bottomSheetController = scaffoldkey.currentState!.showBottomSheet(
             (context) {
               return Container(
@@ -417,7 +515,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     Container(
                                       width: MediaQuery.of(context).size.width /
                                           2.2,
-                                      height: 210,
+                                      height: 250,
                                       child: Card(
                                           color: Colors.white,
                                           shape: RoundedRectangleBorder(
@@ -427,9 +525,6 @@ class _HomeScreenState extends State<HomeScreen>
                                           elevation: 15.0,
                                           child: Column(
                                             children: [
-                                              SizedBox(
-                                                height: 15.0,
-                                              ),
                                               Card(
                                                 elevation: 15.0,
                                                 color: Colors.white,
@@ -447,20 +542,14 @@ class _HomeScreenState extends State<HomeScreen>
                                                   ),
                                                 ),
                                               ),
-                                              SizedBox(
-                                                height: 15.0,
-                                              ),
                                               Padding(
                                                 padding:
-                                                    const EdgeInsets.all(8.0),
+                                                    const EdgeInsets.all(2.0),
                                                 child: ClipRRect(
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           20.0),
-                                                  child: Image(
-                                                    image: NetworkImage(
-                                                        "https://cdn.pixabay.com/photo/2017/10/12/20/15/photoshop-2845779_960_720.jpg"),
-                                                  ),
+                                                  child: selectdropdown(),
                                                 ),
                                               ),
                                             ],
@@ -700,7 +789,7 @@ class _HomeScreenState extends State<HomeScreen>
                                               listeOffre: listeOffre,
                                               listeResultatJournee:
                                                   listeResultatJournee,
-                                              photoProduit: photoProduit,
+                                              photoProduit: dataJoin,
                                               typeDuProduit: typeDuProduit,
                                               panierTotal: panierTotal,
                                               nombreVenteOffreTotal:

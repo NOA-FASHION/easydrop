@@ -1,3 +1,5 @@
+
+import 'dart:io';
 import 'package:easydrop/controllers/challenge_controller.dart';
 import 'package:easydrop/models/drop_models.dart';
 import 'package:easydrop/screens/resultat_Days.dart';
@@ -91,9 +93,12 @@ class _BuildProductState extends State<BuildProduct> {
       child: Container(
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Colors.white,
-        ),
+            border: Border.all(color: Colors.white70),
+            borderRadius: BorderRadius.circular(15),
+            gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [Colors.pink, Colors.orange])),
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
@@ -130,13 +135,13 @@ class _BuildProductState extends State<BuildProduct> {
                       child: Row(
                         children: [
                           Text(
-                            "prix produit",
+                            "prix du produit",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.blue),
                           ),
                           SizedBox(
-                            width: 5.0,
+                            width: 12.0,
                           ),
                           Text(
                             product.prixVente.toString(),
@@ -154,15 +159,13 @@ class _BuildProductState extends State<BuildProduct> {
                   child: Container(
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(40.0),
-                      child: Image(
-                        width: MediaQuery.of(context).size.width / 6,
-                        height: MediaQuery.of(context).size.height / 16,
-                        image: NetworkImage(
-                            "https://cdn.pixabay.com/photo/2017/10/12/20/15/photoshop-2845779_960_720.jpg"),
+                    child:Image.file(File(product.photoProduit), width: MediaQuery.of(context).size.width / 6,
+                        height: MediaQuery.of(context).size.height / 14,),
+                       
+                       
                       ),
                     ),
                   ),
-                ),
               ],
             ),
           ),
@@ -326,8 +329,6 @@ class _BuildProductState extends State<BuildProduct> {
                                 value: variable,
                                 child: ResultDays(
                                     index, _productGagnantList[index].id))));
-
-               
                   },
                   title: Container(
                     child: Row(
@@ -342,7 +343,7 @@ class _BuildProductState extends State<BuildProduct> {
                             child: Row(
                               children: [
                                 Text(
-                                  "Titre".toUpperCase(),
+                                  "Nom du Produit".toUpperCase(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.purple),

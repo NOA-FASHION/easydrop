@@ -312,6 +312,7 @@ class Challengecontroller extends ChangeNotifier {
     }
     return resulDays;
   }
+   
 
   List<Offre> getOffresProduct(String id) {
     List<Offre> offreProduct = [];

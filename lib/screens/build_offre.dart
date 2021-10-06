@@ -46,9 +46,9 @@ class _BuildOffreState extends State<BuildOffre> {
     Widget longLetter;
 
     String word2;
-    if (word.length > 20) {
+    if (word.length > 33) {
       longLetter = Container(
-        width: MediaQuery.of(context).size.width / 1.5,
+        width: MediaQuery.of(context).size.width / 1.55,
         color: Colors.transparent,
         child: MarqueeText(
           text: word,
@@ -60,7 +60,7 @@ class _BuildOffreState extends State<BuildOffre> {
         ),
       );
       return longLetter;
-    } else if (word.length > 25) {
+    } else if (word.length > 28) {
       longLetter = Container(
         width: MediaQuery.of(context).size.width / 2,
         color: Colors.transparent,
@@ -93,9 +93,12 @@ class _BuildOffreState extends State<BuildOffre> {
       child: Container(
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Colors.white,
-        ),
+            border: Border.all(color: Colors.white70),
+            borderRadius: BorderRadius.circular(15),
+            gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [Colors.pink, Colors.orange])),
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
@@ -111,49 +114,55 @@ class _BuildOffreState extends State<BuildOffre> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(7.0),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Column(
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width / 2.5,
-                          height: 25.0,
-                          child: Row(
-                            children: [
-                              Text(
-                                "prix d'achat",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.blue),
-                              ),
-                              SizedBox(
-                                width: 18.0,
-                              ),
-                              maxLetter(offres.prixAchat.toString()),
-                            ],
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.orange),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Column(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width / 2.5,
+                            height: 25.0,
+                            child: Row(
+                              children: [
+                                Text(
+                                  "prix d'achat",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.blue),
+                                ),
+                                SizedBox(
+                                  width: 18.0,
+                                ),
+                                maxLetter(offres.prixAchat.toString()),
+                              ],
+                            ),
                           ),
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width / 2.5,
-                          height: 30.0,
-                          child: Row(
-                            children: [
-                              Text(
-                                "Pris de vente",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.blue),
-                              ),
-                              SizedBox(
-                                width: 5.0,
-                              ),
-                              Text(
-                                offres.prixVente.toString(),
-                              ),
-                            ],
+                          Container(
+                            width: MediaQuery.of(context).size.width / 2.5,
+                            height: 30.0,
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Pris de vente",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.blue),
+                                ),
+                                SizedBox(
+                                  width: 5.0,
+                                ),
+                                Text(
+                                  offres.prixVente.toString(),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -162,49 +171,55 @@ class _BuildOffreState extends State<BuildOffre> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(7.0),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Column(
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width / 3.4,
-                          height: 25.0,
-                          child: Row(
-                            children: [
-                              Text(
-                                "Roas",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.blue),
-                              ),
-                              SizedBox(
-                                width: 12.0,
-                              ),
-                              maxLetter(offres.roas.toString()),
-                            ],
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.pink),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Column(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width / 3.4,
+                            height: 25.0,
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Roas",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.blue),
+                                ),
+                                SizedBox(
+                                  width: 12.0,
+                                ),
+                                maxLetter(offres.roas.toString()),
+                              ],
+                            ),
                           ),
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width / 3.4,
-                          height: 30.0,
-                          child: Row(
-                            children: [
-                              Text(
-                                "Marge",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.blue),
-                              ),
-                              SizedBox(
-                                width: 5.0,
-                              ),
-                              Text(
-                                offres.margeOffre.toString(),
-                              ),
-                            ],
+                          Container(
+                            width: MediaQuery.of(context).size.width / 3.4,
+                            height: 30.0,
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Marge",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.blue),
+                                ),
+                                SizedBox(
+                                  width: 5.0,
+                                ),
+                                Text(
+                                  offres.margeOffre.toString(),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -387,7 +402,7 @@ class _BuildOffreState extends State<BuildOffre> {
                             child: Row(
                               children: [
                                 Text(
-                                  "Offre" +
+                                  "Offre ".toUpperCase() +
                                       (index + 1).toString().toUpperCase(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
