@@ -173,7 +173,7 @@ class _BuildResultDaysState extends State<BuildResultDays> {
       ),
     );
 
-    return glow;
+    return glow; 
   }
 
   String imageproductGagnant(List<ProduitGagnant> _listProduitGagnant) {
