@@ -6,6 +6,7 @@ import 'package:easydrop/screens/stat_days.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:marquee_text/marquee_text.dart';
+import 'package:multi_charts/multi_charts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -124,12 +125,14 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                             "Chiffre d'affaire",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Colors.blue),
+                                color: Colors.orange),
                           ),
                           SizedBox(
                             width: 32.0,
                           ),
-                          maxLetter(resultDays.chiffreAffaireDays.toString()),
+                          maxLetter(resultDays.chiffreAffaireDays
+                              .roundToDouble()
+                              .toString()),
                         ],
                       ),
                     ),
@@ -142,29 +145,37 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                             "Marge de la journée",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Colors.blue),
+                                color: Colors.greenAccent),
                           ),
                           SizedBox(
                             width: 5.0,
                           ),
                           Text(
-                            resultDays.margeDays.toString(),
+                            resultDays.margeDays.roundToDouble().toString(),
                           ),
                         ],
                       ),
                     ),
                   ],
                 ),
-                Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(60.0),
-                  ),
-                  elevation: 15.0,
-                  child: Container(
-                   child:Image.file(File(imageproductGagnant(_listProduitGagnant)), width: MediaQuery.of(context).size.width / 6,
-                        height: MediaQuery.of(context).size.height / 14,),
-                    
-                  ),
+                PieChart(
+                  textScaleFactor: 0.1,
+                  maxWidth: MediaQuery.of(context).size.width / 4.3,
+                  maxHeight: MediaQuery.of(context).size.height / 14,
+                  values: [
+                    ((resultDays.margeDays / resultDays.chiffreAffaireDays) *
+                            100)
+                        .roundToDouble(),
+                    100 -
+                        ((resultDays.margeDays /
+                                    resultDays.chiffreAffaireDays) *
+                                100)
+                            .roundToDouble()
+                  ],
+                  labels: ['Marge', 'frais'],
+                  sliceFillColors: [Colors.greenAccent, Colors.red],
+                  animationDuration: Duration(milliseconds: 1500),
+                  showLegend: false,
                 ),
               ],
             ),
@@ -173,7 +184,7 @@ class _BuildResultDaysState extends State<BuildResultDays> {
       ),
     );
 
-    return glow; 
+    return glow;
   }
 
   String imageproductGagnant(List<ProduitGagnant> _listProduitGagnant) {
@@ -339,30 +350,15 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                 elevation: 20.0,
                 child: ListTile(
                   onTap: () async {
-                    // Navigator.of(context).push(MaterialPageRoute(
-                    //     builder: (context) => ChangeNotifierProvider.value(
-                    //         value: variable,
-                    //         child: HomeTaches(
-                    //             _challengesList[index].id,
-                    //             variable.returnIndexForName(
-                    //                 _challengesList[index].id),
-                    //             _challengesList[index].name,
-                    //             _challengesList[index].animatedpadding))));
-
                     Navigator.push(
                         context,
                         PageTransition(
                             type: PageTransitionType.bottomToTop,
                             child: ChangeNotifierProvider.value(
-                                value: variable, child: StatDays())));
-
-                    // var HomeTaches1 =
-                    //     await buildPageAsync(_challengesList, variable, index);
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => ChangeNotifierProvider.value(
-                    //             value: variable, child: HomeTaches1)));
+                                value: variable,
+                                child: StatDays(
+                                  resultatDaysList: _resultatDaysList[index],
+                                ))));
                   },
                   title: Container(
                     child: Row(

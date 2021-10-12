@@ -126,8 +126,9 @@ class _ResultDaysState extends State<ResultDays> {
     double margeDays = 0;
     for (var i = offreEnCours.length - 1; i >= 0; i--) {
       margeDays = margeDays +
-          (offreEnCours[i].margeOffre * double.parse(venteOffre[i]) - coutPub);
+          (offreEnCours[i].margeOffre * double.parse(venteOffre[i]));
     }
+    margeDays = margeDays - coutPub;
     return margeDays;
   }
 

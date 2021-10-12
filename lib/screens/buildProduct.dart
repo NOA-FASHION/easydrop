@@ -1,4 +1,3 @@
-
 import 'dart:io';
 import 'package:easydrop/controllers/challenge_controller.dart';
 import 'package:easydrop/models/drop_models.dart';
@@ -135,6 +134,26 @@ class _BuildProductState extends State<BuildProduct> {
                       child: Row(
                         children: [
                           Text(
+                            "prix d'achat",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue),
+                          ),
+                          SizedBox(
+                            width: 35.0,
+                          ),
+                          Text(
+                            product.prixAchat.toString(),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width / 1.8,
+                      height: 30.0,
+                      child: Row(
+                        children: [
+                          Text(
                             "prix du produit",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -158,14 +177,15 @@ class _BuildProductState extends State<BuildProduct> {
                   elevation: 15.0,
                   child: Container(
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(40.0),
-                    child:Image.file(File(product.photoProduit), width: MediaQuery.of(context).size.width / 6,
-                        height: MediaQuery.of(context).size.height / 14,),
-                       
-                       
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: Image.file(
+                        File(product.photoProduit),
+                        width: MediaQuery.of(context).size.width / 5,
+                        height: MediaQuery.of(context).size.height / 11,
                       ),
                     ),
                   ),
+                ),
               ],
             ),
           ),
