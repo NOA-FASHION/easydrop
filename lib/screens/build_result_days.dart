@@ -159,7 +159,7 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                   ],
                 ),
                 PieChart(
-                  textScaleFactor: 0.1,
+                  textScaleFactor: 0.0,
                   maxWidth: MediaQuery.of(context).size.width / 4.3,
                   maxHeight: MediaQuery.of(context).size.height / 14,
                   values: [
