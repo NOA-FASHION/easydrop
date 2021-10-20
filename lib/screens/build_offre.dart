@@ -1,6 +1,7 @@
 import 'package:easydrop/controllers/challenge_controller.dart';
 import 'package:easydrop/models/drop_models.dart';
-import 'package:easydrop/screens/presentation_offre.dart';
+
+import 'package:easydrop/screens/stat_offre.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:marquee_text/marquee_text.dart';
@@ -387,7 +388,7 @@ class _BuildOffreState extends State<BuildOffre> {
                         PageTransition(
                             type: PageTransitionType.bottomToTop,
                             child: ChangeNotifierProvider.value(
-                                value: variable, child: PresentationOffre())));
+                                value: variable, child: StatOffre())));
                   },
                   title: Container(
                     child: Row(

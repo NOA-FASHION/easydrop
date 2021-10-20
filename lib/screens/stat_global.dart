@@ -1,74 +1,19 @@
-import 'dart:math';
-
-import 'package:easydrop/models/drop_models.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_charts/multi_charts.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
-class StatDays extends StatefulWidget {
-  final ResultJournee resultatDaysList;
-  StatDays({required this.resultatDaysList});
+class StatGlobal extends StatefulWidget {
+  StatGlobal({Key? key}) : super(key: key);
 
   @override
-  _StatDaysState createState() => _StatDaysState();
+  _StatGlobalState createState() => _StatGlobalState();
 }
 
-class _StatDaysState extends State<StatDays> {
+class _StatGlobalState extends State<StatGlobal> {
   final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     List<Color> listeColors = [];
-    List<double> statOffre(double totalOffres) {
-      List<double> statOffres = [];
-
-      for (var i = widget.resultatDaysList.nombreVenteOffreDays.length - 1;
-          i >= 0;
-          i--) {
-        statOffres.add(
-            (((double.parse(widget.resultatDaysList.nombreVenteOffreDays[i])) /
-                        totalOffres) *
-                    100)
-                .roundToDouble());
-      }
-      return statOffres;
-    }
-
-    List<Color> listeDeCouleurOffre() {
-      List<Color> listesColor = [];
-      for (var i = widget.resultatDaysList.nombreVenteOffreDays.length - 1;
-          i >= 0;
-          i--) {
-        listesColor
-            .add(Colors.primaries[Random().nextInt(Colors.primaries.length)]);
-      }
-      listeColors = listesColor;
-
-      return listesColor;
-    }
-
-    double totalOffre() {
-      double totalOffres = 0;
-      for (var i = widget.resultatDaysList.nombreVenteOffreDays.length - 1;
-          i >= 0;
-          i--) {
-        totalOffres = totalOffres +
-            (double.parse(widget.resultatDaysList.nombreVenteOffreDays[i]));
-      }
-      return totalOffres;
-    }
-
-    List<String> statOffreString() {
-      List<String> statOffres = [];
-      for (var i = widget.resultatDaysList.nombreVenteOffreDays.length - 1;
-          i >= 0;
-          i--) {
-        statOffres.add('OFFRE ' +
-            (i + 1).toString() +
-            " : " +
-            widget.resultatDaysList.nombreVenteOffreDays[i]);
-      }
-      return statOffres;
-    }
 
     return Scaffold(
       appBar: PreferredSize(
@@ -228,11 +173,7 @@ class _StatDaysState extends State<StatDays> {
                                                       width: 95.0,
                                                     ),
                                                     Text(
-                                                      widget.resultatDaysList
-                                                              .chiffreAffaireDays
-                                                              .roundToDouble()
-                                                              .toString() +
-                                                          "€",
+                                                      "€",
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -277,12 +218,7 @@ class _StatDaysState extends State<StatDays> {
                                                 width: 10.0,
                                               ),
                                               Text(
-                                                'Couts produit: ' +
-                                                    widget.resultatDaysList
-                                                        .coutDaysProduit
-                                                        .roundToDouble()
-                                                        .toString() +
-                                                    "€",
+                                                'Couts produit: ',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.blueAccent),
@@ -302,12 +238,7 @@ class _StatDaysState extends State<StatDays> {
                                                 width: 10.0,
                                               ),
                                               Text(
-                                                'Pub: ' +
-                                                    widget.resultatDaysList
-                                                        .facebookDepenseDays
-                                                        .roundToDouble()
-                                                        .toString() +
-                                                    "€",
+                                                'Pub: ',
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.orangeAccent,
@@ -338,12 +269,7 @@ class _StatDaysState extends State<StatDays> {
                                                 width: 10.0,
                                               ),
                                               Text(
-                                                'Shipping: ' +
-                                                    widget.resultatDaysList
-                                                        .prixShippingDays
-                                                        .roundToDouble()
-                                                        .toString() +
-                                                    "€",
+                                                'Shipping: ',
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.cyanAccent,
@@ -365,12 +291,7 @@ class _StatDaysState extends State<StatDays> {
                                                 width: 10.0,
                                               ),
                                               Text(
-                                                'Marge: ' +
-                                                    widget.resultatDaysList
-                                                        .margeDays
-                                                        .roundToDouble()
-                                                        .toString() +
-                                                    "€",
+                                                'Marge: ',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors
@@ -410,49 +331,12 @@ class _StatDaysState extends State<StatDays> {
                                                     .size
                                                     .height /
                                                 12,
-                                            values: [
-                                              (((widget.resultatDaysList
-                                                          .coutDaysProduit /
-                                                      widget.resultatDaysList
-                                                          .chiffreAffaireDays) *
-                                                  100)),
-                                              (((widget.resultatDaysList
-                                                          .facebookDepenseDays /
-                                                      widget.resultatDaysList
-                                                          .chiffreAffaireDays) *
-                                                  100)),
-                                              (((widget.resultatDaysList
-                                                          .prixShippingDays /
-                                                      widget.resultatDaysList
-                                                          .chiffreAffaireDays) *
-                                                  100)),
-                                              (((widget.resultatDaysList
-                                                          .margeDays /
-                                                      widget.resultatDaysList
-                                                          .chiffreAffaireDays) *
-                                                  100))
-                                            ],
+                                            values: [25, 25, 25, 25],
                                             labels: [
-                                              'Couts produit: ' +
-                                                  widget.resultatDaysList
-                                                      .coutDaysProduit
-                                                      .roundToDouble()
-                                                      .toString(),
-                                              'Pub: ' +
-                                                  widget.resultatDaysList
-                                                      .facebookDepenseDays
-                                                      .roundToDouble()
-                                                      .toString(),
-                                              'Shipping: ' +
-                                                  widget.resultatDaysList
-                                                      .prixShippingDays
-                                                      .roundToDouble()
-                                                      .toString(),
-                                              'Marge: ' +
-                                                  widget.resultatDaysList
-                                                      .margeDays
-                                                      .roundToDouble()
-                                                      .toString()
+                                              'Couts produit: ',
+                                              'Pub: ',
+                                              'Shipping: ',
+                                              'Marge: '
                                             ],
                                             sliceFillColors: [
                                               Colors.blueAccent,
@@ -616,11 +500,12 @@ class _StatDaysState extends State<StatDays> {
                                                               .size
                                                               .height /
                                                           10,
-                                                  values:
-                                                      statOffre(totalOffre()),
-                                                  labels: statOffreString(),
-                                                  sliceFillColors:
-                                                      listeDeCouleurOffre(),
+                                                  values: [25, 75],
+                                                  labels: ['test', 'test'],
+                                                  sliceFillColors: [
+                                                    Colors.amberAccent,
+                                                    Colors.white
+                                                  ],
                                                   animationDuration: Duration(
                                                       milliseconds: 1500),
                                                   showLegend: false,
@@ -632,47 +517,34 @@ class _StatDaysState extends State<StatDays> {
                                               width: 100,
                                               height: 200,
                                               child: ListView.builder(
-                                                  itemCount: widget
-                                                      .resultatDaysList
-                                                      .nombreVenteOffreDays
-                                                      .length,
                                                   itemBuilder:
                                                       (BuildContext context,
                                                           int index) {
-                                                    return Row(
-                                                      children: [
-                                                        Container(
-                                                          height: 10.0,
-                                                          width: 10.0,
-                                                          decoration:
-                                                              new BoxDecoration(
-                                                            color: Colors
-                                                                .cyanAccent,
-                                                            shape:
-                                                                BoxShape.circle,
-                                                          ),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 10.0,
-                                                        ),
-                                                        Text(
-                                                          'offre ' +
-                                                              (index + 1)
-                                                                  .toString() +
-                                                              ": " +
-                                                              widget.resultatDaysList
-                                                                      .nombreVenteOffreDays[
-                                                                  index],
-                                                          style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color: listeColors[
-                                                                index],
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    );
-                                                  }),
+                                                return Row(
+                                                  children: [
+                                                    Container(
+                                                      height: 10.0,
+                                                      width: 10.0,
+                                                      decoration:
+                                                          new BoxDecoration(
+                                                        color:
+                                                            Colors.cyanAccent,
+                                                        shape: BoxShape.circle,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10.0,
+                                                    ),
+                                                    Text(
+                                                      'offre ',
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                );
+                                              }),
                                             )
                                           ],
                                         ),
@@ -747,10 +619,7 @@ class _StatDaysState extends State<StatDays> {
                                                   width: 10.0,
                                                 ),
                                                 Text(
-                                                  "Nombre de vues site internet :" +
-                                                      widget.resultatDaysList
-                                                          .vueDays
-                                                          .toString(),
+                                                  "Nombre de vues site internet :",
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
@@ -809,11 +678,7 @@ class _StatDaysState extends State<StatDays> {
                                                       width: 10.0,
                                                     ),
                                                     Text(
-                                                      "Panier : " +
-                                                          widget
-                                                              .resultatDaysList
-                                                              .panierDays
-                                                              .toString(),
+                                                      "Panier : ",
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -834,25 +699,7 @@ class _StatDaysState extends State<StatDays> {
                                                                 .size
                                                                 .height /
                                                             14,
-                                                    values: [
-                                                      ((widget.resultatDaysList
-                                                                      .panierDays /
-                                                                  widget
-                                                                      .resultatDaysList
-                                                                      .vueDays) *
-                                                              100)
-                                                          .roundToDouble(),
-                                                      (((widget.resultatDaysList
-                                                                          .vueDays -
-                                                                      widget
-                                                                          .resultatDaysList
-                                                                          .panierDays) /
-                                                                  widget
-                                                                      .resultatDaysList
-                                                                      .vueDays) *
-                                                              100)
-                                                          .roundToDouble()
-                                                    ],
+                                                    values: [50, 50],
                                                     labels: [
                                                       'panier',
                                                       'nonpanier'
@@ -887,12 +734,7 @@ class _StatDaysState extends State<StatDays> {
                                                       width: 10.0,
                                                     ),
                                                     Text(
-                                                      "vente : " +
-                                                          widget
-                                                              .resultatDaysList
-                                                              .venteDays
-                                                              .toInt()
-                                                              .toString(),
+                                                      "vente : ",
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -913,25 +755,7 @@ class _StatDaysState extends State<StatDays> {
                                                                 .size
                                                                 .height /
                                                             14,
-                                                    values: [
-                                                      ((widget.resultatDaysList
-                                                                      .venteDays /
-                                                                  widget
-                                                                      .resultatDaysList
-                                                                      .vueDays) *
-                                                              100)
-                                                          .roundToDouble(),
-                                                      (((widget.resultatDaysList
-                                                                          .vueDays -
-                                                                      widget
-                                                                          .resultatDaysList
-                                                                          .venteDays) /
-                                                                  widget
-                                                                      .resultatDaysList
-                                                                      .vueDays) *
-                                                              100)
-                                                          .roundToDouble()
-                                                    ],
+                                                    values: [25, 75],
                                                     labels: ['Marge', 'frais'],
                                                     sliceFillColors: [
                                                       Colors.amberAccent,
@@ -1021,13 +845,7 @@ class _StatDaysState extends State<StatDays> {
                                                       width: 10.0,
                                                     ),
                                                     Text(
-                                                      "Marge: " +
-                                                          widget
-                                                              .resultatDaysList
-                                                              .margeDays
-                                                              .roundToDouble()
-                                                              .toString() +
-                                                          "€",
+                                                      "Marge: ",
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -1087,23 +905,7 @@ class _StatDaysState extends State<StatDays> {
                                                                     .size
                                                                     .height /
                                                                 14,
-                                                        values: [
-                                                          ((widget.resultatDaysList
-                                                                          .margeDays /
-                                                                      widget
-                                                                          .resultatDaysList
-                                                                          .chiffreAffaireDays) *
-                                                                  100)
-                                                              .roundToDouble(),
-                                                          100 -
-                                                              ((widget.resultatDaysList
-                                                                              .margeDays /
-                                                                          widget
-                                                                              .resultatDaysList
-                                                                              .chiffreAffaireDays) *
-                                                                      100)
-                                                                  .roundToDouble()
-                                                        ],
+                                                        values: [50, 50],
                                                         labels: [
                                                           'Marge',
                                                           'frais'

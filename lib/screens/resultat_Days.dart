@@ -2,6 +2,7 @@ import 'package:easydrop/controllers/challenge_controller.dart';
 import 'package:easydrop/models/drop_models.dart';
 import 'package:easydrop/screens/build_result_days.dart';
 import 'package:easydrop/screens/offre.dart';
+import 'package:easydrop/screens/stat_global.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
@@ -217,10 +218,20 @@ class _ResultDaysState extends State<ResultDays> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Icon(
-                          Icons.query_stats,
-                          size: 20,
-                          color: Colors.blue,
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    type: PageTransitionType.bottomToTop,
+                                    child: ChangeNotifierProvider.value(
+                                        value: variable, child: StatGlobal())));
+                          },
+                          child: Icon(
+                            Icons.query_stats,
+                            size: 20,
+                            color: Colors.blue,
+                          ),
                         ), // icon
                         Text(
                           "Stat globale",
