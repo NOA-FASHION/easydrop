@@ -404,6 +404,7 @@ class Challengecontroller extends ChangeNotifier {
     }
     return chiffreAffaireTotals;
   }
+
   int nombreVueTotal(int indexProduit) {
     int nombreVueTotal = 0;
     for (var i =
@@ -411,12 +412,11 @@ class Challengecontroller extends ChangeNotifier {
         i >= 0;
         i--) {
       nombreVueTotal = nombreVueTotal +
-          _listProduitGagnant[indexProduit]
-              .listeResultatJournee[i]
-              .vueDays;
+          _listProduitGagnant[indexProduit].listeResultatJournee[i].vueDays;
     }
     return nombreVueTotal;
   }
+
   int nombrePanierTotal(int indexProduit) {
     int nombrePanierTotal = 0;
     for (var i =
@@ -424,53 +424,63 @@ class Challengecontroller extends ChangeNotifier {
         i >= 0;
         i--) {
       nombrePanierTotal = nombrePanierTotal +
-          _listProduitGagnant[indexProduit]
-              .listeResultatJournee[i]
-              .panierDays;
+          _listProduitGagnant[indexProduit].listeResultatJournee[i].panierDays;
     }
     return nombrePanierTotal;
   }
-    double nombreVenteTotal(int indexProduit) {
+
+  double nombreVenteTotal(int indexProduit) {
     double nombreVenteTotal = 0;
     for (var i =
             _listProduitGagnant[indexProduit].listeResultatJournee.length - 1;
         i >= 0;
         i--) {
       nombreVenteTotal = nombreVenteTotal +
-          _listProduitGagnant[indexProduit]
-              .listeResultatJournee[i]
-              .venteDays;
+          _listProduitGagnant[indexProduit].listeResultatJournee[i].venteDays;
     }
     return nombreVenteTotal;
   }
 
+  listNombreOffreTotal(int indexProduit, List<String> nombreOffreTotals) {
+    if (_listProduitGagnant[indexProduit].nombreVenteOffreTotal.length > 0) {
+      for (var i = nombreOffreTotals.length - 1; i >= 0; i--) {
+        if (i <
+            _listProduitGagnant[indexProduit].nombreVenteOffreTotal.length -
+                1) {
+          _listProduitGagnant[indexProduit].nombreVenteOffreTotal[i] =
+              (int.parse(_listProduitGagnant[indexProduit]
+                          .nombreVenteOffreTotal[i]) +
+                      int.parse(nombreOffreTotals[i]))
+                  .toString();
+        } else {
+          _listProduitGagnant[indexProduit]
+              .nombreVenteOffreTotal
+              .add(nombreOffreTotals[i]);
+        }
+      }
+    } else {
+      for (var i = nombreOffreTotals.length - 1; i >= 0; i--) {
+        _listProduitGagnant[indexProduit]
+            .nombreVenteOffreTotal
+            .add(nombreOffreTotals[i]);
+      }
+    }
+  }
 
-  List<int>  nombreOffreTotal(int indexProduit) {
+  nombreOffreTotal(int indexProduit) {
     List<int> nombreOffreTotals = [];
-    
+
     for (var i =
             _listProduitGagnant[indexProduit].listeResultatJournee.length - 1;
         i >= 0;
         i--) {
-      for (var j = _listProduitGagnant[indexProduit]
-                  .listeResultatJournee[i]
-                  .nombreVenteOffreDays
-                  .length -
-              1;
-          j >= 0;
-          j--) {
-        if (nombreOffreTotals.length < 0) {
-          nombreOffreTotals.add(int.parse(_listProduitGagnant[indexProduit]
+      listNombreOffreTotal(
+          indexProduit,
+          _listProduitGagnant[indexProduit]
               .listeResultatJournee[i]
-              .nombreVenteOffreDays[j]));
-        } else {
-          nombreOffreTotals[j] = nombreOffreTotals[j] +
-              int.parse(_listProduitGagnant[indexProduit]
-                  .listeResultatJournee[i]
-                  .nombreVenteOffreDays[j]);
-        }
-      }
+              .nombreVenteOffreDays);
     }
+
     return nombreOffreTotals;
   }
 }
