@@ -200,7 +200,12 @@ class Challengecontroller extends ChangeNotifier {
     required String idProduct,
   }) async {
     _listProduitGagnant[indexProduct].listeResultatJournee.removeAt(index);
+
     await _saveResultatDays(remove: true, idProduct: idProduct);
+
+    nombreOffreTotal(indexProduct);
+    await _save(remove: false);
+
     _initProduitGagnantList();
     notifyListeners();
   }
@@ -281,7 +286,7 @@ class Challengecontroller extends ChangeNotifier {
         venteDays: venteDays));
 
     addresultDays(index: index, resultday: _resultatDays);
-
+    nombreOffreTotal(index);
     await _save(remove: false);
     _initProduitGagnantList();
     notifyListeners();

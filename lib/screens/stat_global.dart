@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:easydrop/controllers/challenge_controller.dart';
 import 'package:easydrop/models/drop_models.dart';
 import 'package:flutter/material.dart';
@@ -17,14 +19,56 @@ class StatGlobal extends StatefulWidget {
 }
 
 class _StatGlobalState extends State<StatGlobal> {
+  List<Color> listeColors = [];
+
+  List<double> statOffre(double totalOffres, ProduitGagnant produitGagnant) {
+    List<double> statOffres = [];
+
+    for (var i = produitGagnant.nombreVenteOffreTotal.length - 1; i >= 0; i--) {
+      statOffres.add((((double.parse(produitGagnant.nombreVenteOffreTotal[i])) /
+                  totalOffres) *
+              100)
+          .roundToDouble());
+    }
+    return statOffres;
+  }
+
+  List<Color> listeDeCouleurOffre(ProduitGagnant produitGagnant) {
+    List<Color> listesColor = [];
+    for (var i = produitGagnant.nombreVenteOffreTotal.length - 1; i >= 0; i--) {
+      listesColor
+          .add(Colors.primaries[Random().nextInt(Colors.primaries.length)]);
+    }
+    listeColors = listesColor;
+
+    return listesColor;
+  }
+
+  double totalOffre(ProduitGagnant produitGagnant) {
+    double totalOffres = 0;
+    for (var i = produitGagnant.nombreVenteOffreTotal.length - 1; i >= 0; i--) {
+      totalOffres =
+          totalOffres + (double.parse(produitGagnant.nombreVenteOffreTotal[i]));
+    }
+    return totalOffres;
+  }
+
+  List<String> statOffreString(ProduitGagnant produitGagnant) {
+    List<String> statOffres = [];
+    for (var i = produitGagnant.nombreVenteOffreTotal.length - 1; i >= 0; i--) {
+      statOffres.add('OFFRE ' +
+          (i + 1).toString() +
+          " : " +
+          produitGagnant.nombreVenteOffreTotal[i]);
+    }
+    return statOffres;
+  }
+
   final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
-    List<ResultJournee> _resultatDaysList =
-        variable.getResulDays(widget.idProduct);
-
-    List<Color> listeColors = [];
+    List<ProduitGagnant> _productGagnantList = variable.getProduitGagnant();
 
     return Scaffold(
       appBar: PreferredSize(
@@ -562,12 +606,21 @@ class _StatGlobalState extends State<StatGlobal> {
                                                               .size
                                                               .height /
                                                           10,
-                                                  values: [25, 75],
-                                                  labels: ['test', 'test'],
-                                                  sliceFillColors: [
-                                                    Colors.amberAccent,
-                                                    Colors.blue
-                                                  ],
+                                                  values: statOffre(
+                                                      totalOffre(
+                                                          _productGagnantList[
+                                                              widget
+                                                                  .indexProduct]),
+                                                      _productGagnantList[
+                                                          widget.indexProduct]),
+                                                  labels: statOffreString(
+                                                      _productGagnantList[
+                                                          widget.indexProduct]),
+                                                  sliceFillColors:
+                                                      listeDeCouleurOffre(
+                                                          _productGagnantList[
+                                                              widget
+                                                                  .indexProduct]),
                                                   animationDuration: Duration(
                                                       milliseconds: 1500),
                                                   showLegend: false,
@@ -579,7 +632,11 @@ class _StatGlobalState extends State<StatGlobal> {
                                               width: 100,
                                               height: 200,
                                               child: ListView.builder(
-                                                  itemCount: 3,
+                                                  itemCount:
+                                                      _productGagnantList[widget
+                                                              .indexProduct]
+                                                          .nombreVenteOffreTotal
+                                                          .length,
                                                   itemBuilder:
                                                       (BuildContext context,
                                                           int index) {
@@ -590,8 +647,8 @@ class _StatGlobalState extends State<StatGlobal> {
                                                           width: 10.0,
                                                           decoration:
                                                               new BoxDecoration(
-                                                            color: Colors
-                                                                .cyanAccent,
+                                                            color: listeColors[
+                                                                index],
                                                             shape:
                                                                 BoxShape.circle,
                                                           ),
@@ -600,10 +657,19 @@ class _StatGlobalState extends State<StatGlobal> {
                                                           width: 10.0,
                                                         ),
                                                         Text(
-                                                          'offre ',
+                                                          'offre ' +
+                                                              (index + 1)
+                                                                  .toString() +
+                                                              ": " +
+                                                              _productGagnantList[
+                                                                      widget
+                                                                          .indexProduct]
+                                                                  .nombreVenteOffreTotal[index],
                                                           style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight.bold,
+                                                            color: listeColors[
+                                                                index],
                                                           ),
                                                         ),
                                                       ],
@@ -1017,7 +1083,7 @@ class _StatGlobalState extends State<StatGlobal> {
                                                   children: [
                                                     Container(
                                                       child: PieChart(
-                                                        textScaleFactor: 0.0,
+                                                        textScaleFactor: 0.1,
                                                         maxWidth: MediaQuery.of(
                                                                     context)
                                                                 .size
@@ -1029,7 +1095,23 @@ class _StatGlobalState extends State<StatGlobal> {
                                                                     .size
                                                                     .height /
                                                                 14,
-                                                        values: [50, 50],
+                                                        values: [
+                                                          ((variable.margeTotal(
+                                                                          widget
+                                                                              .indexProduct) /
+                                                                      variable.chiffreAffaireTotal(
+                                                                          widget
+                                                                              .indexProduct)) *
+                                                                  100)
+                                                              .roundToDouble(),
+                                                          100 -
+                                                              (((variable.margeTotal(widget
+                                                                              .indexProduct) /
+                                                                          variable
+                                                                              .chiffreAffaireTotal(widget.indexProduct))) *
+                                                                      100)
+                                                                  .roundToDouble()
+                                                        ],
                                                         labels: [
                                                           'Marge',
                                                           'frais'
