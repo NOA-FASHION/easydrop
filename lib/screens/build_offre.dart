@@ -388,7 +388,10 @@ class _BuildOffreState extends State<BuildOffre> {
                         PageTransition(
                             type: PageTransitionType.bottomToTop,
                             child: ChangeNotifierProvider.value(
-                                value: variable, child: StatOffre())));
+                                value: variable,
+                                child: StatOffre(
+                                  offres: _offresProduct[index],
+                                ))));
                   },
                   title: Container(
                     child: Row(

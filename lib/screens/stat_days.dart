@@ -646,8 +646,8 @@ class _StatDaysState extends State<StatDays> {
                                                           width: 10.0,
                                                           decoration:
                                                               new BoxDecoration(
-                                                            color: Colors
-                                                                .cyanAccent,
+                                                            color: listeColors[
+                                                                index],
                                                             shape:
                                                                 BoxShape.circle,
                                                           ),

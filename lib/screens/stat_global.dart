@@ -1,9 +1,16 @@
+import 'package:easydrop/controllers/challenge_controller.dart';
+import 'package:easydrop/models/drop_models.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_charts/multi_charts.dart';
+import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
 class StatGlobal extends StatefulWidget {
-  StatGlobal({Key? key}) : super(key: key);
+  final int indexProduct;
+
+  final String idProduct;
+  StatGlobal({required this.idProduct, required this.indexProduct, Key? key})
+      : super(key: key);
 
   @override
   _StatGlobalState createState() => _StatGlobalState();
@@ -13,6 +20,10 @@ class _StatGlobalState extends State<StatGlobal> {
   final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    Challengecontroller variable = Provider.of<Challengecontroller>(context);
+    List<ResultJournee> _resultatDaysList =
+        variable.getResulDays(widget.idProduct);
+
     List<Color> listeColors = [];
 
     return Scaffold(
@@ -87,8 +98,7 @@ class _StatGlobalState extends State<StatGlobal> {
                                       children: [
                                         Center(
                                           child: Text(
-                                            "Résultat de la journée"
-                                                .toUpperCase(),
+                                            "Résultat total".toUpperCase(),
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.blue),
@@ -170,10 +180,16 @@ class _StatGlobalState extends State<StatGlobal> {
                                                           color: Colors.blue),
                                                     ),
                                                     SizedBox(
-                                                      width: 95.0,
+                                                      width: 25.0,
                                                     ),
                                                     Text(
-                                                      "€",
+                                                      variable
+                                                              .chiffreDaffaireTotal(
+                                                                  widget
+                                                                      .indexProduct)
+                                                              .roundToDouble()
+                                                              .toString() +
+                                                          "€",
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -218,7 +234,13 @@ class _StatGlobalState extends State<StatGlobal> {
                                                 width: 10.0,
                                               ),
                                               Text(
-                                                'Couts produit: ',
+                                                'Couts produit: ' +
+                                                    variable
+                                                        .coutProductTotal(
+                                                            widget.indexProduct)
+                                                        .roundToDouble()
+                                                        .toString() +
+                                                    "€",
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.blueAccent),
@@ -238,7 +260,13 @@ class _StatGlobalState extends State<StatGlobal> {
                                                 width: 10.0,
                                               ),
                                               Text(
-                                                'Pub: ',
+                                                'Pub: ' +
+                                                    variable
+                                                        .pubTotal(
+                                                            widget.indexProduct)
+                                                        .roundToDouble()
+                                                        .toString() +
+                                                    "€",
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.orangeAccent,
@@ -269,7 +297,13 @@ class _StatGlobalState extends State<StatGlobal> {
                                                 width: 10.0,
                                               ),
                                               Text(
-                                                'Shipping: ',
+                                                'Shipping: ' +
+                                                    variable
+                                                        .shippingTotal(
+                                                            widget.indexProduct)
+                                                        .roundToDouble()
+                                                        .toString() +
+                                                    "€",
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.cyanAccent,
@@ -291,7 +325,13 @@ class _StatGlobalState extends State<StatGlobal> {
                                                 width: 10.0,
                                               ),
                                               Text(
-                                                'Marge: ',
+                                                'Marge: ' +
+                                                    variable
+                                                        .margeTotal(
+                                                            widget.indexProduct)
+                                                        .roundToDouble()
+                                                        .toString() +
+                                                    "€",
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors
@@ -331,7 +371,29 @@ class _StatGlobalState extends State<StatGlobal> {
                                                     .size
                                                     .height /
                                                 12,
-                                            values: [25, 25, 25, 25],
+                                            values: [
+                                              (((variable.coutProductTotal(
+                                                      widget.indexProduct) /
+                                                  variable.chiffreAffaireTotal(
+                                                      widget.indexProduct) *
+                                                  100))),
+                                              (((variable.pubTotal(
+                                                      widget.indexProduct) /
+                                                  variable.chiffreAffaireTotal(
+                                                      widget.indexProduct) *
+                                                  100))),
+                                              (((variable.shippingTotal(
+                                                      widget.indexProduct) /
+                                                  variable.chiffreAffaireTotal(
+                                                      widget.indexProduct) *
+                                                  100))),
+                                              (((variable.margeTotal(
+                                                          widget.indexProduct) /
+                                                      variable.chiffreAffaireTotal(
+                                                          widget
+                                                              .indexProduct)) *
+                                                  100))
+                                            ],
                                             labels: [
                                               'Couts produit: ',
                                               'Pub: ',
@@ -413,14 +475,14 @@ class _StatGlobalState extends State<StatGlobal> {
                                                       width: 25.0,
                                                     ),
                                                     Text(
-                                                      "Nombre de vente par offres ",
+                                                      "Nombre total de vente par offres ",
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,
                                                           color: Colors.blue),
                                                     ),
                                                     SizedBox(
-                                                      width: 75.0,
+                                                      width: 35.0,
                                                     ),
                                                     // Text(
                                                     //   widget
@@ -504,7 +566,7 @@ class _StatGlobalState extends State<StatGlobal> {
                                                   labels: ['test', 'test'],
                                                   sliceFillColors: [
                                                     Colors.amberAccent,
-                                                    Colors.white
+                                                    Colors.blue
                                                   ],
                                                   animationDuration: Duration(
                                                       milliseconds: 1500),
@@ -517,34 +579,36 @@ class _StatGlobalState extends State<StatGlobal> {
                                               width: 100,
                                               height: 200,
                                               child: ListView.builder(
+                                                  itemCount: 3,
                                                   itemBuilder:
                                                       (BuildContext context,
                                                           int index) {
-                                                return Row(
-                                                  children: [
-                                                    Container(
-                                                      height: 10.0,
-                                                      width: 10.0,
-                                                      decoration:
-                                                          new BoxDecoration(
-                                                        color:
-                                                            Colors.cyanAccent,
-                                                        shape: BoxShape.circle,
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 10.0,
-                                                    ),
-                                                    Text(
-                                                      'offre ',
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                );
-                                              }),
+                                                    return Row(
+                                                      children: [
+                                                        Container(
+                                                          height: 10.0,
+                                                          width: 10.0,
+                                                          decoration:
+                                                              new BoxDecoration(
+                                                            color: Colors
+                                                                .cyanAccent,
+                                                            shape:
+                                                                BoxShape.circle,
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 10.0,
+                                                        ),
+                                                        Text(
+                                                          'offre ',
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  }),
                                             )
                                           ],
                                         ),
@@ -619,7 +683,11 @@ class _StatGlobalState extends State<StatGlobal> {
                                                   width: 10.0,
                                                 ),
                                                 Text(
-                                                  "Nombre de vues site internet :",
+                                                  "Nombre de vues site internet :" +
+                                                      variable
+                                                          .nombreVueTotal(widget
+                                                              .indexProduct)
+                                                          .toString(),
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
@@ -678,7 +746,12 @@ class _StatGlobalState extends State<StatGlobal> {
                                                       width: 10.0,
                                                     ),
                                                     Text(
-                                                      "Panier : ",
+                                                      "Panier : " +
+                                                          variable
+                                                              .nombrePanierTotal(
+                                                                  widget
+                                                                      .indexProduct)
+                                                              .toString(),
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -688,7 +761,7 @@ class _StatGlobalState extends State<StatGlobal> {
                                                 ),
                                                 Container(
                                                   child: PieChart(
-                                                    textScaleFactor: 0.0,
+                                                    textScaleFactor: 0.1,
                                                     maxWidth:
                                                         MediaQuery.of(context)
                                                                 .size
@@ -699,7 +772,27 @@ class _StatGlobalState extends State<StatGlobal> {
                                                                 .size
                                                                 .height /
                                                             14,
-                                                    values: [50, 50],
+                                                    values: [
+                                                      ((variable.nombrePanierTotal(
+                                                                      widget
+                                                                          .indexProduct) /
+                                                                  variable.nombreVueTotal(
+                                                                      widget
+                                                                          .indexProduct)) *
+                                                              100)
+                                                          .roundToDouble(),
+                                                      (((variable.nombreVueTotal(
+                                                                          widget
+                                                                              .indexProduct) -
+                                                                      variable.nombrePanierTotal(
+                                                                          widget
+                                                                              .indexProduct)) /
+                                                                  variable.nombreVueTotal(
+                                                                      widget
+                                                                          .indexProduct)) *
+                                                              100)
+                                                          .roundToDouble(),
+                                                    ],
                                                     labels: [
                                                       'panier',
                                                       'nonpanier'
@@ -734,7 +827,12 @@ class _StatGlobalState extends State<StatGlobal> {
                                                       width: 10.0,
                                                     ),
                                                     Text(
-                                                      "vente : ",
+                                                      "vente : " +
+                                                          variable
+                                                              .nombreVenteTotal(
+                                                                  widget
+                                                                      .indexProduct)
+                                                              .toString(),
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -744,7 +842,7 @@ class _StatGlobalState extends State<StatGlobal> {
                                                 ),
                                                 Container(
                                                   child: PieChart(
-                                                    textScaleFactor: 0.0,
+                                                    textScaleFactor: 0.1,
                                                     maxWidth:
                                                         MediaQuery.of(context)
                                                                 .size
@@ -755,7 +853,27 @@ class _StatGlobalState extends State<StatGlobal> {
                                                                 .size
                                                                 .height /
                                                             14,
-                                                    values: [25, 75],
+                                                    values: [
+                                                      ((variable.nombreVenteTotal(
+                                                                      widget
+                                                                          .indexProduct) /
+                                                                  variable.nombreVueTotal(
+                                                                      widget
+                                                                          .indexProduct)) *
+                                                              100)
+                                                          .roundToDouble(),
+                                                      (((variable.nombreVueTotal(
+                                                                          widget
+                                                                              .indexProduct) -
+                                                                      variable.nombreVenteTotal(
+                                                                          widget
+                                                                              .indexProduct)) /
+                                                                  variable.nombreVueTotal(
+                                                                      widget
+                                                                          .indexProduct)) *
+                                                              100)
+                                                          .roundToDouble(),
+                                                    ],
                                                     labels: ['Marge', 'frais'],
                                                     sliceFillColors: [
                                                       Colors.amberAccent,
@@ -845,7 +963,13 @@ class _StatGlobalState extends State<StatGlobal> {
                                                       width: 10.0,
                                                     ),
                                                     Text(
-                                                      "Marge: ",
+                                                      'Marge: ' +
+                                                          variable
+                                                              .margeTotal(widget
+                                                                  .indexProduct)
+                                                              .roundToDouble()
+                                                              .toString() +
+                                                          "€",
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,

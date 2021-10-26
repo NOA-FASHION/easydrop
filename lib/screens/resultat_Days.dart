@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:easydrop/controllers/challenge_controller.dart';
 import 'package:easydrop/models/drop_models.dart';
 import 'package:easydrop/screens/build_result_days.dart';
@@ -225,7 +227,11 @@ class _ResultDaysState extends State<ResultDays> {
                                 PageTransition(
                                     type: PageTransitionType.bottomToTop,
                                     child: ChangeNotifierProvider.value(
-                                        value: variable, child: StatGlobal())));
+                                        value: variable,
+                                        child: StatGlobal(
+                                            idProduct: widget.idProduct,
+                                            indexProduct:
+                                                widget.indexProduct))));
                           },
                           child: Icon(
                             Icons.query_stats,
@@ -308,74 +314,15 @@ class _ResultDaysState extends State<ResultDays> {
                               padding: const EdgeInsets.all(8.0),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20.0),
-                                child: Image(
-                                  image: NetworkImage(
-                                      "https://cdn.pixabay.com/photo/2017/10/12/20/15/photoshop-2845779_960_720.jpg"),
+                                child: Image.file(
+                                  File(variable
+                                      .getProduitGagnant()[widget.indexProduct]
+                                      .photoProduit),
+                                  width: MediaQuery.of(context).size.width / 5,
+                                  height:
+                                      MediaQuery.of(context).size.height / 11,
                                 ),
                               ),
-                            ),
-
-                            Container(
-                              width: 250,
-                              height: 150,
-                              child: ListView.builder(
-                                  padding: const EdgeInsets.all(8),
-                                  itemCount: offreDays.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return Container(
-                                      width: MediaQuery.of(context).size.width /
-                                          3.2,
-                                      margin: EdgeInsets.only(top: 10),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: TextFormField(
-                                          style: TextStyle(fontSize: 10),
-                                          textCapitalization:
-                                              TextCapitalization.sentences,
-                                          onSaved: (value) {
-                                            nombreVenteOffreDays.add(value!);
-                                          },
-                                          validator: (value) {
-                                            if (value!.isEmpty) {
-                                              return "Merci d'entrer le nombre de vente concernant l'offre " +
-                                                  offreDays.length.toString();
-                                            } else if (value.length > 35) {
-                                              return "Pas plus de 50 caractères";
-                                            }
-                                            return null;
-                                          },
-                                          decoration: InputDecoration(
-                                            focusedBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    width: 2.0,
-                                                    color: Colors.blueAccent),
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        15.0)),
-                                            enabledBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    width: 1.0,
-                                                    color: Colors.blueAccent),
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        15.0)),
-                                            contentPadding:
-                                                EdgeInsets.symmetric(
-                                                    horizontal: 20,
-                                                    vertical: 10),
-                                            labelText:
-                                                "Nombre de vente concernant l'offre" +
-                                                    (index + 1).toString(),
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        15.0)),
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  }),
                             ),
 
                             SizedBox(
@@ -518,6 +465,68 @@ class _ResultDaysState extends State<ResultDays> {
 
                             SizedBox(
                               height: 15.0,
+                            ),
+                            Container(
+                              width: 250,
+                              height: 270,
+                              child: ListView.builder(
+                                  padding: const EdgeInsets.all(8),
+                                  itemCount: offreDays.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return Container(
+                                      width: MediaQuery.of(context).size.width /
+                                          3.2,
+                                      margin: EdgeInsets.only(top: 10),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TextFormField(
+                                          style: TextStyle(fontSize: 10),
+                                          textCapitalization:
+                                              TextCapitalization.sentences,
+                                          onSaved: (value) {
+                                            nombreVenteOffreDays.add(value!);
+                                          },
+                                          validator: (value) {
+                                            if (value!.isEmpty) {
+                                              return "Merci d'entrer le nombre de vente concernant l'offre " +
+                                                  offreDays.length.toString();
+                                            } else if (value.length > 35) {
+                                              return "Pas plus de 50 caractères";
+                                            }
+                                            return null;
+                                          },
+                                          decoration: InputDecoration(
+                                            focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    width: 2.0,
+                                                    color: Colors.blueAccent),
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        15.0)),
+                                            enabledBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    width: 1.0,
+                                                    color: Colors.blueAccent),
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        15.0)),
+                                            contentPadding:
+                                                EdgeInsets.symmetric(
+                                                    horizontal: 20,
+                                                    vertical: 10),
+                                            labelText:
+                                                "Nombre de vente concernant l'offre" +
+                                                    (index + 1).toString(),
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        15.0)),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }),
                             ),
 
                             offreVente(variable.getProduitGagnant(),
