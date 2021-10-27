@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:multi_charts/multi_charts.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class StatGlobal extends StatefulWidget {
   final int indexProduct;
@@ -20,6 +21,13 @@ class StatGlobal extends StatefulWidget {
 
 class _StatGlobalState extends State<StatGlobal> {
   List<Color> listeColors = [];
+  void _launchMapsUrl(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   List<double> statOffre(double totalOffres, ProduitGagnant produitGagnant) {
     List<double> statOffres = [];
@@ -159,6 +167,309 @@ class _StatGlobalState extends State<StatGlobal> {
                       )),
                   SizedBox(
                     height: 10,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width / 1.08,
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      elevation: 15.0,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  elevation: 15.0,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          border:
+                                              Border.all(color: Colors.white70),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          gradient: LinearGradient(
+                                              begin: Alignment.centerLeft,
+                                              end: Alignment.centerRight,
+                                              colors: [
+                                                Colors.pink,
+                                                Colors.orange
+                                              ])),
+                                      width: MediaQuery.of(context).size.width /
+                                          3.2,
+                                      child: Card(
+                                        color: Colors.transparent,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
+                                        elevation: 15.0,
+                                        child: Column(
+                                          children: [
+                                            IconButton(
+                                              iconSize: 50,
+                                              color: Colors.orange[900],
+                                              icon: Icon(Icons.web),
+                                              onPressed: () {
+                                                _launchMapsUrl(
+                                                    _productGagnantList[
+                                                            widget.indexProduct]
+                                                        .siteVente);
+                                              },
+                                            ),
+                                            Card(
+                                                color: Colors.amber,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                ),
+                                                elevation: 10.0,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Text("Site internet"),
+                                                )),
+                                            // Card(
+                                            //     color: Colors.orange,
+                                            //     shape: RoundedRectangleBorder(
+                                            //       borderRadius:
+                                            //           BorderRadius.circular(
+                                            //               7.0),
+                                            //     ),
+                                            //     child: Padding(
+                                            //       padding:
+                                            //           const EdgeInsets.all(8.0),
+                                            //       child: Text("€"),
+                                            //     ))
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  elevation: 15.0,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          border:
+                                              Border.all(color: Colors.white70),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          gradient: LinearGradient(
+                                              begin: Alignment.centerLeft,
+                                              end: Alignment.centerRight,
+                                              colors: [
+                                                Colors.pink,
+                                                Colors.orange
+                                              ])),
+                                      width: MediaQuery.of(context).size.width /
+                                          3.2,
+                                      child: Card(
+                                        color: Colors.transparent,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
+                                        elevation: 15.0,
+                                        child: Column(
+                                          children: [
+                                            IconButton(
+                                              iconSize: 50,
+                                              color: Colors.orange[900],
+                                              icon: Icon(Icons.facebook),
+                                              onPressed: () {
+                                                _launchMapsUrl(
+                                                    _productGagnantList[
+                                                            widget.indexProduct]
+                                                        .facebookAdress);
+                                              },
+                                            ),
+                                            Card(
+                                                color: Colors.amber,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                ),
+                                                elevation: 10.0,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Text("Facebook"),
+                                                )),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  elevation: 15.0,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          border:
+                                              Border.all(color: Colors.white70),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          gradient: LinearGradient(
+                                              begin: Alignment.centerLeft,
+                                              end: Alignment.centerRight,
+                                              colors: [
+                                                Colors.pink,
+                                                Colors.orange
+                                              ])),
+                                      width: MediaQuery.of(context).size.width /
+                                          3.2,
+                                      child: Card(
+                                        color: Colors.transparent,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
+                                        elevation: 15.0,
+                                        child: Column(
+                                          children: [
+                                            IconButton(
+                                              iconSize: 50,
+                                              color: Colors.orange[900],
+                                              icon: Icon(Icons.shop),
+                                              onPressed: () {
+                                                _launchMapsUrl(
+                                                    _productGagnantList[
+                                                            widget.indexProduct]
+                                                        .siteAliexpress);
+                                              },
+                                            ),
+                                            Card(
+                                                color: Colors.amber,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                ),
+                                                elevation: 10.0,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Text("Aliexpress"),
+                                                )),
+                                            // Card(
+                                            //     color: Colors.orange,
+                                            //     shape: RoundedRectangleBorder(
+                                            //       borderRadius:
+                                            //           BorderRadius.circular(
+                                            //               7.0),
+                                            //     ),
+                                            //     child: Padding(
+                                            //       padding:
+                                            //           const EdgeInsets.all(8.0),
+                                            //       child: Text("€"),
+                                            //     ))
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  elevation: 15.0,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          border:
+                                              Border.all(color: Colors.white70),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          gradient: LinearGradient(
+                                              begin: Alignment.centerLeft,
+                                              end: Alignment.centerRight,
+                                              colors: [
+                                                Colors.pink,
+                                                Colors.orange
+                                              ])),
+                                      width: MediaQuery.of(context).size.width /
+                                          3.2,
+                                      child: Card(
+                                        color: Colors.transparent,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
+                                        elevation: 15.0,
+                                        child: Column(
+                                          children: [
+                                            Icon(
+                                              Icons.calculate,
+                                              size: 50,
+                                              color: Colors.orange[900],
+                                            ),
+                                            Card(
+                                                color: Colors.amber,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                ),
+                                                elevation: 10.0,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Text("Produit"),
+                                                )),
+                                            // Card(
+                                            //     color: Colors.orange,
+                                            //     shape: RoundedRectangleBorder(
+                                            //       borderRadius:
+                                            //           BorderRadius.circular(
+                                            //               7.0),
+                                            //     ),
+                                            //     child: Padding(
+                                            //       padding:
+                                            //           const EdgeInsets.all(8.0),
+                                            //       child: Text("€"),
+                                            //     ))
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                   /////////////////////////////////////////////////////////////
                   Container(
