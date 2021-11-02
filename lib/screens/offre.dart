@@ -67,7 +67,7 @@ class _OffreProductState extends State<OffreProduct> {
       formKey1.currentState!.save();
       {
         setState(() {
-          roas = prixVente - prixAchat;
+          roas = prixVente / validateMarge(formKey1);
           roas1 = roas;
         });
       }
@@ -407,8 +407,8 @@ class _OffreProductState extends State<OffreProduct> {
                                 onTap: () {
                                   validateMarge(formKey);
                                   _bottomSheetController.setState!(() {
-                                    margeText =
-                                        validateMarge(formKey).toString();
+                                    margeText = validateMarge(formKey)
+                                        .toStringAsFixed(2);
                                     if (validateMarge(formKey) > 12) {
                                       margeColors = Colors.green;
                                     } else {
@@ -462,8 +462,9 @@ class _OffreProductState extends State<OffreProduct> {
                                 onTap: () {
                                   validateRoas(formKey);
                                   _bottomSheetController.setState!(() {
-                                    roaText = validateRoas(formKey).toString();
-                                    if (validateRoas(formKey) > 12) {
+                                    roaText = validateRoas(formKey)
+                                        .toStringAsFixed(2);
+                                    if (validateRoas(formKey) < 1.80) {
                                       roaColors = Colors.green;
                                     } else {
                                       roaColors = Colors.red;

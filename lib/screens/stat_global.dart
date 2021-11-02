@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:easydrop/controllers/challenge_controller.dart';
@@ -150,7 +151,7 @@ class _StatGlobalState extends State<StatGlobal> {
                                       children: [
                                         Center(
                                           child: Text(
-                                            "Résultat total".toUpperCase(),
+                                            "statistique global".toUpperCase(),
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.blue),
@@ -169,7 +170,105 @@ class _StatGlobalState extends State<StatGlobal> {
                     height: 10,
                   ),
                   Container(
-                    width: MediaQuery.of(context).size.width / 1.08,
+                      width: MediaQuery.of(context).size.width / 1.15,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blue),
+                          borderRadius: BorderRadius.circular(15),
+                          gradient: LinearGradient(
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              colors: [Colors.pink, Colors.orange])),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        elevation: 15.0,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    height: 30.0,
+                                    child: Row(
+                                      children: [
+                                        Center(
+                                          child: Text(
+                                            "Nom du produit: ".toUpperCase() +
+                                                _productGagnantList[
+                                                        widget.indexProduct]
+                                                    .nomProduit,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.blue),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      )),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                      width: MediaQuery.of(context).size.width / 1.15,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blue),
+                          borderRadius: BorderRadius.circular(15),
+                          gradient: LinearGradient(
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              colors: [Colors.pink, Colors.orange])),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        elevation: 15.0,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    height: 30.0,
+                                    child: Row(
+                                      children: [
+                                        Center(
+                                          child: Text(
+                                            "Type de produit: ".toUpperCase() +
+                                                _productGagnantList[
+                                                        widget.indexProduct]
+                                                    .typeDuProduit,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.blue),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      )),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width / 1.13,
                     child: Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
@@ -428,10 +527,30 @@ class _StatGlobalState extends State<StatGlobal> {
                                         elevation: 15.0,
                                         child: Column(
                                           children: [
-                                            Icon(
-                                              Icons.calculate,
-                                              size: 50,
-                                              color: Colors.orange[900],
+                                            Card(
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(20.0),
+                                              ),
+                                              elevation: 15.0,
+                                              child: Container(
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                  child: Image.file(
+                                                    File(_productGagnantList[
+                                                            widget.indexProduct]
+                                                        .photoProduit),
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                    height: 60,
+                                                  ),
+                                                ),
+                                              ),
                                             ),
                                             Card(
                                                 color: Colors.amber,
@@ -1501,7 +1620,15 @@ class _StatGlobalState extends State<StatGlobal> {
                                                 child: Row(
                                                   children: [
                                                     Text(
-                                                      "Roas",
+                                                      "Roas: " +
+                                                          (variable.chiffreDaffaireTotal(
+                                                                      widget
+                                                                          .indexProduct) /
+                                                                  variable.margeTotal(
+                                                                      widget
+                                                                          .indexProduct))
+                                                              .toStringAsFixed(
+                                                                  2),
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -1561,13 +1688,30 @@ class _StatGlobalState extends State<StatGlobal> {
                                                                     .size
                                                                     .height /
                                                                 14,
-                                                        values: [40, 60],
+                                                        values: [
+                                                          (100 -
+                                                              (((variable.chiffreDaffaireTotal(widget
+                                                                              .indexProduct) /
+                                                                          variable
+                                                                              .margeTotal(widget.indexProduct)) /
+                                                                      1.80) *
+                                                                  100)),
+                                                          (((variable.chiffreDaffaireTotal(
+                                                                          widget
+                                                                              .indexProduct) /
+                                                                      variable.margeTotal(
+                                                                          widget
+                                                                              .indexProduct)) /
+                                                                  1.80) *
+                                                              100)
+                                                        ],
                                                         labels: [
                                                           'Marge',
                                                           'frais'
                                                         ],
                                                         sliceFillColors: [
-                                                          Colors.greenAccent,
+                                                          Colors
+                                                              .lightGreenAccent,
                                                           Colors.red
                                                         ],
                                                         animationDuration:

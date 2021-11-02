@@ -142,7 +142,7 @@ class _StatDaysState extends State<StatDays> {
                                       children: [
                                         Center(
                                           child: Text(
-                                            "Résultat de la journée"
+                                            "statistique de la journée"
                                                 .toUpperCase(),
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
@@ -823,7 +823,7 @@ class _StatDaysState extends State<StatDays> {
                                                 ),
                                                 Container(
                                                   child: PieChart(
-                                                    textScaleFactor: 0.0,
+                                                    textScaleFactor: 0.1,
                                                     maxWidth:
                                                         MediaQuery.of(context)
                                                                 .size
@@ -902,7 +902,7 @@ class _StatDaysState extends State<StatDays> {
                                                 ),
                                                 Container(
                                                   child: PieChart(
-                                                    textScaleFactor: 0.0,
+                                                    textScaleFactor: 0.1,
                                                     maxWidth:
                                                         MediaQuery.of(context)
                                                                 .size
@@ -1075,7 +1075,7 @@ class _StatDaysState extends State<StatDays> {
                                                   children: [
                                                     Container(
                                                       child: PieChart(
-                                                        textScaleFactor: 0.0,
+                                                        textScaleFactor: 0.1,
                                                         maxWidth: MediaQuery.of(
                                                                     context)
                                                                 .size
@@ -1182,7 +1182,14 @@ class _StatDaysState extends State<StatDays> {
                                                 child: Row(
                                                   children: [
                                                     Text(
-                                                      "Roas",
+                                                      "Roas: " +
+                                                          (widget.resultatDaysList
+                                                                      .chiffreAffaireDays /
+                                                                  widget
+                                                                      .resultatDaysList
+                                                                      .margeDays)
+                                                              .toStringAsFixed(
+                                                                  2),
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -1242,13 +1249,30 @@ class _StatDaysState extends State<StatDays> {
                                                                     .size
                                                                     .height /
                                                                 14,
-                                                        values: [40, 60],
+                                                        values: [
+                                                          (100 -
+                                                              (((widget.resultatDaysList
+                                                                              .chiffreAffaireDays /
+                                                                          widget
+                                                                              .resultatDaysList
+                                                                              .margeDays) /
+                                                                      1.80) *
+                                                                  100)),
+                                                          (((widget.resultatDaysList
+                                                                          .chiffreAffaireDays /
+                                                                      widget
+                                                                          .resultatDaysList
+                                                                          .margeDays) /
+                                                                  1.80) *
+                                                              100)
+                                                        ],
                                                         labels: [
                                                           'Marge',
                                                           'frais'
                                                         ],
                                                         sliceFillColors: [
-                                                          Colors.greenAccent,
+                                                          Colors
+                                                              .lightGreenAccent,
                                                           Colors.red
                                                         ],
                                                         animationDuration:
