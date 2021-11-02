@@ -14,11 +14,6 @@ class GuestScreen extends StatefulWidget {
 
 class _GuestScreenState extends State<GuestScreen> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     Challengecontroller _userDrop = Provider.of<Challengecontroller>(context);
 

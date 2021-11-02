@@ -10,8 +10,12 @@ const String keyAccesUserDrop = "UserDrop";
 List<ProduitGagnant> _listProduitGagnant = [];
 
 class Challengecontroller extends ChangeNotifier {
+  Future<Null> delay(int milliseconds) {
+    return new Future.delayed(new Duration(milliseconds: milliseconds));
+  }
+
   late SharedPreferences _localData;
-  UserDrop _userDrop = UserDrop(
+  late UserDrop _userDrop = UserDrop(
       email: '',
       nom: '',
       photo: '',
@@ -449,7 +453,7 @@ class Challengecontroller extends ChangeNotifier {
   listNombreOffreTotal(int indexProduit, List<String> nombreOffreTotals) {
     if (_listProduitGagnant[indexProduit].nombreVenteOffreTotal.length > 0) {
       for (var i = nombreOffreTotals.length - 1; i >= 0; i--) {
-        if (i <
+        if (i <=
             _listProduitGagnant[indexProduit].nombreVenteOffreTotal.length -
                 1) {
           _listProduitGagnant[indexProduit].nombreVenteOffreTotal[i] =
@@ -473,8 +477,7 @@ class Challengecontroller extends ChangeNotifier {
   }
 
   nombreOffreTotal(int indexProduit) {
-    List<int> nombreOffreTotals = [];
-
+    _listProduitGagnant[indexProduit].nombreVenteOffreTotal = [];
     for (var i =
             _listProduitGagnant[indexProduit].listeResultatJournee.length - 1;
         i >= 0;
@@ -485,7 +488,5 @@ class Challengecontroller extends ChangeNotifier {
               .listeResultatJournee[i]
               .nombreVenteOffreDays);
     }
-
-    return nombreOffreTotals;
   }
 }

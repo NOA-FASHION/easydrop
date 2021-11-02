@@ -808,8 +808,14 @@ class _StatGlobalState extends State<StatGlobal> {
                                                     "€",
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors
-                                                        .lightGreenAccent),
+                                                    color: variable
+                                                                .margeTotal(widget
+                                                                    .indexProduct)
+                                                                .roundToDouble() <
+                                                            0
+                                                        ? Colors.red
+                                                        : Colors
+                                                            .lightGreenAccent),
                                               ),
                                             ],
                                           ),

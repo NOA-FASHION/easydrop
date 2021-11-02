@@ -47,7 +47,7 @@ class _BuildOffreState extends State<BuildOffre> {
     Widget longLetter;
 
     String word2;
-    if (word.length > 33) {
+    if (word.length > 34) {
       longLetter = Container(
         width: MediaQuery.of(context).size.width / 1.55,
         color: Colors.transparent,
@@ -61,7 +61,7 @@ class _BuildOffreState extends State<BuildOffre> {
         ),
       );
       return longLetter;
-    } else if (word.length > 28) {
+    } else if (word.length > 30) {
       longLetter = Container(
         width: MediaQuery.of(context).size.width / 2,
         color: Colors.transparent,
@@ -195,7 +195,7 @@ class _BuildOffreState extends State<BuildOffre> {
                                 SizedBox(
                                   width: 12.0,
                                 ),
-                                maxLetter(offres.roas.toString()),
+                                maxLetter(offres.roas.toStringAsFixed(2)),
                               ],
                             ),
                           ),

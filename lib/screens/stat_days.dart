@@ -373,8 +373,14 @@ class _StatDaysState extends State<StatDays> {
                                                     "€",
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors
-                                                        .lightGreenAccent),
+                                                    color: widget
+                                                                .resultatDaysList
+                                                                .margeDays
+                                                                .roundToDouble() <
+                                                            0
+                                                        ? Colors.red
+                                                        : Colors
+                                                            .lightGreenAccent),
                                               ),
                                             ],
                                           ),

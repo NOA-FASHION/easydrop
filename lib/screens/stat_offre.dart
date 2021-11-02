@@ -707,8 +707,22 @@ class _StatOffreState extends State<StatOffre> {
                                                 height: 30.0,
                                                 child: Row(
                                                   children: [
+                                                    Container(
+                                                      height: 10.0,
+                                                      width: 10.0,
+                                                      decoration:
+                                                          new BoxDecoration(
+                                                        color: Colors
+                                                            .lightGreenAccent,
+                                                        shape: BoxShape.circle,
+                                                      ),
+                                                    ),
                                                     Text(
-                                                      "Roas",
+                                                      "Roas: " +
+                                                          widget.offres.roas
+                                                              .toStringAsFixed(
+                                                                  2) +
+                                                          "€",
                                                       style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -768,13 +782,23 @@ class _StatOffreState extends State<StatOffre> {
                                                                     .size
                                                                     .height /
                                                                 14,
-                                                        values: [40, 60],
+                                                        values: [
+                                                          (((100 - widget.offres.roas) /
+                                                                      1.80) *
+                                                                  100)
+                                                              .roundToDouble(),
+                                                          (((widget.offres.roas) /
+                                                                      1.80) *
+                                                                  100)
+                                                              .roundToDouble()
+                                                        ],
                                                         labels: [
                                                           'Marge',
                                                           'frais'
                                                         ],
                                                         sliceFillColors: [
-                                                          Colors.greenAccent,
+                                                          Colors
+                                                              .lightGreenAccent,
                                                           Colors.red
                                                         ],
                                                         animationDuration:

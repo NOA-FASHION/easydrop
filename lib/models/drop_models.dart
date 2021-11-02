@@ -212,7 +212,7 @@ class UserDrop {
   String telephone;
   String photo;
   UserDrop({
-    required this.infoRecupere,
+  required this.infoRecupere,
     required this.nom,
     required this.prenom,
     required this.email,
