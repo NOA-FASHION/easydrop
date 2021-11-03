@@ -464,7 +464,11 @@ class _StatDaysState extends State<StatDays> {
                                               Colors.blueAccent,
                                               Colors.orangeAccent,
                                               Colors.cyanAccent,
-                                              Colors.lightGreenAccent
+                                              widget.resultatDaysList.margeDays
+                                                          .roundToDouble() <
+                                                      0
+                                                  ? Colors.red
+                                                  : Colors.lightGreenAccent
                                             ],
                                             animationDuration:
                                                 Duration(milliseconds: 1500),
@@ -653,7 +657,9 @@ class _StatDaysState extends State<StatDays> {
                                                           decoration:
                                                               new BoxDecoration(
                                                             color: listeColors[
-                                                                index],
+                                                                (listeColors.length -
+                                                                        1) -
+                                                                    index],
                                                             shape:
                                                                 BoxShape.circle,
                                                           ),
@@ -673,7 +679,9 @@ class _StatDaysState extends State<StatDays> {
                                                             fontWeight:
                                                                 FontWeight.bold,
                                                             color: listeColors[
-                                                                index],
+                                                                (listeColors.length -
+                                                                        1) -
+                                                                    index],
                                                           ),
                                                         ),
                                                       ],
