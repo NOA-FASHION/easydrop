@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
-
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share/share.dart';
@@ -14,6 +15,8 @@ class PlayPicture extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final pdf = pw.Document();
+    // final image = Image(image: MemoryImage(patch, scale: 0.5));
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(100.0),
@@ -33,13 +36,45 @@ class PlayPicture extends StatelessWidget {
                             text: 'Great picture');
                       },
                       child: Icon(
-                        Icons.share,
+                        Icons.picture_in_picture,
                         size: 30,
                         color: Colors.blue,
                       ),
                     ), // icon
                     Text(
-                      "Partage",
+                      "Pictures",
+                      style: TextStyle(fontSize: 10, color: Colors.blue),
+                    ), // text
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 12),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    InkWell(
+                      splashColor: Colors.white,
+                      onTap: () async {
+                        pdf.addPage(pw.Page(build: (pw.Context context) {
+                          return pw.Center(
+                            child: pw.Image(pw.MemoryImage(patch)),
+                          ); // Center
+                        }));
+                        final output = await getTemporaryDirectory();
+                        final file = File("${output.path}/easydrop.pdf");
+                        await file.writeAsBytes(await pdf.save()); //
+                        Share.shareFiles(["${output.path}/easydrop.pdf"],
+                            text: 'Great picture');
+                      },
+                      child: Icon(
+                        Icons.picture_as_pdf,
+                        size: 30,
+                        color: Colors.blue,
+                      ),
+                    ), // icon
+                    Text(
+                      "Pdf",
                       style: TextStyle(fontSize: 10, color: Colors.blue),
                     ), // text
                   ],

@@ -138,13 +138,13 @@ class _StatGlobalState extends State<StatGlobal> {
                         }
                       },
                       child: Icon(
-                        Icons.picture_in_picture,
+                        Icons.share,
                         size: 30,
                         color: Colors.blue,
                       ),
                     ), // icon
                     Text(
-                      "Image",
+                      "Partage",
                       style: TextStyle(fontSize: 10, color: Colors.blue),
                     ), // text
                   ],
