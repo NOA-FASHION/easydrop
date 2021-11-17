@@ -19,7 +19,7 @@ class PlayPicture extends StatelessWidget {
     // final image = Image(image: MemoryImage(patch, scale: 0.5));
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(100.0),
+        preferredSize: Size.fromHeight(140.0),
         child: SafeArea(
           child: AppBar(
             actions: [
@@ -84,15 +84,15 @@ class PlayPicture extends StatelessWidget {
             title: Text("Images"),
             centerTitle: true,
             flexibleSpace: Container(
-              height: 130,
-              padding: EdgeInsets.only(top: 40.0, right: 30.0),
+              height: 140,
+              padding: EdgeInsets.only(top: 20.0, right: 30.0),
               alignment: Alignment.centerRight,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Image.asset(
                     'assets/logo.png',
-                    width: 60,
+                    width: 140,
                   ),
                 ],
               ),

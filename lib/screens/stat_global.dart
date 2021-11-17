@@ -109,7 +109,7 @@ class _StatGlobalState extends State<StatGlobal> {
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(100.0),
+        preferredSize: Size.fromHeight(140.0),
         child: SafeArea(
           child: AppBar(
             actions: [
@@ -118,40 +118,6 @@ class _StatGlobalState extends State<StatGlobal> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    //    InkWell(
-                    //   splashColor: Colors.white,
-                    //   onTap: () async {
-                    //     final boundary = key.currentContext?.findRenderObject()
-                    //         as RenderRepaintBoundary?;
-                    //     final image = await boundary?.toImage();
-                    //     final byteData = await image?.toByteData(
-                    //         format: ImageByteFormat.png);
-                    //     final imageBytes = byteData?.buffer.asUint8List();
-                    //     if (imageBytes != null) {
-                    //       final directory =
-                    //           await getApplicationDocumentsDirectory();
-                    //       final imagePath = await File(
-                    //               '${directory.path}/container_image.png')
-                    //           .create();
-                    //       await imagePath.writeAsBytes(imageBytes);
-                    //       Navigator.push(
-                    //           context,
-                    //           PageTransition(
-                    //               type: PageTransitionType.bottomToTop,
-                    //               child: ChangeNotifierProvider.value(
-                    //                   value: variable,
-                    //                   child: PlayPicture(
-                    //                     patch: imageBytes,
-                    //                     directory: directory,
-                    //                   ))));
-                    //     }
-                    //   },
-                    //   child: Icon(
-                    //     Icons.share,
-                    //     size: 30,
-                    //     color: Colors.blue,
-                    //   ),
-                    // ),
                     InkWell(
                       splashColor: Colors.white,
                       onTap: () async {
@@ -198,12 +164,12 @@ class _StatGlobalState extends State<StatGlobal> {
             title: Text("Produit"),
             centerTitle: true,
             flexibleSpace: Container(
-              padding: EdgeInsets.only(top: 40.0),
+              padding: EdgeInsets.only(top: 20.0),
               alignment: Alignment.center,
               child: Image.asset(
                 'assets/logo.png',
-                width: 55,
-                height: 130,
+                width: 140,
+                height: 140,
               ),
               decoration: BoxDecoration(
                   gradient: LinearGradient(

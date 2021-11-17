@@ -168,15 +168,15 @@ class _ResultDaysState extends State<ResultDays> {
       child: Scaffold(
         key: scaffoldkey,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(100.0),
+          preferredSize: Size.fromHeight(140.0),
           child: SafeArea(
             child: AppBar(
               title: Text("Résultat de la journée"),
               centerTitle: true,
               flexibleSpace: Container(
-                padding: EdgeInsets.only(top: 40.0),
+                padding: EdgeInsets.only(top: 20.0),
                 alignment: Alignment.center,
-                height: 130,
+                height: 140,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -202,7 +202,7 @@ class _ResultDaysState extends State<ResultDays> {
                           }, // butt
                           child: Icon(
                             Icons.money,
-                            size: 20,
+                            size: 30,
                             color: Colors.blue,
                           ),
                         ), // icon
@@ -214,8 +214,8 @@ class _ResultDaysState extends State<ResultDays> {
                     ),
                     Image.asset(
                       'assets/logo.png',
-                      width: 55,
-                      height: 130,
+                      width: 140,
+                      height: 140,
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -235,7 +235,7 @@ class _ResultDaysState extends State<ResultDays> {
                           },
                           child: Icon(
                             Icons.query_stats,
-                            size: 20,
+                            size: 30,
                             color: Colors.blue,
                           ),
                         ), // icon

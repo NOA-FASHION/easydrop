@@ -82,19 +82,19 @@ class _OffreProductState extends State<OffreProduct> {
       child: Scaffold(
         key: scaffoldkey,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(100.0),
+          preferredSize: Size.fromHeight(140.0),
           child: SafeArea(
             child: AppBar(
               title: Text("Offres"),
               centerTitle: true,
               flexibleSpace: Container(
-                padding: EdgeInsets.only(top: 40.0),
+                padding: EdgeInsets.only(top: 20.0),
                 alignment: Alignment.center,
-                height: 130,
+                height: 140,
                 child: Image.asset(
                   'assets/logo.png',
-                  width: 55,
-                  height: 130,
+                  width: 140,
+                  height: 140,
                 ),
                 decoration: BoxDecoration(
                     gradient: LinearGradient(

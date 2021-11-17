@@ -69,18 +69,19 @@ class _HomeScreenState extends State<HomeScreen>
       child: Scaffold(
         key: scaffoldkey,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(100.0),
+          preferredSize: Size.fromHeight(140.0),
           child: SafeArea(
             child: AppBar(
+              elevation: 0,
               title: Text("Produit"),
               centerTitle: true,
               flexibleSpace: Container(
-                padding: EdgeInsets.only(top: 40.0),
+                padding: EdgeInsets.only(top: 20.0),
                 alignment: Alignment.center,
                 child: Image.asset(
                   'assets/logo.png',
-                  width: 55,
-                  height: 130,
+                  width: 140,
+                  height: 140,
                 ),
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -227,16 +228,6 @@ class _HomeScreenState extends State<HomeScreen>
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            // IconButton(
-                            //   alignment: Alignment.topRight,
-                            //   icon: Icon(
-                            //     Icons.cancel,
-                            //     color: Colors.black,
-                            //   ),
-                            //   onPressed: () {
-                            //     Navigator.pop(context);
-                            //   },
-                            // ),
                             SizedBox(
                               height: 5.0,
                             ),
