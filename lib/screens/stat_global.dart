@@ -12,6 +12,7 @@ import 'package:multi_charts/multi_charts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:screenshot/screenshot.dart';
+import 'package:image/image.dart' as IMG;
 import 'package:share/share.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -25,6 +26,14 @@ class StatGlobal extends StatefulWidget {
 
   @override
   _StatGlobalState createState() => _StatGlobalState();
+}
+
+Uint8List? resizeImage(Uint8List data) {
+  Uint8List? resizedData = data;
+  IMG.Image? img = IMG.decodeImage(data);
+  IMG.Image resized = IMG.copyResize(img!, width: 700, height: 1900);
+  resizedData = IMG.encodeJpg(resized) as Uint8List?;
+  return resizedData;
 }
 
 class _StatGlobalState extends State<StatGlobal> {
@@ -109,6 +118,40 @@ class _StatGlobalState extends State<StatGlobal> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
+                    //    InkWell(
+                    //   splashColor: Colors.white,
+                    //   onTap: () async {
+                    //     final boundary = key.currentContext?.findRenderObject()
+                    //         as RenderRepaintBoundary?;
+                    //     final image = await boundary?.toImage();
+                    //     final byteData = await image?.toByteData(
+                    //         format: ImageByteFormat.png);
+                    //     final imageBytes = byteData?.buffer.asUint8List();
+                    //     if (imageBytes != null) {
+                    //       final directory =
+                    //           await getApplicationDocumentsDirectory();
+                    //       final imagePath = await File(
+                    //               '${directory.path}/container_image.png')
+                    //           .create();
+                    //       await imagePath.writeAsBytes(imageBytes);
+                    //       Navigator.push(
+                    //           context,
+                    //           PageTransition(
+                    //               type: PageTransitionType.bottomToTop,
+                    //               child: ChangeNotifierProvider.value(
+                    //                   value: variable,
+                    //                   child: PlayPicture(
+                    //                     patch: imageBytes,
+                    //                     directory: directory,
+                    //                   ))));
+                    //     }
+                    //   },
+                    //   child: Icon(
+                    //     Icons.share,
+                    //     size: 30,
+                    //     color: Colors.blue,
+                    //   ),
+                    // ),
                     InkWell(
                       splashColor: Colors.white,
                       onTap: () async {
@@ -117,14 +160,15 @@ class _StatGlobalState extends State<StatGlobal> {
                         final image = await boundary?.toImage();
                         final byteData = await image?.toByteData(
                             format: ImageByteFormat.png);
-                        final imageBytes = byteData?.buffer.asUint8List();
-                        if (imageBytes != null) {
+                        var imageBytes = byteData?.buffer.asUint8List();
+                        var imageBytes1 = resizeImage(imageBytes!);
+                        if (imageBytes1 != null) {
                           final directory =
                               await getApplicationDocumentsDirectory();
                           final imagePath = await File(
                                   '${directory.path}/container_image.png')
                               .create();
-                          await imagePath.writeAsBytes(imageBytes);
+                          await imagePath.writeAsBytes(imageBytes1);
                           Navigator.push(
                               context,
                               PageTransition(
@@ -132,7 +176,7 @@ class _StatGlobalState extends State<StatGlobal> {
                                   child: ChangeNotifierProvider.value(
                                       value: variable,
                                       child: PlayPicture(
-                                        patch: imageBytes,
+                                        patch: imageBytes1,
                                         directory: directory,
                                       ))));
                         }
