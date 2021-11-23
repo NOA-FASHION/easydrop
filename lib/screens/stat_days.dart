@@ -696,7 +696,12 @@ class _StatDaysState extends State<StatDays> {
                                                                 .height /
                                                             10,
                                                     values:
-                                                        statOffre(totalOffre()),
+                                                        listeDeCouleurOffre()
+                                                                    .length <=
+                                                                1
+                                                            ? [100]
+                                                            : statOffre(
+                                                                totalOffre()),
                                                     labels: statOffreString(),
                                                     sliceFillColors:
                                                         listeDeCouleurOffre(),

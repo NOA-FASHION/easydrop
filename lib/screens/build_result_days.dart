@@ -221,6 +221,7 @@ class _BuildResultDaysState extends State<BuildResultDays> {
     return ListView.builder(
       itemCount: _resultatDaysList.length,
       itemBuilder: (context, index) {
+        print(_resultatDaysList[index].date.toString());
         return Padding(
           padding: const EdgeInsets.only(bottom: 3.0, left: 8.0, right: 8.0),
           child: Dismissible(
@@ -383,7 +384,10 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                                 ),
                                 maxLetterTitre(
                                   "Résultat du ".toUpperCase() +
-                                      todays.toUpperCase(),
+                                      _resultatDaysList[index]
+                                          .date
+                                          .toString()
+                                          .toUpperCase(),
                                 )
                               ],
                             ),

@@ -1158,14 +1158,21 @@ class _StatGlobalState extends State<StatGlobal> {
                                                                 .size
                                                                 .height /
                                                             10,
-                                                    values: statOffre(
-                                                        totalOffre(
+                                                    values: listeDeCouleurOffre(
+                                                                    _productGagnantList[
+                                                                        widget
+                                                                            .indexProduct])
+                                                                .length <=
+                                                            1
+                                                        ? [100]
+                                                        : statOffre(
+                                                            totalOffre(
+                                                                _productGagnantList[
+                                                                    widget
+                                                                        .indexProduct]),
                                                             _productGagnantList[
                                                                 widget
                                                                     .indexProduct]),
-                                                        _productGagnantList[
-                                                            widget
-                                                                .indexProduct]),
                                                     labels: statOffreString(
                                                         _productGagnantList[
                                                             widget

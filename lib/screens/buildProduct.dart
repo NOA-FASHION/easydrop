@@ -170,19 +170,13 @@ class _BuildProductState extends State<BuildProduct> {
                     ),
                   ],
                 ),
-                Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(60.0),
-                  ),
-                  elevation: 15.0,
-                  child: Container(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10.0),
-                      child: Image.file(
-                        File(product.photoProduit),
-                        width: MediaQuery.of(context).size.width / 5,
-                        height: MediaQuery.of(context).size.height / 11,
-                      ),
+                Container(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10.0),
+                    child: Image.file(
+                      File(product.photoProduit),
+                      width: MediaQuery.of(context).size.width / 5,
+                      height: MediaQuery.of(context).size.height / 11,
                     ),
                   ),
                 ),
