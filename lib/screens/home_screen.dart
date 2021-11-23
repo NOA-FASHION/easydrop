@@ -278,7 +278,7 @@ class _HomeScreenState extends State<HomeScreen>
                                             },
                                             validator: (value) {
                                               if (value!.isEmpty) {
-                                                return "Merci d'entrer une description pour la mission";
+                                                return "Merci d'entrer le nom du produit";
                                               } else if (value.length > 35) {
                                                 return "Pas plus de 50 caractères";
                                               }
@@ -325,7 +325,7 @@ class _HomeScreenState extends State<HomeScreen>
                                             },
                                             validator: (value) {
                                               if (value!.isEmpty) {
-                                                return "Merci d'entrer une description pour la mission";
+                                                return "Merci d'entrer le type de produit";
                                               } else if (value.length > 35) {
                                                 return "Pas plus de 50 caractères";
                                               }
@@ -372,7 +372,7 @@ class _HomeScreenState extends State<HomeScreen>
                                             },
                                             validator: (value) {
                                               if (value!.isEmpty) {
-                                                return "Merci d'entrer une description pour la mission";
+                                                return "Merci d'entrer le prix d'achat du produit";
                                               } else if (value.length > 35) {
                                                 return "Pas plus de 50 caractères";
                                               }
@@ -419,7 +419,7 @@ class _HomeScreenState extends State<HomeScreen>
                                             },
                                             validator: (value) {
                                               if (value!.isEmpty) {
-                                                return "Merci d'entrer une description pour la mission";
+                                                return "Merci d'entrer le prix de vente du produit";
                                               } else if (value.length > 35) {
                                                 return "Pas plus de 50 caractères";
                                               }
@@ -467,7 +467,7 @@ class _HomeScreenState extends State<HomeScreen>
                                             },
                                             validator: (value) {
                                               if (value!.isEmpty) {
-                                                return "Merci d'entrer une description pour la mission";
+                                                return "Merci d'entrer le prix du shipping";
                                               } else if (value.length > 35) {
                                                 return "Pas plus de 50 caractères";
                                               }
@@ -597,10 +597,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                 },
                                                 validator: (value) {
                                                   if (value!.isEmpty) {
-                                                    return "Merci d'entrer une description pour la mission";
-                                                  } else if (value.length >
-                                                      35) {
-                                                    return "Pas plus de 50 caractères";
+                                                    return "Merci d'entrer l'adresse du site de vente";
                                                   }
                                                   return null;
                                                 },
@@ -649,10 +646,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                 },
                                                 validator: (value) {
                                                   if (value!.isEmpty) {
-                                                    return "Merci d'entrer une description pour la mission";
-                                                  } else if (value.length >
-                                                      35) {
-                                                    return "Pas plus de 50 caractères";
+                                                    return "Merci d'entrer l'adresse du site d'achat";
                                                   }
                                                   return null;
                                                 },
@@ -701,10 +695,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                 },
                                                 validator: (value) {
                                                   if (value!.isEmpty) {
-                                                    return "Merci d'entrer une description pour la mission";
-                                                  } else if (value.length >
-                                                      35) {
-                                                    return "Pas plus de 50 caractères";
+                                                    return "Merci d'entrer l'adresse de la page facebook";
                                                   }
                                                   return null;
                                                 },
