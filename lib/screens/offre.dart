@@ -85,7 +85,10 @@ class _OffreProductState extends State<OffreProduct> {
           preferredSize: Size.fromHeight(140.0),
           child: SafeArea(
             child: AppBar(
-              title: Text("Offres"),
+              title: Text(
+                "Offres",
+                style: TextStyle(color: Colors.black),
+              ),
               centerTitle: true,
               flexibleSpace: Container(
                 padding: EdgeInsets.only(top: 20.0),

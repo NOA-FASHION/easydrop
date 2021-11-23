@@ -73,7 +73,10 @@ class _HomeScreenState extends State<HomeScreen>
           child: SafeArea(
             child: AppBar(
               elevation: 0,
-              title: Text("Produit"),
+              title: Text(
+                "Produits",
+                style: TextStyle(color: Colors.black),
+              ),
               centerTitle: true,
               flexibleSpace: Container(
                 padding: EdgeInsets.only(top: 20.0),

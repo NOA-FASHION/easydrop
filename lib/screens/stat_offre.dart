@@ -106,7 +106,10 @@ class _StatOffreState extends State<StatOffre> {
                 ),
               ),
             ],
-            title: Text("offre"),
+            title: Text(
+              "Stats offres",
+              style: TextStyle(color: Colors.black),
+            ),
             centerTitle: true,
             flexibleSpace: Container(
               padding: EdgeInsets.only(top: 20.0),
@@ -807,8 +810,7 @@ class _StatOffreState extends State<StatOffre> {
                                                         "Roas: " +
                                                             widget.offres.roas
                                                                 .toStringAsFixed(
-                                                                    2) +
-                                                            "€",
+                                                                    2),
                                                         style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight.bold,

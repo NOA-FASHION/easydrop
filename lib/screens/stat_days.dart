@@ -134,7 +134,8 @@ class _StatDaysState extends State<StatDays> {
                 ),
               ),
             ],
-            title: Text("Produit"),
+            title: Text("Stats de la journée",
+                style: TextStyle(color: Colors.black)),
             centerTitle: true,
             flexibleSpace: Container(
               padding: EdgeInsets.only(top: 20.0),

@@ -81,7 +81,7 @@ class PlayPicture extends StatelessWidget {
                 ),
               ),
             ],
-            title: Text("Images"),
+            title: Text("Partages", style: TextStyle(color: Colors.black)),
             centerTitle: true,
             flexibleSpace: Container(
               height: 140,

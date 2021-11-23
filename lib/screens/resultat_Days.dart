@@ -171,7 +171,8 @@ class _ResultDaysState extends State<ResultDays> {
           preferredSize: Size.fromHeight(140.0),
           child: SafeArea(
             child: AppBar(
-              title: Text("Résultat de la journée"),
+              title: Text("Résultats de la journée",
+                  style: TextStyle(color: Colors.black)),
               centerTitle: true,
               flexibleSpace: Container(
                 padding: EdgeInsets.only(top: 20.0),
@@ -201,13 +202,13 @@ class _ResultDaysState extends State<ResultDays> {
                             //         widget.indexProduct, widget.idProduct)));
                           }, // butt
                           child: Icon(
-                            Icons.money,
+                            Icons.fact_check_outlined,
                             size: 30,
                             color: Colors.blue,
                           ),
                         ), // icon
                         Text(
-                          "Offre",
+                          "Offres",
                           style: TextStyle(fontSize: 10, color: Colors.blue),
                         ), // text
                       ],
@@ -240,7 +241,7 @@ class _ResultDaysState extends State<ResultDays> {
                           ),
                         ), // icon
                         Text(
-                          "Stat globale",
+                          "Stats globales",
                           style: TextStyle(fontSize: 10, color: Colors.blue),
                         ), // text
                       ],

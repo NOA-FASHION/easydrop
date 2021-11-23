@@ -161,7 +161,10 @@ class _StatGlobalState extends State<StatGlobal> {
                 ),
               ),
             ],
-            title: Text("Produit"),
+            title: Text(
+              "Stats globales",
+              style: TextStyle(color: Colors.black),
+            ),
             centerTitle: true,
             flexibleSpace: Container(
               padding: EdgeInsets.only(top: 20.0),
