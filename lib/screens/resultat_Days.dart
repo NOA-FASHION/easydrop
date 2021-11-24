@@ -342,7 +342,9 @@ class _ResultDaysState extends State<ResultDays> {
                                   textCapitalization:
                                       TextCapitalization.sentences,
                                   onSaved: (value) {
-                                    facebookDepenseDays = double.parse(value!);
+                                    // facebookDepenseDays = double.parse(value!);
+                                    facebookDepenseDays =
+                                        controller.doubleValue;
                                   },
                                   validator: (value) {
                                     if (value!.isEmpty) {

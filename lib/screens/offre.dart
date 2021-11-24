@@ -231,7 +231,7 @@ class _OffreProductState extends State<OffreProduct> {
                                     textCapitalization:
                                         TextCapitalization.sentences,
                                     onSaved: (value) {
-                                      prixAchat = double.parse(value!);
+                                      prixAchat = controller.doubleValue;
                                     },
                                     validator: (value) {
                                       if (value!.isEmpty) {
@@ -277,7 +277,7 @@ class _OffreProductState extends State<OffreProduct> {
                                     textCapitalization:
                                         TextCapitalization.sentences,
                                     onSaved: (value) {
-                                      prixVente = double.parse(value!);
+                                      prixVente = controller1.doubleValue;
                                     },
                                     validator: (value) {
                                       if (value!.isEmpty) {
@@ -331,7 +331,7 @@ class _OffreProductState extends State<OffreProduct> {
                                     textCapitalization:
                                         TextCapitalization.sentences,
                                     onSaved: (value) {
-                                      prixShipping = double.parse(value!);
+                                      prixShipping = controller2.doubleValue;
                                     },
                                     validator: (value) {
                                       if (value!.isEmpty) {
@@ -377,7 +377,7 @@ class _OffreProductState extends State<OffreProduct> {
                                     textCapitalization:
                                         TextCapitalization.sentences,
                                     onSaved: (value) {
-                                      prixBarre = double.parse(value!);
+                                      prixBarre = controller3.doubleValue;
                                     },
                                     validator: (value) {
                                       if (value!.isEmpty) {

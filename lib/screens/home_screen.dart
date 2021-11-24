@@ -377,7 +377,8 @@ class _HomeScreenState extends State<HomeScreen>
                                             textCapitalization:
                                                 TextCapitalization.sentences,
                                             onSaved: (value) {
-                                              prixAchat = double.parse(value!);
+                                              prixAchat =
+                                                  controller.doubleValue;
                                             },
                                             validator: (value) {
                                               if (value!.isEmpty) {
@@ -425,7 +426,8 @@ class _HomeScreenState extends State<HomeScreen>
                                             textCapitalization:
                                                 TextCapitalization.sentences,
                                             onSaved: (value) {
-                                              prixVente = double.parse(value!);
+                                              prixVente =
+                                                  controller1.doubleValue;
                                             },
                                             validator: (value) {
                                               if (value!.isEmpty) {
@@ -474,7 +476,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                 TextCapitalization.sentences,
                                             onSaved: (value) {
                                               prixShipping =
-                                                  double.parse(value!);
+                                                  controller2.doubleValue;
                                             },
                                             validator: (value) {
                                               if (value!.isEmpty) {
