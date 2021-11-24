@@ -1,8 +1,9 @@
+import 'package:currency_textfield/currency_textfield.dart';
 import 'package:easydrop/controllers/challenge_controller.dart';
 import 'package:easydrop/screens/build_offre.dart';
-import 'package:easydrop/screens/build_result_days.dart';
+
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
+
 import 'package:provider/provider.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
@@ -20,7 +21,14 @@ class _OffreProductState extends State<OffreProduct> {
   late PersistentBottomSheetController _bottomSheetController;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
-
+  var controller = CurrencyTextFieldController(
+      rightSymbol: "€", decimalSymbol: ".", thousandSymbol: ",");
+  var controller1 = CurrencyTextFieldController(
+      rightSymbol: "€", decimalSymbol: ".", thousandSymbol: ",");
+  var controller2 = CurrencyTextFieldController(
+      rightSymbol: "€", decimalSymbol: ".", thousandSymbol: ",");
+  var controller3 = CurrencyTextFieldController(
+      rightSymbol: "€", decimalSymbol: ".", thousandSymbol: ",");
   // late FancyDrawerController _controller;
   void initState() {
     super.initState();
@@ -218,6 +226,7 @@ class _OffreProductState extends State<OffreProduct> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: TextFormField(
+                                    controller: controller,
                                     style: TextStyle(fontSize: 10),
                                     textCapitalization:
                                         TextCapitalization.sentences,
@@ -263,6 +272,7 @@ class _OffreProductState extends State<OffreProduct> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: TextFormField(
+                                    controller: controller1,
                                     style: TextStyle(fontSize: 10),
                                     textCapitalization:
                                         TextCapitalization.sentences,
@@ -316,6 +326,7 @@ class _OffreProductState extends State<OffreProduct> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: TextFormField(
+                                    controller: controller2,
                                     style: TextStyle(fontSize: 10),
                                     textCapitalization:
                                         TextCapitalization.sentences,
@@ -361,6 +372,7 @@ class _OffreProductState extends State<OffreProduct> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: TextFormField(
+                                    controller: controller3,
                                     style: TextStyle(fontSize: 10),
                                     textCapitalization:
                                         TextCapitalization.sentences,

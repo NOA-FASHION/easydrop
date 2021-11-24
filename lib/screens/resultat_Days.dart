@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:currency_textfield/currency_textfield.dart';
 import 'package:easydrop/controllers/challenge_controller.dart';
 import 'package:easydrop/models/drop_models.dart';
 import 'package:easydrop/screens/build_result_days.dart';
@@ -24,6 +25,8 @@ class _ResultDaysState extends State<ResultDays> {
   late PersistentBottomSheetController _bottomSheetController;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
+  var controller = CurrencyTextFieldController(
+      rightSymbol: "€", decimalSymbol: ".", thousandSymbol: ",");
 
   // late FancyDrawerController _controller;
   void initState() {
@@ -334,6 +337,7 @@ class _ResultDaysState extends State<ResultDays> {
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: TextFormField(
+                                  controller: controller,
                                   style: TextStyle(fontSize: 10),
                                   textCapitalization:
                                       TextCapitalization.sentences,
@@ -469,7 +473,7 @@ class _ResultDaysState extends State<ResultDays> {
                             ),
                             Container(
                               width: 250,
-                              height: 270,
+                              height: offreDays.length > 3 ? 260 : 140,
                               child: ListView.builder(
                                   padding: const EdgeInsets.all(8),
                                   itemCount: offreDays.length,

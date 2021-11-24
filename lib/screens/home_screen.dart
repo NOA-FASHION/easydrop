@@ -1,5 +1,6 @@
 // import 'package:fancy_drawer/fancy_drawer.dart';
 
+import 'package:currency_textfield/currency_textfield.dart';
 import 'package:easydrop/controllers/challenge_controller.dart';
 import 'package:easydrop/models/drop_models.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
+  var controller = CurrencyTextFieldController(
+      rightSymbol: "€", decimalSymbol: ".", thousandSymbol: ",");
+  var controller1 = CurrencyTextFieldController(
+      rightSymbol: "€", decimalSymbol: ".", thousandSymbol: ",");
+  var controller2 = CurrencyTextFieldController(
+      rightSymbol: "€", decimalSymbol: ".", thousandSymbol: ",");
+
   late PersistentBottomSheetController _bottomSheetController;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
@@ -364,6 +372,7 @@ class _HomeScreenState extends State<HomeScreen>
                                         Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: TextFormField(
+                                            controller: controller,
                                             style: TextStyle(fontSize: 10),
                                             textCapitalization:
                                                 TextCapitalization.sentences,
@@ -411,6 +420,7 @@ class _HomeScreenState extends State<HomeScreen>
                                         Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: TextFormField(
+                                            controller: controller1,
                                             style: TextStyle(fontSize: 10),
                                             textCapitalization:
                                                 TextCapitalization.sentences,
@@ -458,6 +468,7 @@ class _HomeScreenState extends State<HomeScreen>
                                         Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: TextFormField(
+                                            controller: controller2,
                                             style: TextStyle(fontSize: 10),
                                             textCapitalization:
                                                 TextCapitalization.sentences,

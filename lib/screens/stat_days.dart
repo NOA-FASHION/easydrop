@@ -1313,18 +1313,6 @@ class _StatDaysState extends State<StatDays> {
                                                   .size
                                                   .width /
                                               2.7,
-                                          // decoration: BoxDecoration(
-                                          //     border: Border.all(
-                                          //         color: Colors.white70),
-                                          //     borderRadius:
-                                          //         BorderRadius.circular(15),
-                                          //     gradient: LinearGradient(
-                                          //         begin: Alignment.centerLeft,
-                                          //         end: Alignment.centerRight,
-                                          //         colors: [
-                                          //           Colors.pink,
-                                          //           Colors.orange
-                                          //         ])),
                                           child: Card(
                                             shape: RoundedRectangleBorder(
                                               borderRadius:
