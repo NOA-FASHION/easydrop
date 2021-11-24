@@ -143,7 +143,7 @@ class _BuildProductState extends State<BuildProduct> {
                             width: 35.0,
                           ),
                           Text(
-                            product.prixAchat.toString(),
+                            product.prixAchat.toString() + "€",
                           ),
                         ],
                       ),
@@ -163,7 +163,7 @@ class _BuildProductState extends State<BuildProduct> {
                             width: 12.0,
                           ),
                           Text(
-                            product.prixVente.toString(),
+                            product.prixVente.toString() + "€",
                           ),
                         ],
                       ),

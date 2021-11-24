@@ -25,7 +25,7 @@ class _BuildOffreState extends State<BuildOffre> {
 
     if (word.length >= 21) {
       longLetter = Container(
-        width: MediaQuery.of(context).size.width / 2.9,
+        width: MediaQuery.of(context).size.width / 2.5,
         color: Colors.transparent,
         child: MarqueeText(
           text: word,
@@ -138,7 +138,7 @@ class _BuildOffreState extends State<BuildOffre> {
                                 SizedBox(
                                   width: 18.0,
                                 ),
-                                maxLetter(offres.prixAchat.toString()),
+                                maxLetter(offres.prixAchat.toString() + "€"),
                               ],
                             ),
                           ),
@@ -157,7 +157,7 @@ class _BuildOffreState extends State<BuildOffre> {
                                   width: 5.0,
                                 ),
                                 Text(
-                                  offres.prixVente.toString(),
+                                  offres.prixVente.toString() + "€",
                                 ),
                               ],
                             ),
@@ -214,7 +214,7 @@ class _BuildOffreState extends State<BuildOffre> {
                                   width: 5.0,
                                 ),
                                 Text(
-                                  offres.margeOffre.toString(),
+                                  offres.margeOffre.toString() + "€",
                                 ),
                               ],
                             ),

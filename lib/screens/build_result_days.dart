@@ -131,8 +131,9 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                             width: 32.0,
                           ),
                           maxLetter(resultDays.chiffreAffaireDays
-                              .roundToDouble()
-                              .toString()),
+                                  .roundToDouble()
+                                  .toString() +
+                              "€"),
                         ],
                       ),
                     ),
@@ -151,7 +152,8 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                             width: 5.0,
                           ),
                           Text(
-                            resultDays.margeDays.roundToDouble().toString(),
+                            resultDays.margeDays.roundToDouble().toString() +
+                                "€",
                           ),
                         ],
                       ),
