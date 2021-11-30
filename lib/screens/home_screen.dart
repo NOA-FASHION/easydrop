@@ -230,7 +230,7 @@ class _HomeScreenState extends State<HomeScreen>
             (context) {
               return Container(
                   alignment: Alignment.center,
-                  height: MediaQuery.of(context).size.height * 0.5,
+                  height: MediaQuery.of(context).size.height * 1.2,
                   child: Form(
                     key: formKey,
                     child: Padding(
@@ -248,373 +248,76 @@ class _HomeScreenState extends State<HomeScreen>
                                 Container(
                                   width:
                                       MediaQuery.of(context).size.width / 2.2,
-                                  height: 500,
+                                  height: 610,
                                   child: Card(
-                                    color: Colors.white,
+                                    color: Colors.blue,
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30.0),
+                                      borderRadius: BorderRadius.circular(20.0),
                                     ),
                                     elevation: 15.0,
-                                    child: Column(
-                                      children: [
-                                        SizedBox(
-                                          height: 30.0,
-                                        ),
-                                        Card(
-                                          elevation: 15.0,
-                                          color: Colors.white,
-                                          shape: RoundedRectangleBorder(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(2.0),
+                                      child: Container(
+                                        decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(20.0),
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(10.0),
-                                            child: Center(
-                                              child: Text(
-                                                  "CARACTERISTIQUE DU PRODUIT"),
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: TextFormField(
-                                            style: TextStyle(fontSize: 10),
-                                            textCapitalization:
-                                                TextCapitalization.sentences,
-                                            onSaved: (value) {
-                                              nomProduit = value!;
-                                            },
-                                            validator: (value) {
-                                              if (value!.isEmpty) {
-                                                return "Merci d'entrer le nom du produit";
-                                              } else if (value.length > 35) {
-                                                return "Pas plus de 50 caractères";
-                                              }
-                                              return null;
-                                            },
-                                            decoration: InputDecoration(
-                                              focusedBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      width: 2.0,
-                                                      color: Colors.blueAccent),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15.0)),
-                                              enabledBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      width: 1.0,
-                                                      color: Colors.blueAccent),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15.0)),
-                                              contentPadding:
-                                                  EdgeInsets.symmetric(
-                                                      horizontal: 20,
-                                                      vertical: 10),
-                                              labelText: "Nom du produit",
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15.0)),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 5.0,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: TextFormField(
-                                            style: TextStyle(fontSize: 10),
-                                            textCapitalization:
-                                                TextCapitalization.sentences,
-                                            onSaved: (value) {
-                                              typeDuProduit = value!;
-                                            },
-                                            validator: (value) {
-                                              if (value!.isEmpty) {
-                                                return "Merci d'entrer le type de produit";
-                                              } else if (value.length > 35) {
-                                                return "Pas plus de 50 caractères";
-                                              }
-                                              return null;
-                                            },
-                                            decoration: InputDecoration(
-                                              focusedBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      width: 2.0,
-                                                      color: Colors.blueAccent),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15.0)),
-                                              enabledBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      width: 1.0,
-                                                      color: Colors.blueAccent),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15.0)),
-                                              contentPadding:
-                                                  EdgeInsets.symmetric(
-                                                      horizontal: 20,
-                                                      vertical: 10),
-                                              labelText: "Type de produit",
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15.0)),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 5.0,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: TextFormField(
-                                            controller: controller,
-                                            style: TextStyle(fontSize: 10),
-                                            textCapitalization:
-                                                TextCapitalization.sentences,
-                                            onSaved: (value) {
-                                              prixAchat =
-                                                  controller.doubleValue;
-                                            },
-                                            validator: (value) {
-                                              if (value!.isEmpty) {
-                                                return "Merci d'entrer le prix d'achat du produit";
-                                              } else if (value.length > 35) {
-                                                return "Pas plus de 50 caractères";
-                                              }
-                                              return null;
-                                            },
-                                            decoration: InputDecoration(
-                                              focusedBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      width: 2.0,
-                                                      color: Colors.blueAccent),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15.0)),
-                                              enabledBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      width: 1.0,
-                                                      color: Colors.blueAccent),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15.0)),
-                                              contentPadding:
-                                                  EdgeInsets.symmetric(
-                                                      horizontal: 20,
-                                                      vertical: 10),
-                                              labelText: "Prix d'achat",
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15.0)),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 5.0,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: TextFormField(
-                                            controller: controller1,
-                                            style: TextStyle(fontSize: 10),
-                                            textCapitalization:
-                                                TextCapitalization.sentences,
-                                            onSaved: (value) {
-                                              prixVente =
-                                                  controller1.doubleValue;
-                                            },
-                                            validator: (value) {
-                                              if (value!.isEmpty) {
-                                                return "Merci d'entrer le prix de vente du produit";
-                                              } else if (value.length > 35) {
-                                                return "Pas plus de 50 caractères";
-                                              }
-                                              return null;
-                                            },
-                                            decoration: InputDecoration(
-                                              focusedBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      width: 2.0,
-                                                      color: Colors.blueAccent),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15.0)),
-                                              enabledBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      width: 1.0,
-                                                      color: Colors.blueAccent),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15.0)),
-                                              contentPadding:
-                                                  EdgeInsets.symmetric(
-                                                      horizontal: 20,
-                                                      vertical: 10),
-                                              labelText: "Prix de vente",
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15.0)),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 5.0,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: TextFormField(
-                                            controller: controller2,
-                                            style: TextStyle(fontSize: 10),
-                                            textCapitalization:
-                                                TextCapitalization.sentences,
-                                            onSaved: (value) {
-                                              prixShipping =
-                                                  controller2.doubleValue;
-                                            },
-                                            validator: (value) {
-                                              if (value!.isEmpty) {
-                                                return "Merci d'entrer le prix du shipping";
-                                              } else if (value.length > 35) {
-                                                return "Pas plus de 50 caractères";
-                                              }
-                                              return null;
-                                            },
-                                            decoration: InputDecoration(
-                                              focusedBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      width: 2.0,
-                                                      color: Colors.blueAccent),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15.0)),
-                                              enabledBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      width: 1.0,
-                                                      color: Colors.blueAccent),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15.0)),
-                                              contentPadding:
-                                                  EdgeInsets.symmetric(
-                                                      horizontal: 20,
-                                                      vertical: 10),
-                                              labelText: "Prix shipping",
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15.0)),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Column(
-                                  children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width /
-                                          2.2,
-                                      height: 250,
-                                      child: Card(
-                                          color: Colors.white,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(30.0),
-                                          ),
-                                          elevation: 15.0,
-                                          child: Column(
-                                            children: [
-                                              Card(
-                                                elevation: 15.0,
-                                                color: Colors.white,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0),
-                                                ),
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
-                                                  child: Center(
-                                                    child: Text(
-                                                        "PHOTO DU PRODUIT"),
-                                                  ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(2.0),
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0),
-                                                  child: selectdropdown(),
-                                                ),
-                                              ),
-                                            ],
-                                          )),
-                                    ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width /
-                                          2.2,
-                                      height: 290,
-                                      child: Card(
-                                        color: Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(30.0),
-                                        ),
-                                        elevation: 15.0,
+                                            gradient: LinearGradient(
+                                                begin: Alignment.centerLeft,
+                                                end: Alignment.centerRight,
+                                                colors: <Color>[
+                                                  Colors.orange,
+                                                  Colors.pink
+                                                ])),
                                         child: Column(
                                           children: [
                                             SizedBox(
-                                              height: 15.0,
+                                              height: 30.0,
                                             ),
                                             Card(
                                               elevation: 15.0,
                                               color: Colors.white,
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(20.0),
+                                                    BorderRadius.circular(10.0),
                                               ),
                                               child: Padding(
                                                 padding:
                                                     const EdgeInsets.all(10.0),
                                                 child: Center(
-                                                  child:
-                                                      Text("ADRESSE INTERNET"),
+                                                  child: Text(
+                                                    "CARACTERISTIQUE DU PRODUIT",
+                                                    textAlign: TextAlign.center,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            SizedBox(
-                                              height: 5.0,
                                             ),
                                             Padding(
                                               padding:
                                                   const EdgeInsets.all(8.0),
                                               child: TextFormField(
-                                                style: TextStyle(fontSize: 10),
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 15,
+                                                ),
                                                 textCapitalization:
                                                     TextCapitalization
                                                         .sentences,
                                                 onSaved: (value) {
-                                                  siteVente = value!;
+                                                  nomProduit = value!;
                                                 },
                                                 validator: (value) {
                                                   if (value!.isEmpty) {
-                                                    return "Merci d'entrer l'adresse du site de vente";
+                                                    return "Merci d'entrer le nom du produit";
+                                                  } else if (value.length >
+                                                      35) {
+                                                    return "Pas plus de 50 caractères";
                                                   }
                                                   return null;
                                                 },
                                                 decoration: InputDecoration(
+                                                  labelStyle: TextStyle(
+                                                      fontSize: 15,
+                                                      color: Colors.white),
                                                   focusedBorder: OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                           width: 2.0,
@@ -635,7 +338,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                       EdgeInsets.symmetric(
                                                           horizontal: 20,
                                                           vertical: 10),
-                                                  labelText: "Site de vente",
+                                                  labelText: "Nom du produit",
                                                   border: OutlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -650,20 +353,28 @@ class _HomeScreenState extends State<HomeScreen>
                                               padding:
                                                   const EdgeInsets.all(8.0),
                                               child: TextFormField(
-                                                style: TextStyle(fontSize: 10),
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    color: Colors.white),
                                                 textCapitalization:
                                                     TextCapitalization
                                                         .sentences,
                                                 onSaved: (value) {
-                                                  siteAliexpress = value!;
+                                                  typeDuProduit = value!;
                                                 },
                                                 validator: (value) {
                                                   if (value!.isEmpty) {
-                                                    return "Merci d'entrer l'adresse du site d'achat";
+                                                    return "Merci d'entrer le type de produit";
+                                                  } else if (value.length >
+                                                      35) {
+                                                    return "Pas plus de 50 caractères";
                                                   }
                                                   return null;
                                                 },
                                                 decoration: InputDecoration(
+                                                  labelStyle: TextStyle(
+                                                      fontSize: 15,
+                                                      color: Colors.white),
                                                   focusedBorder: OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                           width: 2.0,
@@ -684,7 +395,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                       EdgeInsets.symmetric(
                                                           horizontal: 20,
                                                           vertical: 10),
-                                                  labelText: "Site AliExpress",
+                                                  labelText: "Type de produit",
                                                   border: OutlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -699,20 +410,30 @@ class _HomeScreenState extends State<HomeScreen>
                                               padding:
                                                   const EdgeInsets.all(8.0),
                                               child: TextFormField(
-                                                style: TextStyle(fontSize: 10),
+                                                controller: controller,
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    color: Colors.white),
                                                 textCapitalization:
                                                     TextCapitalization
                                                         .sentences,
                                                 onSaved: (value) {
-                                                  facebookAdress = value!;
+                                                  prixAchat =
+                                                      controller.doubleValue;
                                                 },
                                                 validator: (value) {
                                                   if (value!.isEmpty) {
-                                                    return "Merci d'entrer l'adresse de la page facebook";
+                                                    return "Merci d'entrer le prix d'achat du produit";
+                                                  } else if (value.length >
+                                                      35) {
+                                                    return "Pas plus de 50 caractères";
                                                   }
                                                   return null;
                                                 },
                                                 decoration: InputDecoration(
+                                                  labelStyle: TextStyle(
+                                                      fontSize: 15,
+                                                      color: Colors.white),
                                                   focusedBorder: OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                           width: 2.0,
@@ -733,7 +454,125 @@ class _HomeScreenState extends State<HomeScreen>
                                                       EdgeInsets.symmetric(
                                                           horizontal: 20,
                                                           vertical: 10),
-                                                  labelText: "facebook",
+                                                  labelText: "Prix d'achat",
+                                                  border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15.0)),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 5.0,
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: TextFormField(
+                                                controller: controller1,
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    color: Colors.white),
+                                                textCapitalization:
+                                                    TextCapitalization
+                                                        .sentences,
+                                                onSaved: (value) {
+                                                  prixVente =
+                                                      controller1.doubleValue;
+                                                },
+                                                validator: (value) {
+                                                  if (value!.isEmpty) {
+                                                    return "Merci d'entrer le prix de vente du produit";
+                                                  } else if (value.length >
+                                                      35) {
+                                                    return "Pas plus de 50 caractères";
+                                                  }
+                                                  return null;
+                                                },
+                                                decoration: InputDecoration(
+                                                  labelStyle: TextStyle(
+                                                      fontSize: 15,
+                                                      color: Colors.white),
+                                                  focusedBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          width: 2.0,
+                                                          color: Colors
+                                                              .blueAccent),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15.0)),
+                                                  enabledBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          width: 1.0,
+                                                          color: Colors
+                                                              .blueAccent),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15.0)),
+                                                  contentPadding:
+                                                      EdgeInsets.symmetric(
+                                                          horizontal: 20,
+                                                          vertical: 10),
+                                                  labelText: "Prix de vente",
+                                                  border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15.0)),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 5.0,
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: TextFormField(
+                                                controller: controller2,
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    color: Colors.white),
+                                                textCapitalization:
+                                                    TextCapitalization
+                                                        .sentences,
+                                                onSaved: (value) {
+                                                  prixShipping =
+                                                      controller2.doubleValue;
+                                                },
+                                                validator: (value) {
+                                                  if (value!.isEmpty) {
+                                                    return "Merci d'entrer le prix du shipping";
+                                                  } else if (value.length >
+                                                      35) {
+                                                    return "Pas plus de 50 caractères";
+                                                  }
+                                                  return null;
+                                                },
+                                                decoration: InputDecoration(
+                                                  labelStyle: TextStyle(
+                                                      fontSize: 15,
+                                                      color: Colors.white),
+                                                  focusedBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          width: 2.0,
+                                                          color: Colors
+                                                              .blueAccent),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15.0)),
+                                                  enabledBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          width: 1.0,
+                                                          color: Colors
+                                                              .blueAccent),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15.0)),
+                                                  contentPadding:
+                                                      EdgeInsets.symmetric(
+                                                          horizontal: 20,
+                                                          vertical: 10),
+                                                  labelText: "Prix shipping",
                                                   border: OutlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -742,6 +581,308 @@ class _HomeScreenState extends State<HomeScreen>
                                               ),
                                             ),
                                           ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Column(
+                                  children: [
+                                    Container(
+                                      width: MediaQuery.of(context).size.width /
+                                          2.2,
+                                      height: 260,
+                                      child: Card(
+                                          color: Colors.blue,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                          ),
+                                          elevation: 15.0,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(2.0),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.0),
+                                                  gradient: LinearGradient(
+                                                      begin:
+                                                          Alignment.centerLeft,
+                                                      end:
+                                                          Alignment.centerRight,
+                                                      colors: <Color>[
+                                                        Colors.orange,
+                                                        Colors.pink
+                                                      ])),
+                                              child: Column(
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            4.0),
+                                                    child: Card(
+                                                      elevation: 15.0,
+                                                      color: Colors.white,
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10.0),
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10.0),
+                                                        child: Center(
+                                                          child: Text(
+                                                            "PHOTO DU PRODUIT",
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            2.0),
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20.0),
+                                                      child: selectdropdown(),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          )),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width /
+                                          2.2,
+                                      height: 350,
+                                      child: Card(
+                                        color: Colors.blue,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                        ),
+                                        elevation: 15.0,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(2.0),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20.0),
+                                                gradient: LinearGradient(
+                                                    begin: Alignment.centerLeft,
+                                                    end: Alignment.centerRight,
+                                                    colors: <Color>[
+                                                      Colors.orange,
+                                                      Colors.pink
+                                                    ])),
+                                            child: Column(
+                                              children: [
+                                                SizedBox(
+                                                  height: 10.0,
+                                                ),
+                                                Card(
+                                                  elevation: 15.0,
+                                                  color: Colors.white,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.0),
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10.0),
+                                                    child: Center(
+                                                      child: Text(
+                                                          "ADRESSE INTERNET"),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 5.0,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: TextFormField(
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        color: Colors.white),
+                                                    textCapitalization:
+                                                        TextCapitalization
+                                                            .sentences,
+                                                    onSaved: (value) {
+                                                      siteVente = value!;
+                                                    },
+                                                    validator: (value) {
+                                                      if (value!.isEmpty) {
+                                                        return "Merci d'entrer l'adresse du site de vente";
+                                                      }
+                                                      return null;
+                                                    },
+                                                    decoration: InputDecoration(
+                                                      labelStyle: TextStyle(
+                                                          fontSize: 15,
+                                                          color: Colors.white),
+                                                      focusedBorder: OutlineInputBorder(
+                                                          borderSide: BorderSide(
+                                                              width: 2.0,
+                                                              color: Colors
+                                                                  .blueAccent),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      15.0)),
+                                                      enabledBorder: OutlineInputBorder(
+                                                          borderSide: BorderSide(
+                                                              width: 1.0,
+                                                              color: Colors
+                                                                  .blueAccent),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      15.0)),
+                                                      contentPadding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 20,
+                                                              vertical: 10),
+                                                      labelText:
+                                                          "Site de vente",
+                                                      border: OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      15.0)),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 5.0,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: TextFormField(
+                                                    style: TextStyle(
+                                                        fontSize: 10,
+                                                        color: Colors.white),
+                                                    textCapitalization:
+                                                        TextCapitalization
+                                                            .sentences,
+                                                    onSaved: (value) {
+                                                      siteAliexpress = value!;
+                                                    },
+                                                    validator: (value) {
+                                                      if (value!.isEmpty) {
+                                                        return "Merci d'entrer l'adresse du site d'achat";
+                                                      }
+                                                      return null;
+                                                    },
+                                                    decoration: InputDecoration(
+                                                      labelStyle: TextStyle(
+                                                          fontSize: 15,
+                                                          color: Colors.white),
+                                                      focusedBorder: OutlineInputBorder(
+                                                          borderSide: BorderSide(
+                                                              width: 2.0,
+                                                              color: Colors
+                                                                  .blueAccent),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      15.0)),
+                                                      enabledBorder: OutlineInputBorder(
+                                                          borderSide: BorderSide(
+                                                              width: 1.0,
+                                                              color: Colors
+                                                                  .blueAccent),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      15.0)),
+                                                      contentPadding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 20,
+                                                              vertical: 10),
+                                                      labelText:
+                                                          "Site AliExpress",
+                                                      border: OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      15.0)),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 5.0,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: TextFormField(
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        color: Colors.white),
+                                                    textCapitalization:
+                                                        TextCapitalization
+                                                            .sentences,
+                                                    onSaved: (value) {
+                                                      facebookAdress = value!;
+                                                    },
+                                                    validator: (value) {
+                                                      if (value!.isEmpty) {
+                                                        return "Merci d'entrer l'adresse de la page facebook";
+                                                      }
+                                                      return null;
+                                                    },
+                                                    decoration: InputDecoration(
+                                                      labelStyle: TextStyle(
+                                                          fontSize: 15,
+                                                          color: Colors.white),
+                                                      focusedBorder: OutlineInputBorder(
+                                                          borderSide: BorderSide(
+                                                              width: 2.0,
+                                                              color: Colors
+                                                                  .blueAccent),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      15.0)),
+                                                      enabledBorder: OutlineInputBorder(
+                                                          borderSide: BorderSide(
+                                                              width: 1.0,
+                                                              color: Colors
+                                                                  .blueAccent),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      15.0)),
+                                                      contentPadding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 20,
+                                                              vertical: 10),
+                                                      labelText: "facebook",
+                                                      border: OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      15.0)),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),
