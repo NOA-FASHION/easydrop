@@ -13,7 +13,6 @@ import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:image/image.dart' as IMG;
-import 'package:share/share.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -40,6 +39,9 @@ class _StatGlobalState extends State<StatGlobal> {
   int _counter = 0;
   // late Uint8List _imageFile;
   final key = GlobalKey();
+  final key1 = GlobalKey();
+  final key2 = GlobalKey();
+  final key3 = GlobalKey();
   //Create an instance of ScreenshotController
   ScreenshotController screenshotController = ScreenshotController();
 
@@ -121,20 +123,47 @@ class _StatGlobalState extends State<StatGlobal> {
                     InkWell(
                       splashColor: Colors.white,
                       onTap: () async {
+                          final boundary3 = key3.currentContext
+                            ?.findRenderObject() as RenderRepaintBoundary?;
+                        final image3 = await boundary3?.toImage();
+                        final byteData3 = await image3?.toByteData(
+                            format: ImageByteFormat.png);
+                        var imageBytes3 = byteData3?.buffer.asUint8List();
+
+                        ////////////////////
+                        final boundary2 = key2.currentContext
+                            ?.findRenderObject() as RenderRepaintBoundary?;
+                        final image2 = await boundary2?.toImage();
+                        final byteData2 = await image2?.toByteData(
+                            format: ImageByteFormat.png);
+                        var imageBytes2 = byteData2?.buffer.asUint8List();
+
+                        ////////////////////
+                        final boundary1 = key1.currentContext
+                            ?.findRenderObject() as RenderRepaintBoundary?;
+                        final image1 = await boundary1?.toImage();
+                        final byteData1 = await image1?.toByteData(
+                            format: ImageByteFormat.png);
+                        var imageBytes1 = byteData1?.buffer.asUint8List();
+                        ////////////////////
                         final boundary = key.currentContext?.findRenderObject()
                             as RenderRepaintBoundary?;
                         final image = await boundary?.toImage();
                         final byteData = await image?.toByteData(
                             format: ImageByteFormat.png);
                         var imageBytes = byteData?.buffer.asUint8List();
-                        var imageBytes1 = resizeImage(imageBytes!);
-                        if (imageBytes1 != null) {
+                        // var imageBytes1 = resizeImage(imageBytes!);
+                        
+                        if (imageBytes != null &&
+                            imageBytes1 != null &&
+                            imageBytes2 != null &&
+                            imageBytes3 != null){
                           final directory =
                               await getApplicationDocumentsDirectory();
                           final imagePath = await File(
                                   '${directory.path}/container_image.png')
                               .create();
-                          await imagePath.writeAsBytes(imageBytes1);
+                          await imagePath.writeAsBytes(imageBytes);
                           Navigator.push(
                               context,
                               PageTransition(
@@ -142,8 +171,13 @@ class _StatGlobalState extends State<StatGlobal> {
                                   child: ChangeNotifierProvider.value(
                                       value: variable,
                                       child: PlayPicture(
-                                        patch: imageBytes1,
-                                        directory: directory, productGagnantList: _productGagnantList[widget.indexProduct],
+                                        patch: imageBytes,
+                                        directory: directory,
+                                        productGagnantList: _productGagnantList[
+                                            widget.indexProduct],
+                                        patch1: imageBytes1,
+                                        patch2: imageBytes2,
+                                        patch3: imageBytes3,
                                       ))));
                         }
                       },
@@ -200,8 +234,6 @@ class _StatGlobalState extends State<StatGlobal> {
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: SingleChildScrollView(
-                child: RepaintBoundary(
-              key: key,
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -571,18 +603,6 @@ class _StatGlobalState extends State<StatGlobal> {
                                                             8.0),
                                                     child: Text("Aliexpress"),
                                                   )),
-                                              // Card(
-                                              //     color: Colors.orange,
-                                              //     shape: RoundedRectangleBorder(
-                                              //       borderRadius:
-                                              //           BorderRadius.circular(
-                                              //               7.0),
-                                              //     ),
-                                              //     child: Padding(
-                                              //       padding:
-                                              //           const EdgeInsets.all(8.0),
-                                              //       child: Text("€"),
-                                              //     ))
                                             ],
                                           ),
                                         ),
@@ -688,724 +708,50 @@ class _StatGlobalState extends State<StatGlobal> {
                       ),
                     ),
                     /////////////////////////////////////////////////////////////
-                    Container(
-                        width: MediaQuery.of(context).size.width / 1.13,
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black,
-                              blurRadius: 45.0, // soften the shadow
-                              spreadRadius: 2.0, //extend the shadow
-                              offset: Offset(
-                                3.0, // Move to right 10  horizontally
-                                3.0, // Move to bottom 10 Vertically
-                              ),
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.transparent,
-                        ),
-                        child: Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            elevation: 20.0,
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                      width: MediaQuery.of(context).size.width /
-                                          1.2,
-                                      decoration: BoxDecoration(
-                                          border:
-                                              Border.all(color: Colors.white70),
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          gradient: LinearGradient(
-                                              begin: Alignment.centerLeft,
-                                              end: Alignment.centerRight,
-                                              colors: [
-                                                Colors.pink,
-                                                Colors.orange
-                                              ])),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Column(
-                                              children: [
-                                                Container(
-                                                  height: 30.0,
-                                                  child: Row(
-                                                    children: [
-                                                      SizedBox(
-                                                        width: 25.0,
-                                                      ),
-                                                      Text(
-                                                        "Chiffre d'affaire",
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color: Colors.blue),
-                                                      ),
-                                                      SizedBox(
-                                                        width: 25.0,
-                                                      ),
-                                                      Text(
-                                                        variable
-                                                                .chiffreDaffaireTotal(
-                                                                    widget
-                                                                        .indexProduct)
-                                                                .roundToDouble()
-                                                                .toString() +
-                                                            "€",
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color: Colors.blue),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      )),
+                    RepaintBoundary(
+                      key: key,
+                      child: Container(
+                          width: MediaQuery.of(context).size.width / 1.13,
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black,
+                                blurRadius: 45.0, // soften the shadow
+                                spreadRadius: 2.0, //extend the shadow
+                                offset: Offset(
+                                  3.0, // Move to right 10  horizontally
+                                  3.0, // Move to bottom 10 Vertically
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Card(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15.0),
-                                    ),
-                                    elevation: 15.0,
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              1.2,
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 10, left: 15),
-                                            child: Row(
-                                              children: [
-                                                Container(
-                                                  height: 10.0,
-                                                  width: 10.0,
-                                                  decoration: new BoxDecoration(
-                                                    color: Colors.blueAccent,
-                                                    shape: BoxShape.circle,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 10.0,
-                                                ),
-                                                Text(
-                                                  'Couts produit: ' +
-                                                      variable
-                                                          .coutProductTotal(
-                                                              widget
-                                                                  .indexProduct)
-                                                          .roundToDouble()
-                                                          .toString() +
-                                                      "€",
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.blueAccent),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 10, left: 15),
-                                          child: Row(
-                                            children: [
-                                              Container(
-                                                height: 10.0,
-                                                width: 10.0,
-                                                decoration: new BoxDecoration(
-                                                  color: Colors.orangeAccent,
-                                                  shape: BoxShape.circle,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 10.0,
-                                              ),
-                                              Text(
-                                                'Pub: ' +
-                                                    variable
-                                                        .pubTotal(
-                                                            widget.indexProduct)
-                                                        .roundToDouble()
-                                                        .toString() +
-                                                    "€",
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.orangeAccent,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              1.2,
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 10, left: 15),
-                                            child: Row(
-                                              children: [
-                                                Container(
-                                                  height: 10.0,
-                                                  width: 10.0,
-                                                  decoration: new BoxDecoration(
-                                                    color: Colors.cyanAccent,
-                                                    shape: BoxShape.circle,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 10.0,
-                                                ),
-                                                Text(
-                                                  'Shipping: ' +
-                                                      variable
-                                                          .shippingTotal(widget
-                                                              .indexProduct)
-                                                          .roundToDouble()
-                                                          .toString() +
-                                                      "€",
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.cyanAccent,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 10, left: 15),
-                                          child: Row(
-                                            children: [
-                                              Container(
-                                                height: 10.0,
-                                                width: 10.0,
-                                                decoration: new BoxDecoration(
-                                                  color:
-                                                      Colors.lightGreenAccent,
-                                                  shape: BoxShape.circle,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 10.0,
-                                              ),
-                                              Text(
-                                                'Marge: ' +
-                                                    variable
-                                                        .margeTotal(
-                                                            widget.indexProduct)
-                                                        .roundToDouble()
-                                                        .toString() +
-                                                    "€",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: variable
-                                                                .margeTotal(widget
-                                                                    .indexProduct)
-                                                                .roundToDouble() <
-                                                            0
-                                                        ? Colors.red
-                                                        : Colors
-                                                            .lightGreenAccent),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.transparent,
+                          ),
+                          child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              elevation: 20.0,
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width /
                                                 1.2,
-                                            child: PieChart(
-                                              size: Size.fromWidth(
-                                                  MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      2.1),
-                                              legendIconSize: 3,
-                                              legendItemPadding:
-                                                  EdgeInsets.all(0),
-                                              legendIconShape:
-                                                  LegendIconShape.Square,
-                                              legendPosition:
-                                                  LegendPosition.Bottom,
-                                              legendTextSize: 8,
-                                              textScaleFactor: 0.00,
-                                              maxWidth: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  2.9,
-                                              maxHeight: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  12,
-                                              values: [
-                                                ((variable.coutProductTotal(widget.indexProduct) +
-                                                            variable.pubTotal(widget
-                                                                .indexProduct) +
-                                                            variable.shippingTotal(
-                                                                widget
-                                                                    .indexProduct)) <
-                                                        variable.chiffreAffaireTotal(
-                                                            widget
-                                                                .indexProduct))
-                                                    ? (((variable.coutProductTotal(widget.indexProduct) /
-                                                        variable.chiffreAffaireTotal(
-                                                            widget
-                                                                .indexProduct) *
-                                                        100)))
-                                                    : ((variable.coutProductTotal(widget.indexProduct) /
-                                                            (variable.coutProductTotal(widget.indexProduct) +
-                                                                variable.pubTotal(
-                                                                    widget.indexProduct) +
-                                                                variable.shippingTotal(widget.indexProduct))) *
-                                                        100),
-                                                ((variable.coutProductTotal(widget.indexProduct) +
-                                                            variable.pubTotal(widget
-                                                                .indexProduct) +
-                                                            variable.shippingTotal(widget
-                                                                .indexProduct)) <
-                                                        variable.chiffreAffaireTotal(
-                                                            widget
-                                                                .indexProduct))
-                                                    ? (((variable.pubTotal(widget.indexProduct) /
-                                                        variable.chiffreAffaireTotal(
-                                                            widget
-                                                                .indexProduct) *
-                                                        100)))
-                                                    : ((variable.pubTotal(widget.indexProduct) /
-                                                            (variable.coutProductTotal(widget.indexProduct) +
-                                                                variable.pubTotal(
-                                                                    widget.indexProduct) +
-                                                                variable.shippingTotal(widget.indexProduct))) *
-                                                        100),
-                                                ((variable.coutProductTotal(widget.indexProduct) +
-                                                            variable.pubTotal(widget
-                                                                .indexProduct) +
-                                                            variable.shippingTotal(
-                                                                widget
-                                                                    .indexProduct)) <
-                                                        variable.chiffreAffaireTotal(
-                                                            widget
-                                                                .indexProduct))
-                                                    ? (((variable.shippingTotal(widget.indexProduct) /
-                                                        variable.chiffreAffaireTotal(
-                                                            widget
-                                                                .indexProduct) *
-                                                        100)))
-                                                    : ((variable.shippingTotal(widget.indexProduct) /
-                                                            (variable.coutProductTotal(widget.indexProduct) +
-                                                                variable.pubTotal(
-                                                                    widget.indexProduct) +
-                                                                variable.shippingTotal(widget.indexProduct))) *
-                                                        100),
-                                                variable.margeTotal(widget
-                                                            .indexProduct) >
-                                                        0
-                                                    ? (((variable.margeTotal(widget
-                                                                .indexProduct) /
-                                                            variable.chiffreAffaireTotal(
-                                                                widget
-                                                                    .indexProduct)) *
-                                                        100))
-                                                    : 0
-                                              ],
-                                              labels: [
-                                                'Couts produit: ',
-                                                'Pub: ',
-                                                'Shipping: ',
-                                                'Marge: '
-                                              ],
-                                              sliceFillColors: [
-                                                Colors.blueAccent,
-                                                Colors.orangeAccent,
-                                                Colors.cyanAccent,
-                                                variable
-                                                            .margeTotal(widget
-                                                                .indexProduct)
-                                                            .roundToDouble() <
-                                                        0
-                                                    ? Colors.red
-                                                    : Colors.lightGreenAccent
-                                              ],
-                                              animationDuration:
-                                                  Duration(milliseconds: 1500),
-                                              showLegend: false,
-                                            ),
-                                            height: 210.0,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ))),
-                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    Container(
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black,
-                              blurRadius: 45.0, // soften the shadow
-                              spreadRadius: 2.0, //extend the shadow
-                              offset: Offset(
-                                3.0, // Move to right 10  horizontally
-                                3.0, // Move to bottom 10 Vertically
-                              ),
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.transparent,
-                        ),
-                        child: Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            elevation: 20.0,
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                      width: MediaQuery.of(context).size.width /
-                                          1.2,
-                                      decoration: BoxDecoration(
-                                          border:
-                                              Border.all(color: Colors.white70),
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          gradient: LinearGradient(
-                                              begin: Alignment.centerLeft,
-                                              end: Alignment.centerRight,
-                                              colors: [
-                                                Colors.pink,
-                                                Colors.orange
-                                              ])),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Column(
-                                              children: [
-                                                Container(
-                                                  height: 30.0,
-                                                  child: Row(
-                                                    children: [
-                                                      SizedBox(
-                                                        width: 25.0,
-                                                      ),
-                                                      Text(
-                                                        "Nombre total de vente par offres ",
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color: Colors.blue),
-                                                      ),
-                                                      SizedBox(
-                                                        width: 35.0,
-                                                      ),
-                                                      // Text(
-                                                      //   widget
-                                                      //       .resultatDaysList
-                                                      //       .nombreVenteOffreDays
-                                                      //       .length
-                                                      //       .toString(),
-                                                      //   style: TextStyle(
-                                                      //       fontWeight:
-                                                      //           FontWeight
-                                                      //               .bold,
-                                                      //       color:
-                                                      //           Colors.blue),
-                                                      // ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      )),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                      width: MediaQuery.of(context).size.width /
-                                          1.2,
-                                      // decoration: BoxDecoration(
-                                      //     border:
-                                      //         Border.all(color: Colors.white70),
-                                      //     borderRadius: BorderRadius.circular(15),
-                                      //     gradient: LinearGradient(
-                                      //         begin: Alignment.centerLeft,
-                                      //         end: Alignment.centerRight,
-                                      //         colors: [
-                                      //           Colors.pink,
-                                      //           Colors.orange
-                                      //         ])),
-                                      child: Card(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15.0),
-                                        ),
-                                        elevation: 15.0,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(0.0),
-                                                child: Container(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      2.15,
-                                                  child: PieChart(
-                                                    legendIconSize: 5,
-                                                    legendItemPadding:
-                                                        EdgeInsets.all(2),
-                                                    legendIconShape:
-                                                        LegendIconShape.Circle,
-                                                    legendPosition:
-                                                        LegendPosition.Top,
-                                                    legendTextSize: 7,
-                                                    textScaleFactor: 0.00,
-                                                    maxWidth:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width /
-                                                            1.8,
-                                                    maxHeight:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height /
-                                                            10,
-                                                    values: listeDeCouleurOffre(
-                                                                    _productGagnantList[
-                                                                        widget
-                                                                            .indexProduct])
-                                                                .length <=
-                                                            1
-                                                        ? [100]
-                                                        : statOffre(
-                                                            totalOffre(
-                                                                _productGagnantList[
-                                                                    widget
-                                                                        .indexProduct]),
-                                                            _productGagnantList[
-                                                                widget
-                                                                    .indexProduct]),
-                                                    labels: statOffreString(
-                                                        _productGagnantList[
-                                                            widget
-                                                                .indexProduct]),
-                                                    sliceFillColors:
-                                                        listeDeCouleurOffre(
-                                                            _productGagnantList[
-                                                                widget
-                                                                    .indexProduct]),
-                                                    animationDuration: Duration(
-                                                        milliseconds: 1500),
-                                                    showLegend: false,
-                                                  ),
-                                                  height: 220.0,
-                                                ),
-                                              ),
-                                              Container(
-                                                width: 100,
-                                                height: 200,
-                                                child: ListView.builder(
-                                                    itemCount: _productGagnantList[
-                                                            widget.indexProduct]
-                                                        .nombreVenteOffreTotal
-                                                        .length,
-                                                    itemBuilder:
-                                                        (BuildContext context,
-                                                            int index) {
-                                                      return Row(
-                                                        children: [
-                                                          Container(
-                                                            height: 10.0,
-                                                            width: 10.0,
-                                                            decoration:
-                                                                new BoxDecoration(
-                                                              color: listeColors[
-                                                                  (listeColors.length -
-                                                                          1) -
-                                                                      index],
-                                                              shape: BoxShape
-                                                                  .circle,
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 10.0,
-                                                          ),
-                                                          Text(
-                                                            'offre ' +
-                                                                (index + 1)
-                                                                    .toString() +
-                                                                ": " +
-                                                                _productGagnantList[
-                                                                        widget
-                                                                            .indexProduct]
-                                                                    .nombreVenteOffreTotal[index],
-                                                            style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              color: listeColors[
-                                                                  (listeColors.length -
-                                                                          1) -
-                                                                      index],
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    }),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      )),
-                                ),
-                              ],
-                            ))),
-                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    ///   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    Container(
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black,
-                              blurRadius: 45.0, // soften the shadow
-                              spreadRadius: 2.0, //extend the shadow
-                              offset: Offset(
-                                3.0, // Move to right 10  horizontally
-                                3.0, // Move to bottom 10 Vertically
-                              ),
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.transparent,
-                        ),
-                        child: Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            elevation: 20.0,
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                      width: MediaQuery.of(context).size.width /
-                                          1.2,
-                                      decoration: BoxDecoration(
-                                          border:
-                                              Border.all(color: Colors.white70),
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          gradient: LinearGradient(
-                                              begin: Alignment.centerLeft,
-                                              end: Alignment.centerRight,
-                                              colors: [
-                                                Colors.pink,
-                                                Colors.orange
-                                              ])),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Container(
-                                              height: 30.0,
-                                              child: Row(
-                                                children: [
-                                                  SizedBox(
-                                                    width: 25.0,
-                                                  ),
-                                                  Container(
-                                                    height: 10.0,
-                                                    width: 10.0,
-                                                    decoration:
-                                                        new BoxDecoration(
-                                                      color: Colors.blue,
-                                                      shape: BoxShape.circle,
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 10.0,
-                                                  ),
-                                                  Text(
-                                                    "Nombre de vues site internet :" +
-                                                        variable
-                                                            .nombreVueTotal(widget
-                                                                .indexProduct)
-                                                            .toString(),
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Colors.blue),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      )),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                      width: MediaQuery.of(context).size.width /
-                                          1.2,
-                                      // decoration: BoxDecoration(
-                                      //     border:
-                                      //         Border.all(color: Colors.white70),
-                                      //     borderRadius: BorderRadius.circular(15),
-                                      //     gradient: LinearGradient(
-                                      //         begin: Alignment.centerLeft,
-                                      //         end: Alignment.centerRight,
-                                      //         colors: [
-                                      //           Colors.pink,
-                                      //           Colors.orange
-                                      //         ])),
-                                      child: Card(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15.0),
-                                        ),
-                                        elevation: 15.0,
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.white70),
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            gradient: LinearGradient(
+                                                begin: Alignment.centerLeft,
+                                                end: Alignment.centerRight,
+                                                colors: [
+                                                  Colors.pink,
+                                                  Colors.orange
+                                                ])),
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: Row(
@@ -1414,396 +760,706 @@ class _StatGlobalState extends State<StatGlobal> {
                                             children: [
                                               Column(
                                                 children: [
-                                                  Row(
-                                                    children: [
-                                                      Container(
-                                                        height: 10.0,
-                                                        width: 10.0,
-                                                        decoration:
-                                                            new BoxDecoration(
-                                                          color: Colors
-                                                              .lightGreenAccent,
-                                                          shape:
-                                                              BoxShape.circle,
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        width: 10.0,
-                                                      ),
-                                                      Text(
-                                                        "Panier : " +
-                                                            variable
-                                                                .nombrePanierTotal(
-                                                                    widget
-                                                                        .indexProduct)
-                                                                .toString(),
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color: Colors.blue),
-                                                      ),
-                                                    ],
-                                                  ),
                                                   Container(
-                                                    child: PieChart(
-                                                      textScaleFactor: 0.1,
-                                                      maxWidth:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              3,
-                                                      maxHeight:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .height /
-                                                              14,
-                                                      values: [
-                                                        ((variable.nombrePanierTotal(
-                                                                        widget
-                                                                            .indexProduct) /
-                                                                    variable.nombreVueTotal(
-                                                                        widget
-                                                                            .indexProduct)) *
-                                                                100)
-                                                            .roundToDouble(),
-                                                        (((variable.nombreVueTotal(widget
-                                                                            .indexProduct) -
-                                                                        variable.nombrePanierTotal(widget
-                                                                            .indexProduct)) /
-                                                                    variable.nombreVueTotal(
-                                                                        widget
-                                                                            .indexProduct)) *
-                                                                100)
-                                                            .roundToDouble(),
-                                                      ],
-                                                      labels: [
-                                                        'panier',
-                                                        'nonpanier'
-                                                      ],
-                                                      sliceFillColors: [
-                                                        Colors.lightGreenAccent,
-                                                        Colors.blue
-                                                      ],
-                                                      animationDuration:
-                                                          Duration(
-                                                              milliseconds:
-                                                                  1500),
-                                                      showLegend: false,
-                                                    ),
-                                                    height: 140.0,
-                                                  ),
-                                                ],
-                                              ),
-                                              Column(
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      Container(
-                                                        height: 10.0,
-                                                        width: 10.0,
-                                                        decoration:
-                                                            new BoxDecoration(
-                                                          color: Colors
-                                                              .amberAccent,
-                                                          shape:
-                                                              BoxShape.circle,
+                                                    height: 30.0,
+                                                    child: Row(
+                                                      children: [
+                                                        SizedBox(
+                                                          width: 25.0,
                                                         ),
-                                                      ),
-                                                      SizedBox(
-                                                        width: 10.0,
-                                                      ),
-                                                      Text(
-                                                        "vente : " +
-                                                            variable
-                                                                .nombreVenteTotal(
-                                                                    widget
-                                                                        .indexProduct)
-                                                                .toString(),
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color: Colors.blue),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Container(
-                                                    child: PieChart(
-                                                      textScaleFactor: 0.1,
-                                                      maxWidth:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              3,
-                                                      maxHeight:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .height /
-                                                              14,
-                                                      values: [
-                                                        ((variable.nombreVenteTotal(
-                                                                        widget
-                                                                            .indexProduct) /
-                                                                    variable.nombreVueTotal(
-                                                                        widget
-                                                                            .indexProduct)) *
-                                                                100)
-                                                            .roundToDouble(),
-                                                        (((variable.nombreVueTotal(widget
-                                                                            .indexProduct) -
-                                                                        variable.nombreVenteTotal(widget
-                                                                            .indexProduct)) /
-                                                                    variable.nombreVueTotal(
-                                                                        widget
-                                                                            .indexProduct)) *
-                                                                100)
-                                                            .roundToDouble(),
+                                                        Text(
+                                                          "Chiffre d'affaire",
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              color:
+                                                                  Colors.blue),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 25.0,
+                                                        ),
+                                                        Text(
+                                                          variable
+                                                                  .chiffreDaffaireTotal(
+                                                                      widget
+                                                                          .indexProduct)
+                                                                  .roundToDouble()
+                                                                  .toString() +
+                                                              "€",
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              color:
+                                                                  Colors.blue),
+                                                        ),
                                                       ],
-                                                      labels: [
-                                                        'Marge',
-                                                        'frais'
-                                                      ],
-                                                      sliceFillColors: [
-                                                        Colors.amberAccent,
-                                                        Colors.blue
-                                                      ],
-                                                      animationDuration:
-                                                          Duration(
-                                                              milliseconds:
-                                                                  1500),
-                                                      showLegend: false,
                                                     ),
-                                                    height: 140.0,
                                                   ),
                                                 ],
                                               ),
                                             ],
                                           ),
-                                        ),
-                                      )),
-                                ),
-                              ],
-                            ))),
-                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        ///   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        Container(
-                            decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black,
-                                  blurRadius: 45.0, // soften the shadow
-                                  spreadRadius: 2.0, //extend the shadow
-                                  offset: Offset(
-                                    3.0, // Move to right 10  horizontally
-                                    3.0, // Move to bottom 10 Vertically
+                                        )),
                                   ),
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.transparent,
-                            ),
-                            child: Card(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              2.7,
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.white70),
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                              gradient: LinearGradient(
-                                                  begin: Alignment.centerLeft,
-                                                  end: Alignment.centerRight,
-                                                  colors: [
-                                                    Colors.pink,
-                                                    Colors.orange
-                                                  ])),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Container(
-                                                  height: 30.0,
-                                                  child: Row(
-                                                    children: [
-                                                      Container(
-                                                        height: 10.0,
-                                                        width: 10.0,
-                                                        decoration:
-                                                            new BoxDecoration(
-                                                          color: Colors
-                                                              .greenAccent,
-                                                          shape:
-                                                              BoxShape.circle,
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        width: 10.0,
-                                                      ),
-                                                      Text(
-                                                        'Marge: ' +
-                                                            variable
-                                                                .margeTotal(widget
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Card(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(15.0),
+                                      ),
+                                      elevation: 15.0,
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                1.2,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 10, left: 15),
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    height: 10.0,
+                                                    width: 10.0,
+                                                    decoration:
+                                                        new BoxDecoration(
+                                                      color: Colors.blueAccent,
+                                                      shape: BoxShape.circle,
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10.0,
+                                                  ),
+                                                  Text(
+                                                    'Couts produit: ' +
+                                                        variable
+                                                            .coutProductTotal(
+                                                                widget
                                                                     .indexProduct)
-                                                                .roundToDouble()
-                                                                .toString() +
-                                                            "€",
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color: Colors.blue),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          )),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              2.7,
-                                          // decoration: BoxDecoration(
-                                          //     border: Border.all(
-                                          //         color: Colors.white70),
-                                          //     borderRadius:
-                                          //         BorderRadius.circular(15),
-                                          //     gradient: LinearGradient(
-                                          //         begin: Alignment.centerLeft,
-                                          //         end: Alignment.centerRight,
-                                          //         colors: [
-                                          //           Colors.pink,
-                                          //           Colors.orange
-                                          //         ])),
-                                          child: Card(
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(15.0),
-                                            ),
-                                            elevation: 15.0,
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Column(
-                                                    children: [
-                                                      Container(
-                                                        child: PieChart(
-                                                          textScaleFactor: 0.0,
-                                                          maxWidth: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width /
-                                                              3.3,
-                                                          maxHeight:
-                                                              MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .height /
-                                                                  14,
-                                                          values: [
-                                                            ((variable.margeTotal(widget
-                                                                            .indexProduct) /
-                                                                        variable
-                                                                            .chiffreAffaireTotal(widget.indexProduct)) *
-                                                                    100)
-                                                                .roundToDouble(),
-                                                            100 -
-                                                                (((variable.margeTotal(widget.indexProduct) /
-                                                                            variable.chiffreAffaireTotal(widget.indexProduct))) *
-                                                                        100)
-                                                                    .roundToDouble()
-                                                          ],
-                                                          labels: [
-                                                            'Marge',
-                                                            'frais'
-                                                          ],
-                                                          sliceFillColors: [
-                                                            Colors.greenAccent,
-                                                            Colors.red
-                                                          ],
-                                                          animationDuration:
-                                                              Duration(
-                                                                  milliseconds:
-                                                                      1500),
-                                                          showLegend: false,
-                                                        ),
-                                                        height: 140.0,
-                                                      ),
-                                                    ],
+                                                            .roundToDouble()
+                                                            .toString() +
+                                                        "€",
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color:
+                                                            Colors.blueAccent),
                                                   ),
                                                 ],
                                               ),
                                             ),
-                                          )),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 10, left: 15),
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  height: 10.0,
+                                                  width: 10.0,
+                                                  decoration: new BoxDecoration(
+                                                    color: Colors.orangeAccent,
+                                                    shape: BoxShape.circle,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 10.0,
+                                                ),
+                                                Text(
+                                                  'Pub: ' +
+                                                      variable
+                                                          .pubTotal(widget
+                                                              .indexProduct)
+                                                          .roundToDouble()
+                                                          .toString() +
+                                                      "€",
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.orangeAccent,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                1.2,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 10, left: 15),
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    height: 10.0,
+                                                    width: 10.0,
+                                                    decoration:
+                                                        new BoxDecoration(
+                                                      color: Colors.cyanAccent,
+                                                      shape: BoxShape.circle,
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10.0,
+                                                  ),
+                                                  Text(
+                                                    'Shipping: ' +
+                                                        variable
+                                                            .shippingTotal(widget
+                                                                .indexProduct)
+                                                            .roundToDouble()
+                                                            .toString() +
+                                                        "€",
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.cyanAccent,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 10, left: 15),
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  height: 10.0,
+                                                  width: 10.0,
+                                                  decoration: new BoxDecoration(
+                                                    color:
+                                                        Colors.lightGreenAccent,
+                                                    shape: BoxShape.circle,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 10.0,
+                                                ),
+                                                Text(
+                                                  'Marge: ' +
+                                                      variable
+                                                          .margeTotal(widget
+                                                              .indexProduct)
+                                                          .roundToDouble()
+                                                          .toString() +
+                                                      "€",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: variable
+                                                                  .margeTotal(widget
+                                                                      .indexProduct)
+                                                                  .roundToDouble() <
+                                                              0
+                                                          ? Colors.red
+                                                          : Colors
+                                                              .lightGreenAccent),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  1.2,
+                                              child: PieChart(
+                                                size: Size.fromWidth(
+                                                    MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                        2.1),
+                                                legendIconSize: 3,
+                                                legendItemPadding:
+                                                    EdgeInsets.all(0),
+                                                legendIconShape:
+                                                    LegendIconShape.Square,
+                                                legendPosition:
+                                                    LegendPosition.Bottom,
+                                                legendTextSize: 8,
+                                                textScaleFactor: 0.00,
+                                                maxWidth: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    2.9,
+                                                maxHeight:
+                                                    MediaQuery.of(context)
+                                                            .size
+                                                            .height /
+                                                        12,
+                                                values: [
+                                                  ((variable.coutProductTotal(widget.indexProduct) +
+                                                              variable.pubTotal(widget
+                                                                  .indexProduct) +
+                                                              variable.shippingTotal(
+                                                                  widget
+                                                                      .indexProduct)) <
+                                                          variable.chiffreAffaireTotal(
+                                                              widget
+                                                                  .indexProduct))
+                                                      ? (((variable.coutProductTotal(widget.indexProduct) /
+                                                          variable.chiffreAffaireTotal(
+                                                              widget
+                                                                  .indexProduct) *
+                                                          100)))
+                                                      : ((variable.coutProductTotal(widget.indexProduct) /
+                                                              (variable.coutProductTotal(widget.indexProduct) +
+                                                                  variable.pubTotal(
+                                                                      widget.indexProduct) +
+                                                                  variable.shippingTotal(widget.indexProduct))) *
+                                                          100),
+                                                  ((variable.coutProductTotal(widget.indexProduct) +
+                                                              variable.pubTotal(
+                                                                  widget
+                                                                      .indexProduct) +
+                                                              variable.shippingTotal(
+                                                                  widget
+                                                                      .indexProduct)) <
+                                                          variable.chiffreAffaireTotal(
+                                                              widget
+                                                                  .indexProduct))
+                                                      ? (((variable.pubTotal(widget.indexProduct) /
+                                                          variable.chiffreAffaireTotal(
+                                                              widget
+                                                                  .indexProduct) *
+                                                          100)))
+                                                      : ((variable.pubTotal(widget.indexProduct) /
+                                                              (variable.coutProductTotal(widget.indexProduct) +
+                                                                  variable.pubTotal(
+                                                                      widget.indexProduct) +
+                                                                  variable.shippingTotal(widget.indexProduct))) *
+                                                          100),
+                                                  ((variable.coutProductTotal(widget.indexProduct) +
+                                                              variable.pubTotal(widget
+                                                                  .indexProduct) +
+                                                              variable.shippingTotal(
+                                                                  widget
+                                                                      .indexProduct)) <
+                                                          variable.chiffreAffaireTotal(
+                                                              widget
+                                                                  .indexProduct))
+                                                      ? (((variable.shippingTotal(widget.indexProduct) /
+                                                          variable.chiffreAffaireTotal(
+                                                              widget
+                                                                  .indexProduct) *
+                                                          100)))
+                                                      : ((variable.shippingTotal(widget.indexProduct) /
+                                                              (variable.coutProductTotal(widget.indexProduct) +
+                                                                  variable.pubTotal(
+                                                                      widget.indexProduct) +
+                                                                  variable.shippingTotal(widget.indexProduct))) *
+                                                          100),
+                                                  variable.margeTotal(widget
+                                                              .indexProduct) >
+                                                          0
+                                                      ? (((variable.margeTotal(
+                                                                  widget
+                                                                      .indexProduct) /
+                                                              variable.chiffreAffaireTotal(
+                                                                  widget
+                                                                      .indexProduct)) *
+                                                          100))
+                                                      : 0
+                                                ],
+                                                labels: [
+                                                  'Couts produit: ',
+                                                  'Pub: ',
+                                                  'Shipping: ',
+                                                  'Marge: '
+                                                ],
+                                                sliceFillColors: [
+                                                  Colors.blueAccent,
+                                                  Colors.orangeAccent,
+                                                  Colors.cyanAccent,
+                                                  variable
+                                                              .margeTotal(widget
+                                                                  .indexProduct)
+                                                              .roundToDouble() <
+                                                          0
+                                                      ? Colors.red
+                                                      : Colors.lightGreenAccent
+                                                ],
+                                                animationDuration: Duration(
+                                                    milliseconds: 1500),
+                                                showLegend: false,
+                                              ),
+                                              height: 210.0,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ],
-                                ))),
-                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        //////   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        Container(
-                            decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black,
-                                  blurRadius: 45.0, // soften the shadow
-                                  spreadRadius: 2.0, //extend the shadow
-                                  offset: Offset(
-                                    3.0, // Move to right 10  horizontally
-                                    3.0, // Move to bottom 10 Vertically
-                                  ),
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.transparent,
-                            ),
-                            child: Card(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
+                                  )
+                                ],
+                              ))),
+                    ),
+                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    RepaintBoundary(
+                      key: key1,
+                      child: Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black,
+                                blurRadius: 45.0, // soften the shadow
+                                spreadRadius: 2.0, //extend the shadow
+                                offset: Offset(
+                                  3.0, // Move to right 10  horizontally
+                                  3.0, // Move to bottom 10 Vertically
                                 ),
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              2.7,
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.white70),
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                              gradient: LinearGradient(
-                                                  begin: Alignment.centerLeft,
-                                                  end: Alignment.centerRight,
-                                                  colors: [
-                                                    Colors.pink,
-                                                    Colors.orange
-                                                  ])),
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.transparent,
+                          ),
+                          child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              elevation: 20.0,
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.2,
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.white70),
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            gradient: LinearGradient(
+                                                begin: Alignment.centerLeft,
+                                                end: Alignment.centerRight,
+                                                colors: [
+                                                  Colors.pink,
+                                                  Colors.orange
+                                                ])),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Column(
+                                                children: [
+                                                  Container(
+                                                    height: 30.0,
+                                                    child: Row(
+                                                      children: [
+                                                        SizedBox(
+                                                          width: 25.0,
+                                                        ),
+                                                        Text(
+                                                          "Nombre total de vente par offres ",
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              color:
+                                                                  Colors.blue),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 35.0,
+                                                        ),
+                                                        // Text(
+                                                        //   widget
+                                                        //       .resultatDaysList
+                                                        //       .nombreVenteOffreDays
+                                                        //       .length
+                                                        //       .toString(),
+                                                        //   style: TextStyle(
+                                                        //       fontWeight:
+                                                        //           FontWeight
+                                                        //               .bold,
+                                                        //       color:
+                                                        //           Colors.blue),
+                                                        // ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        )),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.2,
+                                        // decoration: BoxDecoration(
+                                        //     border:
+                                        //         Border.all(color: Colors.white70),
+                                        //     borderRadius: BorderRadius.circular(15),
+                                        //     gradient: LinearGradient(
+                                        //         begin: Alignment.centerLeft,
+                                        //         end: Alignment.centerRight,
+                                        //         colors: [
+                                        //           Colors.pink,
+                                        //           Colors.orange
+                                        //         ])),
+                                        child: Card(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15.0),
+                                          ),
+                                          elevation: 15.0,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(0.0),
+                                                  child: Container(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            2.15,
+                                                    child: PieChart(
+                                                      legendIconSize: 5,
+                                                      legendItemPadding:
+                                                          EdgeInsets.all(2),
+                                                      legendIconShape:
+                                                          LegendIconShape
+                                                              .Circle,
+                                                      legendPosition:
+                                                          LegendPosition.Top,
+                                                      legendTextSize: 7,
+                                                      textScaleFactor: 0.00,
+                                                      maxWidth:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              1.8,
+                                                      maxHeight:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height /
+                                                              10,
+                                                      values: listeDeCouleurOffre(
+                                                                      _productGagnantList[
+                                                                          widget
+                                                                              .indexProduct])
+                                                                  .length <=
+                                                              1
+                                                          ? [100]
+                                                          : statOffre(
+                                                              totalOffre(
+                                                                  _productGagnantList[
+                                                                      widget
+                                                                          .indexProduct]),
+                                                              _productGagnantList[
+                                                                  widget
+                                                                      .indexProduct]),
+                                                      labels: statOffreString(
+                                                          _productGagnantList[
+                                                              widget
+                                                                  .indexProduct]),
+                                                      sliceFillColors:
+                                                          listeDeCouleurOffre(
+                                                              _productGagnantList[
+                                                                  widget
+                                                                      .indexProduct]),
+                                                      animationDuration:
+                                                          Duration(
+                                                              milliseconds:
+                                                                  1500),
+                                                      showLegend: false,
+                                                    ),
+                                                    height: 220.0,
+                                                  ),
+                                                ),
+                                                Container(
+                                                  width: 100,
+                                                  height: 200,
+                                                  child: ListView.builder(
+                                                      itemCount: _productGagnantList[
+                                                              widget
+                                                                  .indexProduct]
+                                                          .nombreVenteOffreTotal
+                                                          .length,
+                                                      itemBuilder:
+                                                          (BuildContext context,
+                                                              int index) {
+                                                        return Row(
+                                                          children: [
+                                                            Container(
+                                                              height: 10.0,
+                                                              width: 10.0,
+                                                              decoration:
+                                                                  new BoxDecoration(
+                                                                color: listeColors[
+                                                                    (listeColors.length -
+                                                                            1) -
+                                                                        index],
+                                                                shape: BoxShape
+                                                                    .circle,
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 10.0,
+                                                            ),
+                                                            Text(
+                                                              'offre ' +
+                                                                  (index + 1)
+                                                                      .toString() +
+                                                                  ": " +
+                                                                  _productGagnantList[
+                                                                          widget
+                                                                              .indexProduct]
+                                                                      .nombreVenteOffreTotal[index],
+                                                              style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                color: listeColors[
+                                                                    (listeColors.length -
+                                                                            1) -
+                                                                        index],
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      }),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        )),
+                                  ),
+                                ],
+                              ))),
+                    ),
+                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    ///   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    RepaintBoundary(
+                      key: key2,
+                      child: Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black,
+                                blurRadius: 45.0, // soften the shadow
+                                spreadRadius: 2.0, //extend the shadow
+                                offset: Offset(
+                                  3.0, // Move to right 10  horizontally
+                                  3.0, // Move to bottom 10 Vertically
+                                ),
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.transparent,
+                          ),
+                          child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              elevation: 20.0,
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.2,
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.white70),
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            gradient: LinearGradient(
+                                                begin: Alignment.centerLeft,
+                                                end: Alignment.centerRight,
+                                                colors: [
+                                                  Colors.pink,
+                                                  Colors.orange
+                                                ])),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Container(
+                                                height: 30.0,
+                                                child: Row(
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 25.0,
+                                                    ),
+                                                    Container(
+                                                      height: 10.0,
+                                                      width: 10.0,
+                                                      decoration:
+                                                          new BoxDecoration(
+                                                        color: Colors.blue,
+                                                        shape: BoxShape.circle,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10.0,
+                                                    ),
+                                                    Text(
+                                                      "Nombre de vues site internet :" +
+                                                          variable
+                                                              .nombreVueTotal(widget
+                                                                  .indexProduct)
+                                                              .toString(),
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.blue),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        )),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.2,
+                                        // decoration: BoxDecoration(
+                                        //     border:
+                                        //         Border.all(color: Colors.white70),
+                                        //     borderRadius: BorderRadius.circular(15),
+                                        //     gradient: LinearGradient(
+                                        //         begin: Alignment.centerLeft,
+                                        //         end: Alignment.centerRight,
+                                        //         colors: [
+                                        //           Colors.pink,
+                                        //           Colors.orange
+                                        //         ])),
+                                        child: Card(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15.0),
+                                          ),
+                                          elevation: 15.0,
                                           child: Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: Row(
@@ -1811,57 +1467,233 @@ class _StatGlobalState extends State<StatGlobal> {
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [
-                                                Container(
-                                                  height: 30.0,
-                                                  child: Row(
-                                                    children: [
-                                                      Text(
-                                                        "Roas: " +
-                                                            (variable.chiffreDaffaireTotal(
-                                                                        widget
-                                                                            .indexProduct) /
-                                                                    variable.margeTotal(
-                                                                        widget
-                                                                            .indexProduct))
-                                                                .toStringAsFixed(
-                                                                    2),
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color: Colors.blue),
+                                                Column(
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Container(
+                                                          height: 10.0,
+                                                          width: 10.0,
+                                                          decoration:
+                                                              new BoxDecoration(
+                                                            color: Colors
+                                                                .lightGreenAccent,
+                                                            shape:
+                                                                BoxShape.circle,
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 10.0,
+                                                        ),
+                                                        Text(
+                                                          "Panier : " +
+                                                              variable
+                                                                  .nombrePanierTotal(
+                                                                      widget
+                                                                          .indexProduct)
+                                                                  .toString(),
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              color:
+                                                                  Colors.blue),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Container(
+                                                      child: PieChart(
+                                                        textScaleFactor: 0.1,
+                                                        maxWidth: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            3,
+                                                        maxHeight:
+                                                            MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .height /
+                                                                14,
+                                                        values: [
+                                                          ((variable.nombrePanierTotal(
+                                                                          widget
+                                                                              .indexProduct) /
+                                                                      variable.nombreVueTotal(
+                                                                          widget
+                                                                              .indexProduct)) *
+                                                                  100)
+                                                              .roundToDouble(),
+                                                          (((variable.nombreVueTotal(widget
+                                                                              .indexProduct) -
+                                                                          variable.nombrePanierTotal(widget
+                                                                              .indexProduct)) /
+                                                                      variable.nombreVueTotal(
+                                                                          widget
+                                                                              .indexProduct)) *
+                                                                  100)
+                                                              .roundToDouble(),
+                                                        ],
+                                                        labels: [
+                                                          'panier',
+                                                          'nonpanier'
+                                                        ],
+                                                        sliceFillColors: [
+                                                          Colors
+                                                              .lightGreenAccent,
+                                                          Colors.blue
+                                                        ],
+                                                        animationDuration:
+                                                            Duration(
+                                                                milliseconds:
+                                                                    1500),
+                                                        showLegend: false,
                                                       ),
-                                                    ],
-                                                  ),
+                                                      height: 140.0,
+                                                    ),
+                                                  ],
+                                                ),
+                                                Column(
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Container(
+                                                          height: 10.0,
+                                                          width: 10.0,
+                                                          decoration:
+                                                              new BoxDecoration(
+                                                            color: Colors
+                                                                .amberAccent,
+                                                            shape:
+                                                                BoxShape.circle,
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 10.0,
+                                                        ),
+                                                        Text(
+                                                          "vente : " +
+                                                              variable
+                                                                  .nombreVenteTotal(
+                                                                      widget
+                                                                          .indexProduct)
+                                                                  .toString(),
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              color:
+                                                                  Colors.blue),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Container(
+                                                      child: PieChart(
+                                                        textScaleFactor: 0.1,
+                                                        maxWidth: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            3,
+                                                        maxHeight:
+                                                            MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .height /
+                                                                14,
+                                                        values: [
+                                                          ((variable.nombreVenteTotal(
+                                                                          widget
+                                                                              .indexProduct) /
+                                                                      variable.nombreVueTotal(
+                                                                          widget
+                                                                              .indexProduct)) *
+                                                                  100)
+                                                              .roundToDouble(),
+                                                          (((variable.nombreVueTotal(widget
+                                                                              .indexProduct) -
+                                                                          variable.nombreVenteTotal(widget
+                                                                              .indexProduct)) /
+                                                                      variable.nombreVueTotal(
+                                                                          widget
+                                                                              .indexProduct)) *
+                                                                  100)
+                                                              .roundToDouble(),
+                                                        ],
+                                                        labels: [
+                                                          'Marge',
+                                                          'frais'
+                                                        ],
+                                                        sliceFillColors: [
+                                                          Colors.amberAccent,
+                                                          Colors.blue
+                                                        ],
+                                                        animationDuration:
+                                                            Duration(
+                                                                milliseconds:
+                                                                    1500),
+                                                        showLegend: false,
+                                                      ),
+                                                      height: 140.0,
+                                                    ),
+                                                  ],
                                                 ),
                                               ],
                                             ),
-                                          )),
+                                          ),
+                                        )),
+                                  ),
+                                ],
+                              ))),
+                    ),
+                    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    RepaintBoundary(
+                      key: key3,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          ///   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                          Container(
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black,
+                                    blurRadius: 45.0, // soften the shadow
+                                    spreadRadius: 2.0, //extend the shadow
+                                    offset: Offset(
+                                      3.0, // Move to right 10  horizontally
+                                      3.0, // Move to bottom 10 Vertically
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              2.7,
-                                          // decoration: BoxDecoration(
-                                          //     border: Border.all(
-                                          //         color: Colors.white70),
-                                          //     borderRadius:
-                                          //         BorderRadius.circular(15),
-                                          //     gradient: LinearGradient(
-                                          //         begin: Alignment.centerLeft,
-                                          //         end: Alignment.centerRight,
-                                          //         colors: [
-                                          //           Colors.pink,
-                                          //           Colors.orange
-                                          //         ])),
-                                          child: Card(
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(15.0),
-                                            ),
-                                            elevation: 15.0,
+                                  )
+                                ],
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.transparent,
+                              ),
+                              child: Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2.7,
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: Colors.white70),
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
+                                                gradient: LinearGradient(
+                                                    begin: Alignment.centerLeft,
+                                                    end: Alignment.centerRight,
+                                                    colors: [
+                                                      Colors.pink,
+                                                      Colors.orange
+                                                    ])),
                                             child: Padding(
                                               padding:
                                                   const EdgeInsets.all(8.0),
@@ -1870,66 +1702,305 @@ class _StatGlobalState extends State<StatGlobal> {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  Column(
-                                                    children: [
-                                                      Container(
-                                                        child: PieChart(
-                                                          textScaleFactor: 0.0,
-                                                          maxWidth: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width /
-                                                              3.3,
-                                                          maxHeight:
-                                                              MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .height /
-                                                                  14,
-                                                          values: [
-                                                            (100 -
-                                                                (((variable.chiffreDaffaireTotal(widget.indexProduct) /
-                                                                            variable.margeTotal(widget.indexProduct)) /
-                                                                        1.80) *
-                                                                    100)),
-                                                            (((variable.chiffreDaffaireTotal(widget
-                                                                            .indexProduct) /
-                                                                        variable
-                                                                            .margeTotal(widget.indexProduct)) /
-                                                                    1.80) *
-                                                                100)
-                                                          ],
-                                                          labels: [
-                                                            'Marge',
-                                                            'frais'
-                                                          ],
-                                                          sliceFillColors: [
-                                                            Colors
-                                                                .lightGreenAccent,
-                                                            Colors.red
-                                                          ],
-                                                          animationDuration:
-                                                              Duration(
-                                                                  milliseconds:
-                                                                      1500),
-                                                          showLegend: false,
+                                                  Container(
+                                                    height: 30.0,
+                                                    child: Row(
+                                                      children: [
+                                                        Container(
+                                                          height: 10.0,
+                                                          width: 10.0,
+                                                          decoration:
+                                                              new BoxDecoration(
+                                                            color: Colors
+                                                                .greenAccent,
+                                                            shape:
+                                                                BoxShape.circle,
+                                                          ),
                                                         ),
-                                                        height: 140.0,
-                                                      ),
-                                                    ],
+                                                        SizedBox(
+                                                          width: 10.0,
+                                                        ),
+                                                        Text(
+                                                          'Marge: ' +
+                                                              variable
+                                                                  .margeTotal(widget
+                                                                      .indexProduct)
+                                                                  .roundToDouble()
+                                                                  .toString() +
+                                                              "€",
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              color:
+                                                                  Colors.blue),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
                                                 ],
                                               ),
-                                            ),
-                                          )),
+                                            )),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2.7,
+                                            // decoration: BoxDecoration(
+                                            //     border: Border.all(
+                                            //         color: Colors.white70),
+                                            //     borderRadius:
+                                            //         BorderRadius.circular(15),
+                                            //     gradient: LinearGradient(
+                                            //         begin: Alignment.centerLeft,
+                                            //         end: Alignment.centerRight,
+                                            //         colors: [
+                                            //           Colors.pink,
+                                            //           Colors.orange
+                                            //         ])),
+                                            child: Card(
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(15.0),
+                                              ),
+                                              elevation: 15.0,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Column(
+                                                      children: [
+                                                        Container(
+                                                          child: PieChart(
+                                                            textScaleFactor:
+                                                                0.0,
+                                                            maxWidth: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width /
+                                                                3.3,
+                                                            maxHeight: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .height /
+                                                                14,
+                                                            values: [
+                                                              ((variable.margeTotal(widget
+                                                                              .indexProduct) /
+                                                                          variable
+                                                                              .chiffreAffaireTotal(widget.indexProduct)) *
+                                                                      100)
+                                                                  .roundToDouble(),
+                                                              100 -
+                                                                  (((variable.margeTotal(widget.indexProduct) /
+                                                                              variable.chiffreAffaireTotal(widget.indexProduct))) *
+                                                                          100)
+                                                                      .roundToDouble()
+                                                            ],
+                                                            labels: [
+                                                              'Marge',
+                                                              'frais'
+                                                            ],
+                                                            sliceFillColors: [
+                                                              Colors
+                                                                  .greenAccent,
+                                                              Colors.red
+                                                            ],
+                                                            animationDuration:
+                                                                Duration(
+                                                                    milliseconds:
+                                                                        1500),
+                                                            showLegend: false,
+                                                          ),
+                                                          height: 140.0,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            )),
+                                      ),
+                                    ],
+                                  ))),
+                          //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                          //////   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                          Container(
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black,
+                                    blurRadius: 45.0, // soften the shadow
+                                    spreadRadius: 2.0, //extend the shadow
+                                    offset: Offset(
+                                      3.0, // Move to right 10  horizontally
+                                      3.0, // Move to bottom 10 Vertically
                                     ),
-                                  ],
-                                ))),
-                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                      ],
+                                  )
+                                ],
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.transparent,
+                              ),
+                              child: Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2.7,
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: Colors.white70),
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
+                                                gradient: LinearGradient(
+                                                    begin: Alignment.centerLeft,
+                                                    end: Alignment.centerRight,
+                                                    colors: [
+                                                      Colors.pink,
+                                                      Colors.orange
+                                                    ])),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Container(
+                                                    height: 30.0,
+                                                    child: Row(
+                                                      children: [
+                                                        Text(
+                                                          "Roas: " +
+                                                              (variable.chiffreDaffaireTotal(
+                                                                          widget
+                                                                              .indexProduct) /
+                                                                      variable.margeTotal(
+                                                                          widget
+                                                                              .indexProduct))
+                                                                  .toStringAsFixed(
+                                                                      2),
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              color:
+                                                                  Colors.blue),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            )),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2.7,
+                                            // decoration: BoxDecoration(
+                                            //     border: Border.all(
+                                            //         color: Colors.white70),
+                                            //     borderRadius:
+                                            //         BorderRadius.circular(15),
+                                            //     gradient: LinearGradient(
+                                            //         begin: Alignment.centerLeft,
+                                            //         end: Alignment.centerRight,
+                                            //         colors: [
+                                            //           Colors.pink,
+                                            //           Colors.orange
+                                            //         ])),
+                                            child: Card(
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(15.0),
+                                              ),
+                                              elevation: 15.0,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Column(
+                                                      children: [
+                                                        Container(
+                                                          child: PieChart(
+                                                            textScaleFactor:
+                                                                0.0,
+                                                            maxWidth: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width /
+                                                                3.3,
+                                                            maxHeight: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .height /
+                                                                14,
+                                                            values: [
+                                                              (100 -
+                                                                  (((variable.chiffreDaffaireTotal(widget.indexProduct) /
+                                                                              variable.margeTotal(widget.indexProduct)) ) *
+                                                                      100)),
+                                                              (((variable.chiffreDaffaireTotal(widget
+                                                                              .indexProduct) /
+                                                                          variable
+                                                                              .margeTotal(widget.indexProduct)) ) *
+                                                                  100)
+                                                            ],
+                                                            labels: [
+                                                              'Marge',
+                                                              'frais'
+                                                            ],
+                                                            sliceFillColors: [
+                                                              Colors
+                                                                  .lightGreenAccent,
+                                                              Colors.red
+                                                            ],
+                                                            animationDuration:
+                                                                Duration(
+                                                                    milliseconds:
+                                                                        1500),
+                                                            showLegend: false,
+                                                          ),
+                                                          height: 140.0,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            )),
+                                      ),
+                                    ],
+                                  ))),
+                          //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        ],
+                      ),
                     )
                   ]),
-            )),
+            ),
           ),
         ),
       ),

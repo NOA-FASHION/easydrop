@@ -12,12 +12,18 @@ import 'package:shimmer_animation/shimmer_animation.dart';
 
 class PlayPicture extends StatelessWidget {
   final Uint8List patch;
+  final Uint8List patch1;
+  final Uint8List patch2;
+  final Uint8List patch3;
   final Directory directory;
   final ProduitGagnant productGagnantList;
   const PlayPicture(
       {Key? key,
       required this.productGagnantList,
       required this.patch,
+      required this.patch1,
+      required this.patch2,
+      required this.patch3,
       required this.directory})
       : super(key: key);
 
@@ -67,34 +73,6 @@ class PlayPicture extends StatelessWidget {
                     InkWell(
                       splashColor: Colors.white,
                       onTap: () async {
-                        // pdf.addPage(pw.Page(build: (pw.Context context) {
-                        //   return pw.Center(
-                        //     child: pw.Image(pw.MemoryImage(patch)),
-                        //   ); // Center
-                        // }));
-                        // pdf.addPage(pw.Page(build: (pw.Context context) {
-                        //   return pw.Column(children: [
-                        //     pw.Text("Nom: " + userDrop.nom),
-                        //     pw.SizedBox(height: 10),
-                        //     pw.Text("Prénom: " + userDrop.prenom),
-                        //     pw.SizedBox(height: 10),
-                        //     pw.Text("Email: " + userDrop.email),
-                        //     pw.SizedBox(height: 10),
-                        //     pw.Text("Téléphone: " + userDrop.telephone),
-                        //     pw.SizedBox(height: 10),
-                        //     pw.Text("Adresse site: " +
-                        //         productGagnantList.siteVente),
-                        //     pw.SizedBox(height: 10),
-                        //     pw.Text("Adresse Facebook: " +
-                        //         productGagnantList.facebookAdress),
-                        //     pw.SizedBox(height: 10),
-                        //     pw.Text("Adresse aliexpress: " +
-                        //         productGagnantList.siteAliexpress),
-                        //     pw.SizedBox(height: 10),
-                        //     pw.Image(pw.MemoryImage(patch)),
-                        //   ]); // Center
-                        // }));
-
                         pdf.addPage(pw.MultiPage(
                             margin: pw.EdgeInsets.all(10),
                             pageFormat: PdfPageFormat.a4,
@@ -128,12 +106,31 @@ class PlayPicture extends StatelessWidget {
                                 pw.Column(
                                     crossAxisAlignment:
                                         pw.CrossAxisAlignment.center,
-                                    mainAxisSize: pw.MainAxisSize.max,
+                                    mainAxisSize: pw.MainAxisSize.min,
                                     children: [
+                                      pw.SizedBox(height: 50),
                                       pw.Image(pw.MemoryImage(patch),
-                                          height: 400,
+                                          height: 200,
+                                          fit: pw.BoxFit.fitHeight),
+                                      pw.SizedBox(height: 30),
+                                      pw.Image(pw.MemoryImage(patch1),
+                                          height: 200,
                                           fit: pw.BoxFit.fitHeight),
                                     ]),
+                                pw.Column(
+                                    crossAxisAlignment:
+                                        pw.CrossAxisAlignment.center,
+                                    mainAxisSize: pw.MainAxisSize.min,
+                                    children: [
+                                      pw.SizedBox(height: 50),
+                                      pw.Image(pw.MemoryImage(patch2),
+                                          height: 250,
+                                          fit: pw.BoxFit.fitHeight),
+                                      pw.SizedBox(height: 30),
+                                      pw.Image(pw.MemoryImage(patch3),
+                                          height: 250,
+                                          fit: pw.BoxFit.fitHeight),
+                                    ])
                               ];
                             }));
 

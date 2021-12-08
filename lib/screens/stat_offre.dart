@@ -15,8 +15,9 @@ import 'package:shimmer_animation/shimmer_animation.dart';
 
 class StatOffre extends StatefulWidget {
   final Offre offres;
-   final int indexProduct;
-  StatOffre({required this.indexProduct,required this.offres, Key? key}) : super(key: key);
+  final int indexProduct;
+  StatOffre({required this.indexProduct, required this.offres, Key? key})
+      : super(key: key);
 
   @override
   _StatOffreState createState() => _StatOffreState();
@@ -24,6 +25,9 @@ class StatOffre extends StatefulWidget {
 
 class _StatOffreState extends State<StatOffre> {
   final key = GlobalKey();
+  final key1 = GlobalKey();
+  final key2 = GlobalKey();
+  final key3 = GlobalKey();
   Widget maxLetter(String word) {
     Widget longLetter;
 
@@ -68,6 +72,30 @@ class _StatOffreState extends State<StatOffre> {
                     InkWell(
                       splashColor: Colors.white,
                       onTap: () async {
+                        final boundary3 = key3.currentContext
+                            ?.findRenderObject() as RenderRepaintBoundary?;
+                        final image3 = await boundary3?.toImage();
+                        final byteData3 = await image3?.toByteData(
+                            format: ImageByteFormat.png);
+                        var imageBytes3 = byteData3?.buffer.asUint8List();
+
+                        ////////////////////
+                        final boundary2 = key2.currentContext
+                            ?.findRenderObject() as RenderRepaintBoundary?;
+                        final image2 = await boundary2?.toImage();
+                        final byteData2 = await image2?.toByteData(
+                            format: ImageByteFormat.png);
+                        var imageBytes2 = byteData2?.buffer.asUint8List();
+
+                        ////////////////////
+                        final boundary1 = key1.currentContext
+                            ?.findRenderObject() as RenderRepaintBoundary?;
+                        final image1 = await boundary1?.toImage();
+                        final byteData1 = await image1?.toByteData(
+                            format: ImageByteFormat.png);
+                        var imageBytes1 = byteData1?.buffer.asUint8List();
+
+                        ////////////////////
                         final boundary = key.currentContext?.findRenderObject()
                             as RenderRepaintBoundary?;
                         final image = await boundary?.toImage();
@@ -75,7 +103,11 @@ class _StatOffreState extends State<StatOffre> {
                             format: ImageByteFormat.png);
                         var imageBytes = byteData?.buffer.asUint8List();
                         // var imageBytes1 = resizeImage(imageBytes!);
-                        if (imageBytes != null) {
+
+                        if (imageBytes != null &&
+                            imageBytes1 != null &&
+                            imageBytes2 != null &&
+                            imageBytes3 != null) {
                           final directory =
                               await getApplicationDocumentsDirectory();
                           final imagePath = await File(
@@ -90,7 +122,12 @@ class _StatOffreState extends State<StatOffre> {
                                       value: variable,
                                       child: PlayPicture(
                                         patch: imageBytes,
-                                        directory: directory,productGagnantList: _productGagnantList[widget.indexProduct],
+                                        directory: directory,
+                                        productGagnantList: _productGagnantList[
+                                            widget.indexProduct],
+                                        patch1: imageBytes1,
+                                        patch2: imageBytes2,
+                                        patch3: imageBytes3,
                                       ))));
                         }
                       },
@@ -145,12 +182,12 @@ class _StatOffreState extends State<StatOffre> {
                     end: Alignment.centerRight,
                     colors: [Colors.orange, Colors.pink])),
             child: SingleChildScrollView(
-              child: RepaintBoundary(
-                key: key,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  RepaintBoundary(
+                    key: key,
+                    child: Container(
                         decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
@@ -240,7 +277,10 @@ class _StatOffreState extends State<StatOffre> {
                                 )
                               ],
                             ))),
-                    Container(
+                  ),
+                  RepaintBoundary(
+                    key: key1,
+                    child: Container(
                       width: MediaQuery.of(context).size.width / 1.08,
                       child: Card(
                         shape: RoundedRectangleBorder(
@@ -565,11 +605,14 @@ class _StatOffreState extends State<StatOffre> {
                         ),
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        ///   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        Container(
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ///   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                      RepaintBoundary(
+                        key: key2,
+                        child: Container(
                             decoration: BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
@@ -660,18 +703,6 @@ class _StatOffreState extends State<StatOffre> {
                                                   .size
                                                   .width /
                                               2.7,
-                                          // decoration: BoxDecoration(
-                                          //     border: Border.all(
-                                          //         color: Colors.white70),
-                                          //     borderRadius:
-                                          //         BorderRadius.circular(15),
-                                          //     gradient: LinearGradient(
-                                          //         begin: Alignment.centerLeft,
-                                          //         end: Alignment.centerRight,
-                                          //         colors: [
-                                          //           Colors.pink,
-                                          //           Colors.orange
-                                          //         ])),
                                           child: Card(
                                             shape: RoundedRectangleBorder(
                                               borderRadius:
@@ -743,9 +774,12 @@ class _StatOffreState extends State<StatOffre> {
                                     ),
                                   ],
                                 ))),
-                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        //////   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        Container(
+                      ),
+                      //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                      //////   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                      RepaintBoundary(
+                        key: key3,
+                        child: Container(
                             decoration: BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
@@ -875,12 +909,14 @@ class _StatOffreState extends State<StatOffre> {
                                                                       .height /
                                                                   14,
                                                           values: [
-                                                            (((100 - widget.offres.roas) /
-                                                                        1.80) *
+                                                            (((100 -
+                                                                        widget
+                                                                            .offres
+                                                                            .roas)) *
                                                                     100)
                                                                 .roundToDouble(),
-                                                            (((widget.offres.roas) /
-                                                                        1.80) *
+                                                            (((widget.offres
+                                                                        .roas)) *
                                                                     100)
                                                                 .roundToDouble()
                                                           ],
@@ -910,11 +946,11 @@ class _StatOffreState extends State<StatOffre> {
                                     ),
                                   ],
                                 ))),
-                        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                      ],
-                    )
-                  ],
-                ),
+                      ),
+                      //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    ],
+                  )
+                ],
               ),
             )),
       ),
