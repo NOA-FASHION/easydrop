@@ -65,6 +65,10 @@ class Challengecontroller extends ChangeNotifier {
     return _userDrop.infoRecupere;
   }
 
+  UserDrop getUserDrop() {
+    return _userDrop;
+  }
+
   addUserDropp(
       {required bool infoRecupere,
       required String nom,

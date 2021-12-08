@@ -391,6 +391,7 @@ class _BuildOffreState extends State<BuildOffre> {
                                 value: variable,
                                 child: StatOffre(
                                   offres: _offresProduct[index],
+                                  indexProduct: widget.indexProduct,
                                 ))));
                   },
                   title: Container(

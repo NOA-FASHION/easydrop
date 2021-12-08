@@ -143,7 +143,7 @@ class _StatGlobalState extends State<StatGlobal> {
                                       value: variable,
                                       child: PlayPicture(
                                         patch: imageBytes1,
-                                        directory: directory,
+                                        directory: directory, productGagnantList: _productGagnantList[widget.indexProduct],
                                       ))));
                         }
                       },
@@ -820,35 +820,40 @@ class _StatGlobalState extends State<StatGlobal> {
                                                           FontWeight.bold,
                                                       color: Colors.blueAccent),
                                                 ),
-                                                SizedBox(
-                                                  width: 30.0,
-                                                ),
-                                                Container(
-                                                  height: 10.0,
-                                                  width: 10.0,
-                                                  decoration: new BoxDecoration(
-                                                    color: Colors.orangeAccent,
-                                                    shape: BoxShape.circle,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 10.0,
-                                                ),
-                                                Text(
-                                                  'Pub: ' +
-                                                      variable
-                                                          .pubTotal(widget
-                                                              .indexProduct)
-                                                          .roundToDouble()
-                                                          .toString() +
-                                                      "€",
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.orangeAccent,
-                                                  ),
-                                                ),
                                               ],
                                             ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 10, left: 15),
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                height: 10.0,
+                                                width: 10.0,
+                                                decoration: new BoxDecoration(
+                                                  color: Colors.orangeAccent,
+                                                  shape: BoxShape.circle,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10.0,
+                                              ),
+                                              Text(
+                                                'Pub: ' +
+                                                    variable
+                                                        .pubTotal(
+                                                            widget.indexProduct)
+                                                        .roundToDouble()
+                                                        .toString() +
+                                                    "€",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.orangeAccent,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                         Container(
@@ -885,43 +890,47 @@ class _StatGlobalState extends State<StatGlobal> {
                                                     color: Colors.cyanAccent,
                                                   ),
                                                 ),
-                                                SizedBox(
-                                                  width: 52.0,
-                                                ),
-                                                Container(
-                                                  height: 10.0,
-                                                  width: 10.0,
-                                                  decoration: new BoxDecoration(
-                                                    color:
-                                                        Colors.lightGreenAccent,
-                                                    shape: BoxShape.circle,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 10.0,
-                                                ),
-                                                Text(
-                                                  'Marge: ' +
-                                                      variable
-                                                          .margeTotal(widget
-                                                              .indexProduct)
-                                                          .roundToDouble()
-                                                          .toString() +
-                                                      "€",
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: variable
-                                                                  .margeTotal(widget
-                                                                      .indexProduct)
-                                                                  .roundToDouble() <
-                                                              0
-                                                          ? Colors.red
-                                                          : Colors
-                                                              .lightGreenAccent),
-                                                ),
                                               ],
                                             ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 10, left: 15),
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                height: 10.0,
+                                                width: 10.0,
+                                                decoration: new BoxDecoration(
+                                                  color:
+                                                      Colors.lightGreenAccent,
+                                                  shape: BoxShape.circle,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10.0,
+                                              ),
+                                              Text(
+                                                'Marge: ' +
+                                                    variable
+                                                        .margeTotal(
+                                                            widget.indexProduct)
+                                                        .roundToDouble()
+                                                        .toString() +
+                                                    "€",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: variable
+                                                                .margeTotal(widget
+                                                                    .indexProduct)
+                                                                .roundToDouble() <
+                                                            0
+                                                        ? Colors.red
+                                                        : Colors
+                                                            .lightGreenAccent),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                         Padding(
@@ -955,33 +964,75 @@ class _StatGlobalState extends State<StatGlobal> {
                                                       .height /
                                                   12,
                                               values: [
-                                                (((variable.coutProductTotal(
-                                                        widget.indexProduct) /
-                                                    variable
-                                                        .chiffreAffaireTotal(
-                                                            widget
-                                                                .indexProduct) *
-                                                    100))),
-                                                (((variable.pubTotal(
-                                                        widget.indexProduct) /
-                                                    variable
-                                                        .chiffreAffaireTotal(
-                                                            widget
-                                                                .indexProduct) *
-                                                    100))),
-                                                (((variable.shippingTotal(
-                                                        widget.indexProduct) /
-                                                    variable
-                                                        .chiffreAffaireTotal(
-                                                            widget
-                                                                .indexProduct) *
-                                                    100))),
-                                                (((variable.margeTotal(widget
-                                                            .indexProduct) /
+                                                ((variable.coutProductTotal(widget.indexProduct) +
+                                                            variable.pubTotal(widget
+                                                                .indexProduct) +
+                                                            variable.shippingTotal(
+                                                                widget
+                                                                    .indexProduct)) <
                                                         variable.chiffreAffaireTotal(
                                                             widget
-                                                                .indexProduct)) *
-                                                    100))
+                                                                .indexProduct))
+                                                    ? (((variable.coutProductTotal(widget.indexProduct) /
+                                                        variable.chiffreAffaireTotal(
+                                                            widget
+                                                                .indexProduct) *
+                                                        100)))
+                                                    : ((variable.coutProductTotal(widget.indexProduct) /
+                                                            (variable.coutProductTotal(widget.indexProduct) +
+                                                                variable.pubTotal(
+                                                                    widget.indexProduct) +
+                                                                variable.shippingTotal(widget.indexProduct))) *
+                                                        100),
+                                                ((variable.coutProductTotal(widget.indexProduct) +
+                                                            variable.pubTotal(widget
+                                                                .indexProduct) +
+                                                            variable.shippingTotal(widget
+                                                                .indexProduct)) <
+                                                        variable.chiffreAffaireTotal(
+                                                            widget
+                                                                .indexProduct))
+                                                    ? (((variable.pubTotal(widget.indexProduct) /
+                                                        variable.chiffreAffaireTotal(
+                                                            widget
+                                                                .indexProduct) *
+                                                        100)))
+                                                    : ((variable.pubTotal(widget.indexProduct) /
+                                                            (variable.coutProductTotal(widget.indexProduct) +
+                                                                variable.pubTotal(
+                                                                    widget.indexProduct) +
+                                                                variable.shippingTotal(widget.indexProduct))) *
+                                                        100),
+                                                ((variable.coutProductTotal(widget.indexProduct) +
+                                                            variable.pubTotal(widget
+                                                                .indexProduct) +
+                                                            variable.shippingTotal(
+                                                                widget
+                                                                    .indexProduct)) <
+                                                        variable.chiffreAffaireTotal(
+                                                            widget
+                                                                .indexProduct))
+                                                    ? (((variable.shippingTotal(widget.indexProduct) /
+                                                        variable.chiffreAffaireTotal(
+                                                            widget
+                                                                .indexProduct) *
+                                                        100)))
+                                                    : ((variable.shippingTotal(widget.indexProduct) /
+                                                            (variable.coutProductTotal(widget.indexProduct) +
+                                                                variable.pubTotal(
+                                                                    widget.indexProduct) +
+                                                                variable.shippingTotal(widget.indexProduct))) *
+                                                        100),
+                                                variable.margeTotal(widget
+                                                            .indexProduct) >
+                                                        0
+                                                    ? (((variable.margeTotal(widget
+                                                                .indexProduct) /
+                                                            variable.chiffreAffaireTotal(
+                                                                widget
+                                                                    .indexProduct)) *
+                                                        100))
+                                                    : 0
                                               ],
                                               labels: [
                                                 'Couts produit: ',
@@ -1660,7 +1711,7 @@ class _StatGlobalState extends State<StatGlobal> {
                                                     children: [
                                                       Container(
                                                         child: PieChart(
-                                                          textScaleFactor: 0.1,
+                                                          textScaleFactor: 0.0,
                                                           maxWidth: MediaQuery.of(
                                                                       context)
                                                                   .size

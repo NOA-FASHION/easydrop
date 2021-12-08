@@ -15,7 +15,8 @@ import 'package:shimmer_animation/shimmer_animation.dart';
 
 class StatOffre extends StatefulWidget {
   final Offre offres;
-  StatOffre({required this.offres, Key? key}) : super(key: key);
+   final int indexProduct;
+  StatOffre({required this.indexProduct,required this.offres, Key? key}) : super(key: key);
 
   @override
   _StatOffreState createState() => _StatOffreState();
@@ -52,6 +53,7 @@ class _StatOffreState extends State<StatOffre> {
   @override
   Widget build(BuildContext context) {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
+    List<ProduitGagnant> _productGagnantList = variable.getProduitGagnant();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(140.0),
@@ -88,7 +90,7 @@ class _StatOffreState extends State<StatOffre> {
                                       value: variable,
                                       child: PlayPicture(
                                         patch: imageBytes,
-                                        directory: directory,
+                                        directory: directory,productGagnantList: _productGagnantList[widget.indexProduct],
                                       ))));
                         }
                       },

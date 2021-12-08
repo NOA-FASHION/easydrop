@@ -15,7 +15,8 @@ import 'package:shimmer_animation/shimmer_animation.dart';
 
 class StatDays extends StatefulWidget {
   final ResultJournee resultatDaysList;
-  StatDays({required this.resultatDaysList});
+   final int indexProduct;
+  StatDays({required this.resultatDaysList,required this.indexProduct});
 
   @override
   _StatDaysState createState() => _StatDaysState();
@@ -78,8 +79,9 @@ class _StatDaysState extends State<StatDays> {
       }
       return statOffres;
     }
-
+   
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
+    List<ProduitGagnant> _productGagnantList = variable.getProduitGagnant();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(140.0),
@@ -116,7 +118,7 @@ class _StatDaysState extends State<StatDays> {
                                       value: variable,
                                       child: PlayPicture(
                                         patch: imageBytes,
-                                        directory: directory,
+                                        directory: directory,productGagnantList: _productGagnantList[widget.indexProduct],
                                       ))));
                         }
                       },
@@ -352,34 +354,39 @@ class _StatDaysState extends State<StatDays> {
                                                           FontWeight.bold,
                                                       color: Colors.blueAccent),
                                                 ),
-                                                SizedBox(
-                                                  width: 30.0,
-                                                ),
-                                                Container(
-                                                  height: 10.0,
-                                                  width: 10.0,
-                                                  decoration: new BoxDecoration(
-                                                    color: Colors.orangeAccent,
-                                                    shape: BoxShape.circle,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 10.0,
-                                                ),
-                                                Text(
-                                                  'Pub: ' +
-                                                      widget.resultatDaysList
-                                                          .facebookDepenseDays
-                                                          .roundToDouble()
-                                                          .toString() +
-                                                      "€",
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.orangeAccent,
-                                                  ),
-                                                ),
                                               ],
                                             ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 10, left: 15),
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                height: 10.0,
+                                                width: 10.0,
+                                                decoration: new BoxDecoration(
+                                                  color: Colors.orangeAccent,
+                                                  shape: BoxShape.circle,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10.0,
+                                              ),
+                                              Text(
+                                                'Pub: ' +
+                                                    widget.resultatDaysList
+                                                        .facebookDepenseDays
+                                                        .roundToDouble()
+                                                        .toString() +
+                                                    "€",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.orangeAccent,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                         Container(
@@ -415,42 +422,46 @@ class _StatDaysState extends State<StatDays> {
                                                     color: Colors.cyanAccent,
                                                   ),
                                                 ),
-                                                SizedBox(
-                                                  width: 52.0,
-                                                ),
-                                                Container(
-                                                  height: 10.0,
-                                                  width: 10.0,
-                                                  decoration: new BoxDecoration(
-                                                    color:
-                                                        Colors.lightGreenAccent,
-                                                    shape: BoxShape.circle,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 10.0,
-                                                ),
-                                                Text(
-                                                  'Marge: ' +
-                                                      widget.resultatDaysList
-                                                          .margeDays
-                                                          .roundToDouble()
-                                                          .toString() +
-                                                      "€",
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: widget
-                                                                  .resultatDaysList
-                                                                  .margeDays
-                                                                  .roundToDouble() <
-                                                              0
-                                                          ? Colors.red
-                                                          : Colors
-                                                              .lightGreenAccent),
-                                                ),
                                               ],
                                             ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 10, left: 15),
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                height: 10.0,
+                                                width: 10.0,
+                                                decoration: new BoxDecoration(
+                                                  color:
+                                                      Colors.lightGreenAccent,
+                                                  shape: BoxShape.circle,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10.0,
+                                              ),
+                                              Text(
+                                                'Marge: ' +
+                                                    widget.resultatDaysList
+                                                        .margeDays
+                                                        .roundToDouble()
+                                                        .toString() +
+                                                    "€",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: widget
+                                                                .resultatDaysList
+                                                                .margeDays
+                                                                .roundToDouble() <
+                                                            0
+                                                        ? Colors.red
+                                                        : Colors
+                                                            .lightGreenAccent),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                         Padding(
@@ -484,26 +495,88 @@ class _StatDaysState extends State<StatDays> {
                                                       .height /
                                                   12,
                                               values: [
-                                                (((widget.resultatDaysList
-                                                            .coutDaysProduit /
+                                                ((widget.resultatDaysList
+                                                                .coutDaysProduit +
+                                                            widget.resultatDaysList
+                                                                .facebookDepenseDays +
+                                                            widget.resultatDaysList
+                                                                .prixShippingDays) <
                                                         widget.resultatDaysList
-                                                            .chiffreAffaireDays) *
-                                                    100)),
-                                                (((widget.resultatDaysList
-                                                            .facebookDepenseDays /
+                                                            .chiffreAffaireDays)
+                                                    ? (((widget.resultatDaysList
+                                                                .coutDaysProduit /
+                                                            widget.resultatDaysList
+                                                                .chiffreAffaireDays) *
+                                                        100))
+                                                    : (((widget.resultatDaysList
+                                                                .coutDaysProduit /
+                                                            (widget.resultatDaysList
+                                                                    .coutDaysProduit +
+                                                                widget
+                                                                    .resultatDaysList
+                                                                    .facebookDepenseDays +
+                                                                widget
+                                                                    .resultatDaysList
+                                                                    .prixShippingDays)) *
+                                                        100)),
+                                                ((widget.resultatDaysList
+                                                                .coutDaysProduit +
+                                                            widget.resultatDaysList
+                                                                .facebookDepenseDays +
+                                                            widget.resultatDaysList
+                                                                .prixShippingDays) <
                                                         widget.resultatDaysList
-                                                            .chiffreAffaireDays) *
-                                                    100)),
-                                                (((widget.resultatDaysList
-                                                            .prixShippingDays /
+                                                            .chiffreAffaireDays)
+                                                    ? (((widget.resultatDaysList
+                                                                .facebookDepenseDays /
+                                                            widget.resultatDaysList
+                                                                .chiffreAffaireDays) *
+                                                        100))
+                                                    : (((widget.resultatDaysList
+                                                                .facebookDepenseDays /
+                                                            (widget.resultatDaysList
+                                                                    .coutDaysProduit +
+                                                                widget
+                                                                    .resultatDaysList
+                                                                    .facebookDepenseDays +
+                                                                widget
+                                                                    .resultatDaysList
+                                                                    .prixShippingDays)) *
+                                                        100)),
+                                                ((widget.resultatDaysList
+                                                                .coutDaysProduit +
+                                                            widget.resultatDaysList
+                                                                .facebookDepenseDays +
+                                                            widget.resultatDaysList
+                                                                .prixShippingDays) <
                                                         widget.resultatDaysList
-                                                            .chiffreAffaireDays) *
-                                                    100)),
-                                                (((widget.resultatDaysList
-                                                            .margeDays /
-                                                        widget.resultatDaysList
-                                                            .chiffreAffaireDays) *
-                                                    100))
+                                                            .chiffreAffaireDays)
+                                                    ? (((widget.resultatDaysList
+                                                                .prixShippingDays /
+                                                            widget.resultatDaysList
+                                                                .chiffreAffaireDays) *
+                                                        100))
+                                                    : (((widget.resultatDaysList
+                                                                .prixShippingDays /
+                                                            (widget.resultatDaysList
+                                                                    .coutDaysProduit +
+                                                                widget
+                                                                    .resultatDaysList
+                                                                    .facebookDepenseDays +
+                                                                widget
+                                                                    .resultatDaysList
+                                                                    .prixShippingDays)) *
+                                                        100)),
+                                                widget.resultatDaysList
+                                                            .margeDays >
+                                                        0
+                                                    ? (((widget.resultatDaysList
+                                                                .margeDays /
+                                                            widget
+                                                                .resultatDaysList
+                                                                .chiffreAffaireDays) *
+                                                        100))
+                                                    : 0
                                               ],
                                               labels: [
                                                 'Couts produit: ' +
@@ -1180,7 +1253,7 @@ class _StatDaysState extends State<StatDays> {
                                                     children: [
                                                       Container(
                                                         child: PieChart(
-                                                          textScaleFactor: 0.1,
+                                                          textScaleFactor: 0.0,
                                                           maxWidth: MediaQuery.of(
                                                                       context)
                                                                   .size

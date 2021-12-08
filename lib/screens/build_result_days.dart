@@ -361,6 +361,7 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                                 value: variable,
                                 child: StatDays(
                                   resultatDaysList: _resultatDaysList[index],
+                                  indexProduct: widget.indexProduct,
                                 ))));
                   },
                   title: Container(
