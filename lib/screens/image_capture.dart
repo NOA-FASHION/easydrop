@@ -11,6 +11,7 @@ import 'package:share/share.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
 class PlayPicture extends StatelessWidget {
+  final bool statOffre;
   final Uint8List patch;
   final Uint8List patch1;
   final Uint8List patch2;
@@ -21,6 +22,7 @@ class PlayPicture extends StatelessWidget {
       {Key? key,
       required this.productGagnantList,
       required this.patch,
+      required this.statOffre,
       required this.patch1,
       required this.patch2,
       required this.patch3,
@@ -40,31 +42,31 @@ class PlayPicture extends StatelessWidget {
         child: SafeArea(
           child: AppBar(
             actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 12),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    InkWell(
-                      splashColor: Colors.white,
-                      onTap: () async {
-                        Share.shareFiles(
-                            ['${directory.path}/container_image.png'],
-                            text: 'Great picture');
-                      },
-                      child: Icon(
-                        Icons.picture_in_picture,
-                        size: 30,
-                        color: Colors.blue,
-                      ),
-                    ), // icon
-                    Text(
-                      "Pictures",
-                      style: TextStyle(fontSize: 10, color: Colors.blue),
-                    ), // text
-                  ],
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(right: 12),
+              //   child: Column(
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //     children: <Widget>[
+              //       InkWell(
+              //         splashColor: Colors.white,
+              //         onTap: () async {
+              //           Share.shareFiles(
+              //               ['${directory.path}/container_image.png'],
+              //               text: 'Great picture');
+              //         },
+              //         child: Icon(
+              //           Icons.picture_in_picture,
+              //           size: 30,
+              //           color: Colors.blue,
+              //         ),
+              //       ), // icon
+              //       Text(
+              //         "Pictures",
+              //         style: TextStyle(fontSize: 10, color: Colors.blue),
+              //       ), // text
+              //     ],
+              //   ),
+              // ),
               Padding(
                 padding: const EdgeInsets.only(right: 12),
                 child: Column(
@@ -127,9 +129,11 @@ class PlayPicture extends StatelessWidget {
                                           height: 250,
                                           fit: pw.BoxFit.fitHeight),
                                       pw.SizedBox(height: 30),
-                                      pw.Image(pw.MemoryImage(patch3),
-                                          height: 250,
-                                          fit: pw.BoxFit.fitHeight),
+                                      statOffre
+                                          ? pw.SizedBox(height: 2)
+                                          : pw.Image(pw.MemoryImage(patch3),
+                                              height: 250,
+                                              fit: pw.BoxFit.fitHeight),
                                     ])
                               ];
                             }));
@@ -187,6 +191,11 @@ class PlayPicture extends StatelessWidget {
         child: ListView(
           children: [
             Image(image: MemoryImage(patch, scale: 0.5)),
+            Image(image: MemoryImage(patch1, scale: 0.5)),
+            Image(image: MemoryImage(patch2, scale: 0.5)),
+            statOffre
+                ? SizedBox(height: 2)
+                : Image(image: MemoryImage(patch3, scale: 0.5)),
           ],
         ),
       ),

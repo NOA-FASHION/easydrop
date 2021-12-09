@@ -153,7 +153,7 @@ class _StatDaysState extends State<StatDays> {
                                             widget.indexProduct],
                                         patch1: imageBytes1,
                                         patch2: imageBytes2,
-                                        patch3: imageBytes3,
+                                        patch3: imageBytes3, statOffre: false,
                                       ))));
                         }
                       },
@@ -212,7 +212,7 @@ class _StatDaysState extends State<StatDays> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                        width: MediaQuery.of(context).size.width / 1.15,
+                        width: MediaQuery.of(context).size.width / 1,
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.blue),
                             borderRadius: BorderRadius.circular(15),
@@ -1213,347 +1213,215 @@ class _StatDaysState extends State<StatDays> {
                     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     RepaintBoundary(
                       key: key3,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          ///   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                          Container(
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black,
-                                    blurRadius: 45.0, // soften the shadow
-                                    spreadRadius: 2.0, //extend the shadow
-                                    offset: Offset(
-                                      3.0, // Move to right 10  horizontally
-                                      3.0, // Move to bottom 10 Vertically
-                                    ),
-                                  )
-                                ],
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.transparent,
+                      child: Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black,
+                                blurRadius: 45.0, // soften the shadow
+                                spreadRadius: 2.0, //extend the shadow
+                                offset: Offset(
+                                  3.0, // Move to right 10  horizontally
+                                  3.0, // Move to bottom 10 Vertically
+                                ),
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.transparent,
+                          ),
+                          child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
                               ),
-                              child: Card(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2.7,
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    color: Colors.white70),
-                                                borderRadius:
-                                                    BorderRadius.circular(15),
-                                                gradient: LinearGradient(
-                                                    begin: Alignment.centerLeft,
-                                                    end: Alignment.centerRight,
-                                                    colors: [
-                                                      Colors.pink,
-                                                      Colors.orange
-                                                    ])),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Container(
-                                                    height: 30.0,
-                                                    child: Row(
-                                                      children: [
-                                                        Container(
-                                                          height: 10.0,
-                                                          width: 10.0,
-                                                          decoration:
-                                                              new BoxDecoration(
-                                                            color: Colors
-                                                                .greenAccent,
-                                                            shape:
-                                                                BoxShape.circle,
-                                                          ),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 10.0,
-                                                        ),
-                                                        Text(
-                                                          "Marge: " +
-                                                              widget
-                                                                  .resultatDaysList
-                                                                  .margeDays
-                                                                  .roundToDouble()
-                                                                  .toString() +
-                                                              "€",
-                                                          style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              color:
-                                                                  Colors.blue),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            )),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2.7,
-                                            // decoration: BoxDecoration(
-                                            //     border: Border.all(
-                                            //         color: Colors.white70),
-                                            //     borderRadius:
-                                            //         BorderRadius.circular(15),
-                                            //     gradient: LinearGradient(
-                                            //         begin: Alignment.centerLeft,
-                                            //         end: Alignment.centerRight,
-                                            //         colors: [
-                                            //           Colors.pink,
-                                            //           Colors.orange
-                                            //         ])),
-                                            child: Card(
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(15.0),
-                                              ),
-                                              elevation: 15.0,
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.2,
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.white70),
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            gradient: LinearGradient(
+                                                begin: Alignment.centerLeft,
+                                                end: Alignment.centerRight,
+                                                colors: [
+                                                  Colors.pink,
+                                                  Colors.orange
+                                                ])),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Container(
+                                                height: 30.0,
                                                 child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
                                                   children: [
-                                                    Column(
-                                                      children: [
-                                                        Container(
-                                                          child: PieChart(
-                                                            textScaleFactor:
-                                                                0.0,
-                                                            maxWidth: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width /
-                                                                3.3,
-                                                            maxHeight: MediaQuery.of(
+                                                    Text(
+                                                      "Roas: " +
+                                                          (widget.resultatDaysList
+                                                                      .chiffreAffaireDays /
+                                                                  widget
+                                                                      .resultatDaysList
+                                                                      .margeDays)
+                                                              .toStringAsFixed(
+                                                                  2),
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.blue),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        )),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.2,
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.white70),
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            gradient: LinearGradient(
+                                                begin: Alignment.centerLeft,
+                                                end: Alignment.centerRight,
+                                                colors: [
+                                                  Colors.pink,
+                                                  Colors.orange
+                                                ])),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Container(
+                                                height: 30.0,
+                                                child: Row(
+                                                  children: [
+                                                    Container(
+                                                      height: 10.0,
+                                                      width: 10.0,
+                                                      decoration:
+                                                          new BoxDecoration(
+                                                        color:
+                                                            Colors.greenAccent,
+                                                        shape: BoxShape.circle,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10.0,
+                                                    ),
+                                                    Text(
+                                                      "Marge: " +
+                                                          widget
+                                                              .resultatDaysList
+                                                              .margeDays
+                                                              .roundToDouble()
+                                                              .toString() +
+                                                          "€",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.blue),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        )),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.2,
+                                        child: Card(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15.0),
+                                          ),
+                                          elevation: 15.0,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Column(
+                                                  children: [
+                                                    Container(
+                                                      child: PieChart(
+                                                        textScaleFactor: 0.0,
+                                                        maxWidth: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            2.2,
+                                                        maxHeight:
+                                                            MediaQuery.of(
                                                                         context)
                                                                     .size
                                                                     .height /
                                                                 14,
-                                                            values: [
+                                                        values: [
+                                                          ((widget.resultatDaysList
+                                                                          .margeDays /
+                                                                      widget
+                                                                          .resultatDaysList
+                                                                          .chiffreAffaireDays) *
+                                                                  100)
+                                                              .roundToDouble(),
+                                                          100 -
                                                               ((widget.resultatDaysList
                                                                               .margeDays /
                                                                           widget
                                                                               .resultatDaysList
                                                                               .chiffreAffaireDays) *
                                                                       100)
-                                                                  .roundToDouble(),
-                                                              100 -
-                                                                  ((widget.resultatDaysList.margeDays /
-                                                                              widget.resultatDaysList.chiffreAffaireDays) *
-                                                                          100)
-                                                                      .roundToDouble()
-                                                            ],
-                                                            labels: [
-                                                              'Marge',
-                                                              'frais'
-                                                            ],
-                                                            sliceFillColors: [
-                                                              Colors
-                                                                  .greenAccent,
-                                                              Colors.red
-                                                            ],
-                                                            animationDuration:
-                                                                Duration(
-                                                                    milliseconds:
-                                                                        1500),
-                                                            showLegend: false,
-                                                          ),
-                                                          height: 140.0,
-                                                        ),
-                                                      ],
+                                                                  .roundToDouble()
+                                                        ],
+                                                        labels: [
+                                                          'Marge',
+                                                          'frais'
+                                                        ],
+                                                        sliceFillColors: [
+                                                          Colors.greenAccent,
+                                                          Colors.red
+                                                        ],
+                                                        animationDuration:
+                                                            Duration(
+                                                                milliseconds:
+                                                                    1500),
+                                                        showLegend: false,
+                                                      ),
+                                                      height: 140.0,
                                                     ),
                                                   ],
                                                 ),
-                                              ),
-                                            )),
-                                      ),
-                                    ],
-                                  ))),
-                          //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                          //////   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                          Container(
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black,
-                                    blurRadius: 45.0, // soften the shadow
-                                    spreadRadius: 2.0, //extend the shadow
-                                    offset: Offset(
-                                      3.0, // Move to right 10  horizontally
-                                      3.0, // Move to bottom 10 Vertically
-                                    ),
-                                  )
-                                ],
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.transparent,
-                              ),
-                              child: Card(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
+                                              ],
+                                            ),
+                                          ),
+                                        )),
                                   ),
-                                  child: Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2.7,
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    color: Colors.white70),
-                                                borderRadius:
-                                                    BorderRadius.circular(15),
-                                                gradient: LinearGradient(
-                                                    begin: Alignment.centerLeft,
-                                                    end: Alignment.centerRight,
-                                                    colors: [
-                                                      Colors.pink,
-                                                      Colors.orange
-                                                    ])),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Container(
-                                                    height: 30.0,
-                                                    child: Row(
-                                                      children: [
-                                                        Text(
-                                                          "Roas: " +
-                                                              (widget.resultatDaysList
-                                                                          .chiffreAffaireDays /
-                                                                      widget
-                                                                          .resultatDaysList
-                                                                          .margeDays)
-                                                                  .toStringAsFixed(
-                                                                      2),
-                                                          style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              color:
-                                                                  Colors.blue),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            )),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2.7,
-                                            child: Card(
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(15.0),
-                                              ),
-                                              elevation: 15.0,
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Column(
-                                                      children: [
-                                                        Container(
-                                                          child: PieChart(
-                                                            textScaleFactor:
-                                                                0.0,
-                                                            maxWidth: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width /
-                                                                3.3,
-                                                            maxHeight: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .height /
-                                                                14,
-                                                            values: [
-                                                              (100 -
-                                                                  (((widget.resultatDaysList
-                                                                              .chiffreAffaireDays /
-                                                                          widget
-                                                                              .resultatDaysList
-                                                                              .margeDays)) *
-                                                                      100)),
-                                                              (((widget.resultatDaysList
-                                                                          .chiffreAffaireDays /
-                                                                      widget
-                                                                          .resultatDaysList
-                                                                          .margeDays)) *
-                                                                  100)
-                                                            ],
-                                                            labels: [
-                                                              'Marge',
-                                                              'frais'
-                                                            ],
-                                                            sliceFillColors: [
-                                                              Colors
-                                                                  .lightGreenAccent,
-                                                              Colors.red
-                                                            ],
-                                                            animationDuration:
-                                                                Duration(
-                                                                    milliseconds:
-                                                                        1500),
-                                                            showLegend: false,
-                                                          ),
-                                                          height: 140.0,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            )),
-                                      ),
-                                    ],
-                                  ))),
-                          //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        ],
-                      ),
+                                ],
+                              ))),
                     )
                   ]),
             ),

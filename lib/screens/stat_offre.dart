@@ -72,12 +72,12 @@ class _StatOffreState extends State<StatOffre> {
                     InkWell(
                       splashColor: Colors.white,
                       onTap: () async {
-                        final boundary3 = key3.currentContext
-                            ?.findRenderObject() as RenderRepaintBoundary?;
-                        final image3 = await boundary3?.toImage();
-                        final byteData3 = await image3?.toByteData(
-                            format: ImageByteFormat.png);
-                        var imageBytes3 = byteData3?.buffer.asUint8List();
+                        // final boundary3 = key3.currentContext
+                        //     ?.findRenderObject() as RenderRepaintBoundary?;
+                        // final image3 = await boundary3?.toImage();
+                        // final byteData3 = await image3?.toByteData(
+                        //     format: ImageByteFormat.png);
+                        // var imageBytes3 = byteData3?.buffer.asUint8List();
 
                         ////////////////////
                         final boundary2 = key2.currentContext
@@ -106,8 +106,7 @@ class _StatOffreState extends State<StatOffre> {
 
                         if (imageBytes != null &&
                             imageBytes1 != null &&
-                            imageBytes2 != null &&
-                            imageBytes3 != null) {
+                            imageBytes2 != null) {
                           final directory =
                               await getApplicationDocumentsDirectory();
                           final imagePath = await File(
@@ -127,7 +126,8 @@ class _StatOffreState extends State<StatOffre> {
                                             widget.indexProduct],
                                         patch1: imageBytes1,
                                         patch2: imageBytes2,
-                                        patch3: imageBytes3,
+                                        patch3: imageBytes2,
+                                        statOffre: true,
                                       ))));
                         }
                       },
@@ -640,7 +640,65 @@ class _StatOffreState extends State<StatOffre> {
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width /
-                                              2.7,
+                                              1.15,
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.white70),
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              gradient: LinearGradient(
+                                                  begin: Alignment.centerLeft,
+                                                  end: Alignment.centerRight,
+                                                  colors: [
+                                                    Colors.pink,
+                                                    Colors.orange
+                                                  ])),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Container(
+                                                  height: 30.0,
+                                                  child: Row(
+                                                    children: [
+                                                      Container(
+                                                        height: 10.0,
+                                                        width: 10.0,
+                                                        decoration:
+                                                            new BoxDecoration(
+                                                          color: Colors
+                                                              .lightGreenAccent,
+                                                          shape:
+                                                              BoxShape.circle,
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        "Roas: " +
+                                                            widget.offres.roas
+                                                                .toStringAsFixed(
+                                                                    2),
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: Colors.blue),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          )),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              1.15,
                                           decoration: BoxDecoration(
                                               border: Border.all(
                                                   color: Colors.white70),
@@ -702,7 +760,7 @@ class _StatOffreState extends State<StatOffre> {
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width /
-                                              2.7,
+                                              1.15,
                                           child: Card(
                                             shape: RoundedRectangleBorder(
                                               borderRadius:
@@ -726,7 +784,7 @@ class _StatOffreState extends State<StatOffre> {
                                                                       context)
                                                                   .size
                                                                   .width /
-                                                              3.3,
+                                                              2.2,
                                                           maxHeight:
                                                               MediaQuery.of(
                                                                           context)
@@ -777,176 +835,176 @@ class _StatOffreState extends State<StatOffre> {
                       ),
                       //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                       //////   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                      RepaintBoundary(
-                        key: key3,
-                        child: Container(
-                            decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black,
-                                  blurRadius: 45.0, // soften the shadow
-                                  spreadRadius: 2.0, //extend the shadow
-                                  offset: Offset(
-                                    3.0, // Move to right 10  horizontally
-                                    3.0, // Move to bottom 10 Vertically
-                                  ),
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.transparent,
-                            ),
-                            child: Card(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              2.7,
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.white70),
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                              gradient: LinearGradient(
-                                                  begin: Alignment.centerLeft,
-                                                  end: Alignment.centerRight,
-                                                  colors: [
-                                                    Colors.pink,
-                                                    Colors.orange
-                                                  ])),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Container(
-                                                  height: 30.0,
-                                                  child: Row(
-                                                    children: [
-                                                      Container(
-                                                        height: 10.0,
-                                                        width: 10.0,
-                                                        decoration:
-                                                            new BoxDecoration(
-                                                          color: Colors
-                                                              .lightGreenAccent,
-                                                          shape:
-                                                              BoxShape.circle,
-                                                        ),
-                                                      ),
-                                                      Text(
-                                                        "Roas: " +
-                                                            widget.offres.roas
-                                                                .toStringAsFixed(
-                                                                    2),
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color: Colors.blue),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          )),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              2.7,
-                                          // decoration: BoxDecoration(
-                                          //     border: Border.all(
-                                          //         color: Colors.white70),
-                                          //     borderRadius:
-                                          //         BorderRadius.circular(15),
-                                          //     gradient: LinearGradient(
-                                          //         begin: Alignment.centerLeft,
-                                          //         end: Alignment.centerRight,
-                                          //         colors: [
-                                          //           Colors.pink,
-                                          //           Colors.orange
-                                          //         ])),
-                                          child: Card(
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(15.0),
-                                            ),
-                                            elevation: 15.0,
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Column(
-                                                    children: [
-                                                      Container(
-                                                        child: PieChart(
-                                                          textScaleFactor: 0.0,
-                                                          maxWidth: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width /
-                                                              3.3,
-                                                          maxHeight:
-                                                              MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .height /
-                                                                  14,
-                                                          values: [
-                                                            (((100 -
-                                                                        widget
-                                                                            .offres
-                                                                            .roas)) *
-                                                                    100)
-                                                                .roundToDouble(),
-                                                            (((widget.offres
-                                                                        .roas)) *
-                                                                    100)
-                                                                .roundToDouble()
-                                                          ],
-                                                          labels: [
-                                                            'Marge',
-                                                            'frais'
-                                                          ],
-                                                          sliceFillColors: [
-                                                            Colors
-                                                                .lightGreenAccent,
-                                                            Colors.red
-                                                          ],
-                                                          animationDuration:
-                                                              Duration(
-                                                                  milliseconds:
-                                                                      1500),
-                                                          showLegend: false,
-                                                        ),
-                                                        height: 140.0,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          )),
-                                    ),
-                                  ],
-                                ))),
-                      ),
+                      // RepaintBoundary(
+                      //   key: key3,
+                      //   child: Container(
+                      //       decoration: BoxDecoration(
+                      //         boxShadow: [
+                      //           BoxShadow(
+                      //             color: Colors.black,
+                      //             blurRadius: 45.0, // soften the shadow
+                      //             spreadRadius: 2.0, //extend the shadow
+                      //             offset: Offset(
+                      //               3.0, // Move to right 10  horizontally
+                      //               3.0, // Move to bottom 10 Vertically
+                      //             ),
+                      //           )
+                      //         ],
+                      //         borderRadius: BorderRadius.circular(20),
+                      //         color: Colors.transparent,
+                      //       ),
+                      //       child: Card(
+                      //           shape: RoundedRectangleBorder(
+                      //             borderRadius: BorderRadius.circular(20.0),
+                      //           ),
+                      //           child: Column(
+                      //             children: [
+                      //               Padding(
+                      //                 padding: const EdgeInsets.all(8.0),
+                      //                 child: Container(
+                      //                     width: MediaQuery.of(context)
+                      //                             .size
+                      //                             .width /
+                      //                         2.7,
+                      //                     decoration: BoxDecoration(
+                      //                         border: Border.all(
+                      //                             color: Colors.white70),
+                      //                         borderRadius:
+                      //                             BorderRadius.circular(15),
+                      //                         gradient: LinearGradient(
+                      //                             begin: Alignment.centerLeft,
+                      //                             end: Alignment.centerRight,
+                      //                             colors: [
+                      //                               Colors.pink,
+                      //                               Colors.orange
+                      //                             ])),
+                      //                     child: Padding(
+                      //                       padding: const EdgeInsets.all(8.0),
+                      //                       child: Row(
+                      //                         mainAxisAlignment:
+                      //                             MainAxisAlignment
+                      //                                 .spaceBetween,
+                      //                         children: [
+                      //                           Container(
+                      //                             height: 30.0,
+                      //                             child: Row(
+                      //                               children: [
+                      //                                 Container(
+                      //                                   height: 10.0,
+                      //                                   width: 10.0,
+                      //                                   decoration:
+                      //                                       new BoxDecoration(
+                      //                                     color: Colors
+                      //                                         .lightGreenAccent,
+                      //                                     shape:
+                      //                                         BoxShape.circle,
+                      //                                   ),
+                      //                                 ),
+                      //                                 Text(
+                      //                                   "Roas: " +
+                      //                                       widget.offres.roas
+                      //                                           .toStringAsFixed(
+                      //                                               2),
+                      //                                   style: TextStyle(
+                      //                                       fontWeight:
+                      //                                           FontWeight.bold,
+                      //                                       color: Colors.blue),
+                      //                                 ),
+                      //                               ],
+                      //                             ),
+                      //                           ),
+                      //                         ],
+                      //                       ),
+                      //                     )),
+                      //               ),
+                      //               Padding(
+                      //                 padding: const EdgeInsets.all(8.0),
+                      //                 child: Container(
+                      //                     width: MediaQuery.of(context)
+                      //                             .size
+                      //                             .width /
+                      //                         2.7,
+                      //                     // decoration: BoxDecoration(
+                      //                     //     border: Border.all(
+                      //                     //         color: Colors.white70),
+                      //                     //     borderRadius:
+                      //                     //         BorderRadius.circular(15),
+                      //                     //     gradient: LinearGradient(
+                      //                     //         begin: Alignment.centerLeft,
+                      //                     //         end: Alignment.centerRight,
+                      //                     //         colors: [
+                      //                     //           Colors.pink,
+                      //                     //           Colors.orange
+                      //                     //         ])),
+                      //                     child: Card(
+                      //                       shape: RoundedRectangleBorder(
+                      //                         borderRadius:
+                      //                             BorderRadius.circular(15.0),
+                      //                       ),
+                      //                       elevation: 15.0,
+                      //                       child: Padding(
+                      //                         padding:
+                      //                             const EdgeInsets.all(8.0),
+                      //                         child: Row(
+                      //                           mainAxisAlignment:
+                      //                               MainAxisAlignment
+                      //                                   .spaceBetween,
+                      //                           children: [
+                      //                             Column(
+                      //                               children: [
+                      //                                 Container(
+                      //                                   child: PieChart(
+                      //                                     textScaleFactor: 0.0,
+                      //                                     maxWidth: MediaQuery.of(
+                      //                                                 context)
+                      //                                             .size
+                      //                                             .width /
+                      //                                         3.3,
+                      //                                     maxHeight:
+                      //                                         MediaQuery.of(
+                      //                                                     context)
+                      //                                                 .size
+                      //                                                 .height /
+                      //                                             14,
+                      //                                     values: [
+                      //                                       (((100 -
+                      //                                                   widget
+                      //                                                       .offres
+                      //                                                       .roas)) *
+                      //                                               100)
+                      //                                           .roundToDouble(),
+                      //                                       (((widget.offres
+                      //                                                   .roas)) *
+                      //                                               100)
+                      //                                           .roundToDouble()
+                      //                                     ],
+                      //                                     labels: [
+                      //                                       'Marge',
+                      //                                       'frais'
+                      //                                     ],
+                      //                                     sliceFillColors: [
+                      //                                       Colors
+                      //                                           .lightGreenAccent,
+                      //                                       Colors.red
+                      //                                     ],
+                      //                                     animationDuration:
+                      //                                         Duration(
+                      //                                             milliseconds:
+                      //                                                 1500),
+                      //                                     showLegend: false,
+                      //                                   ),
+                      //                                   height: 140.0,
+                      //                                 ),
+                      //                               ],
+                      //                             ),
+                      //                           ],
+                      //                         ),
+                      //                       ),
+                      //                     )),
+                      //               ),
+                      //             ],
+                      //           ))),
+                      // ),
                       //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     ],
                   )
