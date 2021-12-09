@@ -48,9 +48,9 @@ class _SignUpScreenState extends State<SignupFormPage> {
                 child: Column(
                   children: <Widget>[
                     Opacity(opacity: 0.88, child: CustomAppBar()),
-                    clipShape(),
+                    // clipShape(),
                     form(),
-                    acceptTermsTextRow(),
+                    // acceptTermsTextRow(),
                     SizedBox(
                       height: _height / 35,
                     ),
@@ -181,24 +181,6 @@ class _SignUpScreenState extends State<SignupFormPage> {
       ),
     );
   }
-  // Widget firstNameTextFormField() {
-  //   return CustomTextField(
-  //     keyboardType: TextInputType.text,
-  //     icon: Icons.person,
-  //     hint: "Nom",
-  //     name: 'Nom',
-  //     formeKey: formeKey,
-  //     listener: FormeValueFieldListener(
-  //       onSaved: (controler, value) {
-  //         nom = value;
-  //       },
-  //       autovalidateMode: AutovalidateMode.onUserInteraction,
-  //       onValidate: FormeValidates.size(min: 5, errorText: 'Minimum 5 lettres'),
-  //       // onAsyncValidate: (f, v) => Future.delayed(Duration(seconds: 2),
-  //       //     () => v == 'admin' ? null : 'username exists'),
-  //     ),
-  //   );
-  // }
 
   Widget lastNameTextFormField() {
     return Card(
@@ -350,35 +332,6 @@ class _SignUpScreenState extends State<SignupFormPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // ElevatedButton(
-        //   style: ButtonStyle(
-        //     elevation: MaterialStateProperty.all(0),
-        //     shape: MaterialStateProperty.all(RoundedRectangleBorder(
-        //         borderRadius: BorderRadius.circular(30.0))),
-        //     textStyle:
-        //         MaterialStateProperty.all(TextStyle(color: Colors.white)),
-        //     padding: MaterialStateProperty.all(EdgeInsets.all(0.0)),
-        //   ),
-        //   onPressed: () {
-        //     formeKey.reset();
-        //   },
-        //   child: Container(
-        //     alignment: Alignment.center,
-        //     width:
-        //         _large ? _width / 4 : (_medium ? _width / 3.75 : _width / 3.5),
-        //     decoration: BoxDecoration(
-        //       borderRadius: BorderRadius.all(Radius.circular(20.0)),
-        //       gradient: LinearGradient(
-        //         colors: <Color>[Colors.pinkAccent[200]!, Colors.redAccent],
-        //       ),
-        //     ),
-        //     padding: const EdgeInsets.all(12.0),
-        //     child: Text(
-        //       'CLEAR',
-        //       style: TextStyle(fontSize: _large ? 14 : (_medium ? 12 : 10)),
-        //     ),
-        //   ),
-        // ),
         SizedBox(
           width: 20,
         ),
@@ -544,12 +497,12 @@ class CustomAppBar extends StatelessWidget {
           gradient: LinearGradient(colors: [Colors.orange, Colors.pinkAccent]),
         ),
         child: Container(
-          padding: EdgeInsets.only(top: 40.0),
+          padding: EdgeInsets.only(top: 20.0),
           alignment: Alignment.center,
           child: Image.asset(
             'assets/logo.png',
-            width: 55,
-            height: 130,
+            width: 140,
+            height: 140,
           ),
           decoration: BoxDecoration(
               gradient: LinearGradient(

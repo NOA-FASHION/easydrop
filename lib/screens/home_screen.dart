@@ -285,7 +285,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                     const EdgeInsets.all(10.0),
                                                 child: Center(
                                                   child: Text(
-                                                    "CARACTERISTIQUE DU PRODUIT",
+                                                    "CARACTERISTIQUES DU PRODUIT",
                                                     textAlign: TextAlign.center,
                                                   ),
                                                 ),
@@ -315,6 +315,11 @@ class _HomeScreenState extends State<HomeScreen>
                                                   return null;
                                                 },
                                                 decoration: InputDecoration(
+                                                  helperStyle: TextStyle(
+                                                      fontSize: 8,
+                                                      color: Colors.white),
+                                                  helperText:
+                                                      "Exemple:'EASYDROPS' ",
                                                   labelStyle: TextStyle(
                                                       fontSize: 15,
                                                       color: Colors.white),
@@ -372,6 +377,11 @@ class _HomeScreenState extends State<HomeScreen>
                                                   return null;
                                                 },
                                                 decoration: InputDecoration(
+                                                  helperStyle: TextStyle(
+                                                      fontSize: 8,
+                                                      color: Colors.white),
+                                                  helperText:
+                                                      "Exemple:'organiseur' ",
                                                   labelStyle: TextStyle(
                                                       fontSize: 15,
                                                       color: Colors.white),
@@ -431,6 +441,10 @@ class _HomeScreenState extends State<HomeScreen>
                                                   return null;
                                                 },
                                                 decoration: InputDecoration(
+                                                  helperStyle: TextStyle(
+                                                      fontSize: 8,
+                                                      color: Colors.white),
+                                                  helperText: "Exemple:'12 €' ",
                                                   labelStyle: TextStyle(
                                                       fontSize: 15,
                                                       color: Colors.white),
@@ -490,6 +504,10 @@ class _HomeScreenState extends State<HomeScreen>
                                                   return null;
                                                 },
                                                 decoration: InputDecoration(
+                                                  helperStyle: TextStyle(
+                                                      fontSize: 8,
+                                                      color: Colors.white),
+                                                  helperText: "Exemple:'12 €' ",
                                                   labelStyle: TextStyle(
                                                       fontSize: 15,
                                                       color: Colors.white),
@@ -549,6 +567,10 @@ class _HomeScreenState extends State<HomeScreen>
                                                   return null;
                                                 },
                                                 decoration: InputDecoration(
+                                                  helperStyle: TextStyle(
+                                                      fontSize: 8,
+                                                      color: Colors.white),
+                                                  helperText: "Exemple:'12 €' ",
                                                   labelStyle: TextStyle(
                                                       fontSize: 15,
                                                       color: Colors.white),
@@ -703,7 +725,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                             10.0),
                                                     child: Center(
                                                       child: Text(
-                                                          "ADRESSE INTERNET"),
+                                                          "ADRESSES INTERNET"),
                                                     ),
                                                   ),
                                                 ),
@@ -730,6 +752,11 @@ class _HomeScreenState extends State<HomeScreen>
                                                       return null;
                                                     },
                                                     decoration: InputDecoration(
+                                                      helperStyle: TextStyle(
+                                                          fontSize: 8,
+                                                          color: Colors.white),
+                                                      helperText:
+                                                          "Exemple:'https://easydrops.fr/' ",
                                                       labelStyle: TextStyle(
                                                           fontSize: 15,
                                                           color: Colors.white),
@@ -788,6 +815,11 @@ class _HomeScreenState extends State<HomeScreen>
                                                       return null;
                                                     },
                                                     decoration: InputDecoration(
+                                                      helperStyle: TextStyle(
+                                                          fontSize: 8,
+                                                          color: Colors.white),
+                                                      helperText:
+                                                          "Exemple:'https://aliexpress.com/' ",
                                                       labelStyle: TextStyle(
                                                           fontSize: 15,
                                                           color: Colors.white),
@@ -814,7 +846,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                               horizontal: 20,
                                                               vertical: 10),
                                                       labelText:
-                                                          "Site AliExpress",
+                                                          "Lien site d'achat",
                                                       border: OutlineInputBorder(
                                                           borderRadius:
                                                               BorderRadius
@@ -846,6 +878,11 @@ class _HomeScreenState extends State<HomeScreen>
                                                       return null;
                                                     },
                                                     decoration: InputDecoration(
+                                                      helperStyle: TextStyle(
+                                                          fontSize: 8,
+                                                          color: Colors.white),
+                                                      helperText:
+                                                          "Exemple:'https://www.facebook.com/' ",
                                                       labelStyle: TextStyle(
                                                           fontSize: 15,
                                                           color: Colors.white),
@@ -871,7 +908,8 @@ class _HomeScreenState extends State<HomeScreen>
                                                           EdgeInsets.symmetric(
                                                               horizontal: 20,
                                                               vertical: 10),
-                                                      labelText: "facebook",
+                                                      labelText:
+                                                          "Lien facebook",
                                                       border: OutlineInputBorder(
                                                           borderRadius:
                                                               BorderRadius

@@ -16,7 +16,13 @@ import 'package:shimmer_animation/shimmer_animation.dart';
 class StatDays extends StatefulWidget {
   final ResultJournee resultatDaysList;
   final int indexProduct;
-  StatDays({required this.resultatDaysList, required this.indexProduct});
+  final String idProduct;
+  final int indexResultDays;
+  StatDays(
+      {required this.idProduct,
+      required this.indexResultDays,
+      required this.resultatDaysList,
+      required this.indexProduct});
 
   @override
   _StatDaysState createState() => _StatDaysState();
@@ -31,6 +37,28 @@ class _StatDaysState extends State<StatDays> {
   @override
   Widget build(BuildContext context) {
     List<Color> listeColors = [];
+    List<String> dateTraduction(String date) {
+      List<String> dateTraduct = date.split(",");
+
+      if (dateTraduct[0] == "Monday") {
+        dateTraduct[0] = 'Lumdi';
+      } else if (dateTraduct[0] == "Tuesday") {
+        dateTraduct[0] = 'Mardi';
+      } else if (dateTraduct[0] == "Wednesday") {
+        dateTraduct[0] = 'Mercredi';
+      } else if (dateTraduct[0] == "Thursday") {
+        dateTraduct[0] = 'Jeudi';
+      } else if (dateTraduct[0] == "Friday") {
+        dateTraduct[0] = 'Vendredi';
+      } else if (dateTraduct[0] == "Saturday") {
+        dateTraduct[0] = 'Samedi';
+      } else if (dateTraduct[0] == "Sunday") {
+        dateTraduct[0] = 'Dimanche';
+      }
+
+      return dateTraduct;
+    }
+
     List<double> statOffre(double totalOffres) {
       List<double> statOffres = [];
 
@@ -85,6 +113,8 @@ class _StatDaysState extends State<StatDays> {
 
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
     List<ProduitGagnant> _productGagnantList = variable.getProduitGagnant();
+    List<ResultJournee> _resultatDaysList =
+        variable.getResulDays(widget.idProduct);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(140.0),
@@ -153,7 +183,17 @@ class _StatDaysState extends State<StatDays> {
                                             widget.indexProduct],
                                         patch1: imageBytes1,
                                         patch2: imageBytes2,
-                                        patch3: imageBytes3, statOffre: false,
+                                        patch3: imageBytes3,
+                                        statOffre: false,
+                                        date: dateTraduction(_resultatDaysList[
+                                                    widget.indexResultDays]
+                                                .date)[0] +
+                                            dateTraduction(_resultatDaysList[
+                                                    widget.indexResultDays]
+                                                .date)[1] +
+                                            dateTraduction(_resultatDaysList[
+                                                    widget.indexResultDays]
+                                                .date)[2],
                                       ))));
                         }
                       },

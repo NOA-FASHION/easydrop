@@ -360,7 +360,7 @@ class _BuildProductState extends State<BuildProduct> {
                                   "Nom du Produit".toUpperCase(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.purple),
+                                      color: Colors.blue),
                                 ),
                                 SizedBox(
                                   width: 5.0,

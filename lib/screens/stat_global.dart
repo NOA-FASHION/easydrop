@@ -3,6 +3,7 @@ import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui';
 import 'package:flutter/rendering.dart';
+import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:easydrop/controllers/challenge_controller.dart';
 import 'package:easydrop/models/drop_models.dart';
@@ -108,7 +109,7 @@ class _StatGlobalState extends State<StatGlobal> {
   Widget build(BuildContext context) {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
     List<ProduitGagnant> _productGagnantList = variable.getProduitGagnant();
-
+DateTime today = new DateTime.now();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(140.0),
@@ -177,7 +178,7 @@ class _StatGlobalState extends State<StatGlobal> {
                                             widget.indexProduct],
                                         patch1: imageBytes1,
                                         patch2: imageBytes2,
-                                        patch3: imageBytes3, statOffre: false,
+                                        patch3: imageBytes3, statOffre: false,  date:DateFormat('yyyy-MM-dd').format(today) ,
                                       ))));
                         }
                       },

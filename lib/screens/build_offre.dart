@@ -411,7 +411,7 @@ class _BuildOffreState extends State<BuildOffre> {
                                       (index + 1).toString().toUpperCase(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.purple),
+                                      color: Colors.blue),
                                 ),
                                 SizedBox(
                                   width: 5.0,

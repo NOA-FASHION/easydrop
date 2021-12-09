@@ -91,6 +91,28 @@ class _BuildResultDaysState extends State<BuildResultDays> {
     return longLetter;
   }
 
+  List<String> dateTraduction(String date) {
+    List<String> dateTraduct = date.split(",");
+
+    if (dateTraduct[0] == "Monday") {
+      dateTraduct[0] = 'Lumdi';
+    } else if (dateTraduct[0] == "Tuesday") {
+      dateTraduct[0] = 'Mardi';
+    } else if (dateTraduct[0] == "Wednesday") {
+      dateTraduct[0] = 'Mercredi';
+    } else if (dateTraduct[0] == "Thursday") {
+      dateTraduct[0] = 'Jeudi';
+    } else if (dateTraduct[0] == "Friday") {
+      dateTraduct[0] = 'Vendredi';
+    } else if (dateTraduct[0] == "Saturday") {
+      dateTraduct[0] = 'Samedi';
+    } else if (dateTraduct[0] == "Sunday") {
+      dateTraduct[0] = 'Dimanche';
+    }
+
+    return dateTraduct;
+  }
+
   Widget activeGlow(
       ResultJournee resultDays, List<ProduitGagnant> _listProduitGagnant) {
     Widget glow = Padding(
@@ -362,6 +384,8 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                                 child: StatDays(
                                   resultatDaysList: _resultatDaysList[index],
                                   indexProduct: widget.indexProduct,
+                                  idProduct: widget.idProduct,
+                                  indexResultDays: index,
                                 ))));
                   },
                   title: Container(
@@ -380,15 +404,23 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                                   "Date".toUpperCase(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.purple),
+                                      color: Colors.blue),
                                 ),
                                 SizedBox(
                                   width: 5.0,
                                 ),
                                 maxLetterTitre(
                                   "Résultat du ".toUpperCase() +
-                                      _resultatDaysList[index]
-                                          .date
+                                      dateTraduction(
+                                              _resultatDaysList[index].date)[0]
+                                          .toString()
+                                          .toUpperCase() +
+                                      dateTraduction(
+                                              _resultatDaysList[index].date)[1]
+                                          .toString()
+                                          .toUpperCase() +
+                                      dateTraduction(
+                                              _resultatDaysList[index].date)[2]
                                           .toString()
                                           .toUpperCase(),
                                 )

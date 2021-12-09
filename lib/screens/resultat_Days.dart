@@ -357,337 +357,396 @@ class _ResultDaysState extends State<ResultDays> {
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: SingleChildScrollView(
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.8,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20.0),
-                                gradient: LinearGradient(
-                                    begin: Alignment.centerLeft,
-                                    end: Alignment.centerRight,
-                                    colors: <Color>[
-                                      Colors.orange,
-                                      Colors.pink
-                                    ])),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  height: 5.0,
-                                ),
-                                ///////////////////////////////////
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: ClipRRect(
+                          child: Card(
+                            color: Colors.blue,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
+                            elevation: 15.0,
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * 0.8,
+                                decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20.0),
-                                    child: Image.file(
-                                      File(variable
-                                          .getProduitGagnant()[
-                                              widget.indexProduct]
-                                          .photoProduit),
-                                      width:
-                                          MediaQuery.of(context).size.width / 5,
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              11,
+                                    gradient: LinearGradient(
+                                        begin: Alignment.centerLeft,
+                                        end: Alignment.centerRight,
+                                        colors: <Color>[
+                                          Colors.orange,
+                                          Colors.pink
+                                        ])),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      height: 5.0,
                                     ),
-                                  ),
-                                ),
-
-                                SizedBox(
-                                  height: 15.0,
-                                ),
-                                Container(
-                                  width: 235,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: TextFormField(
-                                      controller: controller,
-                                      style: TextStyle(
-                                          fontSize: 15, color: Colors.white),
-                                      textCapitalization:
-                                          TextCapitalization.sentences,
-                                      onSaved: (value) {
-                                        // facebookDepenseDays = double.parse(value!);
-                                        facebookDepenseDays =
-                                            controller.doubleValue;
-                                      },
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return "Merci d'entrer les dépense facebook";
-                                        } else if (value.length > 35) {
-                                          return "Pas plus de 50 caractères";
-                                        }
-                                        return null;
-                                      },
-                                      decoration: InputDecoration(
-                                        labelStyle: TextStyle(
-                                            fontSize: 15, color: Colors.white),
-                                        focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                width: 2.0,
-                                                color: Colors.blueAccent),
-                                            borderRadius:
-                                                BorderRadius.circular(15.0)),
-                                        enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                width: 1.0,
-                                                color: Colors.blueAccent),
-                                            borderRadius:
-                                                BorderRadius.circular(15.0)),
-                                        contentPadding: EdgeInsets.symmetric(
-                                            horizontal: 20, vertical: 10),
-                                        labelText: "Dépense Facebook",
-                                        border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15.0)),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-
-                                SizedBox(
-                                  height: 15.0,
-                                ),
-                                Container(
-                                  width: 235,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: TextFormField(
-                                      style: TextStyle(
-                                          fontSize: 15, color: Colors.white),
-                                      textCapitalization:
-                                          TextCapitalization.sentences,
-                                      onSaved: (value) {
-                                        panierDays = int.parse(value!);
-                                      },
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return "Merci d'entrer le nombre de panier de la journée";
-                                        } else if (value.length > 35) {
-                                          return "Pas plus de 50 caractères";
-                                        }
-                                        return null;
-                                      },
-                                      decoration: InputDecoration(
-                                        labelStyle: TextStyle(
-                                            fontSize: 15, color: Colors.white),
-                                        focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                width: 2.0,
-                                                color: Colors.blueAccent),
-                                            borderRadius:
-                                                BorderRadius.circular(15.0)),
-                                        enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                width: 1.0,
-                                                color: Colors.blueAccent),
-                                            borderRadius:
-                                                BorderRadius.circular(15.0)),
-                                        contentPadding: EdgeInsets.symmetric(
-                                            horizontal: 20, vertical: 10),
-                                        labelText:
-                                            "Nombre de panier de la journée",
-                                        border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15.0)),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-
-                                SizedBox(
-                                  height: 15.0,
-                                ),
-                                Container(
-                                  width: 235,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: TextFormField(
-                                      style: TextStyle(
-                                          fontSize: 15, color: Colors.white),
-                                      textCapitalization:
-                                          TextCapitalization.sentences,
-                                      onSaved: (value) {
-                                        vueDays = int.parse(value!);
-                                      },
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return "Merci d'entrer le nombre de vue de la journée";
-                                        } else if (value.length > 35) {
-                                          return "Pas plus de 50 caractères";
-                                        }
-                                        return null;
-                                      },
-                                      decoration: InputDecoration(
-                                        labelStyle: TextStyle(
-                                            fontSize: 15, color: Colors.white),
-                                        focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                width: 2.0,
-                                                color: Colors.blueAccent),
-                                            borderRadius:
-                                                BorderRadius.circular(15.0)),
-                                        enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                width: 1.0,
-                                                color: Colors.blueAccent),
-                                            borderRadius:
-                                                BorderRadius.circular(15.0)),
-                                        contentPadding: EdgeInsets.symmetric(
-                                            horizontal: 20, vertical: 10),
-                                        labelText:
-                                            "le nombre de vue de la journée",
-                                        border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15.0)),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-
-                                SizedBox(
-                                  height: 15.0,
-                                ),
-                                Container(
-                                  width: 250,
-                                  height: offreDays.length > 3 ? 260 : 140,
-                                  child: ListView.builder(
-                                      padding: const EdgeInsets.all(8),
-                                      itemCount: offreDays.length,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        return Container(
+                                    ///////////////////////////////////
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                        child: Image.file(
+                                          File(variable
+                                              .getProduitGagnant()[
+                                                  widget.indexProduct]
+                                              .photoProduit),
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width /
-                                              3.2,
-                                          margin: EdgeInsets.only(top: 10),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: TextFormField(
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  color: Colors.white),
-                                              textCapitalization:
-                                                  TextCapitalization.sentences,
-                                              onSaved: (value) {
-                                                nombreVenteOffreDays
-                                                    .add(value!);
-                                              },
-                                              validator: (value) {
-                                                if (value!.isEmpty) {
-                                                  return "Merci d'entrer le nombre de vente concernant l'offre " +
-                                                      offreDays.length
-                                                          .toString();
-                                                } else if (value.length > 35) {
-                                                  return "Pas plus de 50 caractères";
-                                                }
-                                                return null;
-                                              },
-                                              decoration: InputDecoration(
-                                                labelStyle: TextStyle(
-                                                    fontSize: 15,
-                                                    color: Colors.white),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            width: 2.0,
-                                                            color: Colors
-                                                                .blueAccent),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                    15.0)),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            width: 1.0,
-                                                            color: Colors
-                                                                .blueAccent),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                    15.0)),
-                                                contentPadding:
-                                                    EdgeInsets.symmetric(
-                                                        horizontal: 20,
-                                                        vertical: 10),
-                                                labelText:
-                                                    "Nombre de vente concernant l'offre" +
-                                                        (index + 1).toString(),
-                                                border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15.0)),
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      }),
-                                ),
-
-                                offreVente(variable.getProduitGagnant(),
-                                    widget.indexProduct),
-                                Center(
-                                  child: IconButton(
-                                    iconSize: 60,
-                                    alignment: Alignment.topRight,
-                                    icon: Icon(
-                                      Icons.check_circle,
-                                      color: Colors.blue,
+                                              5,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              11,
+                                        ),
+                                      ),
                                     ),
-                                    onPressed: () {
-                                      if (formKey.currentState!.validate()) {
-                                        formKey.currentState!.save();
-                                        {
-                                          Provider.of<Challengecontroller>(
-                                                  context,
-                                                  listen: false)
-                                              .addResultatDays(
-                                            date: todays,
-                                            index: widget.indexProduct,
-                                            chiffreAffaireDays: chiffreAffaire(
-                                                offreEnCours: offreDays,
-                                                venteOffre:
-                                                    nombreVenteOffreDays),
-                                            facebookDepenseDays:
-                                                facebookDepenseDays,
-                                            panierDays: panierDays,
-                                            vueDays: vueDays,
-                                            venteDays: totalNombreVante(
-                                                offreEnCours: offreDays,
-                                                venteOffre:
-                                                    nombreVenteOffreDays),
-                                            margeDays: margeDaysCalcul(
-                                                coutPub: facebookDepenseDays,
-                                                offreEnCours: offreDays,
-                                                venteOffre:
-                                                    nombreVenteOffreDays),
-                                            nombreVenteOffreDays:
-                                                nombreVenteOffreDays,
-                                            coutDaysProduit:
-                                                coutProductDaysCalcul(
-                                                    offreEnCours: offreDays,
-                                                    venteOffre:
-                                                        nombreVenteOffreDays),
-                                            prixShippingDays:
-                                                shippingDaysCalcul(
-                                                    offreEnCours: offreDays,
-                                                    venteOffre:
-                                                        nombreVenteOffreDays),
-                                            roaDays: roaDaysCalcul(
-                                                offreEnCours: offreDays,
-                                                venteOffre:
-                                                    nombreVenteOffreDays),
-                                          );
 
-                                          Navigator.pop(context);
-                                        }
-                                      }
-                                    },
-                                  ),
+                                    SizedBox(
+                                      height: 15.0,
+                                    ),
+                                    Container(
+                                      width: 235,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TextFormField(
+                                          controller: controller,
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.white),
+                                          textCapitalization:
+                                              TextCapitalization.sentences,
+                                          onSaved: (value) {
+                                            // facebookDepenseDays = double.parse(value!);
+                                            facebookDepenseDays =
+                                                controller.doubleValue;
+                                          },
+                                          validator: (value) {
+                                            if (value!.isEmpty) {
+                                              return "Merci d'entrer les dépense facebook";
+                                            } else if (value.length > 35) {
+                                              return "Pas plus de 50 caractères";
+                                            }
+                                            return null;
+                                          },
+                                          decoration: InputDecoration(
+                                            helperStyle: TextStyle(
+                                                fontSize: 8,
+                                                color: Colors.white),
+                                            helperText: "Exemple:'12 €' ",
+                                            labelStyle: TextStyle(
+                                                fontSize: 15,
+                                                color: Colors.white),
+                                            focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    width: 2.0,
+                                                    color: Colors.blueAccent),
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        15.0)),
+                                            enabledBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    width: 1.0,
+                                                    color: Colors.blueAccent),
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        15.0)),
+                                            contentPadding:
+                                                EdgeInsets.symmetric(
+                                                    horizontal: 20,
+                                                    vertical: 10),
+                                            labelText: "Dépense Facebook",
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        15.0)),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+
+                                    SizedBox(
+                                      height: 15.0,
+                                    ),
+                                    Container(
+                                      width: 235,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TextFormField(
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.white),
+                                          textCapitalization:
+                                              TextCapitalization.sentences,
+                                          onSaved: (value) {
+                                            panierDays = int.parse(value!);
+                                          },
+                                          validator: (value) {
+                                            if (value!.isEmpty) {
+                                              return "Merci d'entrer le nombre de panier de la journée";
+                                            } else if (value.length > 35) {
+                                              return "Pas plus de 50 caractères";
+                                            }
+                                            return null;
+                                          },
+                                          decoration: InputDecoration(
+                                            helperStyle: TextStyle(
+                                                fontSize: 8,
+                                                color: Colors.white),
+                                            helperText: "Exemple:'12' ",
+                                            labelStyle: TextStyle(
+                                                fontSize: 15,
+                                                color: Colors.white),
+                                            focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    width: 2.0,
+                                                    color: Colors.blueAccent),
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        15.0)),
+                                            enabledBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    width: 1.0,
+                                                    color: Colors.blueAccent),
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        15.0)),
+                                            contentPadding:
+                                                EdgeInsets.symmetric(
+                                                    horizontal: 20,
+                                                    vertical: 10),
+                                            labelText:
+                                                "Nombre de panier de la journée",
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        15.0)),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+
+                                    SizedBox(
+                                      height: 15.0,
+                                    ),
+                                    Container(
+                                      width: 235,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TextFormField(
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.white),
+                                          textCapitalization:
+                                              TextCapitalization.sentences,
+                                          onSaved: (value) {
+                                            vueDays = int.parse(value!);
+                                          },
+                                          validator: (value) {
+                                            if (value!.isEmpty) {
+                                              return "Merci d'entrer le nombre de vue de la journée";
+                                            } else if (value.length > 35) {
+                                              return "Pas plus de 50 caractères";
+                                            }
+                                            return null;
+                                          },
+                                          decoration: InputDecoration(
+                                            helperStyle: TextStyle(
+                                                fontSize: 8,
+                                                color: Colors.white),
+                                            helperText: "Exemple:'120' ",
+                                            labelStyle: TextStyle(
+                                                fontSize: 15,
+                                                color: Colors.white),
+                                            focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    width: 2.0,
+                                                    color: Colors.blueAccent),
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        15.0)),
+                                            enabledBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                    width: 1.0,
+                                                    color: Colors.blueAccent),
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        15.0)),
+                                            contentPadding:
+                                                EdgeInsets.symmetric(
+                                                    horizontal: 20,
+                                                    vertical: 10),
+                                            labelText:
+                                                "le nombre de vue de la journée",
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        15.0)),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+
+                                    SizedBox(
+                                      height: 15.0,
+                                    ),
+                                    Container(
+                                      width: 250,
+                                      height: offreDays.length > 3 ? 260 : 140,
+                                      child: ListView.builder(
+                                          padding: const EdgeInsets.all(8),
+                                          itemCount: offreDays.length,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            return Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  3.2,
+                                              margin: EdgeInsets.only(top: 10),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: TextFormField(
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      color: Colors.white),
+                                                  textCapitalization:
+                                                      TextCapitalization
+                                                          .sentences,
+                                                  onSaved: (value) {
+                                                    nombreVenteOffreDays
+                                                        .add(value!);
+                                                  },
+                                                  validator: (value) {
+                                                    if (value!.isEmpty) {
+                                                      return "Merci d'entrer le nombre de vente concernant l'offre " +
+                                                          offreDays.length
+                                                              .toString();
+                                                    } else if (value.length >
+                                                        35) {
+                                                      return "Pas plus de 50 caractères";
+                                                    }
+                                                    return null;
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    helperStyle: TextStyle(
+                                                        fontSize: 8,
+                                                        color: Colors.white),
+                                                    helperText: "Exemple:'12' ",
+                                                    labelStyle: TextStyle(
+                                                        fontSize: 15,
+                                                        color: Colors.white),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                            borderSide: BorderSide(
+                                                                width: 2.0,
+                                                                color: Colors
+                                                                    .blueAccent),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        15.0)),
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                            borderSide: BorderSide(
+                                                                width: 1.0,
+                                                                color: Colors
+                                                                    .blueAccent),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        15.0)),
+                                                    contentPadding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 20,
+                                                            vertical: 10),
+                                                    labelText:
+                                                        "Nombre de vente concernant l'offre" +
+                                                            (index + 1)
+                                                                .toString(),
+                                                    border: OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                    15.0)),
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          }),
+                                    ),
+
+                                    offreVente(variable.getProduitGagnant(),
+                                        widget.indexProduct),
+                                    Center(
+                                      child: IconButton(
+                                        iconSize: 60,
+                                        alignment: Alignment.topRight,
+                                        icon: Icon(
+                                          Icons.check_circle,
+                                          color: Colors.blue,
+                                        ),
+                                        onPressed: () {
+                                          if (formKey.currentState!
+                                              .validate()) {
+                                            formKey.currentState!.save();
+                                            {
+                                              Provider.of<Challengecontroller>(
+                                                      context,
+                                                      listen: false)
+                                                  .addResultatDays(
+                                                date: todays,
+                                                index: widget.indexProduct,
+                                                chiffreAffaireDays:
+                                                    chiffreAffaire(
+                                                        offreEnCours: offreDays,
+                                                        venteOffre:
+                                                            nombreVenteOffreDays),
+                                                facebookDepenseDays:
+                                                    facebookDepenseDays,
+                                                panierDays: panierDays,
+                                                vueDays: vueDays,
+                                                venteDays: totalNombreVante(
+                                                    offreEnCours: offreDays,
+                                                    venteOffre:
+                                                        nombreVenteOffreDays),
+                                                margeDays: margeDaysCalcul(
+                                                    coutPub:
+                                                        facebookDepenseDays,
+                                                    offreEnCours: offreDays,
+                                                    venteOffre:
+                                                        nombreVenteOffreDays),
+                                                nombreVenteOffreDays:
+                                                    nombreVenteOffreDays,
+                                                coutDaysProduit:
+                                                    coutProductDaysCalcul(
+                                                        offreEnCours: offreDays,
+                                                        venteOffre:
+                                                            nombreVenteOffreDays),
+                                                prixShippingDays:
+                                                    shippingDaysCalcul(
+                                                        offreEnCours: offreDays,
+                                                        venteOffre:
+                                                            nombreVenteOffreDays),
+                                                roaDays: roaDaysCalcul(
+                                                    offreEnCours: offreDays,
+                                                    venteOffre:
+                                                        nombreVenteOffreDays),
+                                              );
+
+                                              Navigator.pop(context);
+                                            }
+                                          }
+                                        },
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
                           ),
                         ),

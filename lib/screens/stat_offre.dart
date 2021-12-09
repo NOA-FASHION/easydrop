@@ -6,6 +6,7 @@ import 'package:easydrop/models/drop_models.dart';
 import 'package:easydrop/screens/image_capture.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:intl/intl.dart';
 import 'package:marquee_text/marquee_text.dart';
 import 'package:multi_charts/multi_charts.dart';
 import 'package:page_transition/page_transition.dart';
@@ -56,6 +57,7 @@ class _StatOffreState extends State<StatOffre> {
   final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    DateTime today = new DateTime.now();
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
     List<ProduitGagnant> _productGagnantList = variable.getProduitGagnant();
     return Scaffold(
@@ -128,6 +130,8 @@ class _StatOffreState extends State<StatOffre> {
                                         patch2: imageBytes2,
                                         patch3: imageBytes2,
                                         statOffre: true,
+                                        date: DateFormat('yyyy-MM-dd')
+                                            .format(today),
                                       ))));
                         }
                       },

@@ -11,6 +11,7 @@ import 'package:share/share.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
 class PlayPicture extends StatelessWidget {
+  final String date;
   final bool statOffre;
   final Uint8List patch;
   final Uint8List patch1;
@@ -21,6 +22,7 @@ class PlayPicture extends StatelessWidget {
   const PlayPicture(
       {Key? key,
       required this.productGagnantList,
+      required this.date,
       required this.patch,
       required this.statOffre,
       required this.patch1,
@@ -32,7 +34,7 @@ class PlayPicture extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
-
+    print(date);
     UserDrop userDrop = variable.getUserDrop();
     final pdf = pw.Document();
 
@@ -42,31 +44,6 @@ class PlayPicture extends StatelessWidget {
         child: SafeArea(
           child: AppBar(
             actions: [
-              // Padding(
-              //   padding: const EdgeInsets.only(right: 12),
-              //   child: Column(
-              //     mainAxisAlignment: MainAxisAlignment.center,
-              //     children: <Widget>[
-              //       InkWell(
-              //         splashColor: Colors.white,
-              //         onTap: () async {
-              //           Share.shareFiles(
-              //               ['${directory.path}/container_image.png'],
-              //               text: 'Great picture');
-              //         },
-              //         child: Icon(
-              //           Icons.picture_in_picture,
-              //           size: 30,
-              //           color: Colors.blue,
-              //         ),
-              //       ), // icon
-              //       Text(
-              //         "Pictures",
-              //         style: TextStyle(fontSize: 10, color: Colors.blue),
-              //       ), // text
-              //     ],
-              //   ),
-              // ),
               Padding(
                 padding: const EdgeInsets.only(right: 12),
                 child: Column(
@@ -94,6 +71,7 @@ class PlayPicture extends StatelessWidget {
                                       pw.Text(
                                           "Téléphone: " + userDrop.telephone),
                                       pw.SizedBox(height: 10),
+                                      pw.Text("Date: " + date),
                                       pw.Text("Adresse site: " +
                                           productGagnantList.siteVente),
                                       pw.SizedBox(height: 10),
