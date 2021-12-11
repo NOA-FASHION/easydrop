@@ -44,46 +44,46 @@ class _ResultDaysState extends State<ResultDays> {
         context: context,
         builder: (context) {
           return AlertDialog(
+            backgroundColor: Colors.transparent,
             scrollable: true,
-            title: Text('Modification'),
+            // title: Text('Vous devez créer une offre.'),
             content: Container(
+              padding: EdgeInsets.all(20),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              height: 450,
+                  borderRadius: BorderRadius.circular(20.0),
+                  gradient: LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: <Color>[Colors.orange, Colors.pink])),
+              height: 150,
               width: double.maxFinite,
-              child: Text(
-                  "Vous ne pouvez rentrer de données quotidienne sans avoir créer une offre"),
-            ),
-            actions: <Widget>[
-              IconButton(
-                onPressed: () {
-                  setState(() {
-                    Navigator.pop(context);
-                  });
-                },
-                icon: Icon(Icons.check),
-                iconSize: 35,
+              child: Center(
+                child: Column(
+                  children: [
+                    Text(
+                      'Vous devez créer une offre.'.toUpperCase(),
+                      textAlign: TextAlign.center,
+                    ),
+                    Text(
+                      "Vous ne pouvez rentrer de données quotidiennes sans avoir créer une offre",
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
               ),
-              // IconButton(
-              //   onPressed: () {
-              //     if (formKey.currentState!.validate()) {
-              //       formKey.currentState!.save();
-              //       if (valueText.isNotEmpty) {
-              //         variable.changeTitre(indexGestion: index, nom: valueText);
-              //       }
-              //       if (valueText.isNotEmpty) {
-              //         variable.changePrix(
-              //             indexGestion: index, montant: valueText2);
-              //       }
+            ),
+            // actions: <Widget>[
+            //   IconButton(
+            //     onPressed: () {
+            //       setState(() {
+            //         Navigator.pop(context);
+            //       });
+            //     },
+            //     icon: Icon(Icons.check),
+            //     iconSize: 35,
+            //   ),
 
-              //       Navigator.pop(context);
-              //     }
-              //   },
-              //   icon: Icon(Icons.check),
-              //   iconSize: 35,
-              // ),
-            ],
+            // ],
           );
         });
   }

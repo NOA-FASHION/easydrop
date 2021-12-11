@@ -725,7 +725,10 @@ class _HomeScreenState extends State<HomeScreen>
                                                             10.0),
                                                     child: Center(
                                                       child: Text(
-                                                          "ADRESSES INTERNET"),
+                                                        "ADRESSES INTERNET",
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
