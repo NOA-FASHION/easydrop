@@ -1,6 +1,5 @@
 import 'package:easydrop/controllers/challenge_controller.dart';
 import 'package:easydrop/models/drop_models.dart';
-
 import 'package:easydrop/screens/stat_offre.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';

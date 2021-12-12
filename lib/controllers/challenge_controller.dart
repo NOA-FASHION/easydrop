@@ -493,4 +493,115 @@ class Challengecontroller extends ChangeNotifier {
               .nombreVenteOffreDays);
     }
   }
+
+  void editProductGagant(
+      {required int indexProduct,
+      required String siteVente,
+      required double prixShipping,
+      required String siteAliexpress,
+      required String nomProduit,
+      required String facebookAdress,
+      required double prixAchat,
+      required double prixVente,
+      required String photoProduit,
+      required String typeDuProduit}) async {
+    if (siteVente.isNotEmpty) {
+      _listProduitGagnant[indexProduct].siteVente = siteVente;
+    }
+
+    if (prixShipping > 0) {
+      _listProduitGagnant[indexProduct].prixShipping = prixShipping;
+    }
+    if (siteAliexpress.isNotEmpty) {
+      _listProduitGagnant[indexProduct].siteAliexpress = siteAliexpress;
+    }
+    if (nomProduit.isNotEmpty) {
+      _listProduitGagnant[indexProduct].nomProduit = nomProduit;
+    }
+    if (facebookAdress.isNotEmpty) {
+      _listProduitGagnant[indexProduct].facebookAdress = facebookAdress;
+    }
+    if (prixAchat > 0) {
+      _listProduitGagnant[indexProduct].prixAchat = prixAchat;
+    }
+    if (prixVente > 0) {
+      _listProduitGagnant[indexProduct].prixVente = prixVente;
+    }
+    if (photoProduit.isNotEmpty) {
+      _listProduitGagnant[indexProduct].photoProduit = photoProduit;
+    }
+    if (typeDuProduit.isNotEmpty) {
+      _listProduitGagnant[indexProduct].typeDuProduit = typeDuProduit;
+    }
+
+    await _save(remove: false);
+    _initProduitGagnantList();
+    notifyListeners();
+  }
+
+  void editResultatDays({
+    required int indexResultDays,
+    required int indexProduct,
+    required double chiffreAffaireDays,
+    required double prixShippingDays,
+    required double facebookDepenseDays,
+    required double coutDaysProduit,
+    required double margeDays,
+    required double venteDays,
+    required double roaDays,
+    required int panierDays,
+    required int vueDays,
+    required List<String> nombreVenteOffreDays,
+  }) async {
+    if (chiffreAffaireDays > 0) {
+      _listProduitGagnant[indexProduct]
+          .listeResultatJournee[indexResultDays]
+          .chiffreAffaireDays = chiffreAffaireDays;
+    }
+    if (prixShippingDays > 0) {
+      _listProduitGagnant[indexProduct]
+          .listeResultatJournee[indexResultDays]
+          .prixShippingDays = prixShippingDays;
+    }
+    if (facebookDepenseDays > 0) {
+      _listProduitGagnant[indexProduct]
+          .listeResultatJournee[indexResultDays]
+          .facebookDepenseDays = facebookDepenseDays;
+    }
+    if (coutDaysProduit > 0) {
+      _listProduitGagnant[indexProduct]
+          .listeResultatJournee[indexResultDays]
+          .coutDaysProduit = coutDaysProduit;
+    }
+    if (margeDays > 0) {
+      _listProduitGagnant[indexProduct]
+          .listeResultatJournee[indexResultDays]
+          .margeDays = margeDays;
+    }
+    if (roaDays > 0) {
+      _listProduitGagnant[indexProduct]
+          .listeResultatJournee[indexResultDays]
+          .roaDays = roaDays;
+    }
+    if (panierDays > 0) {
+      _listProduitGagnant[indexProduct]
+          .listeResultatJournee[indexResultDays]
+          .panierDays = panierDays;
+    }
+    if (vueDays > 0) {
+      _listProduitGagnant[indexProduct]
+          .listeResultatJournee[indexResultDays]
+          .vueDays = vueDays;
+    }
+    if (nombreVenteOffreDays.length > 0) {
+      _listProduitGagnant[indexProduct]
+          .listeResultatJournee[indexResultDays]
+          .nombreVenteOffreDays = nombreVenteOffreDays;
+    }
+
+    nombreOffreTotal(indexProduct);
+    await _save(remove: false);
+    _initProduitGagnantList();
+    notifyListeners();
+  }
 }

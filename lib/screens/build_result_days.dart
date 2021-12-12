@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:easydrop/controllers/challenge_controller.dart';
 import 'package:easydrop/models/drop_models.dart';
+import 'package:easydrop/screens/edit_result_days.dart';
 import 'package:easydrop/screens/stat_days.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -44,6 +45,21 @@ class _BuildResultDaysState extends State<BuildResultDays> {
       longLetter = Text(word2);
     }
     return longLetter;
+  }
+
+  _editProduct(int indexResultDays, Challengecontroller variable) {
+    // var baseDialog = EditProduitGagnant();
+    showDialog(
+        context: context,
+        builder: (context) {
+          return ChangeNotifierProvider.value(
+              value: variable,
+              child: EditResultDays(
+                idProduct: widget.idProduct,
+                indexProduct: widget.indexProduct,
+                indexResultDays: indexResultDays,
+              ));
+        });
   }
 
   Widget maxLetterTitre(String word) {
@@ -391,40 +407,54 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                   title: Container(
                     child: Row(
                       children: [
-                        Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          elevation: 15.0,
-                          child: Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Date".toUpperCase(),
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.blue),
-                                ),
-                                SizedBox(
-                                  width: 5.0,
-                                ),
-                                maxLetterTitre(
-                                  "Résultat du ".toUpperCase() +
-                                      dateTraduction(
-                                              _resultatDaysList[index].date)[0]
-                                          .toString()
-                                          .toUpperCase() +
-                                      dateTraduction(
-                                              _resultatDaysList[index].date)[1]
-                                          .toString()
-                                          .toUpperCase() +
-                                      dateTraduction(
-                                              _resultatDaysList[index].date)[2]
-                                          .toString()
-                                          .toUpperCase(),
-                                )
-                              ],
+                        Container(
+                          width: MediaQuery.of(context).size.width / 1.2,
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            elevation: 15.0,
+                            child: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "Date".toUpperCase(),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.blue),
+                                  ),
+                                  SizedBox(
+                                    width: 5.0,
+                                  ),
+                                  maxLetterTitre(
+                                    "Résultat du ".toUpperCase() +
+                                        dateTraduction(_resultatDaysList[index]
+                                                .date)[0]
+                                            .toString()
+                                            .toUpperCase() +
+                                        dateTraduction(_resultatDaysList[index]
+                                                .date)[1]
+                                            .toString()
+                                            .toUpperCase() +
+                                        dateTraduction(_resultatDaysList[index]
+                                                .date)[2]
+                                            .toString()
+                                            .toUpperCase(),
+                                  ),
+                                  IconButton(
+                                    padding: EdgeInsets.all(0),
+                                    iconSize: 20,
+                                    icon: Icon(
+                                      Icons.edit,
+                                      color: Colors.blue,
+                                    ),
+                                    onPressed: () {
+                                      _editProduct(index, variable);
+                                    },
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:easydrop/controllers/challenge_controller.dart';
 import 'package:easydrop/models/drop_models.dart';
+import 'package:easydrop/screens/edit_produit_gagnant.dart';
 import 'package:easydrop/screens/resultat_Days.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -45,9 +46,9 @@ class _BuildProductState extends State<BuildProduct> {
     Widget longLetter;
 
     String word2;
-    if (word.length > 20) {
+    if (word.length > 15) {
       longLetter = Container(
-        width: MediaQuery.of(context).size.width / 2.4,
+        width: MediaQuery.of(context).size.width / 2.79,
         color: Colors.transparent,
         child: MarqueeText(
           text: word,
@@ -59,7 +60,7 @@ class _BuildProductState extends State<BuildProduct> {
         ),
       );
       return longLetter;
-    } else if (word.length > 25) {
+    } else if (word.length > 20) {
       longLetter = Container(
         width: MediaQuery.of(context).size.width / 2,
         color: Colors.transparent,
@@ -84,6 +85,19 @@ class _BuildProductState extends State<BuildProduct> {
       );
     }
     return longLetter;
+  }
+
+  _editProduct(int indexProduct, Challengecontroller variable) {
+    // var baseDialog = EditProduitGagnant();
+    showDialog(
+        context: context,
+        builder: (context) {
+          return ChangeNotifierProvider.value(
+              value: variable,
+              child: EditProduitGagnant(
+                indexProduitGagnant: indexProduct,
+              ));
+        });
   }
 
   Widget activeGlow(ProduitGagnant product) {
@@ -345,35 +359,49 @@ class _BuildProductState extends State<BuildProduct> {
                                     index, _productGagnantList[index].id))));
                   },
                   title: Container(
+                    height: 35,
                     child: Row(
                       children: [
-                        Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          elevation: 15.0,
-                          child: Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Nom du Produit".toUpperCase(),
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.blue),
-                                ),
-                                SizedBox(
-                                  width: 5.0,
-                                ),
-                                maxLetterTitre(_productGagnantList[index]
-                                    .nomProduit
-                                    .toUpperCase()),
-                              ],
+                        Container(
+                          width: MediaQuery.of(context).size.width / 1.2,
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            elevation: 15.0,
+                            child: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text(
+                                    "Nom du Produit".toUpperCase(),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.blue),
+                                  ),
+                                  SizedBox(
+                                    width: 3.0,
+                                  ),
+                                  maxLetterTitre(_productGagnantList[index]
+                                      .nomProduit
+                                      .toUpperCase()),
+                                  IconButton(
+                                    padding: EdgeInsets.all(0),
+                                    iconSize: 20,
+                                    icon: Icon(
+                                      Icons.edit,
+                                      color: Colors.blue,
+                                    ),
+                                    onPressed: () {
+                                      _editProduct(index, variable);
+                                    },
+                                  )
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 5.0,
                         ),
                       ],
                     ),
