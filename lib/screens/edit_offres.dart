@@ -130,7 +130,7 @@ class _EditOffresState extends State<EditOffres> {
                               decoration: InputDecoration(
                                 helperStyle: TextStyle(
                                     fontSize: 15, color: Colors.white),
-                                helperText: "valeure actuelle: " +
+                                helperText: "valeur actuelle: " +
                                     _offresProduct[widget.indexOffre].offres,
                                 labelStyle: TextStyle(
                                     fontSize: 15, color: Colors.white),
@@ -181,7 +181,7 @@ class _EditOffresState extends State<EditOffres> {
                                 decoration: InputDecoration(
                                   helperStyle: TextStyle(
                                       fontSize: 15, color: Colors.white),
-                                  helperText: "valeure actuelle: " +
+                                  helperText: "valeur actuelle: " +
                                       _offresProduct[widget.indexOffre]
                                           .prixAchat
                                           .toString(),
@@ -232,7 +232,7 @@ class _EditOffresState extends State<EditOffres> {
                                 decoration: InputDecoration(
                                   helperStyle: TextStyle(
                                       fontSize: 15, color: Colors.white),
-                                  helperText: "valeure actuelle: " +
+                                  helperText: "valeur actuelle: " +
                                       _offresProduct[widget.indexOffre]
                                           .prixVente
                                           .toString(),
@@ -291,7 +291,7 @@ class _EditOffresState extends State<EditOffres> {
                                 decoration: InputDecoration(
                                   helperStyle: TextStyle(
                                       fontSize: 15, color: Colors.white),
-                                  helperText: "valeure actuelle: " +
+                                  helperText: "valeur actuelle: " +
                                       _offresProduct[widget.indexOffre]
                                           .prixShipping
                                           .toString(),
@@ -342,7 +342,7 @@ class _EditOffresState extends State<EditOffres> {
                                 decoration: InputDecoration(
                                   helperStyle: TextStyle(
                                       fontSize: 15, color: Colors.white),
-                                  helperText: "valeure actuelle: " +
+                                  helperText: "valeur actuelle: " +
                                       _offresProduct[widget.indexOffre]
                                           .prixBarre
                                           .toString(),
