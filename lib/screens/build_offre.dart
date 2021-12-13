@@ -1,5 +1,6 @@
 import 'package:easydrop/controllers/challenge_controller.dart';
 import 'package:easydrop/models/drop_models.dart';
+import 'package:easydrop/screens/edit_offres.dart';
 import 'package:easydrop/screens/stat_offre.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -42,13 +43,28 @@ class _BuildOffreState extends State<BuildOffre> {
     return longLetter;
   }
 
+  _editOffres(int indexOffre, Challengecontroller variable) {
+    // var baseDialog = EditProduitGagnant();
+    showDialog(
+        context: context,
+        builder: (context) {
+          return ChangeNotifierProvider.value(
+              value: variable,
+              child: EditOffres(
+                index: widget.indexProduct,
+                indexOffre: indexOffre,
+                idProduct: widget.idProduct,
+              ));
+        });
+  }
+
   Widget maxLetterTitre(String word) {
     Widget longLetter;
 
     String word2;
-    if (word.length > 34) {
+    if (word.length > 25) {
       longLetter = Container(
-        width: MediaQuery.of(context).size.width / 1.55,
+        width: MediaQuery.of(context).size.width / 1.95,
         color: Colors.transparent,
         child: MarqueeText(
           text: word,
@@ -62,7 +78,7 @@ class _BuildOffreState extends State<BuildOffre> {
       return longLetter;
     } else if (word.length > 30) {
       longLetter = Container(
-        width: MediaQuery.of(context).size.width / 2,
+        width: MediaQuery.of(context).size.width / 1.9,
         color: Colors.transparent,
         child: MarqueeText(
           text: word,
@@ -394,6 +410,7 @@ class _BuildOffreState extends State<BuildOffre> {
                                 ))));
                   },
                   title: Container(
+                    height: 35,
                     child: Row(
                       children: [
                         Card(
@@ -419,12 +436,20 @@ class _BuildOffreState extends State<BuildOffre> {
                                     .offres
                                     .toString()
                                     .toUpperCase()),
+                                IconButton(
+                                  padding: EdgeInsets.all(0),
+                                  iconSize: 20,
+                                  icon: Icon(
+                                    Icons.edit,
+                                    color: Colors.blue,
+                                  ),
+                                  onPressed: () {
+                                    _editOffres(index, variable);
+                                  },
+                                )
                               ],
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 5.0,
                         ),
                       ],
                     ),

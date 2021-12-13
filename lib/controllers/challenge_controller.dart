@@ -604,4 +604,42 @@ class Challengecontroller extends ChangeNotifier {
     _initProduitGagnantList();
     notifyListeners();
   }
+
+  void edditOffreDays(
+      {required int indexoffre,
+      required int index,
+      required double prixAchat,
+      required double prixVente,
+      required double prixBarre,
+      required double margeOffre,
+      required double roas,
+      required double prixShipping,
+      required String offres}) async {
+    if (prixAchat > 0) {
+      _listProduitGagnant[index].listeOffre[indexoffre].prixAchat = prixAchat;
+    }
+    if (prixVente > 0) {
+      _listProduitGagnant[index].listeOffre[indexoffre].prixVente = prixVente;
+    }
+    if (prixBarre > 0) {
+      _listProduitGagnant[index].listeOffre[indexoffre].prixBarre = prixBarre;
+    }
+    if (margeOffre > 0) {
+      _listProduitGagnant[index].listeOffre[indexoffre].margeOffre = margeOffre;
+    }
+    if (roas > 0) {
+      _listProduitGagnant[index].listeOffre[indexoffre].roas = roas;
+    }
+    if (prixShipping > 0) {
+      _listProduitGagnant[index].listeOffre[indexoffre].prixShipping =
+          prixShipping;
+    }
+    if (offres.isNotEmpty) {
+      _listProduitGagnant[index].listeOffre[indexoffre].offres = offres;
+    }
+
+    await _save(remove: false);
+    _initProduitGagnantList();
+    notifyListeners();
+  }
 }

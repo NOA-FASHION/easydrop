@@ -66,9 +66,9 @@ class _BuildResultDaysState extends State<BuildResultDays> {
     Widget longLetter;
 
     String word2;
-    if (word.length > 40) {
+    if (word.length > 20) {
       longLetter = Container(
-        width: MediaQuery.of(context).size.width / 1.45,
+        width: MediaQuery.of(context).size.width / 1.5,
         color: Colors.transparent,
         child: MarqueeText(
           text: word,
@@ -408,6 +408,7 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                     child: Row(
                       children: [
                         Container(
+                          height: 35,
                           width: MediaQuery.of(context).size.width / 1.2,
                           child: Card(
                             shape: RoundedRectangleBorder(
@@ -442,17 +443,17 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                                             .toString()
                                             .toUpperCase(),
                                   ),
-                                  IconButton(
-                                    padding: EdgeInsets.all(0),
-                                    iconSize: 20,
-                                    icon: Icon(
-                                      Icons.edit,
-                                      color: Colors.blue,
-                                    ),
-                                    onPressed: () {
-                                      _editProduct(index, variable);
-                                    },
-                                  )
+                                  // IconButton(
+                                  //   padding: EdgeInsets.all(0),
+                                  //   iconSize: 20,
+                                  //   icon: Icon(
+                                  //     Icons.edit,
+                                  //     color: Colors.blue,
+                                  //   ),
+                                  //   onPressed: () {
+                                  //     _editProduct(index, variable);
+                                  //   },
+                                  // )
                                 ],
                               ),
                             ),

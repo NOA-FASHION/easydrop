@@ -149,6 +149,17 @@ class _EditResultDaysState extends State<EditResultDays> {
     return roaDays;
   }
 
+  String indexOffreResult(List<String> nombreVenteOffreDays, int index1) {
+    String index = "0";
+    if ((nombreVenteOffreDays.length - 1) < index1) {
+      index = "0";
+    } else {
+      index = nombreVenteOffreDays[index1];
+    }
+
+    return index;
+  }
+
   @override
   Widget build(BuildContext context) {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
@@ -279,9 +290,7 @@ class _EditResultDaysState extends State<EditResultDays> {
                                     panierDays = int.parse(value!);
                                   },
                                   validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return "Merci d'entrer le nombre de panier de la journée";
-                                    } else if (value.length > 35) {
+                                    if (value!.length > 35) {
                                       return "Pas plus de 50 caractères";
                                     }
                                     return null;
@@ -410,10 +419,11 @@ class _EditResultDaysState extends State<EditResultDays> {
                                                 fontSize: 15,
                                                 color: Colors.white),
                                             helperText: "valeure actuelle: " +
-                                                _resultatDaysList[
-                                                        widget.indexResultDays]
-                                                    .nombreVenteOffreDays
-                                                    .toString(),
+                                                indexOffreResult(
+                                                    _resultatDaysList[widget
+                                                            .indexResultDays]
+                                                        .nombreVenteOffreDays,
+                                                    index),
                                             labelStyle: TextStyle(
                                                 fontSize: 15,
                                                 color: Colors.white),
