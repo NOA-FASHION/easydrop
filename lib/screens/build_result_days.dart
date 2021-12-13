@@ -198,24 +198,27 @@ class _BuildResultDaysState extends State<BuildResultDays> {
                     ),
                   ],
                 ),
-                PieChart(
-                  textScaleFactor: 0.0,
-                  maxWidth: MediaQuery.of(context).size.width / 4.3,
-                  maxHeight: MediaQuery.of(context).size.height / 14,
-                  values: [
-                    ((resultDays.margeDays / resultDays.chiffreAffaireDays) *
-                            100)
-                        .roundToDouble(),
-                    100 -
-                        ((resultDays.margeDays /
-                                    resultDays.chiffreAffaireDays) *
-                                100)
-                            .roundToDouble()
-                  ],
-                  labels: ['Marge', 'frais'],
-                  sliceFillColors: [Colors.greenAccent, Colors.red],
-                  animationDuration: Duration(milliseconds: 1500),
-                  showLegend: false,
+                Container(
+                  width: 90,
+                  child: PieChart(
+                    textScaleFactor: 0.0,
+                    maxWidth: MediaQuery.of(context).size.width / 4.3,
+                    maxHeight: MediaQuery.of(context).size.height / 14,
+                    values: [
+                      ((resultDays.margeDays / resultDays.chiffreAffaireDays) *
+                              100)
+                          .roundToDouble(),
+                      100 -
+                          ((resultDays.margeDays /
+                                      resultDays.chiffreAffaireDays) *
+                                  100)
+                              .roundToDouble()
+                    ],
+                    labels: ['Marge', 'frais'],
+                    sliceFillColors: [Colors.greenAccent, Colors.red],
+                    animationDuration: Duration(milliseconds: 1500),
+                    showLegend: false,
+                  ),
                 ),
               ],
             ),

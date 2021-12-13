@@ -109,7 +109,7 @@ class _StatGlobalState extends State<StatGlobal> {
   Widget build(BuildContext context) {
     Challengecontroller variable = Provider.of<Challengecontroller>(context);
     List<ProduitGagnant> _productGagnantList = variable.getProduitGagnant();
-DateTime today = new DateTime.now();
+    DateTime today = new DateTime.now();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(140.0),
@@ -178,7 +178,10 @@ DateTime today = new DateTime.now();
                                             widget.indexProduct],
                                         patch1: imageBytes1,
                                         patch2: imageBytes2,
-                                        patch3: imageBytes3, statOffre: false,  date:DateFormat('yyyy-MM-dd').format(today) ,
+                                        patch3: imageBytes3,
+                                        statOffre: false,
+                                        date: DateFormat('yyyy-MM-dd')
+                                            .format(today),
                                       ))));
                         }
                       },
@@ -1503,6 +1506,7 @@ DateTime today = new DateTime.now();
                                                       ],
                                                     ),
                                                     Container(
+                                                      width: 150,
                                                       child: PieChart(
                                                         textScaleFactor: 0.1,
                                                         maxWidth: MediaQuery.of(
@@ -1589,6 +1593,7 @@ DateTime today = new DateTime.now();
                                                       ],
                                                     ),
                                                     Container(
+                                                      width: 150,
                                                       child: PieChart(
                                                         textScaleFactor: 0.1,
                                                         maxWidth: MediaQuery.of(
@@ -1834,7 +1839,14 @@ DateTime today = new DateTime.now();
                                                     Column(
                                                       children: [
                                                         Container(
+                                                          width: 170,
                                                           child: PieChart(
+                                                            size: Size.fromWidth(
+                                                                MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    2.1),
                                                             textScaleFactor:
                                                                 0.0,
                                                             maxWidth: MediaQuery.of(

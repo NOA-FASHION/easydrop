@@ -239,7 +239,7 @@ class _StatDaysState extends State<StatDays> {
         enabled: true,
         direction: ShimmerDirection.fromLTRB(),
         child: Container(
-          height: MediaQuery.of(context).size.height,
+          height: MediaQuery.of(context).size.height / 1,
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.centerLeft,
@@ -266,7 +266,7 @@ class _StatDaysState extends State<StatDays> {
                           ),
                           elevation: 15.0,
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(20.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -1106,6 +1106,7 @@ class _StatDaysState extends State<StatDays> {
                                                       ],
                                                     ),
                                                     Container(
+                                                      width: 150,
                                                       child: PieChart(
                                                         textScaleFactor: 0.1,
                                                         maxWidth: MediaQuery.of(
@@ -1192,6 +1193,7 @@ class _StatDaysState extends State<StatDays> {
                                                       ],
                                                     ),
                                                     Container(
+                                                      width: 150,
                                                       child: PieChart(
                                                         textScaleFactor: 0.1,
                                                         maxWidth: MediaQuery.of(
@@ -1407,6 +1409,7 @@ class _StatDaysState extends State<StatDays> {
                                                 Column(
                                                   children: [
                                                     Container(
+                                                      width: 170,
                                                       child: PieChart(
                                                         textScaleFactor: 0.0,
                                                         maxWidth: MediaQuery.of(
