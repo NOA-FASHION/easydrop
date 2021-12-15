@@ -221,7 +221,7 @@ class _EditProduitGagnantState extends State<EditProduitGagnant> {
                                           helperStyle: TextStyle(
                                               fontSize: 15,
                                               color: Colors.white),
-                                          helperText: "valeur actuelle: " +
+                                          helperText: "valeur: " +
                                               _productGagnantList[widget
                                                       .indexProduitGagnant]
                                                   .nomProduit,
@@ -272,7 +272,7 @@ class _EditProduitGagnantState extends State<EditProduitGagnant> {
                                           helperStyle: TextStyle(
                                               fontSize: 15,
                                               color: Colors.white),
-                                          helperText: "valeur actuelle: " +
+                                          helperText: "valeur: " +
                                               _productGagnantList[widget
                                                       .indexProduitGagnant]
                                                   .typeDuProduit,
@@ -324,7 +324,7 @@ class _EditProduitGagnantState extends State<EditProduitGagnant> {
                                           helperStyle: TextStyle(
                                               fontSize: 15,
                                               color: Colors.white),
-                                          helperText: "valeur actuelle: " +
+                                          helperText: "valeur: " +
                                               _productGagnantList[widget
                                                       .indexProduitGagnant]
                                                   .prixAchat
@@ -377,7 +377,7 @@ class _EditProduitGagnantState extends State<EditProduitGagnant> {
                                           helperStyle: TextStyle(
                                               fontSize: 15,
                                               color: Colors.white),
-                                          helperText: "valeur actuelle: " +
+                                          helperText: "valeur: " +
                                               _productGagnantList[widget
                                                       .indexProduitGagnant]
                                                   .prixVente
@@ -431,7 +431,7 @@ class _EditProduitGagnantState extends State<EditProduitGagnant> {
                                           helperStyle: TextStyle(
                                               fontSize: 15,
                                               color: Colors.white),
-                                          helperText: "valeur actuelle: " +
+                                          helperText: "valeur: " +
                                               _productGagnantList[widget
                                                       .indexProduitGagnant]
                                                   .prixShipping
