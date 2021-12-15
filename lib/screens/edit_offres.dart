@@ -184,7 +184,8 @@ class _EditOffresState extends State<EditOffres> {
                                   helperText: "valeur: " +
                                       _offresProduct[widget.indexOffre]
                                           .prixAchat
-                                          .toString(),
+                                          .toString() +
+                                      " €",
                                   labelStyle: TextStyle(
                                       fontSize: 15, color: Colors.white),
                                   focusedBorder: OutlineInputBorder(
@@ -232,10 +233,11 @@ class _EditOffresState extends State<EditOffres> {
                                 decoration: InputDecoration(
                                   helperStyle: TextStyle(
                                       fontSize: 15, color: Colors.white),
-                                  helperText: "valeur actuelle: " +
+                                  helperText: "valeur: " +
                                       _offresProduct[widget.indexOffre]
                                           .prixVente
-                                          .toString(),
+                                          .toString() +
+                                      " €",
                                   labelStyle: TextStyle(
                                       fontSize: 15, color: Colors.white),
                                   focusedBorder: OutlineInputBorder(
@@ -294,7 +296,8 @@ class _EditOffresState extends State<EditOffres> {
                                   helperText: "valeur: " +
                                       _offresProduct[widget.indexOffre]
                                           .prixShipping
-                                          .toString(),
+                                          .toString() +
+                                      " €",
                                   labelStyle: TextStyle(
                                       fontSize: 15, color: Colors.white),
                                   focusedBorder: OutlineInputBorder(
@@ -345,7 +348,8 @@ class _EditOffresState extends State<EditOffres> {
                                   helperText: "valeur: " +
                                       _offresProduct[widget.indexOffre]
                                           .prixBarre
-                                          .toString(),
+                                          .toString() +
+                                      " €",
                                   labelStyle: TextStyle(
                                       fontSize: 15, color: Colors.white),
                                   focusedBorder: OutlineInputBorder(

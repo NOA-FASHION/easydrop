@@ -328,7 +328,8 @@ class _EditProduitGagnantState extends State<EditProduitGagnant> {
                                               _productGagnantList[widget
                                                       .indexProduitGagnant]
                                                   .prixAchat
-                                                  .toString(),
+                                                  .toString() +
+                                              " €",
                                           labelStyle: TextStyle(
                                               fontSize: 15,
                                               color: Colors.white),
@@ -381,7 +382,8 @@ class _EditProduitGagnantState extends State<EditProduitGagnant> {
                                               _productGagnantList[widget
                                                       .indexProduitGagnant]
                                                   .prixVente
-                                                  .toString(),
+                                                  .toString() +
+                                              " €",
                                           labelStyle: TextStyle(
                                               fontSize: 15,
                                               color: Colors.white),
@@ -435,7 +437,8 @@ class _EditProduitGagnantState extends State<EditProduitGagnant> {
                                               _productGagnantList[widget
                                                       .indexProduitGagnant]
                                                   .prixShipping
-                                                  .toString(),
+                                                  .toString() +
+                                              " €",
                                           labelStyle: TextStyle(
                                               fontSize: 15,
                                               color: Colors.white),
