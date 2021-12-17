@@ -587,12 +587,6 @@ class _EditProduitGagnantState extends State<EditProduitGagnant> {
                                             onSaved: (value) {
                                               siteVente = value!;
                                             },
-                                            // validator: (value) {
-                                            //   if (value!.isEmpty) {
-                                            //     return "Merci d'entrer l'adresse du site de vente";
-                                            //   }
-                                            //   return null;
-                                            // },
                                             decoration: InputDecoration(
                                               helperStyle: TextStyle(
                                                   fontSize: 15,
